@@ -1,0 +1,8 @@
+/.quarto/
+**/*.quarto_ipynb
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+/.quarto/
+/_manuscript

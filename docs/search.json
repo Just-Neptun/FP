@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "FP",
+    "section": "",
+    "text": "Home\nThis is where the scripts for my\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Methods in Experimental Physics\n\n\nThis lab report introduces Gaussian error propagation (GEP), least squares fitting (LSF), maximum likelihood estimation (MLE), and Bayesian parameter estimation (BPE). We first derive their theoretical foundations and then exemplify their usage by way of a toy model. In particular we use SymPy to perform symbolic error propagation (GEP), we fit a third degree polynomial to data (LSF), we estimate the mean lifetime (MLE) and branching ratio (BPE) of a decay.\n\n\n\n\n\nNov 26, 2025\n\n\nJustus Zimmermann, Frederik William Hollis\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "S01 Statistik/S01.html",
+    "href": "S01 Statistik/S01.html",
+    "title": "Statistical Methods in Experimental Physics",
+    "section": "",
+    "text": "1 Introduction\n\n\n2 Tasks\n\n\n3 Conclusion"
+  }
+]

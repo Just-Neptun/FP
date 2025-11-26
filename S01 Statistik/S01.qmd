@@ -1,0 +1,21 @@
+---
+title: Statistical Methods in Experimental Physics
+author:
+  - name: Justus Zimmermann
+    affiliation: Heidelberg University
+  - name: Frederik William Hollis
+    affiliation: Heidelberg University
+abstract: |
+  This lab report introduces Gaussian error propagation (GEP), least squares fitting (LSF), maximum likelihood estimation (MLE), and Bayesian parameter estimation (BPE).
+  We first derive their theoretical foundations and then exemplify their usage by way of a toy model.
+  In particular we use SymPy to perform symbolic error propagation (GEP), we fit a third degree polynomial to data (LSF), we estimate the mean lifetime (MLE) and branching ratio (BPE) of a decay.
+date: last-modified
+bibliography: references.bib
+number-sections: true
+---
+
+# Introduction
+
+# Tasks
+
+# Conclusion
