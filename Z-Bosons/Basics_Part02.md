@@ -51,7 +51,7 @@ Transverse momentum of the lepton
 Pseudorapidity of the lepton
 Azimuthal angle of the lepton
 
-For graphing `lep_pt` this is saved as a vector because multiple leptons can be detected. Each one has its own momentum which is a single entry in the vector.
+For graphing `lep_pt` and `lep_eta`, these are saved as vectors because multiple leptons can be detected in one collision. Each one has its own momentum and pseudorapitity which are single components of the `lep_pt` and `lep_eta` vectors.
 
 The histogram consolidates all of these measurements, so it has more total measurements than there were collisions.
 
