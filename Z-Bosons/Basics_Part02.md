@@ -11,7 +11,7 @@ number of measurements / entries \
 average position of the vertex \
 std dev of the vertex
 
-histogram with number of entries vs position of collision in ____ units
+histogram with number of entries vs position of collision in millimeters
 
 Why this (mostly Gauss) distribution? \
 Random variable is normally distributed. \
@@ -50,6 +50,10 @@ Also, neutrinos are not detected, allowing odd numbers of leptons.
 Transverse momentum of the lepton
 Pseudorapidity of the lepton
 Azimuthal angle of the lepton
+
+For graphing `lep_pt` this is saved as a vector because multiple leptons can be detected. Each one has its own momentum which is a single entry in the vector.
+
+The histogram consolidates all of these measurements, so it has more total measurements than there were collisions.
 
 ### Many Questions
 
