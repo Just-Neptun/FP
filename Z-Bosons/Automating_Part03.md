@@ -15,3 +15,17 @@ In order:
 - write all histograms inside the new `.root` file
 - by default, create a popup window/canvas with the created histogram
     - wait for user input before the popup is closed
+
+## 3.
+
+Rapidity:
+$$ y = \frac{1}{2} \ln \frac{E + p_z}{E - p_z} $$
+For low ratio of jet mass / jet energy:
+$$ p_z \approx E \cos \theta $$
+For negligible jet mass, pseudorapidity:
+$$ \eta = - \ln \Big( \tan \frac{\theta}{2} \Big) \\
+\eta = y $$
+
+Invariant mass of the two leading leptons:
+
+$$ p_T^2 = p_x^2 + p_y^2 $$
