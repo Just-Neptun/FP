@@ -28,4 +28,24 @@ $$ \eta = - \ln \Big( \tan \frac{\theta}{2} \Big) \\
 
 Invariant mass of the two leading leptons:
 
-$$ p_T^2 = p_x^2 + p_y^2 $$
+$$ m_0^2 c^2 = \frac{E^2}{c^2} - \vec{p}^2 $$
+
+---
+Measured values: $ p_T, p_z, \eta $
+
+Rearranging rapidity for E and then setting $ y = \eta$
+$$ e^{2 y} = \frac{E + p_z}{E - p_z} \\
+e^{2 y} (E - p_z) = E + p_z \\
+-p_z e^{2 y} - p_z = E (1 - e^{2 y}) \\
+-p_z (1 + e^{2 y}) = E (1 - e^{2 y}) \\
+- p_z \frac{1 + e^{2 y}}{1 - e^{2 y}} = E \\
+- p_z \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} = E $$
+
+Also:
+$$ p_T^2 = p_x^2 + p_y^2 \\
+p^2 = p_T^2 + p_z^2 $$
+
+Now subsitute into equation for invariant mass:
+
+$$ m_0^2 = \frac{E^2}{c^4} - \frac{\vec{p}^2}{c^2} \\
+m_0^2 = p_z^2 \bigg( \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} \bigg)^2 / c^4 - (p_T^2 + p_z^2)/c^2
