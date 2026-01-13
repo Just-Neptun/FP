@@ -16,7 +16,7 @@ In order:
 - by default, create a popup window/canvas with the created histogram
     - wait for user input before the popup is closed
 
-## 3.
+## 3. Invariant Mass
 
 Rapidity:
 $$ y = \frac{1}{2} \ln \frac{E + p_z}{E - p_z} $$
@@ -60,3 +60,12 @@ e^{2 y} (E - p_z) = E + p_z \\
 
 $$ m_0^2 = p_z^2 \bigg( \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} \bigg)^2 / c^4 - (p_T^2 + (p_T \cdot \sinh (\eta))^2)/c^2 $$
 -->
+
+## 4. `TLorentzVector`
+
+Both methods do the same thing and produce exactly the same histogram.
+
+## 5. Expected Distribution
+
+MC simulation to find what we would expect from the data.
+(Simulated distribution matches quite well to measured distribution.)
