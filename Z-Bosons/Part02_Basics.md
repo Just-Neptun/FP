@@ -1,9 +1,9 @@
 # 6.2 Getting to Know the Basics
 
-## 2. Plot the vxp_z variable.
+## 2. Plot the `vxp_z` variable.
 
 float \
-z-position of the primary vertex \
+z-position of the primary vertex in mm \
 z-position is along the path of the particles, z axis along the beam pipe
 center of the collider is at $z=0$
 
