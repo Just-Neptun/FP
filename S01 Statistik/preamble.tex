@@ -1,0 +1,68 @@
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}
+\setmonofont{Libertinus Mono}
+
+\usepackage{graphicx} % Graphiken
+
+% Seitenlayout
+\usepackage[
+    headsepline,
+    footsepline,
+    draft=false
+]{scrlayer-scrpage}
+\newcommand{\Name}{Frederik Hollis, Justus Zimmermann}
+\ihead{\Name}
+\ohead{V\VersuchNr}
+
+% Mathe 
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\usepackage[
+    math-style=ISO,
+    bold-style=ISO,
+    partial=upright,
+    nabla=upright
+]{unicode-math}
+\setmathfont{Libertinus Math}
+
+\usepackage{microtype} % Spacing
+\usepackage{pdfpages} % PDFs einfügen
+\usepackage{booktabs} % Bessere Tabellen
+\usepackage{subcaption} % Bessere Captions
+\captionsetup{margin=10pt,font=small,labelfont=sc}
+\usepackage{diffcoeff} % Ableitungen
+\usepackage{listings}
+
+\usepackage{siunitx} % Einheiten
+\DeclareSIUnit{\atomicmassunit}{u}
+\DeclareSIUnit{\torr}{Torr}
+\DeclareSIUnit{\skt}{Skt.}
+\DeclareSIUnit{\bar}{bar}
+\DeclareSIUnit{\decibelvolt}{dBV}
+\DeclareSIUnit{\voltrms}{V\textsubscript{rms}}
+\sisetup{separate-uncertainty=true}
+\sisetup{output-decimal-marker={,}}
+\sisetup{table-align-uncertainty=true}
+\usepackage{isotope}
+
+% Bibliographie
+\usepackage[
+    backend=biber,
+    style=phys,
+    sorting=none
+]{biblatex}
+\addbibresource{../commons/ref.bib}
+
+\usepackage[pageanchor]{hyperref} % Links
+\definecolor{mygray}{RGB}{211,211,211}
+\definecolor{myNavy}{RGB}{0,0,80}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=myNavy,
+    urlcolor=blue,
+}
+\urlstyle{same}
