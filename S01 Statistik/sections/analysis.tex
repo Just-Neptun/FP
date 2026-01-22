@@ -1,0 +1,82 @@
+% !TEX root = ./../ausarbeitung.tex
+\section{Analysis}
+\label{sec:analysis}
+
+In the following section, we apply the theory and methods of statistics explained above to examples.
+
+\subsection{Applying Bayes' Theorem to Particle Decays and Branching Ratios}
+\label{sec:analysis:bayes_theorem}
+
+\subsubsection{The Example}
+
+We examine a newly discovered particle which was found to be able to decay in two different ways. This means there are two different decay channels: $\alpha$ and $\beta$. The probability $f_\alpha$ for decay $\alpha$ to happen is called the \quotedef{branching ratio}.
+
+We can recognize that each decay is a Bernoulli trial, because of two reasons. First, there are exactly two outcomes: it can \emph{either} go to channel $\alpha$ \emph{or} to channel $\beta$. Secondly, the probabilities of a decay going to either channel are fixed.
+
+For one decay:
+\begin{gather*}
+    P(\alpha) = f_\alpha \\
+    P(\beta) = 1 - f_\alpha
+\end{gather*}
+
+When the number of trials $N$ is fixed, a series of \emph{statistically independent} Bernoulli trials is called a Bernoulli process.
+A Bernoulli process is described by the binomial distribution,
+\begin{gather*}
+    P(n, k, p) = \binom{n}{k} p^k (1 - p)^{n - k} \\
+    P(k, f_\alpha, N) = \binom{N}{k} f_\alpha^k (1-f_\alpha)^{(N-k)}
+    \label{eq:bayes_theorem:binomial_distribution}
+\end{gather*}
+where $k$ is the number of "successes", i.e. the number of decays to channel $\alpha$, $N$ is the total number of decays, and $f_\alpha$ is the probability of a decay going to the $\alpha$ channel.
+
+Therefore, with a fixed number \( N \) of observed decays, the number of decays to one of the channels (e.g. \( \alpha \)) follows a binomial distribution.
+
+\subsubsection{Bayes' Theorem}
+
+As explained previously, Bayes' Theorem tells us how to update our beliefs about a parameter of a distribution when we get new information from measurements. In this case the model is a Bernoulli process, described by the binomial distribution in \cref{eq:bayes_theorem:binomial_distribution}. The binomial distribution is dependent on the probability $p$, which is our parameter.
+
+We start with some notion of what this parameter might be.
+This is codified in the prior probability distribution, $\pi(p)$.
+In the Bayesian sense the function gives the level of confidence (probability) that a certain value for $p$ is correct.
+
+If we make a set of observations $\vec{x}$, we can then calculate the likelihood $L(\vec{x} | p)$ of these observations given our model,
+$$
+L(\vec{x} | p) = \prod_{x_i \in \vec{x}} P(x_i, p),
+$$
+where each $x_i$ is the number of successes in a number of trials $n$.
+
+Finally, we can calculate the probability of the parameter taking on a certain value given our observations.
+\begin{gather*}
+    P(p | \vec{x}) = \frac{L(\vec{x} | p) \, \pi(p)}{\int L(\vec{x} | p) \, \pi(p)\, \mathrm{d} p}. \\
+    P(f_\alpha|\vec{k}) = \frac{L(\vec{k}|f_\alpha) \, P(f_\alpha)}{\int L(\vec{k}|f_\alpha) \, P(f_\alpha) \, \mathrm{d}f_\alpha}
+    \label{eq:bayes:posterior}
+\end{gather*}
+
+Sometimes other variables are used in this equation. On the second line above we have therefore replaced \( \vec{x} \mapsto \vec{k} \) and \( p \mapsto f_\alpha \). \cref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter $f_\alpha$. This lets us estimate what the true value of the original system is.
+
+\subsubsection{Calculating the Posterior Probability Distribution}
+
+
+\subsubsection{Calculating with Many Observations}
+
+
+
+\subsection{Applying Error Propagation to Examples}
+\label{sec:analysis:error_propagation}
+
+
+
+
+
+\subsection{Using the Least Squares Method for Finding Parameters of Best Fit Curves}
+\label{sec:least squares}
+
+
+
+
+
+\subsubsection{part 2}
+
+\subsection{Using the Maximum Likelihood Estimator to Find Parameters}
+\label{sec:analysis:mle}
+
+\subsubsection{part 2}
