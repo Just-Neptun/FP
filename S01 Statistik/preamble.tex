@@ -37,6 +37,12 @@
 \usepackage{diffcoeff} % Ableitungen
 \usepackage{listings}
 
+\usepackage[autostyle=true]{csquotes}    % Language aware quotations
+\newcommand{\quoteactual}[1]{\enquote{#1}}   % Quoting someone's words
+\newcommand{\quotemention}[1]{\enquote{#1}}  % Talk about the word 'word'
+\newcommand{\quoteapprox}[1]{\enquote{#1}}   % Saying something not quite right
+\newcommand{\quotedef}[1]{\enquote{#1}}    % Defining something
+
 \usepackage{siunitx} % Einheiten
 \DeclareSIUnit{\atomicmassunit}{u}
 \DeclareSIUnit{\torr}{Torr}
