@@ -41,12 +41,14 @@ In the Bayesian sense the function gives the level of confidence (probability) t
 If we make a set of observations $\vec{x}$, we can then calculate the likelihood $L(\vec{x} | p)$ of these observations given our model,
 $$
 L(\vec{x} | p) = \prod_{x_i \in \vec{x}} P(x_i, p),
+\label{eq:bayes_theorem:likelihood_definition}
 $$
 where each $x_i$ is the number of successes in a number of trials $n$.
 
 Finally, we can calculate the probability of the parameter taking on a certain value given our observations.
 \begin{gather*}
     P(p | \vec{x}) = \frac{L(\vec{x} | p) \, \pi(p)}{\int L(\vec{x} | p) \, \pi(p)\, \mathrm{d} p}. \\
+    % do we want to insert P(k | f) from above explicitly?
     P(f_\alpha|\vec{k}) = \frac{L(\vec{k}|f_\alpha) \, P(f_\alpha)}{\int L(\vec{k}|f_\alpha) \, P(f_\alpha) \, \mathrm{d}f_\alpha}
     \label{eq:bayes:posterior}
 \end{gather*}
@@ -55,10 +57,70 @@ Sometimes other variables are used in this equation. On the second line above we
 
 \subsubsection{Calculating the Posterior Probability Distribution}
 
+Assuming a small number of measurements we can explicitly calculate the posterior distribution of \( f_\alpha \).
 
-\subsubsection{Calculating with Many Observations}
+If a single decay was measured and it went to \( \alpha \), the likelihood is simply \( L(\alpha | f_\alpha) = f_\alpha \). Because we have no reason to weight our distribution before the first piece of data, the prior distribution will be flat and limited to the interval \( [0, 1] \), because probabilities of discrete events must be between \num{0} and \num{1}. Therefore, $\pi(f_\alpha)=1 \forall f_\alpha\in[0,1]$ and the posterior is:
+\begin{gather*}
+    P(f_\alpha|\alpha) = \frac{f_\alpha \cdot 1}{\int _0 ^1 f_\alpha \cdot 1 \, \mathrm{d}f_\alpha} \\
+    P(f_\alpha|\alpha) = 2 f_\alpha
+    \label{eq:bayes_theorem:posterior_1_decay}
+\end{gather*}
 
+If another measurement is made, we can use \cref{eq:bayes_theorem:posterior_1_decay} as the new prior and calculate the likelihood using \cref{eq:bayes_theorem:likelihood_definition}.
 
+This approach of starting with a prior, making observations, then calculating the posterior to become the next prior is called \quotedef{updating beliefs}.
+It is very logical and useful.
+However, often the necessary integrals are only numerically integrable, which means lots of time and computing power are needed to find the result.
+Here the concept of a "conjugate prior" comes in handy.
+
+The general idea is to find a function specified by some set of \quotedef{hyperparameters} such that for the given type of experiment the calculated posterior will also be a function of the same form, just with different values for the hyperparameters.
+
+For the Bernoulli process, which is described by a binomial distribution, this conjugate prior is called the beta distribution.
+It has the form
+$$
+\pi(p) = \frac{p^{\alpha - 1} (1 - p)^{\beta - 1}}{\Beta(\alpha, \beta)}, \quad p \in [0,1]
+$$
+where $\alpha$ and $\beta$ are the hyperparameters and $\Beta$ is the beta function. The beta function normalizes the beta distribution.
+
+While the calculations of the posterior are analytically solvable for a small number of measurements we implement the more robust method using conjugate priors. The beta distribution is implemented in the \texttt{scipy.stats} package, which we will use in our implementation of the calculations.
+
+For a single measurement, our calculation will show that this method is equivalent to the analytic function $P(f_\alpha|\alpha) = 2 f_\alpha$.
+
+Using the conjugate prior method, we graph the prior and posterior probability distributions of \( f_\alpha \) in \cref{fig:bayes_theorem:prior_posterior_one_alpha_decay}.
+
+\begin{figure}[htbp]
+    \centering
+    % Prior and posterior of observing one alpha decay
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{Prior and Posterior Probability Distribution of \( f_\alpha \), Given One \( \alpha \) Decay}
+    \label{fig:bayes_theorem:prior_posterior_one_alpha_decay}
+\end{figure}
+
+Now we are given five total measurements: \( (\alpha, \beta, \alpha, \alpha, \beta) \).
+
+We now set the previous result as the new prior and calculate the new posteriors after one more of these measurements, until we have used all measurements to inform the posterior.
+
+% We make use of the fact that calculating the posterior twice, once after event $x_1 = (n_1, k_1)$ and once after event $x_2 = (n_2, k_2)$, gives the same result as calculating the posterior after event $x = x_1 + x_2 = (n_1 + n_2, k_1 + k_2)$.
+
+To see the evolution of our knowledge about the parameter \( f_\alpha \), in \cref{fig:bayes_theorem:posteriors_2_to_5} we graph the posteriors after each new data point is added.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{Evolution of Posterior Distributions after Multiple Observations}
+    \label{fig:bayes_theorem:posteriors_2_to_5}
+\end{figure}
+
+Because of our robust implementation for calculating posteriors, we can now use the same code to calculate the posterior after a large number of decays. In this case, we are given a total of \( n = \num{100} \) decays, with \num{58} going to \( \alpha \). The posterior is given in \cref{fig:bayes_theorem:posterior_100_decays}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{Posterior Probability Distribution of \( f_\alpha \), Given \num{100} Data Points}
+    \label{fig:bayes_theorem:posterior_100_decays}
+\end{figure}
+
+% ==========================================================================
 
 \subsection{Applying Error Propagation to Examples}
 \label{sec:analysis:error_propagation}
