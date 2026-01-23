@@ -8,18 +8,18 @@ We examine a newly discovered particle which was found to be able to decay in tw
 We can recognize that each decay is a Bernoulli trial, because of two reasons. First, there are exactly two outcomes: it can \emph{either} go to channel $\alpha$ \emph{or} to channel $\beta$. Secondly, the probabilities of a decay going to either channel are fixed.
 
 For one decay:
-\begin{gather*}
+\begin{gather}
     P(\alpha) = f_\alpha \\
     P(\beta) = 1 - f_\alpha
-\end{gather*}
+\end{gather}
 
 When the number of trials $N$ is fixed, a series of \emph{statistically independent} Bernoulli trials is called a Bernoulli process.
 A Bernoulli process is described by the binomial distribution,
-\begin{gather*}
+\begin{gather}
     P(n, k, p) = \binom{n}{k} p^k (1 - p)^{n - k} \\
     P(k, f_\alpha, N) = \binom{N}{k} f_\alpha^k (1-f_\alpha)^{(N-k)}
     \label{eq:bayes_theorem:binomial_distribution}
-\end{gather*}
+\end{gather}
 where $k$ is the number of "successes", i.e. the number of decays to channel $\alpha$, $N$ is the total number of decays, and $f_\alpha$ is the probability of a decay going to the $\alpha$ channel.
 
 Therefore, with a fixed number \( N \) of observed decays, the number of decays to one of the channels (e.g. \( \alpha \)) follows a binomial distribution.
@@ -40,12 +40,12 @@ $$
 where each $x_i$ is the number of successes in a number of trials $n$.
 
 Finally, we can calculate the probability of the parameter taking on a certain value given our observations.
-\begin{gather*}
+\begin{gather}
     P(p | \vec{x}) = \frac{L(\vec{x} | p) \, \pi(p)}{\int L(\vec{x} | p) \, \pi(p)\, \mathrm{d} p}. \\
     % do we want to insert P(k | f) from above explicitly?
     P(f_\alpha|\vec{k}) = \frac{L(\vec{k}|f_\alpha) \, P(f_\alpha)}{\int L(\vec{k}|f_\alpha) \, P(f_\alpha) \, \mathrm{d}f_\alpha}
     \label{eq:bayes:posterior}
-\end{gather*}
+\end{gather}
 
 Sometimes other variables are used in this equation. On the second line above we have therefore replaced \( \vec{x} \mapsto \vec{k} \) and \( p \mapsto f_\alpha \). \cref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter $f_\alpha$. This lets us estimate what the true value of the original system is.
 
@@ -54,11 +54,11 @@ Sometimes other variables are used in this equation. On the second line above we
 Assuming a small number of measurements we can explicitly calculate the posterior distribution of \( f_\alpha \).
 
 If a single decay was measured and it went to \( \alpha \), the likelihood is simply \( L(\alpha | f_\alpha) = f_\alpha \). Because we have no reason to weight our distribution before the first piece of data, the prior distribution will be flat and limited to the interval \( [0, 1] \), because probabilities of discrete events must be between \num{0} and \num{1}. Therefore, $\pi(f_\alpha)=1 \forall f_\alpha\in[0,1]$ and the posterior is:
-\begin{gather*}
+\begin{gather}
     P(f_\alpha|\alpha) = \frac{f_\alpha \cdot 1}{\int _0 ^1 f_\alpha \cdot 1 \, \mathrm{d}f_\alpha} \\
     P(f_\alpha|\alpha) = 2 f_\alpha
     \label{eq:bayes_theorem:posterior_1_decay}
-\end{gather*}
+\end{gather}
 
 If another measurement is made, we can use \cref{eq:bayes_theorem:posterior_1_decay} as the new prior and calculate the likelihood using \cref{eq:bayes_theorem:likelihood_definition}.
 

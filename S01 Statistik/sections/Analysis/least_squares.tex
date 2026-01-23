@@ -1,2 +1,40 @@
 \subsection{Using the Least Squares Method for Finding Parameters of Best Fit Curves}
 \label{sec:least squares}
+
+Note that in this section, superscript numbers always mean exponents, not indices.
+
+For the next part, we will use the method of least squares to find fit parameters of a function from some data. We are given some independent measurements (see appendix \typeout{TODO: add an appendix with least squares given data!}).
+
+Assuming the data came from a third-order polynomial, the fit function is of the form:
+\begin{gather}
+    y(x) = \theta_0 + \theta_1 x + \theta_2 x^2 + \theta_3 x^3
+    \label{eq:least_squares:fit_polynomial}
+\end{gather}
+
+This kind of polynomial function is linear in its parameters (the coefficients \( \theta_i \)), meaning an exact solution exists.
+\typeout{Is this real? Explain in intro?}
+\begin{gather}
+    f(x ; \vec{\theta}) = \sum \limits _{k = 0}^{3} x^{k} \cdot \theta_k
+    \label{eq:least_squares:general_form_fit_polynomial}
+\end{gather}
+
+For a set of \( n \) inputs $\vec{x}$, our model predicts outputs: $ \vec{\mu} = \mathbf{A} \vec{\theta} $, with $ A_{ij} = x_i^j$. When given measurement data, $\vec{x}$ represents the independent variable and $\vec{y}$ represents the dependent variable.
+
+This lets the sum of the square residuals ($\chi^2$) be calculated like in \cref{eq:least_squares:sum_square_residuals_matrix_represenation}. After taking the gradient of this expression and setting to zero, matrix algebra finds us the $\vec{\theta}$ which minimizes the square residuals.
+\begin{gather}
+    % \chi^2 = \sum \limits_{i = 0} ^n \frac{(x_i - \mu_i)^2}{\sigma^2}     <----- only for single variable
+    \chi^2 = (\vec{y} - \mathbf{A}\vec{\theta})^\mathsf{T} \mathbf{C}^{-1} (\vec{y} - \mathbf{A}\vec{\theta})
+    \label{eq:least_squares:sum_square_residuals_matrix_represenation} \\
+    \vec{\theta} = (\mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \mathbf{A})^{-1} \mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \vec{y} \\
+    \vec{\theta} = \mathbf{G} \vec{y}
+    \label{eq:least_squares:finding_theta}
+\end{gather}
+
+$\mathbf{C}$ is the matrix representing the covariances of $\vec{y}$. To find the covariances $\mathbf{C}_\theta $ of our fit parameters, we transform this matrix. Terms cancel again to obtain a simplified result in \cref{eq:least_squares:covariances_theta}.
+\begin{gather}
+    \mathbf{C}_\theta = \mathbf{G} \mathbf{C} \mathbf{G}^\mathsf{T} \\
+    \mathbf{C}_\theta = (\mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \mathbf{A})^{-1}
+    \label{eq:least_squares:covariances_theta}
+\end{gather}
+
+Translating these matrix operations into code gives an analytic solution for the least squares regression.
