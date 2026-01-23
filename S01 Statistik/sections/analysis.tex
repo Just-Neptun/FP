@@ -6,63 +6,60 @@ In the following section, we apply the theory and methods of statistics explaine
 
 \subsection{Applying Bayes' Theorem to Particle Decays and Branching Ratios}
 \label{sec:analysis:bayes_theorem}
+We examine a newly discovered particle which was found to be able to decay in two different ways. 
+This means there are two different decay channels, α and β. 
+The probability \( \falpha \) for decay α to happen is called the \quotedef{branching ratio}.
+We can recognize that each decay is a Bernoulli trial, because of two reasons. 
+First, there are exactly two outcomes: it can \emph{either} go to channel α \emph{or} to channel β. 
+Second, the probabilities of a decay going to either channel are fixed.
+Therefore, the probabilities for one decay are
+\begin{gather}
+    P(\symup{α}) = \falpha, \\
+    P(\symup{β}) = 1 - \falpha.
+\end{gather}
 
-\subsubsection{The Example}
-
-We examine a newly discovered particle which was found to be able to decay in two different ways. This means there are two different decay channels: $\alpha$ and $\beta$. The probability $f_\alpha$ for decay $\alpha$ to happen is called the \quotedef{branching ratio}.
-
-We can recognize that each decay is a Bernoulli trial, because of two reasons. First, there are exactly two outcomes: it can \emph{either} go to channel $\alpha$ \emph{or} to channel $\beta$. Secondly, the probabilities of a decay going to either channel are fixed.
-
-For one decay:
-\begin{gather*}
-    P(\alpha) = f_\alpha \\
-    P(\beta) = 1 - f_\alpha
-\end{gather*}
-
-When the number of trials $N$ is fixed, a series of \emph{statistically independent} Bernoulli trials is called a Bernoulli process.
+When the number of trials \( N \) is fixed, a series of \emph{statistically independent} Bernoulli trials is called a Bernoulli process.
 A Bernoulli process is described by the binomial distribution,
-\begin{gather*}
-    P(n, k, p) = \binom{n}{k} p^k (1 - p)^{n - k} \\
-    P(k, f_\alpha, N) = \binom{N}{k} f_\alpha^k (1-f_\alpha)^{(N-k)}
+\begin{equation}
     \label{eq:bayes_theorem:binomial_distribution}
-\end{gather*}
-where $k$ is the number of "successes", i.e. the number of decays to channel $\alpha$, $N$ is the total number of decays, and $f_\alpha$ is the probability of a decay going to the $\alpha$ channel.
-
-Therefore, with a fixed number \( N \) of observed decays, the number of decays to one of the channels (e.g. \( \alpha \)) follows a binomial distribution.
+    P(k, \falpha, N) = \binom{N}{k} \falpha^k (1-\falpha)^{(N-k)}.
+\end{equation}
+Here, \( k \) is the number of \quotedef{successes}, i.e. the number of decays to channel α, \( N \) is the total number of decays, and \( \falpha \) is the probability of a decay going to the α channel.
+Therefore, with a fixed number \( N \) of observed decays, the number of decays to one of the channels (e.g. α) follows a binomial distribution.
 
 \subsubsection{Bayes' Theorem}
 
-As explained previously, Bayes' Theorem tells us how to update our beliefs about a parameter of a distribution when we get new information from measurements. In this case the model is a Bernoulli process, described by the binomial distribution in \cref{eq:bayes_theorem:binomial_distribution}. The binomial distribution is dependent on the probability $p$, which is our parameter.
+As explained previously, Bayes' Theorem tells us how to update our beliefs about a parameter of a distribution when we get new information from measurements. In this case the model is a Bernoulli process, described by the binomial distribution in \cref{eq:bayes_theorem:binomial_distribution}. The binomial distribution is dependent on the probability \( p \), which is our parameter.
 
 We start with some notion of what this parameter might be.
-This is codified in the prior probability distribution, $\pi(p)$.
-In the Bayesian sense the function gives the level of confidence (probability) that a certain value for $p$ is correct.
+This is codified in the prior probability distribution, \( \pi(p) \).
+In the Bayesian sense the function gives the level of confidence (probability) that a certain value for \( p \) is correct.
 
-If we make a set of observations $\vec{x}$, we can then calculate the likelihood $L(\vec{x} | p)$ of these observations given our model,
-$$
-L(\vec{x} | p) = \prod_{x_i \in \vec{x}} P(x_i, p),
-\label{eq:bayes_theorem:likelihood_definition}
-$$
-where each $x_i$ is the number of successes in a number of trials $n$.
+If we make a set of observations \( \vec{x} \), we can then calculate the likelihood \( L(\vec{x} | p) \) of these observations given our model,
+\begin{equation}
+    \label{eq:bayes_theorem:likelihood_definition}
+    L(\vec{x} | p) = \prod_{x_i \in \vec{x}} P(x_i, p),
+\end{equation}
+where each \( x_i \) is the number of successes in a number of trials \( n \).
 
 Finally, we can calculate the probability of the parameter taking on a certain value given our observations.
 \begin{gather*}
     P(p | \vec{x}) = \frac{L(\vec{x} | p) \, \pi(p)}{\int L(\vec{x} | p) \, \pi(p)\, \mathrm{d} p}. \\
     % do we want to insert P(k | f) from above explicitly?
-    P(f_\alpha|\vec{k}) = \frac{L(\vec{k}|f_\alpha) \, P(f_\alpha)}{\int L(\vec{k}|f_\alpha) \, P(f_\alpha) \, \mathrm{d}f_\alpha}
+    P(\falpha|\vec{k}) = \frac{L(\vec{k}|\falpha) \, P(\falpha)}{\int L(\vec{k}|\falpha) \, P(\falpha) \, \mathrm{d}\falpha}
     \label{eq:bayes:posterior}
 \end{gather*}
 
-Sometimes other variables are used in this equation. On the second line above we have therefore replaced \( \vec{x} \mapsto \vec{k} \) and \( p \mapsto f_\alpha \). \cref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter $f_\alpha$. This lets us estimate what the true value of the original system is.
+Sometimes other variables are used in this equation. On the second line above we have therefore replaced \( \vec{x} \mapsto \vec{k} \) and \( p \mapsto \falpha \). \cref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter \( \falpha \). This lets us estimate what the true value of the original system is.
 
 \subsubsection{Calculating the Posterior Probability Distribution}
 
-Assuming a small number of measurements we can explicitly calculate the posterior distribution of \( f_\alpha \).
+Assuming a small number of measurements we can explicitly calculate the posterior distribution of \( \falpha \).
 
-If a single decay was measured and it went to \( \alpha \), the likelihood is simply \( L(\alpha | f_\alpha) = f_\alpha \). Because we have no reason to weight our distribution before the first piece of data, the prior distribution will be flat and limited to the interval \( [0, 1] \), because probabilities of discrete events must be between \num{0} and \num{1}. Therefore, $\pi(f_\alpha)=1 \forall f_\alpha\in[0,1]$ and the posterior is:
+If a single decay was measured and it went to \( \alpha \), the likelihood is simply \( L(\alpha | \falpha) = \falpha \). Because we have no reason to weight our distribution before the first piece of data, the prior distribution will be flat and limited to the interval \( [0, 1] \), because probabilities of discrete events must be between \num{0} and \num{1}. Therefore, \( \pi(\falpha)=1 \forall \falpha\in[0,1] \) and the posterior is:
 \begin{gather*}
-    P(f_\alpha|\alpha) = \frac{f_\alpha \cdot 1}{\int _0 ^1 f_\alpha \cdot 1 \, \mathrm{d}f_\alpha} \\
-    P(f_\alpha|\alpha) = 2 f_\alpha
+    P(\falpha|\alpha) = \frac{\falpha \cdot 1}{\int _0 ^1 \falpha \cdot 1 \, \mathrm{d}\falpha} \\
+    P(\falpha|\alpha) = 2 \falpha
     \label{eq:bayes_theorem:posterior_1_decay}
 \end{gather*}
 
@@ -77,22 +74,22 @@ The general idea is to find a function specified by some set of \quotedef{hyperp
 
 For the Bernoulli process, which is described by a binomial distribution, this conjugate prior is called the beta distribution.
 It has the form
-$$
-\pi(p) = \frac{p^{\alpha - 1} (1 - p)^{\beta - 1}}{\Beta(\alpha, \beta)}, \quad p \in [0,1]
-$$
-where $\alpha$ and $\beta$ are the hyperparameters and $\Beta$ is the beta function. The beta function normalizes the beta distribution.
+\begin{equation}
+    \pi(p) = \frac{p^{\alpha - 1} (1 - p)^{\beta - 1}}{\Beta(\alpha, \beta)}, \quad p \in [0,1]
+\end{equation}
+where \( \alpha \) and \( \beta \) are the hyperparameters and \( \Beta \) is the beta function. The beta function normalizes the beta distribution.
 
 While the calculations of the posterior are analytically solvable for a small number of measurements we implement the more robust method using conjugate priors. The beta distribution is implemented in the \texttt{scipy.stats} package, which we will use in our implementation of the calculations.
 
-For a single measurement, our calculation will show that this method is equivalent to the analytic function $P(f_\alpha|\alpha) = 2 f_\alpha$.
+For a single measurement, our calculation will show that this method is equivalent to the analytic function \( P(\falpha|\alpha) = 2 \falpha \).
 
-Using the conjugate prior method, we graph the prior and posterior probability distributions of \( f_\alpha \) in \cref{fig:bayes_theorem:prior_posterior_one_alpha_decay}.
+Using the conjugate prior method, we graph the prior and posterior probability distributions of \( \falpha \) in \cref{fig:bayes_theorem:prior_posterior_one_alpha_decay}.
 
 \begin{figure}[htbp]
     \centering
     % Prior and posterior of observing one alpha decay
     \includegraphics[width=0.7\textwidth]{placeholder.png}
-    \caption{Prior and Posterior Probability Distribution of \( f_\alpha \), Given One \( \alpha \) Decay}
+    \caption{Prior and Posterior Probability Distribution of \( \falpha \), Given One \( \alpha \) Decay}
     \label{fig:bayes_theorem:prior_posterior_one_alpha_decay}
 \end{figure}
 
@@ -100,9 +97,9 @@ Now we are given five total measurements: \( (\alpha, \beta, \alpha, \alpha, \be
 
 We now set the previous result as the new prior and calculate the new posteriors after one more of these measurements, until we have used all measurements to inform the posterior.
 
-% We make use of the fact that calculating the posterior twice, once after event $x_1 = (n_1, k_1)$ and once after event $x_2 = (n_2, k_2)$, gives the same result as calculating the posterior after event $x = x_1 + x_2 = (n_1 + n_2, k_1 + k_2)$.
+% We make use of the fact that calculating the posterior twice, once after event \( x_1 = (n_1, k_1) \) and once after event \( x_2 = (n_2, k_2) \), gives the same result as calculating the posterior after event \( x = x_1 + x_2 = (n_1 + n_2, k_1 + k_2) \).
 
-To see the evolution of our knowledge about the parameter \( f_\alpha \), in \cref{fig:bayes_theorem:posteriors_2_to_5} we graph the posteriors after each new data point is added.
+To see the evolution of our knowledge about the parameter \( \falpha \), in \cref{fig:bayes_theorem:posteriors_2_to_5} we graph the posteriors after each new data point is added.
 
 \begin{figure}[htbp]
     \centering
@@ -116,7 +113,7 @@ Because of our robust implementation for calculating posteriors, we can now use 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{placeholder.png}
-    \caption{Posterior Probability Distribution of \( f_\alpha \), Given \num{100} Data Points}
+    \caption{Posterior Probability Distribution of \( \falpha \), Given \num{100} Data Points}
     \label{fig:bayes_theorem:posterior_100_decays}
 \end{figure}
 
