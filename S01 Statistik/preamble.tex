@@ -23,6 +23,7 @@
 \usepackage{mathtools}
 
 \usepackage[
+    warnings-off={mathtools-colon,mathtools-overbracket},
     math-style=ISO,
     bold-style=ISO,
     partial=upright,
@@ -66,7 +67,7 @@
 ]{biblatex}
 \addbibresource{../commons/ref.bib}
 
-\usepackage[pageanchor]{hyperref} % Links
+\usepackage[pageanchor,final]{hyperref} % Links
 \definecolor{mygray}{RGB}{211,211,211}
 \definecolor{myNavy}{RGB}{0,0,80}
 \hypersetup{
