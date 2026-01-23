@@ -7,23 +7,26 @@ We can recognize that each decay is a Bernoulli trial, because of two reasons.
 First, there are exactly two outcomes: it can \emph{either} go to channel α \emph{or} to channel β. 
 Second, the probabilities of a decay going to either channel are fixed.
 Therefore, the probabilities for one decay are
+\begin{subequations}
 \begin{gather}
     P(\symup{α}) = \falpha, \\
     P(\symup{β}) = 1 - \falpha.
 \end{gather}
+\end{subequations}
 
 When the number of trials \( N \) is fixed, a series of \emph{statistically independent} Bernoulli trials is called a Bernoulli process.
 A Bernoulli process is described by the binomial distribution,
 \begin{equation}
     \label{eq:bayes_theorem:binomial_distribution}
-    P(k, \falpha, N) = \binom{N}{k} \falpha^k (1-\falpha)^{(N-k)}.
+    P(k, \falpha, N) = \binom{N}{k} \, \falpha^k \, (1 - \falpha)^{N - k}.
 \end{equation}
 Here, \( k \) is the number of \quotedef{successes}, i.e. the number of decays to channel α, \( N \) is the total number of decays, and \( \falpha \) is the probability of a decay going to the α channel.
 Therefore, with a fixed number \( N \) of observed decays, the number of decays to one of the channels (e.g. α) follows a binomial distribution.
 
 \subsubsection{Bayes' Theorem}
-
-As explained previously, Bayes' Theorem tells us how to update our beliefs about a parameter of a distribution when we get new information from measurements. In this case the model is a Bernoulli process, described by the binomial distribution in \cref{eq:bayes_theorem:binomial_distribution}. The binomial distribution is dependent on the probability \( p \), which is our parameter.
+As explained previously, Bayes' Theorem tells us how to update our beliefs about a parameter of a distribution when we get new information from measurements.
+In this case the model is a Bernoulli process, described by the binomial distribution in \cref{eq:bayes_theorem:binomial_distribution}.
+The binomial distribution is dependent on the probability \( p \), which is our parameter.
 
 We start with some notion of what this parameter might be.
 This is codified in the prior probability distribution, \( \pi(p) \).
