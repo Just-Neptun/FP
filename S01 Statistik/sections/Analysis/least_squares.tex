@@ -1,2 +1,88 @@
+% !TEX root = ../../ausarbeitung.tex
 \subsection{Using the Least Squares Method for Finding Parameters of Best Fit Curves}
 \label{sec:least squares}
+
+Note that in this section, superscript numbers always mean exponents, not indices.
+
+\subsubsection{Finding Best Fit Parameters}
+
+For the next part, we will use the method of least squares to find fit parameters of a function from some data. We are given some independent measurements (see appendix \typeout{TODO: add an appendix with least squares given data!}).
+
+Assuming the data came from a third-order polynomial, the fit function is of the form:
+\begin{gather}
+    y(x) = \theta_0 + \theta_1 x + \theta_2 x^2 + \theta_3 x^3
+    \label{eq:least_squares:fit_polynomial}
+\end{gather}
+
+This kind of polynomial function is linear in its parameters (the coefficients \( \theta_i \)), meaning an exact solution exists.
+\typeout{Is this real? Explain in intro?}
+\begin{gather}
+    f(x ; \vec{\theta}) = \sum \limits _{k = 0}^{3} x^{k} \cdot \theta_k
+    \label{eq:least_squares:general_form_fit_polynomial}
+\end{gather}
+
+For a set of \( n \) inputs $\vec{x}$, our model predicts outputs: $ \vec{\mu} = \mathbf{A} \vec{\theta} $, with $ A_{ij} = x_i^j$. When given measurement data, $\vec{x}$ represents the independent variable and $\vec{y}$ represents the dependent variable.
+
+This lets the sum of the square residuals ($\chi^2$) be calculated like in \cref{eq:least_squares:sum_square_residuals_matrix_represenation}. After taking the gradient of this expression and setting to zero, matrix algebra finds us the $\vec{\theta}$ which minimizes the square residuals.
+\begin{gather}
+    % \chi^2 = \sum \limits_{i = 0} ^n \frac{(x_i - \mu_i)^2}{\sigma^2}     <----- only for single variable
+    \chi^2 = (\vec{y} - \mathbf{A}\vec{\theta})^\mathsf{T} \mathbf{C}^{-1} (\vec{y} - \mathbf{A}\vec{\theta})
+    \label{eq:least_squares:sum_square_residuals_matrix_represenation} \\
+    \vec{\theta} = (\mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \mathbf{A})^{-1} \mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \vec{y} \\
+    \vec{\theta} = \mathbf{G} \vec{y}
+    \label{eq:least_squares:finding_theta}
+\end{gather}
+
+$\mathbf{C}$ is the matrix representing the covariances of $\vec{y}$. To find the covariances $\mathbf{C}_\theta $ of our fit parameters, we transform this matrix. Terms cancel again to obtain a simplified result in \cref{eq:least_squares:covariances_theta}.
+\begin{gather}
+    \mathbf{C}_\theta = \mathbf{G} \mathbf{C} \mathbf{G}^\mathsf{T} \\
+    \mathbf{C}_\theta = (\mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \mathbf{A})^{-1}
+    \label{eq:least_squares:covariances_theta}
+\end{gather}
+
+Translating these matrix operations into code gives an analytic solution for the least squares regression. For the given data, we find the following fit parameters and covariances.
+\begin{align}
+    \theta_0 &= \num{ 4.4 \pm 0.3} \\
+    \theta_1 &= \num{-0.4 \pm 0.8} \\
+    \theta_2 &= \num{-2.6 \pm 0.4} \\
+    \theta_3 &= \num{ 2.3 \pm 0.5}
+\end{align}
+\begin{gather}
+    \mathbf{C} = 
+    \begin{pmatrix}
+        \num{ 0.114 } & \num{-0.0261} & \num{-0.0879} & \num{ 0.0163} \\
+        \num{-0.0261} & \num{ 0.566 } & \num{ 0.0111} & \num{-0.334 } \\
+        \num{-0.0879} & \num{ 0.0111} & \num{ 0.170 } & \num{-0.0172} \\
+        \num{ 0.0163} & \num{-0.334 } & \num{-0.0172} & \num{ 0.257 }
+    \end{pmatrix}
+\end{gather}
+
+\subsubsection{Goodness of Fit Analysis}
+
+To analyze how well our model fits the data, we use the final minimized sum of the square residuals. For this we simply input the fit parameters which by definition minimize this value into the function \cref{eq:least_squares:sum_square_residuals_matrix_represenation}. With the given data, \( \chi_\mathrm{obs}^2 = \num{10.5} \).
+
+To understand this value, we compare it to the family of distributions from which the statistic should come.
+
+The number of degrees of freedom is the total number of data points minus the number of fit parameters. This number is important because it takes into account how complicated the model is. As an extreme example, if a model has as many parameters as there are data points, obviously the data is matched perfectly. However, this is an extreme overfit. Really we are looking for models which are very good at predicting the data even with much fewer parameters than data points.
+
+With the given data and third-degree polynomial fit function:
+\begin{gather*}
+    \text{Data Points: } 13 \\
+    \text{Parameters: } 4 \\
+    \text{Degrees of Freedom: } 9
+\end{gather*}
+
+Knowing this, we can plot the $\chi^2$-distribution for this number of degrees of freedom in \cref{fig:least_squares:chi_square_distribution_1}. This lets us compare the test statistic of our fit with the expected distribution. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{\( \chi^2 \)-Distribution with \num{9} Degrees of Freedom, Comparison to Test Statistic of the Fit Function}
+    \label{fig:least_squares:chi_square_distribution_1}
+\end{figure}
+
+Using the cumulative density function of the distribution, we can calculate the \( p \)-Value of the fit: \( p \approx \num{0.310} \).
+
+This value gives the probability of obtaining a $\chi^2$-Value equal to or more extreme (larger) than this one, under the assumption that the determined parameters are the true values. Often, hypothesis testing is done with significance levels of \( p > 0.05 \). Because our \( p \)-value is much larger than any reasonable significance level, we \emph{fail} to reject the null hypothesis.
+
+The null hypothesis is that there is nothing remarkable going on, and that the parameters are correct. This goodness of fit test therefore leaves us with fairly high confidence that our fit parameters are quite close to the true values.

@@ -1,3 +1,4 @@
+% !TEX root = ../../ausarbeitung.tex
 \subsection{Applying Bayes' Theorem to Particle Decays and Branching Ratios}
 \label{sec:analysis:bayes_theorem}
 We examine a newly discovered particle which was found to be able to decay in two different ways. 
@@ -34,18 +35,18 @@ In the Bayesian sense the function gives the level of confidence (probability) t
 
 If we make a set of observations \( \vec{x} \), we can then calculate the likelihood \( L(\vec{x} | p) \) of these observations given our model,
 \begin{equation}
-    \label{eq:bayes_theorem:likelihood_definition}
     L(\vec{x} | p) = \prod_{x_i \in \vec{x}} P(x_i, p),
+    \label{eq:bayes_theorem:likelihood_definition}
 \end{equation}
 where each \( x_i \) is the number of successes in a number of trials \( n \).
 
 Finally, we can calculate the probability of the parameter taking on a certain value given our observations.
-\begin{gather*}
+\begin{gather}
     P(p | \vec{x}) = \frac{L(\vec{x} | p) \, \pi(p)}{\int L(\vec{x} | p) \, \pi(p)\, \mathrm{d} p}. \\
     % do we want to insert P(k | f) from above explicitly?
     P(\falpha|\vec{k}) = \frac{L(\vec{k}|\falpha) \, P(\falpha)}{\int L(\vec{k}|\falpha) \, P(\falpha) \, \mathrm{d}\falpha}
     \label{eq:bayes:posterior}
-\end{gather*}
+\end{gather}
 
 Sometimes other variables are used in this equation. On the second line above we have therefore replaced \( \vec{x} \mapsto \vec{k} \) and \( p \mapsto \falpha \). \cref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter \( \falpha \). This lets us estimate what the true value of the original system is.
 
@@ -54,11 +55,11 @@ Sometimes other variables are used in this equation. On the second line above we
 Assuming a small number of measurements we can explicitly calculate the posterior distribution of \( \falpha \).
 
 If a single decay was measured and it went to \( \alpha \), the likelihood is simply \( L(\alpha | \falpha) = \falpha \). Because we have no reason to weight our distribution before the first piece of data, the prior distribution will be flat and limited to the interval \( [0, 1] \), because probabilities of discrete events must be between \num{0} and \num{1}. Therefore, \( \pi(\falpha)=1 \forall \falpha\in[0,1] \) and the posterior is:
-\begin{gather*}
+\begin{gather}
     P(\falpha|\alpha) = \frac{\falpha \cdot 1}{\int _0 ^1 \falpha \cdot 1 \, \mathrm{d}\falpha} \\
     P(\falpha|\alpha) = 2 \falpha
     \label{eq:bayes_theorem:posterior_1_decay}
-\end{gather*}
+\end{gather}
 
 If another measurement is made, we can use \cref{eq:bayes_theorem:posterior_1_decay} as the new prior and calculate the likelihood using \cref{eq:bayes_theorem:likelihood_definition}.
 
@@ -71,9 +72,9 @@ The general idea is to find a function specified by some set of \quotedef{hyperp
 
 For the Bernoulli process, which is described by a binomial distribution, this conjugate prior is called the beta distribution.
 It has the form
-\begin{equation}
+\begin{gather}
     \pi(p) = \frac{p^{\alpha - 1} (1 - p)^{\beta - 1}}{\Beta(\alpha, \beta)}, \quad p \in [0,1]
-\end{equation}
+\end{gather}
 where \( \alpha \) and \( \beta \) are the hyperparameters and \( \Beta \) is the beta function. The beta function normalizes the beta distribution.
 
 While the calculations of the posterior are analytically solvable for a small number of measurements we implement the more robust method using conjugate priors. The beta distribution is implemented in the \texttt{scipy.stats} package, which we will use in our implementation of the calculations.
