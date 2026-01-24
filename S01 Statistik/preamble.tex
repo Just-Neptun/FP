@@ -49,16 +49,9 @@
 \newcommand{\quotedef}[1]{\enquote{#1}}    % Defining something
 
 \usepackage{siunitx} % Einheiten
-\DeclareSIUnit{\atomicmassunit}{u}
-\DeclareSIUnit{\torr}{Torr}
-\DeclareSIUnit{\skt}{Skt.}
-\DeclareSIUnit{\bar}{bar}
-\DeclareSIUnit{\decibelvolt}{dBV}
-\DeclareSIUnit{\voltrms}{V\textsubscript{rms}}
 \sisetup{uncertainty-mode=separate}
 \sisetup{output-decimal-marker={.}}
 \sisetup{table-align-uncertainty=true}
-\usepackage{isotope}
 
 % Bibliography
 \usepackage[
@@ -66,10 +59,9 @@
     style=phys,
     sorting=none
 ]{biblatex}
-\addbibresource{../commons/ref.bib}
+\addbibresource{./ref.bib}
 
 \usepackage[pageanchor]{hyperref} % Links
-\definecolor{mygray}{RGB}{211,211,211}
 \definecolor{myNavy}{RGB}{0,0,80}
 \hypersetup{
     colorlinks=true,
