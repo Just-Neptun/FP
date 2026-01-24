@@ -1,6 +1,6 @@
 % !TEX root = ../../ausarbeitung.tex
 \subsection{Applying Bayes' Theorem to Particle Decays and Branching Ratios}
-\label{sec:analysis:bayes_theorem}
+\label{sec:analysis:bayes}
 We examine a newly discovered particle which was found to be able to decay in two different ways. 
 This means there are two different decay channels, α and β. 
 The probability \( \falpha \) for decay α to happen is called the \quotedef{branching ratio}.
@@ -18,15 +18,16 @@ Therefore, the probabilities for one decay are
 When the number of trials \( N \) is fixed, a series of \emph{statistically independent} Bernoulli trials is called a Bernoulli process.
 A Bernoulli process is described by the binomial distribution,
 \begin{equation}
-    \label{eq:bayes_theorem:binomial_distribution}
-    P(k, \falpha, N) = \binom{N}{k} \, \falpha^k \, (1 - \falpha)^{N - k}.
+    \label{eq:bayes:binomial_distribution}
+    P(N, k, \falpha) = \binom{N}{k} \, \falpha^k \, (1 - \falpha)^{N - k}.
 \end{equation}
-Here, \( k \) is the number of \quotedef{successes}, i.e. the number of decays to channel α, \( N \) is the total number of decays, and \( \falpha \) is the probability of a decay going to the α channel.
+Here, \( N \) is the total number of decays, \( k \) is the number of \quotedef{successes}, i.e. the number of decays to channel α, and \( \falpha \) is the probability of a decay going to the α channel.
 Therefore, with a fixed number \( N \) of observed decays, the number of decays to one of the channels (e.g. α) follows a binomial distribution.
 
 \subsubsection{Bayes' Theorem}
+\label{sec:analysis:bayes:bayes_theorem}
 As explained previously, Bayes' Theorem tells us how to update our beliefs about a parameter of a distribution when we get new information from measurements.
-In this case the model is a Bernoulli process, described by the binomial distribution in \cref{eq:bayes_theorem:binomial_distribution}.
+In this case the model is a Bernoulli process, described by the binomial distribution in \cref{eq:bayes:binomial_distribution}.
 The binomial distribution is dependent on the probability \( p \), which is our parameter.
 
 We start with some notion of what this parameter might be.
