@@ -57,6 +57,19 @@ Translating these matrix operations into code gives an analytic solution for the
     \end{pmatrix}
 \end{gather}
 
+\subsubsection{Numerical Minimization for Finding Best Fit Parameters}
+
+In this problem, it was relatively easy to outline an analytic solution which minimizes the square residuals and produces an optimized fit. However, this approach does not work in general, especially with more complicated functions. For some, there might not even be an analytic solution. Because of this, it is important to note that we can alternatively use numerical tools to find the fit parameters which minimize \( \chi^2 \).
+
+To find a fit curve, we also used the \texttt{iminuit} python package and its \texttt{Minuit}, \texttt{.migrad()} and \texttt{.minos()} tools to find the best values for all the \( \theta_i \). The results match quite well, which can be seen visually in \autoref{fig:least_squares:3rd_polynomial_analytic_and_numeric}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{Comparison Between Analytically and Numerically Determined Best Fit Curves}
+    \label{fig:least_squares:3rd_polynomial_analytic_and_numeric}
+\end{figure}
+
 \subsubsection{Goodness of Fit Analysis}
 
 To analyze how well our model fits the data, we use the final minimized sum of the square residuals. For this we simply input the fit parameters which by definition minimize this value into the function \cref{eq:least_squares:sum_square_residuals_matrix_represenation}. With the given data, \( \chi_\mathrm{obs}^2 = \num{10.5} \).
@@ -86,3 +99,27 @@ Using the cumulative density function of the distribution, we can calculate the 
 This value gives the probability of obtaining a $\chi^2$-Value equal to or more extreme (larger) than this one, under the assumption that the determined parameters are the true values. Often, hypothesis testing is done with significance levels of \( p > 0.05 \). Because our \( p \)-value is much larger than any reasonable significance level, we \emph{fail} to reject the null hypothesis.
 
 The null hypothesis is that there is nothing remarkable going on, and that the parameters are correct. This goodness of fit test therefore leaves us with fairly high confidence that our fit parameters are quite close to the true values.
+
+\subsubsection{Plotting the Best Fit Curve}
+
+Next we want to visually plot the fit curve, using the calculated parameters. In addition to this, a \( 1 \sigma \) band should be plotted around the model curve itself. This will give a better idea about how certain the model is about its prediction.
+
+To calculate the error band, as well as evaluating the fit function at every point, we also use the known full error propagation formula with covariances (see \autoref{eq:}). \typeout{autoref or just ref, reference the formula in introduction or the formula here?}. \( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mathbf{A} \) comes from the Jacobian \( \mathbf{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
+\begin{gather}
+    \sigma_y^2 = \mathbf{A} \mathbf{C} \mathbf{A}^\mathrm{T}
+    \autoref{eq:least_squares:covariance_error} \\
+    \mathbf{J}(x) =
+    \begin{pmatrix}
+        1, x, x^2, x^3
+    \end{pmatrix}
+    \label{eq:least_squares:jacobian_of_polynomial_3rd_degree}
+\end{gather}
+
+Implementing this in code gives the graph in \autoref{fig:least_squares:3rd_polynomial_fit_error_band}. To graph this, we simply evaluate the function and the error as discussed above at many points and plot this. Numerically, we could for example sample at $x = 1$, where the model predicts $y = \num{3.78 \pm 0.48}$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{Best Fit Curve (Third Degree Polynomial) with \( 1 \sigma \)-Error Band}
+    \label{fig:least_squares:3rd_polynomial_fit_error_band}
+\end{figure}
