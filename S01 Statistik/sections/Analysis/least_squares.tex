@@ -161,4 +161,30 @@ Therefore, this model is \emph{not} an acceptable description of the data. The a
 
 \subsubsection{Relationship Between Measurement Uncertainty and Resulting \( p \)-Value}
 
+Continuing with the linear fit function, we examine what would happen if the measurement uncertainties were doubled. To calculate this we simply input the new errors into the \( \chi^2 \) function and again minimize it with respect to the \( \theta_i \).
+
+The data with doubled error is shown alongside the best fit curve and its error band in \autoref{fig:least_squares:linear_fit_double_errors}. Uniformly changing the errors will clearly not affect the line of best fit, only the uncertainty. As we expect, the line of best fit is the same as before.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{Line of Best Fit and \( \qty{1}{\sigma} \)-Uncertainty Band, Data with Doubled Errors}
+    \label{fig:least_squares:linear_fit_double_errors}
+\end{figure}
+
+After this, we perform the same goodness of fit analysis as before. Because the model/fit function is the same, we have the same number of parameters and the degrees of freedom remain at \num{11}. As seen in \autoref{fig:least_squares:chi_square_distribution_linear_2}, the \( \chi^2 \) test statistic is reduced a lot compared to before. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{\( \chi^2 \)-Distribution with \num{11} Degrees of Freedom, Showing Resulting Test Statistic}
+    \label{fig:least_squares:chi_square_distribution_linear_2}
+\end{figure}
+
+Because of the reduction in \( \chi^2_\mathrm{obs} \), the \( p \)-value is increased significantly (\( p = 0.224 \)). Again, the null hypothesis of this test is that the fit function does correctly model the \( y \) vs. \( x \) relationship. Because the \( p \)-value is much larger than the \( 0.05 \) significance level, we fail to reject the null hypothesis. In other words, the probability of the data varying at least this much from the model due to random error is \num{0.224}. Because this is quite likely, we would gain a lot of confidence in this model.
+
+
+\typeout{... we see how increasing error estimates must be done carefully..., maybe in discussion section?}
+
+
 \subsection{part 2}
