@@ -65,7 +65,7 @@ To find a fit curve, we also used the \texttt{iminuit} python package and its \t
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/3rd_deg_polynomial_fit_2}
     \caption{Comparison Between Analytically and Numerically Determined Best Fit Curves}
     \label{fig:least_squares:3rd_polynomial_analytic_and_numeric}
 \end{figure}
@@ -89,7 +89,7 @@ The number of degrees of freedom is the total number of data points minus the nu
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/chi_dist_9_dof}
     \caption{\( \chi^2 \)-Distribution with \num{9} Degrees of Freedom, Comparison to Test Statistic of the Fit Function}
     \label{fig:least_squares:chi_square_distribution_1}
 \end{figure}
@@ -119,7 +119,7 @@ Implementing this in code gives the graph in \autoref{fig:least_squares:3rd_poly
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/3rd_deg_polynomial_fit}
     \caption{Best Fit Curve (Third Degree Polynomial) with \( 1 \sigma \)-Error Band}
     \label{fig:least_squares:3rd_polynomial_fit_error_band}
 \end{figure}
@@ -139,7 +139,7 @@ For this fit, the parameters are given below. In \autoref{fig:least_squares:line
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/linear_fit_1.png}
     \caption{Linear Best Fit Function with \( 1 \sigma \)-Error Band}
     \label{fig:least_squares:linear_fit}
 \end{figure}
@@ -152,8 +152,8 @@ Lastly, we check the $\chi^2_{\mathrm{obs}}$ statistic and the $p$-value to see 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
-    \caption{}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/linear_fit_chi_dist_11_dof}
+    \caption{\( \chi^2 \)-Distribution with \num{11} Degrees of Freedom, Comparison to Test Statistic of the Linear Fit Function}
     \label{fig:least_squares:chi_square_distribution_linear_1}
 \end{figure}
 
@@ -169,7 +169,7 @@ The data with doubled error is shown alongside the best fit curve and its error 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/linear_fit_2.png}
     \caption{Line of Best Fit and \( \qty{1}{\sigma} \)-Uncertainty Band, Data with Doubled Errors}
     \label{fig:least_squares:linear_fit_double_errors}
 \end{figure}
@@ -178,7 +178,7 @@ After this, we perform the same goodness of fit analysis as before. Because the 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/linear_fit_chi_dist_11_dof_2.png}
     \caption{\( \chi^2 \)-Distribution with \num{11} Degrees of Freedom, Showing Resulting Test Statistic}
     \label{fig:least_squares:chi_square_distribution_linear_2}
 \end{figure}
@@ -221,16 +221,17 @@ Importantly, here we will apply the method completely independently to both data
     p \text{-Value}: \num{0.0458} \\
 \end{gather}
 
+%%% MOST ÜBERFLÜSSIGE GRAPHS HERE
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/position_vs_time_1.png}
     \caption{Data and Fitted Curve for Position vs. Time of a Damped Harmonic Oscillator}
     \label{fig:least_squares_02:position_vs_time_1}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/amplitude_vs_frequency_1.png}
     \caption{Data and Fitted Curve for Amplitude vs. Frequency of a Driven Harmonic Oscillator}
     \label{fig:least_squares_02:amplitude_vs_frequency_1}
 \end{figure}
@@ -261,14 +262,14 @@ The fit parameters are given below. The new fit functions are graphed alongside 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/position_vs_time_2.png}
     \caption{Position vs. Time for a Damped Harmonic Oscillator Showing Data with Independently and Jointly Calculated Fits}
     \label{fig:least_squares_02:position_vs_time_2}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/amplitude_vs_frequency_2.png}
     \caption{Amplitude vs. Frequency of a Driven Harmonic Oscillator Showing Data with Independent and Jointly Calculated Fits}
     \label{fig:least_squares_02:amplitude_vs_frequency_2}
 \end{figure}
