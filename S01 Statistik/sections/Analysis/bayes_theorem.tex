@@ -34,22 +34,21 @@ We start with some notion of what this parameter might be.
 This is codified in the prior probability distribution, \( \pi(p) \).
 In the Bayesian sense the function gives the level of confidence (probability) that a certain value for \( p \) is correct.
 
-If we make a set of observations \( \vec{x} \), we can then calculate the likelihood \( L(\vec{x} | p) \) of these observations given our model,
+If we make a set of observations \( \vec{k} \), we can then calculate the likelihood \( L(\vec{k} | \falpha) \) of these observations given our model,
 \begin{equation}
-    L(\vec{x} | p) = \prod_{x_i \in \vec{x}} P(x_i, p),
+    L(\vec{k} | \falpha) = \prod_{k_i \in \vec{k}} P(k_i, \falpha),
     \label{eq:bayes_theorem:likelihood_definition}
 \end{equation}
-where each \( x_i \) is the number of successes in a number of trials \( n \).
+where each \( k_i \) is the number of successes in a number of trials \( N \).
 
 Finally, we can calculate the probability of the parameter taking on a certain value given our observations.
 \begin{gather}
-    P(p | \vec{x}) = \frac{L(\vec{x} | p) \, \pi(p)}{\int L(\vec{x} | p) \, \pi(p)\, \mathrm{d} p}. \\
     % do we want to insert P(k | f) from above explicitly?
     P(\falpha|\vec{k}) = \frac{L(\vec{k}|\falpha) \, P(\falpha)}{\int L(\vec{k}|\falpha) \, P(\falpha) \, \mathrm{d}\falpha}
     \label{eq:bayes:posterior}
 \end{gather}
 
-Sometimes other variables are used in this equation. On the second line above we have therefore replaced \( \vec{x} \mapsto \vec{k} \) and \( p \mapsto \falpha \). \cref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter \( \falpha \). This lets us estimate what the true value of the original system is.
+\cref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter \( \falpha \). This lets us estimate what the true value of the original system is.
 
 \subsubsection{Calculating the Posterior Probability Distribution}
 

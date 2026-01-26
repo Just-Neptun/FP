@@ -6,7 +6,7 @@ Note that in this section, superscript numbers always mean exponents, not indice
 
 \subsubsection{Finding Best Fit Parameters}
 
-For the next part, we will use the method of least squares to find fit parameters of a function from some data. We are given some independent measurements (see appendix \typeout{TODO: add an appendix with least squares given data!}).
+For the next part, we will use the method of least squares to find fit parameters of a function from some data. We are given some independent measurements (see appendix\typeout{TODO: add an appendix with least squares given data!}).
 
 Assuming the data came from a third-order polynomial, the fit function is of the form:
 \begin{gather}
@@ -15,11 +15,11 @@ Assuming the data came from a third-order polynomial, the fit function is of the
 \end{gather}
 
 This kind of polynomial function is linear in its parameters (the coefficients \( \theta_i \)), meaning an exact solution exists.
-\typeout{Is this real? Explain in intro?}
-\begin{gather}
-    f(x ; \vec{\theta}) = \sum \limits _{k = 0}^{3} x^{k} \cdot \theta_k
-    \label{eq:least_squares:general_form_fit_polynomial}
-\end{gather}
+% \typeout{Is this real? Explain in intro?}
+% \begin{gather}
+%     f(x ; \vec{\theta}) = \sum \limits _{k = 0}^{3} x^{k} \cdot \theta_k
+%     \label{eq:least_squares:general_form_fit_polynomial}
+% \end{gather}
 
 For a set of \( n \) inputs $\vec{x}$, our model predicts outputs: $ \vec{\mu} = \mathbf{A} \vec{\theta} $, with $ A_{ij} = x_i^j$. When given measurement data, $\vec{x}$ represents the independent variable and $\vec{y}$ represents the dependent variable.
 
@@ -76,16 +76,16 @@ To analyze how well our model fits the data, we use the final minimized sum of t
 
 To understand this value, we compare it to the family of distributions from which the statistic should come.
 
-The number of degrees of freedom is the total number of data points minus the number of fit parameters. This number is important because it takes into account how complicated the model is. As an extreme example, if a model has as many parameters as there are data points, obviously the data is matched perfectly. However, this is an extreme overfit. Really we are looking for models which are very good at predicting the data even with much fewer parameters than data points.
+% The number of degrees of freedom is the total number of data points minus the number of fit parameters. This number is important because it takes into account how complicated the model is. As an extreme example, if a model has as many parameters as there are data points, obviously the data is matched perfectly. However, this is an extreme overfit. Really we are looking for models which are very good at predicting the data even with much fewer parameters than data points.
 
-With the given data and third-degree polynomial fit function:
-\begin{gather*}
-    \text{Data Points: } 13 \\
-    \text{Parameters: } 4 \\
-    \text{Degrees of Freedom: } 9
-\end{gather*}
+% With the given data and third-degree polynomial fit function:
+% \begin{gather*}
+%     \text{Data Points: } 13 \\
+%     \text{Parameters: } 4 \\
+%     \text{Degrees of Freedom: } 9
+% \end{gather*}
 
-Knowing this, we can plot the $\chi^2$-distribution for this number of degrees of freedom in \cref{fig:least_squares:chi_square_distribution_1}. This lets us compare the test statistic of our fit with the expected distribution. 
+The number of degrees of freedom is the total number of data points minus the number of fit parameters: \( 13 - 4 = 9 \).Knowing this, we can plot the $\chi^2$-distribution for this number of degrees of freedom in \cref{fig:least_squares:chi_square_distribution_1}. This lets us compare the test statistic of our fit with the expected distribution. 
 
 \begin{figure}[htbp]
     \centering
