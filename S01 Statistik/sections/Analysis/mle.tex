@@ -5,9 +5,53 @@
 Another way of finding fit parameters for a model is the \quotedef{Maximum Likelihood Estimator} method. For this part, we will analyze data from a radioactive decay. Specifically, we will match a fit function (\autoref{label}) to the lifetimes of decaying particles. This function takes the mean lifetime \( \tau \) as a parameter, so finding the fit function also returns this an estimate of this value.
 \begin{gather}
     f(t, \tau) = \frac{1}{\tau} e^{-t/\tau}
+    \label{eq:mle:decay_function}
 \end{gather}
 
 \subsubsection{Applying the MLE Method to find a Fit Parameter with Uncertainty}
+
+\typeout{stuff in introduction to explain why/how:}
+
+Using the MLE method, the goal is to find the fit parameters (in this case \( \tau \)) which maximize the likelihood that the data came from the distribution. We will solve this analytically.
+
+We start with the general log-likelihood function from \autoref{label}. Inserting the decay distribution function $f(t ; \tau)$ from \autoref{eq:mle:decay_function} and simplifying gives us a different expression for the log-likelihood.
+\begin{align}
+    \ln L(\vec{t} ; \tau) &= \sum \limits_{i = 1}^{n} \ln f(t_i ; \tau) \\
+    &= \sum \limits_{i = 1}^{n} \ln \Big( \frac{1}{\tau} e^{\frac{-t_i}{\tau}} \Big) \\
+    &= \sum \limits_{i = 1}^{n} \Big( - \ln (\tau) - \frac{t_i}{\tau} \Big) \\
+    &= - n \ln (\tau) - \frac{1}{\tau} \sum \limits_{i = 1}^{n} t_i \\
+\end{align}
+
+It is much easier to take the derivative in this form. Because the logarithm is monotonic, the maximum of the likelihood will be at the same point as the maximum of the log-likelihood. This is at the inflection point of the function, where the first derivative is zero.
+\begin{gather}
+    \frac{\partial}{\partial \tau} \ln L(\vec{t} ; \tau) = -\frac{n}{\tau} + \frac{1}{\tau^2} \sum \limits_{i = 1}^{n} t_i \\
+    \frac{n}{\tau} = \frac{1}{\tau^2} \sum \limits_{i = 1}^{n} t_i \\
+    \tau = \frac{1}{n} \sum \limits_{i = 1}^{n} t_i := \hat{\tau}
+\end{gather}
+
+The calculated value \( \hat{\tau} \) is called the maximum likelihood estimate of \( \tau \). This is the fit parameter, which is why it gets a new symbol. We note that in this case the MLE is simply the average of the measurements. This is to be expected because the parameter \( \tau \) \emph{is} the mean lifetime.
+
+To find the uncertainty of this estimate, we compute the second derivative and insert this into the known equation for $\sigma_\tau^2$.
+\begin{align}
+    \frac{\partial^2}{\partial \tau^2} \ln L(\vec{t} ; \tau) &= \frac{n}{\tau^2} - \frac{2}{\tau^3} \sum \limits_{i = 1}^{n} t_i \\
+    &= \frac{n}{\tau^2} - \frac{2 n}{\tau^3} \cdot \frac{1}{n} \sum \limits_{i = 1}^{n} t_i \\
+    &= \frac{n}{\tau^2} - \frac{2 n \hat{\tau}}{\tau^3}
+\end{align}
+
+Lastly we can evaluate the second derivative at $\tau = \hat{\tau}$ and use it in the known equation for $\sigma_\tau^2$.
+
+\begin{align}
+    \sigma_\tau^2 &= - \left(\frac{\partial^2 \ln L(\tau)}{\partial^2 \tau} \Big|_{\tau = \hat \tau} \right)^{-1} \\
+    &= - \left( \frac{n}{\hat{\tau}^2} - \frac{2 n \hat{\tau}}{\hat{\tau}^3} \right)^{-1} \\
+    &= - \left(- \frac{n}{\hat{\tau}^2} \right)^{-1} \\
+    \sigma_\tau^2 &= \frac{\hat{\tau}^2}{n} \\
+    \sigma_\tau &= \frac{\hat{\tau}}{\sqrt{n}}
+    \label{eq:mle:uncertainty_of_tau_hat}
+\end{align}
+
+We arrive at \autoref{eq:mle:uncertainty_of_tau_hat}, which gives the uncertainty of \( \hat{\tau} \).
+
+\subsubsection{Plotting the Log-Likelihood Function and its Approximation}
 
 
 
