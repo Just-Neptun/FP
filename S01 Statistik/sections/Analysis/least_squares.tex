@@ -145,7 +145,7 @@ For this fit, the parameters are given below. In \autoref{fig:}, we then use the
 Lastly we check the $\chi^2_{\mathrm{obs}}$ statistic and the $p$-value to see if the model is valid:
 \begin{gather}
     \chi^2_{\mathrm{obs}} = 56.6 \\
-    p = 3.88 \times 10^{-8} % I like \times for powers of ten (optional and only my opinion)
+    p = \num{3.88e-8}
 \end{gather}
 
 \begin{figure}[htbp]
@@ -155,8 +155,10 @@ Lastly we check the $\chi^2_{\mathrm{obs}}$ statistic and the $p$-value to see i
     \label{fig:least_squares:chi_square_distribution_linear_1}
 \end{figure}
 
-As we can also see on the $\chi^2$-distribution graph in \autoref{fig:least_squares:chi_square_distribution_linear_1}, the obtained $\chi^2_{\mathrm{obs}}$ statistic is extremely large compared to the bulk of the distribution. Therefore, we are not surprised that this means the probability of obtaining a result at least this large is very small. The $p$-value of \( p = 3.88 \times 10^{-8} \) is most definitely under the significance level of $0.05$, leading to us \emph{rejecting} the null hypothesis (which is that this model reflects the distribution which produced the data).
+As we can also see on the $\chi^2$-distribution graph in \autoref{fig:least_squares:chi_square_distribution_linear_1}, the obtained $\chi^2_{\mathrm{obs}}$ statistic is extremely large compared to the bulk of the distribution. Therefore, we are not surprised that this means the probability of obtaining a result at least this large is very small. The $p$-value of \( p = \num{3.88e-8} \) is most definitely under the significance level of $0.05$, leading to us \emph{rejecting} the null hypothesis (which is that this model reflects the distribution which produced the data).
 
 Therefore, this model is \emph{not} an acceptable description of the data. The analyzed data most likely comes from a different (nonlinear) distribution, for example the third degree polynomial which we examined earlier.
 
 \subsubsection{Relationship Between Measurement Uncertainty and Resulting \( p \)-Value}
+
+\subsection{part 2}
