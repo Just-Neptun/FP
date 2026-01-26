@@ -42,7 +42,7 @@ To find the uncertainty of this estimate, we compute the second derivative and i
 Lastly we can evaluate the second derivative at $\tau = \hat{\tau}$ and use it in the known equation for $\sigma_\tau^2$.
 
 \begin{align}
-    \sigma_\tau^2 &= - \left(\frac{\partial^2 \ln L(\tau)}{\partial^2 \tau} \Big|_{\tau = \hat \tau} \right)^{-1} \\
+    \sigma_\tau^2 &= - \left(\frac{\partial^2 \ln L(\tau)}{\partial^2 \tau} \Big|_{\tau = \hat{\tau}} \right)^{-1} \\
     &= - \left( \frac{n}{\hat{\tau}^2} - \frac{2 n \hat{\tau}}{\hat{\tau}^3} \right)^{-1} \\
     &= - \left(- \frac{n}{\hat{\tau}^2} \right)^{-1} \\
     \sigma_\tau^2 &= \frac{\hat{\tau}^2}{n} \\
@@ -98,4 +98,72 @@ From the total number of runs and the number of successes we can calculate the s
 
 \typeout{discuss how good 67 percent is? (discussion?)}
 
-\subsection{part 2}
+\subsection{MLE Analysis on a Second Dataset}
+
+We want to examine another generated dataset. For this one, the probability density function for the distribution of an angle $\alpha$ is given by \autoref{eq:mle:pdf_02}.
+\begin{gather}
+    f(x; a) = \frac{1 + a x}{2}, \quad x = \cos \alpha
+    \label{eq:mle:pdf_02}
+\end{gather}
+
+The parameter $a$ is in the range $-1 \le a \le 1$.
+
+For the generated dataset $\vec{x}$ with $n$ values, the log-likelihood of is therefore:
+
+\begin{align}
+    \ln L(\vec{x}; a) &= \sum \limits_{i=1}^{n} \ln f(\vec{x}; a) \\
+    \ln L(\vec{x}; a) &= \sum \limits_{i=1}^{n} \ln \frac{1 + a x_i}{2}
+\end{align}
+
+Using the same MLE method and numerical minimization tool \texttt{iminuit} with this new function, we obtain the maximum likelihood estimate $\hat{a} = \num{0.19 \pm 0.05}$.
+
+To confirm this result, the log-likelihood function and the MLE parameter are plotted in \autoref{fig:mle:lllh_part_02}. Visually we can confirm that $\hat{a}$ maximizes the likelihood of obtaining the given dataset $\vec{x}$.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Graphs/MLE/lllh_part_02.png}
+    \caption{Log-Likelihood Function using Generated Data Set with \( n = 1000 \) Samples}
+    \label{fig:mle:lllh_part_02}
+\end{figure}
+
+\subsubsection{Plotting the Fit Function}
+
+We plot the histogram of the data and the distribution function (using our determined fit parameter $\hat{a}$) on the same graph.
+
+We make sure to graph the histogram using density/relative frequency. This ensures that we have the same scaling for both elements in the graph, which visually shows that the shape of the histogram matches relatively well with the distribution. We can therefore see that the type of distribution is correct and that the estimate $\hat{a}$ for the parameter $a$ is generally accurate. The next section on errors will show this numerically.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Graphs/MLE/data_and_mle_part_02.png}
+    \caption{Generated Data Alongside the Calculated Fit Function}
+    \label{fig:mle:data_and_mle_part_02}
+\end{figure}
+
+\subsubsection{Determining Convergence of Upper and Lower Uncertainties}
+
+We want to analyze the upper and lower errors of the MLE approach. These $\sigma_a^-$ and $\sigma_a^+$ are defined in \autoref{eq:mle:part_02_sigma_pm_definition}. We can rearrange this equation to define a new function $f$. The roots of this function give the desired solutions (the values of $\hat{a} \pm \sigma_a$).
+\begin{align}
+    \ln L_\mathrm{max} - \frac{1}{2} &= \ln L (\hat{a} \pm \sigma_a)
+    \label{eq:mle:part_02_sigma_pm_definition} \\
+    f(\hat{a} \pm \sigma_a) = 0 &= \ln L (\hat{a} \pm \sigma_a)  - \big( \ln L_\mathrm{max} - \frac{1}{2} \big)
+\end{align}
+
+Now we can use the standard \texttt{scipy.optimize.root\_scalar} function to find these roots and solve for the positive and negative deviations from \( \hat{a} \).
+
+\begin{gather}
+    f(\hat{a} \pm \sigma_a) = 0 \\
+    \Rightarrow a^+ = \hat{a} + \sigma_a^+ \\
+    \Rightarrow a^- = \hat{a} - \sigma_a^- \\
+    \sigma_a^+ = a^+ - \hat{a} \\
+    \sigma_a^- = \hat{a} - a^-
+\end{gather}
+
+%%% please cut this because I am worried it is wrong
+%%% or shorten and only keep one of the methods!
+%%% or does this go in a discussion section?
+
+In order to analyze how the number of data points impacts the errors, we select some interesting numbers of events for which to try the MLE method (see attached code\typeout{appendix or nah?}). Clearly very small samples have very large errors and have no power to accurately determine the parameter $a$. The errors are not just large, but also unbalanced: The difference between $\sigma^+$ and $\sigma^-$ is greater than $5 \%$ for small samples.
+
+The $\hat{a}$ estimate appears to converge relatively quickly. However, we see that even reducing the sample number by only $10$, to $n = 990$, the difference between $\sigma^+$ and $\sigma^-$ already grows to over $5 \%$. This value seems to converge much more slowly.
+
+We can also observe that (at least with this dataset) the difference in upper and lower uncertainties does not monotonically reduce with sample size. For example, from $200$ to $750$ samples the difference increases by about $4$ percentage points. From $n = 995$ to $n = 996$ the difference also jumps up, although after this point it reduces sharply. At the maximum number of samples, we include the entire dataset and $n = 1000$. At this point the difference in errors is only $1.4 \%$.
+
+Interestingly, the \texttt{minos()} method finds very different values of $\sigma^+$ and $\sigma^-$, leading to a much smaller difference in their values overall. Their values have a difference of below $5 \%$ for all sample sizes above about $n = 50$.
