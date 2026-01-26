@@ -224,14 +224,55 @@ Importantly, here we will apply the method completely independently to both data
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{placeholder.png}
-    \caption{Data and Fitted Curve for Position of Damped Harmonic Oscillator vs. Time}
+    \caption{Data and Fitted Curve for Position vs. Time of a Damped Harmonic Oscillator}
     \label{fig:least_squares_02:position_vs_time_1}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{placeholder.png}
-    \caption{Data and Fitted Curve for Amplitude vs. Frequency of Driven Harmonic Oscillator}
+    \caption{Data and Fitted Curve for Amplitude vs. Frequency of a Driven Harmonic Oscillator}
     \label{fig:least_squares_02:amplitude_vs_frequency_1}
 \end{figure}
 
+\subsubsection{Simultaneous Fit}
+
+As discussed above, we essentially treated the analysis as if we had only made one set of measurements. But in this case, we actually have more data to inform our model. The parameters which are shared between the two fit functions should obviously be the same for both fit functions (see above for the explicit form of the functions):
+\begin{gather}
+    x(t ; \ x_0, \varphi_0, \omega_0, \beta) \\
+    A(\omega ; \ \omega_0, \beta, K)
+\end{gather}
+
+All the data contains information about these shared parameters, so we can find better estimates of them using the combined dataset.
+
+To take this into account, we define a new square residual function \( \chi^2 \). It is the sum of the \( \chi^2 \) functions of both models and their data individually.\footnote{If desired, during the sum the functions could be weighted to put more importance on one of the two datasets. In our case we do not do this, because both datasets are equally valid and valuable.} We obviously make sure that this function keeps the relevant parameters shared between the two functions. Minimizing \( \chi^2 \) again using \texttt{iminuit} lets us find the \num{5} parameters using all the available data.
+
+The fit parameters are given below. The new fit functions are graphed alongside the previous independently determined ones in \autoref{fig:least_squares_02:position_vs_time_2} and \autoref{fig:least_squares_02:amplitude_vs_frequency_2}.
+\begin{gather}
+    \begin{aligned}
+        x_0 &= \num{0.0998 \pm 0.0025} \\
+        \varphi_0 &= \num{0.003 \pm 0.027} \\
+        \omega_0 &= \num{4.007 \pm 0.008} \\
+        \beta &= \num{0.294 \pm 0.009} \\
+        K &= \num{0.197 \pm 0.004}
+    \end{aligned} \\
+    p \text{-Value}: \num{0.543} \\
+\end{gather}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{Position vs. Time for a Damped Harmonic Oscillator Showing Data with Independently and Jointly Calculated Fits}
+    \label{fig:least_squares_02:position_vs_time_2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{placeholder.png}
+    \caption{Amplitude vs. Frequency of a Driven Harmonic Oscillator Showing Data with Independent and Jointly Calculated Fits}
+    \label{fig:least_squares_02:amplitude_vs_frequency_2}
+\end{figure}
+
+We note that the \( p \)-value of this fit is quite high, giving us confidence that our combined model fits the data well.
+
+\typeout{discuss difference (small difference) here or in discussion?}
