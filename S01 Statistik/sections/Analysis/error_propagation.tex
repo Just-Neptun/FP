@@ -1,7 +1,28 @@
 % !TEX root = ../../ausarbeitung.tex
 \subsection{Applying Error Propagation to Examples}
 \label{sec:analysis:error_propagation}
+In this exercise, we make use of the Python library \verb|SymPy| for symbolic mathematics.
+\verb|SymPy| lets the user define mathematical symbols, which can be combined into more complex expressions.
+We will use \verb|SymPy| to propagate uncertainties of various expressions.
 
-\typeout{Ping!}
-\( \sigma \) and \qty{1}{\sigma} and \( \qty{1}{\sigma} \) test.
-\typeout{Ping!}
+We start with some input variables, \( \vec x = (x_1, \dots, x_n) \), and their corresponding \( n \times n \) covariance matrix,
+\begin{equation}
+    \symbfup{C}_{ij} = \cov(x_i, x_j) = \rho_{x_i x_j} \sigma_{x_i} \sigma_{x_j}.
+\end{equation}
+Now, we have some functions of these variables, \( \vec f(\vec x) = (f_1(\vec x), \dots, f_m(\vec x)) \), and their corresponding \( m \times m \) covariance matrix,
+\begin{equation}
+    \symbfup{E}_{ij} = \cov(f_i, f_j) = \rho_{f_i f_j} \sigma_{f_i} \sigma_{f_j}.
+\end{equation}
+Using the (Jacobian) transition matrix,
+\begin{equation}
+    \symbfup{G}_{ij} = \frac{\partial f_i}{\partial x_j},
+\end{equation}
+we can calculate \( \symbfup{E} \) from \( \symbfup{C} \),
+\begin{equation}
+    \symbfup{E} = \symbfup{G} \cdot \symbfup{C} \cdot \symbfup{G}^\mathsf T.
+\end{equation}
+
+We now implement two functions, \verb|calc_E| and \verb|calc_unc|.
+The function \verb|calc_E| uses the above equations to calculate \( \symbfup{E} \) given \( \vec f \), \( \vec x \), and \( \symbfup{C} \).
+The function \verb|calc_unc| uses \verb|calc_E| to calculate the covariance matrix of a scalar function \( f \).
+It returns the propagated uncertainty, which is just the square root of the matrix's single element.
