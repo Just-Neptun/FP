@@ -9,7 +9,7 @@ We start with some input variables, \( \vec x = (x_1, \dots, x_n) \), and their 
 \begin{equation}
     \symbfup{C}_{ij} = \cov(x_i, x_j) = ρ_{x_i x_j} σ_{x_i} σ_{x_j}.
 \end{equation}
-Now, we have some functions of these variables, \( \vec f(\vec x) = (f_1(\vec x), \dots, f_m(\vec x)) \), and their corresponding \( m \times m \) covariance matrix,
+Now, we have some functions of these variables, \( \vec f(\vec x) = (f_1(\vec x), \dots, f_m(\vec x)) \), and their corresponding \( m \times m \) covariance matrix (error matrix),
 \begin{equation}
     \symbfup{E}_{ij} = \cov(f_i, f_j) = ρ_{f_i f_j} σ_{f_i} σ_{f_j}.
 \end{equation}
@@ -98,3 +98,25 @@ Under assumption (ii), we find
     V(ρ = -1) &= \qty{157.1 \pm 1.6}{\centi\meter\cubed}.
 \end{align}
 \end{subequations}
+
+\subsubsection{Calculating the Error Matrix After a Change of Variables}
+\label{sec:analysis:error_propagation:variables}
+Finally, we make use of the general function introduced at the beginning, \verb|calc_E|.
+It calculates the error matrix of a function \( \vec{f} \) dependent on the variables \( \vec{x} \) and their (co-)variances \( \symbfup{C} \).
+Given a position measurement \( \vec{x} = (x, y) \) of a two-dimensional particle with uncorrelated uncertainties \( σ_x \) and \( σ_y \), we change variables to polar coordinates \( \vec{f} = (r, θ) \).
+The scattering angle and the radial distance can be determined via 
+\begin{subequations}
+\begin{align}
+    r &= \sqrt{x^2 + y^2}, \\ 
+    θ &= \operatorname{atan2}(y, x).
+\end{align}
+\end{subequations}
+We find the error matrix to be
+\begin{equation}
+    \symbfup{E} = \begin{pmatrix}
+        \frac{σ_x^2 x^2 + σ_y^2 y^2}{x^2 + y^2} 
+        & \frac{x y (- σ_x^2 + σ_y^2)}{(x^2 + y^2)^{\frac{3}{2}}} \\
+        \frac{x y (- σ_x^2 + σ_y^2)}{(x^2 + y^2)^{\frac{3}{2}}} 
+        & \frac{σ_x^2 y^2 + σ_y^2 x^2}{(x^2 + y^2)^2}
+    \end{pmatrix}.
+\end{equation}
