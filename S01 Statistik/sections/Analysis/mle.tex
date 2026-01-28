@@ -54,32 +54,35 @@ We arrive at \autoref{eq:mle:uncertainty_of_tau_hat}, which gives the uncertaint
 
 \subsubsection{Plotting the Log-Likelihood Function and its Approximation}
 
-To understand the shapes of log-likelihood functions better, we generate some data from the distribution \autoref{eq:mle:decay_function}, using the true value of \( \tau = \num{2} \). The log-likelihood function is calculated and plotted for different values of the parameter \( \tau \) for datasets with \( n \in \{ 30, 300, \num{10000}\} \) data points (see \autoref{fig:mle:lllh_30_data_points}, \autoref{fig:mle:lllh_300_data_points} and \autoref{fig:mle:lllh_10000_data_points}).
+To understand the shapes of log-likelihood functions better, we generate some data from the distribution \autoref{eq:mle:decay_function}, using the true value of \( \tau = \num{2} \). The log-likelihood function is calculated and plotted for different values of the parameter \( \tau \) for datasets with \( n \in \{ 30, 300, \num{10000}\} \) data points (see \autoref{fig:mle:lllh}).
 
 We will also plot the second order approximation of the log-likelihood function. With both functions on the same graph, we can examine how well the approximation holds.
 \begin{gather}
     \ln L(\tau) \approx \ln L_\mathrm{max} - \frac{(\tau - \hat{\tau})^2}{2 \sigma_\tau^2}
 \end{gather}
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/MLE/lllh_for_30_data_points.png}
-    \caption{Exact and Approximated Log-Likelihood Functions for \( n = 30 \) Data Points}
-    \label{fig:mle:lllh_30_data_points}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/MLE/lllh_for_300_data_points.png}
-    \caption{Exact and Approximated Log-Likelihood Functions for \( n = 300 \) Data Points}
-    \label{fig:mle:lllh_300_data_points}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/MLE/lllh_for_10000_data_points.png}
-    \caption{Exact and Approximated Log-Likelihood Functions for \( n = \num{10000} \) Data Points}
-    \label{fig:mle:lllh_10000_data_points}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{Graphs/MLE/lllh_for_30_data_points.png}
+        \caption{\( n = 30 \)}
+        \label{fig:mle:lllh_30_data_points}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{Graphs/MLE/lllh_for_300_data_points.png}
+        \caption{\( n = 300 \)}
+        \label{fig:mle:lllh_300_data_points}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{Graphs/MLE/lllh_for_10000_data_points.png}
+        \caption{\( n = 10000 \)}
+        \label{fig:mle:lllh_10000_data_points}
+    \end{subfigure}
+    \caption{Exact and Approximated Log-Likelihood Functions for \( n \) Data Points.}
+    \label{fig:mle:lllh}
 \end{figure}
 
 As $n$ increases, we see in the graphs that the log-likelihood (as well as its approximation) gets much more strongly peaked (note the changing $y$-axis scales). The maximum likelihood is correctly predicted by both calculations, because the approximation is a Taylor expansion around the MLE. Increasing the sample size means the approximation becomes better near the maximum. However, the log-likelihood function clearly does not globally approach a quadratic, as we can see that the two sides remain very asymmetric, even at large sample sizes.
