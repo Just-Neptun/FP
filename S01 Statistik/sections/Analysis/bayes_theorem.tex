@@ -27,7 +27,7 @@ Therefore, with a fixed number \( N \) of observed decays, the number of decays 
 \subsubsection{Bayes' Theorem}
 \label{sec:analysis:bayes:bayes_theorem}
 As explained previously, Bayes' Theorem tells us how to update our beliefs about a parameter of a distribution when we get new information from measurements.
-In this case the model is a Bernoulli process, described by the binomial distribution in \cref{eq:bayes:binomial_distribution}.
+In this case the model is a Bernoulli process, described by the binomial distribution in \autoref{eq:bayes:binomial_distribution}.
 The binomial distribution is dependent on the probability \( p \), which is our parameter.
 
 We start with some notion of what this parameter might be.
@@ -48,7 +48,7 @@ Finally, we can calculate the probability of the parameter taking on a certain v
     \label{eq:bayes:posterior}
 \end{gather}
 
-\cref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter \( \falpha \). This lets us estimate what the true value of the original system is.
+\autoref{eq:bayes:posterior} shows the \emph{Posterior Probability Distribution} for this experiment. As was explained before, this gives us a probability distribution over the possible values of the parameter \( \falpha \). This lets us estimate what the true value of the original system is.
 
 \subsubsection{Calculating the Posterior Probability Distribution}
 
@@ -61,7 +61,7 @@ If a single decay was measured and it went to \( \alpha \), the likelihood is si
     \label{eq:bayes_theorem:posterior_1_decay}
 \end{gather}
 
-If another measurement is made, we can use \cref{eq:bayes_theorem:posterior_1_decay} as the new prior and calculate the likelihood using \cref{eq:bayes_theorem:likelihood_definition}.
+If another measurement is made, we can use \autoref{eq:bayes_theorem:posterior_1_decay} as the new prior and calculate the likelihood using \autoref{eq:bayes_theorem:likelihood_definition}.
 
 This approach of starting with a prior, making observations, then calculating the posterior to become the next prior is called \quotedef{updating beliefs}.
 It is very logical and useful.
@@ -81,7 +81,7 @@ While the calculations of the posterior are analytically solvable for a small nu
 
 For a single measurement, our calculation will show that this method is equivalent to the analytic function \( P(\falpha|\alpha) = 2 \falpha \).
 
-Using the conjugate prior method, we graph the prior and posterior probability distributions of \( \falpha \) in \cref{fig:bayes_theorem:prior_posterior_one_alpha_decay}.
+Using the conjugate prior method, we graph the prior and posterior probability distributions of \( \falpha \) in \autoref{fig:bayes_theorem:prior_posterior_one_alpha_decay}.
 
 \begin{figure}[htbp]
     \centering
@@ -97,7 +97,7 @@ We now set the previous result as the new prior and calculate the new posteriors
 
 % We make use of the fact that calculating the posterior twice, once after event \( x_1 = (n_1, k_1) \) and once after event \( x_2 = (n_2, k_2) \), gives the same result as calculating the posterior after event \( x = x_1 + x_2 = (n_1 + n_2, k_1 + k_2) \).
 
-To see the evolution of our knowledge about the parameter \( \falpha \), in \cref{fig:bayes_theorem:posteriors_2_to_5} we graph the posteriors after each new data point is added.
+To see the evolution of our knowledge about the parameter \( \falpha \), in \autoref{fig:bayes_theorem:posteriors_2_to_5} we graph the posteriors after each new data point is added.
 
 \begin{figure}[htbp]
     \centering
@@ -106,7 +106,7 @@ To see the evolution of our knowledge about the parameter \( \falpha \), in \cre
     \label{fig:bayes_theorem:posteriors_2_to_5}
 \end{figure}
 
-Because of our robust implementation for calculating posteriors, we can now use the same code to calculate the posterior after a large number of decays. In this case, we are given a total of \( n = \num{100} \) decays, with \num{58} going to \( \alpha \). The posterior is given in \cref{fig:bayes_theorem:posterior_100_decays}.
+Because of our robust implementation for calculating posteriors, we can now use the same code to calculate the posterior after a large number of decays. In this case, we are given a total of \( n = \num{100} \) decays, with \num{58} going to \( \alpha \). The posterior is given in \autoref{fig:bayes_theorem:posterior_100_decays}.
 
 \begin{figure}[htbp]
     \centering

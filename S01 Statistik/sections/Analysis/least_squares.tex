@@ -23,7 +23,7 @@ This kind of polynomial function is linear in its parameters (the coefficients \
 
 For a set of \( n \) inputs $\vec{x}$, our model predicts outputs: $ \vec{\mu} = \mathbf{A} \vec{\theta} $, with $ A_{ij} = x_i^j$. When given measurement data, $\vec{x}$ represents the independent variable and $\vec{y}$ represents the dependent variable.
 
-This lets the sum of the square residuals ($\chi^2$) be calculated like in \cref{eq:least_squares:sum_square_residuals_matrix_represenation}. After taking the gradient of this expression and setting to zero, matrix algebra finds us the $\vec{\theta}$ which minimizes the square residuals.
+This lets the sum of the square residuals ($\chi^2$) be calculated like in \autoref{eq:least_squares:sum_square_residuals_matrix_represenation}. After taking the gradient of this expression and setting to zero, matrix algebra finds us the $\vec{\theta}$ which minimizes the square residuals.
 \begin{gather}
     % \chi^2 = \sum \limits_{i = 0} ^n \frac{(x_i - \mu_i)^2}{\sigma^2}     <----- only for single variable
     \chi^2 = (\vec{y} - \mathbf{A}\vec{\theta})^\mathsf{T} \mathbf{C}^{-1} (\vec{y} - \mathbf{A}\vec{\theta})
@@ -33,7 +33,7 @@ This lets the sum of the square residuals ($\chi^2$) be calculated like in \cref
     \label{eq:least_squares:finding_theta}
 \end{gather}
 
-$\mathbf{C}$ is the matrix representing the covariances of $\vec{y}$. To find the covariances $\mathbf{C}_\theta $ of our fit parameters, we transform this matrix. Terms cancel again to obtain a simplified result in \cref{eq:least_squares:covariances_theta}.
+$\mathbf{C}$ is the matrix representing the covariances of $\vec{y}$. To find the covariances $\mathbf{C}_\theta $ of our fit parameters, we transform this matrix. Terms cancel again to obtain a simplified result in \autoref{eq:least_squares:covariances_theta}.
 \begin{gather}
     \mathbf{C}_\theta = \mathbf{G} \mathbf{C} \mathbf{G}^\mathsf{T} \\
     \mathbf{C}_\theta = (\mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \mathbf{A})^{-1}
@@ -72,7 +72,7 @@ To find a fit curve, we also used the \texttt{iminuit} python package and its \t
 
 \subsubsection{Goodness of Fit Analysis}
 
-To analyze how well our model fits the data, we use the final minimized sum of the square residuals. For this we simply input the fit parameters which by definition minimize this value into the function \cref{eq:least_squares:sum_square_residuals_matrix_represenation}. With the given data, \( \chi_\mathrm{obs}^2 = \num{10.5} \).
+To analyze how well our model fits the data, we use the final minimized sum of the square residuals. For this we simply input the fit parameters which by definition minimize this value into the function \autoref{eq:least_squares:sum_square_residuals_matrix_represenation}. With the given data, \( \chi_\mathrm{obs}^2 = \num{10.5} \).
 
 To understand this value, we compare it to the family of distributions from which the statistic should come.
 
@@ -85,7 +85,7 @@ To understand this value, we compare it to the family of distributions from whic
 %     \text{Degrees of Freedom: } 9
 % \end{gather*}
 
-The number of degrees of freedom is the total number of data points minus the number of fit parameters: \( 13 - 4 = 9 \).Knowing this, we can plot the $\chi^2$-distribution for this number of degrees of freedom in \cref{fig:least_squares:chi_square_distribution_1}. This lets us compare the test statistic of our fit with the expected distribution. 
+The number of degrees of freedom is the total number of data points minus the number of fit parameters: \( 13 - 4 = 9 \).Knowing this, we can plot the $\chi^2$-distribution for this number of degrees of freedom in \autoref{fig:least_squares:chi_square_distribution_1}. This lets us compare the test statistic of our fit with the expected distribution. 
 
 \begin{figure}[htbp]
     \centering
