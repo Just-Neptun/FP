@@ -2,7 +2,7 @@
 \subsection{Using the Maximum Likelihood Estimator to Find Parameters}
 \label{sec:analysis:mle}
 
-Another way of finding fit parameters for a model is the \quotedef{Maximum Likelihood Estimator} method. For this part, we will analyze data from a radioactive decay. Specifically, we will match a fit function (\autoref{label}) to the lifetimes of decaying particles. This function takes the mean lifetime \( \tau \) as a parameter, so finding the fit function also returns this an estimate of this value.
+Another way of finding fit parameters for a model is the \quotedef{Maximum Likelihood Estimator} method. For this part, we will analyze data from a radioactive decay. Specifically, we will match a fit function (\autoref{eq:mle:decay_function}) to the lifetimes of decaying particles. This function takes the mean lifetime \( \tau \) as a parameter, so finding the fit function also returns this an estimate of this value.
 \begin{gather}
     f(t, \tau) = \frac{1}{\tau} e^{-t/\tau}
     \label{eq:mle:decay_function}
@@ -14,7 +14,7 @@ Another way of finding fit parameters for a model is the \quotedef{Maximum Likel
 
 Using the MLE method, the goal is to find the fit parameters (in this case \( \tau \)) which maximize the likelihood that the data came from the distribution. We will solve this analytically.
 
-We start with the general log-likelihood function from \autoref{label}. Inserting the decay distribution function $f(t ; \tau)$ from \autoref{eq:mle:decay_function} and simplifying gives us a different expression for the log-likelihood.
+We start with the general log-likelihood function. Inserting the decay distribution function $f(t ; \tau)$ from \autoref{eq:mle:decay_function} and simplifying gives us a different expression for the log-likelihood.
 \begin{align}
     \ln L(\vec{t} ; \tau) &= \sum \limits_{i = 1}^{n} \ln f(t_i ; \tau) \\
     &= \sum \limits_{i = 1}^{n} \ln \Big( \frac{1}{\tau} e^{\frac{-t_i}{\tau}} \Big) \\
