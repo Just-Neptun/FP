@@ -1,3 +1,122 @@
 % !TEX root = ../../ausarbeitung.tex
-\subsection{Applying Error Propagation to Examples}
+\subsection{Implementing Symbolic Error Propagation in Python}
 \label{sec:analysis:error_propagation}
+In this exercise, we make use of the Python library \verb|SymPy| for symbolic mathematics.
+\verb|SymPy| lets the user define mathematical symbols, which can be combined into more complex expressions.
+We will use \verb|SymPy| to propagate uncertainties of various expressions.
+
+We start with some input variables, \( \vec x = (x_1, \dots, x_n) \), and their corresponding \( n \times n \) covariance matrix,
+\begin{equation}
+    \symbfup{C}_{ij} = \cov(x_i, x_j) = ρ_{x_i x_j} σ_{x_i} σ_{x_j}.
+\end{equation}
+Now, we have some functions of these variables, \( \vec f(\vec x) = (f_1(\vec x), \dots, f_m(\vec x)) \), and their corresponding \( m \times m \) covariance matrix (error matrix),
+\begin{equation}
+    \symbfup{E}_{ij} = \cov(f_i, f_j) = ρ_{f_i f_j} σ_{f_i} σ_{f_j}.
+\end{equation}
+Using the (Jacobian) transition matrix,
+\begin{equation}
+    \symbfup{G}_{ij} = \frac{\partial f_i}{\partial x_j},
+\end{equation}
+we can calculate \( \symbfup{E} \) from \( \symbfup{C} \),
+\begin{equation}
+    \symbfup{E} = \symbfup{G} \cdot \symbfup{C} \cdot \symbfup{G}^\mathsf T.
+\end{equation}
+
+We now implement two functions, \verb|calc_E| and \verb|calc_unc|.
+The function \verb|calc_E| uses the above equations to calculate \( \symbfup{E} \) given \( \vec f \), \( \vec x \), and \( \symbfup{C} \).
+The function \verb|calc_unc| uses \verb|calc_E| to calculate the covariance matrix of a scalar function \( f \).
+It returns the propagated uncertainty, which is just the square root of the matrix's single element.
+
+\subsubsection{Applying Error Propagation to Examples}
+\label{sec:analysis:error_propagation:examples}
+Starting with the real numbers \( x \) and \( y \) as well as their uncertainties and correlation coefficient \( σ_x \), \( σ_y \), and \( ρ \), their covariance matrix, as defined above, becomes
+\begin{equation}
+    \symbfup{C} = \begin{pmatrix}
+        σ_x^2 & ρ σ_x σ_y \\
+        ρ σ_x σ_y & σ_y^2
+    \end{pmatrix}.
+\end{equation}
+First, we derive the absolute uncertainty of their sum and difference, respectively
+\begin{subequations}
+\begin{align}
+    z &= x + y &&σ_z = \sqrt{2 ρ σ_x σ_y + σ_x^2 + σ_y^2}, \\
+    z &= x - y &&σ_z = \sqrt{- 2 ρ σ_x σ_y + σ_x^2 + σ_y^2}.
+\end{align}
+\end{subequations}
+
+\begin{subequations}
+\begin{align}
+    z &= x y &&\frac{σ_z}{z} = \sqrt{\frac{2 ρ σ_x σ_y}{x y} + \frac{σ_x^2}{x^2} + \frac{σ_y^2}{y^2}}, \\
+    z &= \frac{x}{y} &&\frac{σ_z}{z} = \sqrt{- \frac{2 ρ σ_x σ_y}{x y} + \frac{σ_x^2}{x^2} + \frac{σ_y^2}{y^2}}, \\
+    z &= x^n y^n &&\frac{σ_z}{z} = \sqrt{\frac{2 ρ σ_x σ_y n^2}{x y} + \frac{σ_x^2 n^2}{x^2} + \frac{σ_y^2 n^2}{y^2}}.
+\end{align}
+\end{subequations}
+
+Next, we calculate the uncertainty of the acceleration of gravity.
+Measuring the length \( L \) and the period \( T \) of a simple pendulum with the corresponding errors \( σ_L \) and \( σ_T \) gives
+\begin{equation}
+    g = 4  π^2 \frac{L}{T^2}.
+\end{equation}
+We find the uncertainty to be
+\begin{equation}
+    σ_g = \sqrt{\frac{64 π^4 L^2 σ_T^2}{T^6} + \frac{16 π^4 σ_L^2}{T^4}} = g \sqrt{\frac{4 σ_T^2}{T^2} + \frac{σ_L^2}{L^2}},
+\end{equation}
+where we assume uncorrelated variables for simplicity.
+
+Finally, we calculate the energy of a rotating object.
+Measuring the angular velocity \( ω \) and the moment of inertia \( I \) with the corresponding errors \( σ_ω \) and \( σ_I \) gives
+\begin{equation}
+    E = \frac{1}{2} I ω^2.
+\end{equation}
+We find the uncertainty to be
+\begin{equation}
+    σ_E = \sqrt{I^2 ω^2 σ_ω^2 + \frac{ω^4 σ_I^2}{4}} = E \sqrt{\frac{4 σ_ω^2}{ω^2} + \frac{σ_I^2}{I^2}},
+\end{equation}
+where we again assume uncorrelated variables for simplicity.
+
+\subsubsection{Determining the Volume of a Cylinder}
+\label{sec:analysis:error_propagation:cylinder}
+We will now us \verb|SymPy| for numerical purposes.
+The \verb|.evalf()| method substitutes values for any or all variables in a given expression and rounds the result to a specified number of decimal places.
+With this we will determine the volume of a cylinder and its associated uncertainty assuming (i) that both measurements are uncorrelated and (ii) that both measurements are fully correlated.
+
+The radius \( r \) and the height \( h \) of the cylinder have been measured to \( r = \qty{5}{\centi\meter} \) and \( h = \qty{2}{\centi\meter} \). 
+The uncertainty for both measurements is \( σ = \qty{0.1}{\centi\meter} \). 
+We know the formula to be
+\begin{equation}
+    V = \pi r^2 h.
+\end{equation}
+If \( r \) and \( h \) are fully correlated, we know that \( ρ = \pm 1 \).
+Under assumption (i), we find
+\begin{equation}
+    V = \qty{157 \pm 10}{\centi\meter\cubed}.
+\end{equation}
+Under assumption (ii), we find
+\begin{subequations}
+\begin{align}
+    V(ρ = +1) &= \qty{157 \pm 14}{\centi\meter\cubed}, \\
+    V(ρ = -1) &= \qty{157.1 \pm 1.6}{\centi\meter\cubed}.
+\end{align}
+\end{subequations}
+
+\subsubsection{Calculating the Error Matrix After a Change of Variables}
+\label{sec:analysis:error_propagation:variables}
+Finally, we make use of the general function introduced at the beginning, \verb|calc_E|.
+It calculates the error matrix of a function \( \vec{f} \) dependent on the variables \( \vec{x} \) and their (co-)variances \( \symbfup{C} \).
+Given a position measurement \( \vec{x} = (x, y) \) of a two-dimensional particle with uncorrelated uncertainties \( σ_x \) and \( σ_y \), we change variables to polar coordinates \( \vec{f} = (r, θ) \).
+The scattering angle and the radial distance can be determined via 
+\begin{subequations}
+\begin{align}
+    r &= \sqrt{x^2 + y^2}, \\ 
+    θ &= \operatorname{atan2}(y, x).
+\end{align}
+\end{subequations}
+We find the error matrix to be
+\begin{equation}
+    \symbfup{E} = \begin{pmatrix}
+        \frac{σ_x^2 x^2 + σ_y^2 y^2}{x^2 + y^2} 
+        & \frac{x y (- σ_x^2 + σ_y^2)}{(x^2 + y^2)^{\frac{3}{2}}} \\
+        \frac{x y (- σ_x^2 + σ_y^2)}{(x^2 + y^2)^{\frac{3}{2}}} 
+        & \frac{σ_x^2 y^2 + σ_y^2 x^2}{(x^2 + y^2)^2}
+    \end{pmatrix}.
+\end{equation}

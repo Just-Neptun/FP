@@ -4,7 +4,7 @@
 \setdefaultlanguage{english}
 \setmainfont{Libertinus Serif}
 \setsansfont{Libertinus Sans}
-\setmonofont{Libertinus Mono}
+% \setmonofont{Libertinus Mono}
 
 \usepackage{import}     % local file paths for \input
 
@@ -22,6 +22,7 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \numberwithin{equation}{section}
+\DeclareMathOperator{\cov}{cov}
 
 \usepackage[
     warnings-off={mathtools-colon,mathtools-overbracket},
@@ -32,7 +33,7 @@
 ]{unicode-math}
 \setmathfont{Libertinus Math}
 
-\usepackage[draft]{graphicx} % Graphiken
+\usepackage{graphicx} % Graphiken
 
 \usepackage{microtype} % Spacing
 \usepackage{pdfpages} % PDFs einfügen
@@ -50,8 +51,18 @@
 
 \usepackage{siunitx} % Einheiten
 \sisetup{uncertainty-mode=separate}
+\sisetup{exponent-product=\ensuremath{\cdot}}
+\sisetup{power-half-as-sqrt}
 \sisetup{output-decimal-marker={.}}
 \sisetup{table-align-uncertainty=true}
+% \sisetup{list-final-separator = {,\,}}    % \qtylist{numbers}{unit}, \numlist{numbers}
+% \sisetup{list-separator = {,\,}}    % keep spacing the same between numbers
+% for listing multiple quantities if you want compacter list of \num{1;2;3} with better spacing/remove "and"
+
+\DeclareSIUnit{\Vss}{V\ensuremath{_\mathrm{SS}}}
+\DeclareSIUnit{\VRMS}{V\ensuremath{_\mathrm{RMS}}}
+\DeclareSIUnit{\decibelvolt}{dBV}
+\DeclareSIUnit{\sigma}{\!\ensuremath{\sigma}}
 
 % Bibliography
 \usepackage[
