@@ -18,10 +18,18 @@
 \maketitle
 
 \begin{abstract}
+    % Draft. Please improve if needed. Should probably be shorter...
     The determination of quantities of interest is a defining goal of experimental physics.
     This measuring process never produces an exact result.
     Instead, the experimentalist has to take into account the various sources of measurement uncertainty.
     Since most measurements happen indirectly, it is crucial to understand how those uncertainties propagate.
+    We will implement a way to perform symbolic error propagation in the programming language \verb|Python| using the package \verb|SymPy|.
+
+    After completing a measurement, the experimentalist compares theoretical predictions with the measured data.
+    In general, the precise relationship of the measured quantities is not known.
+    Assuming a general model dependent on some parameters, the task becomes the estimation of these parameters.
+    We implement and examine three methods of estimation: 
+    The method of least squares, the maximum-likelihood method, and the method of Bayesian parameter estimation.
 \end{abstract}
 
 \tableofcontents
