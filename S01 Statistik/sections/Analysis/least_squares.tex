@@ -104,7 +104,7 @@ The null hypothesis is that there is nothing remarkable going on, and that the p
 
 Next we want to visually plot the fit curve, using the calculated parameters. In addition to this, a \( 1 \sigma \) band should be plotted around the model curve itself. This will give a better idea about how certain the model is about its prediction.
 
-To calculate the error band, as well as evaluating the fit function at every point, we also use the known full error propagation formula with covariances (see \autoref{eq:}). \typeout{autoref or just ref, reference the formula in introduction or the formula here?}. \( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mathbf{A} \) comes from the Jacobian \( \mathbf{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
+To calculate the error band, as well as evaluating the fit function at every point, we also use the known full error propagation formula with covariances. \typeout{autoref or just ref, reference the formula in introduction or the formula here?} \( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mathbf{A} \) comes from the Jacobian \( \mathbf{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
 \begin{gather}
     \sigma_y^2 = \mathbf{A} \mathbf{C} \mathbf{A}^\mathrm{T}
     \label{eq:least_squares:covariance_error} \\
@@ -128,10 +128,11 @@ Implementing this in code gives the graph in \autoref{fig:least_squares:3rd_poly
 
 While the third degree polynomial seems to fit the data very well, it is of course useful to also consider other models. In this case it is not so likely, but maybe the data actually correlates linearly, in which case the more complicated model is overfitting and capturing random measurement errors.
 
-Now we will use a linear fit function (first degree polynomial, see \autoref{eq:}) in much the same way as before to find a new fit with new parameters. We reuse our functions to perform the same least squares regression fit with a polynomial with only two parameters (a linear model). This time there are $2$ fewer fit parameters, meaning the degrees of freedom goes up by two: $13 - 2 = 11$ degrees of freedom.
+Now we will use a linear fit function (first degree polynomial, see \autoref{eq:least_squares:linear_fit}) in much the same way as before to find a new fit with new parameters. We reuse our functions to perform the same least squares regression fit with a polynomial with only two parameters (a linear model). This time there are $2$ fewer fit parameters, meaning the degrees of freedom goes up by two: $13 - 2 = 11$ degrees of freedom.
 
 For this fit, the parameters are given below. In \autoref{fig:least_squares:linear_fit}, we then use the same error propagation method to plot the fit function with a $1\sigma$ error band.
 \begin{gather}
+    \label{eq:least_squares:linear_fit}
     y(x) = \theta_0 + \theta_1 x \\
     \theta_0 = \num{3.64 \pm 0.22} \\
     \theta_1 = \num{1.5 \pm 0.4}
