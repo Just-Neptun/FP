@@ -54,7 +54,7 @@ We arrive at \autoref{eq:mle:uncertainty_of_tau_hat}, which gives the uncertaint
 
 \subsubsection{Plotting the Log-Likelihood Function and its Approximation}
 
-To understand the shapes of log-likelihood functions better, we generate some data from the distribution \autoref{eq:mle:decay_function}, using the true value of \( \tau = \num{2} \). The log-likelihood function is calculated and plotted for different values of the parameter \( \tau \) for datasets with \( n \in \{ 30, 300, \num{10000}\} \) data points (see \autoref{fig:mle:lllh}).
+To understand the shapes of log-likelihood functions better, we generate some data from the distribution \autoref{eq:mle:decay_function}, using the true value of \( \tau = \num{2} \). The log-likelihood function is calculated and plotted for different values of the parameter \( \tau \) for datasets with \( n \in \{ 30, 300 \} \) data points (see \autoref{fig:mle:lllh}).
 
 We will also plot the second order approximation of the log-likelihood function. With both functions on the same graph, we can examine how well the approximation holds.
 \begin{gather}
@@ -75,12 +75,12 @@ We will also plot the second order approximation of the log-likelihood function.
         \caption{\( n = 300 \)}
         \label{fig:mle:lllh_300_data_points}
     \end{subfigure}
-    \begin{subfigure}{.4\textwidth}
-        \centering
-        \includegraphics[width=.9\textwidth]{Graphs/MLE/lllh_for_10000_data_points.png}
-        \caption{\( n = 10000 \)}
-        \label{fig:mle:lllh_10000_data_points}
-    \end{subfigure}
+    % \begin{subfigure}{.4\textwidth}
+    %     \centering
+    %     \includegraphics[width=.9\textwidth]{Graphs/MLE/lllh_for_10000_data_points.png}
+    %     \caption{\( n = 10000 \)}
+    %     \label{fig:mle:lllh_10000_data_points}
+    % \end{subfigure}
     \caption{Exact and Approximated Log-Likelihood Functions for \( n \) Data Points.}
     \label{fig:mle:lllh}
 \end{figure}
