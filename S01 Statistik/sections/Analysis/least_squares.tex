@@ -61,7 +61,9 @@ Translating these matrix operations into code gives an analytic solution for the
 
 In this problem, it was relatively easy to outline an analytic solution which minimizes the square residuals and produces an optimized fit. However, this approach does not work in general, especially with more complicated functions. For some, there might not even be an analytic solution. Because of this, it is important to note that we can alternatively use numerical tools to find the fit parameters which minimize \( \chi^2 \).
 
-To find a fit curve, we also used the \texttt{iminuit} python package and its \texttt{Minuit}, \texttt{.migrad()} and \texttt{.minos()} tools to find the best values for all the \( \theta_i \). The results match quite well, which can be seen visually in \autoref{fig:least_squares:3rd_polynomial_analytic_and_numeric}.
+To find a fit curve, we also used the \verb|iminuit| python package.
+Specifically the \verb|Minuit|, \verb|.migrad()| and \verb|.minos()| tools helped us find the best values for all the \( \theta_i \). 
+The results match quite well, which can be seen visually in \autoref{fig:least_squares:3rd_polynomial_analytic_and_numeric}.
 
 \begin{figure}[htbp]
     \centering
@@ -196,7 +198,7 @@ Continuing with the least squares method of finding fit curves, more complicated
 
 In this case we are given generated data from damped and driven harmonic oscillators. One data set is measurements of displacement vs. time. Secondly we have the relationship between amplitude of the oscillation and the driving frequency.
 
-Once again we define the two functions which we want to fit to our data sets (\autoref{eq:least_squares_02:damped_oszi_fitfunction} and \autoref{eq:least_squares_02:driven_oszi_fitfunction}). Then we use the same method as before, defining the sum of the square residuals ($\chi^2$) as our parameter to optimize. Using \texttt{iminuit} we find the parameters which minimize this function.
+Once again we define the two functions which we want to fit to our data sets (\autoref{eq:least_squares_02:damped_oszi_fitfunction} and \autoref{eq:least_squares_02:driven_oszi_fitfunction}). Then we use the same method as before, defining the sum of the square residuals ($\chi^2$) as our parameter to optimize. Using \verb|iminuit| we find the parameters which minimize this function.
 
 Similarly to before, we also do a goodness of fit analysis on the models. The most relevant value to report is the \( p \)-value for both fit functions.
 
@@ -247,7 +249,7 @@ As discussed above, we essentially treated the analysis as if we had only made o
 
 All the data contains information about these shared parameters, so we can find better estimates of them using the combined dataset.
 
-To take this into account, we define a new square residual function \( \chi^2 \). It is the sum of the \( \chi^2 \) functions of both models and their data individually.\footnote{If desired, during the sum the functions could be weighted to put more importance on one of the two datasets. In our case we do not do this, because both datasets are equally valid and valuable.} We obviously make sure that this function keeps the relevant parameters shared between the two functions. Minimizing \( \chi^2 \) again using \texttt{iminuit} lets us find the \num{5} parameters using all the available data.
+To take this into account, we define a new square residual function \( \chi^2 \). It is the sum of the \( \chi^2 \) functions of both models and their data individually.\footnote{If desired, during the sum the functions could be weighted to put more importance on one of the two datasets. In our case we do not do this, because both datasets are equally valid and valuable.} We obviously make sure that this function keeps the relevant parameters shared between the two functions. Minimizing \( \chi^2 \) again using \verb|iminuit| lets us find the \num{5} parameters using all the available data.
 
 The fit parameters are given below. The new fit functions are graphed alongside the previous independently determined ones in \autoref{fig:least_squares_02:position_vs_time_2} and \autoref{fig:least_squares_02:amplitude_vs_frequency_2}.
 \begin{gather}
