@@ -1,4 +1,12 @@
 % !TEX root = ./../ausarbeitung.tex
 \section{Introduction}
 \label{sec:introduction}
+Before we can focus on error propagation and parameter estimation, we need to introduce the basics of probability theory.
 
+We formally model a random process using a \define{probability space}.
+This is a triple consisting of a \define{sample space} \( Ω \), an \define{event space} \( F \), and a \define{probability function} \( P\colon F \to [0, 1] \).
+An \define{outcome} \( ω \in Ω \) is a possible result, an \define{event} \( E \in F \) is a set of outcomes, and \( P(E) \) is the \define{probability} of an event occurring.
+
+An event \( E \) occurred, if the result \( ω \) of the process is in \( E \), \( ω \in E \).
+Since \( ω \in Ω \), we know \( P(Ω) = 1 \).
+If two events \( E_1, E_2 \) are \define{mutually exclusive}, \( E_1 \cap E_2 = \emptyset \), then the probability of either one happening is the sum of their individual probabilities, \( P(E_1 \cup E_2) = P(E_1) + P(E_2) \).
