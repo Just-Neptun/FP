@@ -11,10 +11,9 @@ An event \( E \) occurred, if the result \( ω \) of the process is in \( E \), 
 Since \( ω \in Ω \), we know \( P(Ω) = 1 \).
 If two events \( E_1, E_2 \) are \define{mutually exclusive}, \( E_1 \cap E_2 = \emptyset \), then the probability of either one happening is the sum of their individual probabilities, \( P(E_1 \cup E_2) = P(E_1) + P(E_2) \).
 
-A \define{random variable} \( X \) is a function from the sample space to the real numbers, \( X\colon Ω \to \reals \).
-Probability as defined on the sample space can now be translated to numeric terms.
-The probability that \( X \) takes on a given value \( x \in \reals \) is given by
+A \define{random variable} \( X \) is a function from the sample space to the real numbers, \( X\colon Ω \to \reals \), and its values \( x = X(ω) \in \reals \) are called its \define{states}.
+We naturally define the \define{image} \( X(E) = \set{X(ω) \in \reals \mid ω \in E} \) of an event \( E \) and the \define{pre-image} \( X^{-1}(A) = \set{ω \in Ω \mid X(ω) \in A} \) of a set of states \( A \).
+The probability that \( X \) takes on a state in \( A \subseteq \reals \) is given by
 \begin{equation}
-    P(X = x) \coloneq P(\set{ω \in Ω \mid X(ω) = x}).
+    P(X \in A) \coloneq P(\set{ω \in Ω \mid X(ω) = x}) = P(X^{-1}(A)).
 \end{equation}
-We naturally define the \define{image} \( X(E) = \set{X(ω) \in \reals \mid ω \in E} \) of an event \( E \) and the \define{pre-image} \( X^{-1}(x) = \set{ω \in Ω \mid X(ω) = x} \) of a possible value of \( X \).
