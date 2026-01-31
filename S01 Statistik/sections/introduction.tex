@@ -17,3 +17,23 @@ The probability that \( X \) takes on a state in \( A \subseteq \reals \) is giv
 \begin{equation}
     P(X \in A) \coloneq P(\set{ω \in Ω \mid X(ω) = x}) = P(X^{-1}(A)).
 \end{equation}
+
+A random variable may be either \define{discrete} (if \( X(Ω) \) is at most countably infinite) or \define{continuous} (if \( X(Ω) \) is uncountably infinite).
+A discrete random variable admits a \define{probability mass function} (p.m.f.) \( p_X\colon \reals \to [0, 1] \), which gives the probability that \( X \) is in state \( x \in \reals\),
+\begin{equation}
+    \label{eq:introduction:definiton_pmf}
+    p_X(x) \coloneq P(X = x) = P(X^{-1}(\set{x})).
+\end{equation}
+A continuous random variable admits a \define{probability density function} (p.d.f.) \( f_X\colon \reals \to \reals \), which gives the probability \emph{per unit length} of finding \( X \) in state \( x \in \reals \),
+\begin{equation}
+    \label{eq:introduction:definition_pdf}
+    f_X(x) \coloneq \lim_{h \to 0} \frac{P(X \in [x, x + h])}{h} = \eval{\diff{F_X}{x}}{x}.
+\end{equation}
+Here we implicitly defined the \define{cumulative distribution function} (c.d.f.) \( F_X\colon \reals \to [0, 1] \), as 
+\begin{equation}
+    \label{eq:introduction:definition_cdf}
+    F_X(x) \coloneq P(X \leq x) = P(X^{-1}((-\infty, x])).\footnotemark[1]
+\end{equation}
+\footnotetext[1]{
+    This definition satisfies \autoref{eq:introduction:definition_pdf} since \( F_X(x + h) - F_X(x) = P(X \leq x + h) - P(X \leq x) = P(x \leq X \leq x + h). \)
+}
