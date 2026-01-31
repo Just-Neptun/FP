@@ -10,3 +10,11 @@ An \define{outcome} \( ω \in Ω \) is a possible result, an \define{event} \( E
 An event \( E \) occurred, if the result \( ω \) of the process is in \( E \), \( ω \in E \).
 Since \( ω \in Ω \), we know \( P(Ω) = 1 \).
 If two events \( E_1, E_2 \) are \define{mutually exclusive}, \( E_1 \cap E_2 = \emptyset \), then the probability of either one happening is the sum of their individual probabilities, \( P(E_1 \cup E_2) = P(E_1) + P(E_2) \).
+
+A \define{random variable} \( X \) is a function from the sample space to the real numbers, \( X\colon Ω \to \reals \).
+This lets us naturally define the \define{image} \( X(E) = \set{X(ω) \in \reals \mid ω \in E} \) of an event \( E \) and the \define{pre-image} \( X^{-1}(x) = \set{ω \in Ω \mid X(ω) = x} \) of a possible value of \( X \).
+Probability as defined on the sample space can now be translated to numeric terms.
+The probability that \( X \) takes on a given value \( x \) is given by
+\begin{equation}
+    P(X = x) \coloneq P(X^{-1}(x)) = P(\set{ω \in Ω \mid X(ω) = x}).
+\end{equation}
