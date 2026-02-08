@@ -47,4 +47,25 @@ It follows that integrating the p.d.f. over an interval gives the probability of
 \end{equation}
 Furthermore, \( f_X \) is non-negative and normalized on \( \reals \).
 
+The \define{expectation value} of a function \( g\colon \reals \to \reals \) of a random variable is
+\begin{equation}
+    \label{eq:introduction:definition_expectation}
+    \ev{g(X)} \coloneq 
+    \begin{cases*}
+        \sum_{x \in X(Ω)} g(x) p_X(x) & if \( X \) is discrete, \\
+        \int_{\reals} g(x) f_X(x) \difl{x} & if \( X \) is continuous.
+    \end{cases*}
+\end{equation}
+From this, we define the \define{mean} and \define{variance} of a random variable as
+\begin{subequations}
+\begin{gather}
+    \label{eq:introduction:definition_mean}
+    \mean(X) = \mu_X \coloneq \ev{X}, \\
+    \label{eq:introduction:definition_variance}
+    \var(X) = σ_X^2 \coloneq \ev{(X - μ_X)^2} = \ev{X^2} - μ_X^2.\footnotemark
+\end{gather}
+\end{subequations}
+\footnotetext{
+    According to \autoref{eq:introduction:definition_expectation}, the expectation value is linear, \( \ev{aX + b} = a \ev{X} + b \).
+}%
 
