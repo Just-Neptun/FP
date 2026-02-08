@@ -32,11 +32,11 @@ A continuous random variable admits a \define{probability density function} (p.d
 Here we implicitly defined the \define{cumulative distribution function} (c.d.f.) \( F_X\colon \reals \to [0, 1] \), as 
 \begin{equation}
     \label{eq:introduction:definition_cdf}
-    F_X(x) \coloneq P(X \leq x) = P(X^{-1}((-\infty, x])).\footnotemark[1]
+    F_X(x) \coloneq P(X \leq x) = P(X^{-1}((-\infty, x])).\footnotemark
 \end{equation}
-\footnotetext[1]{
+\footnotetext{
     This definition satisfies \autoref{eq:introduction:definition_pdf} since \( F_X(x + h) - F_X(x) = P(X \leq x + h) - P(X \leq x) = P(x \leq X \leq x + h). \)
-}
+}%
 It follows that integrating the p.d.f. over an interval gives the probability of finding the random variable in that interval,
 \begin{equation}
     P(a \leq X \leq b) = \int_a^b f_X(x) \difl{x}.
