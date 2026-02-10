@@ -108,6 +108,20 @@ If \( ρ \) is close to \( 1 \) or \( -1 \), it reflects that \( X \) taking on 
 A small \( ρ \) means large \( X \) corresponds to small \( Y \).
 A positive value for \( ρ \) means that \( X \) and \( Y \) tend to be on the same side of their respective mean, while negative \( ρ \) means the opposite.
 
+We define the \define{covariance matrix} of a random vector \( \vec{X} \) as
+\begin{equation}
+    \mat{C}_{ij} = \cov(X_i, X_j).
+\end{equation}
+Given a function \( f\colon \reals^N \to \reals^M \) which is sufficiently well represented by its first degree Taylor series, we can calculate the covariance matrix of the random variable \( \vec{Y} = f(\vec{X}) \) using the (Jacobian) transition matrix,
+\begin{equation}
+    \mat{G}_{ij} = \frac{\partial f_i}{\partial x_j},
+\end{equation}
+in the following way:
+\begin{equation}
+    \mat{E} = \mat{G} \cdot \mat{C} \cdot \mat{G}\transpose.
+\end{equation}
+
+
 % This is strictly an estimator of the population covariance, not the covariance of two random variables... 
 % If two discrete variables \( x \) and \( y \), with means \( \mu_x \) and \( \mu_y \) respectively, are measured simultaneously for \( N \) samples, the covariances are calculated in the following way.
 % \begin{gather}
