@@ -16,6 +16,8 @@ In order:
 - by default, create a popup window/canvas with the created histogram
     - wait for user input before the popup is closed
 
+![vxp_z graph](Plots_pngs/Part03/3_2-vxp_z.png)
+
 ## 3. Invariant Mass
 
 Rapidity:
@@ -46,7 +48,6 @@ Now substitute into the equation for invariant mass:
 $$ m_0^2 = \frac{E^2}{c^4} - \frac{\vec{p}^2}{c^2} \\
 m_0^2 = \frac{E^2}{c^4} - p_T^2 \cdot (1 + \sinh^2 (\eta)) / c^2 $$
 
-
 <!--
 könnte sogar stimmen!
 
@@ -61,11 +62,17 @@ e^{2 y} (E - p_z) = E + p_z \\
 $$ m_0^2 = p_z^2 \bigg( \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} \bigg)^2 / c^4 - (p_T^2 + (p_T \cdot \sinh (\eta))^2)/c^2 $$
 -->
 
+![Invariant Mass graph](Plots_pngs/Part03/3_3-inv_mass.png)
+
 ## 4. `TLorentzVector`
+
+![Invariant Mass graph](Plots_pngs/Part03/3_4.png)
 
 Both methods do the same thing and produce exactly the same histogram.
 
 ## 5. Expected Distribution
+
+![Invariant Mass graph](Plots_pngs/Part03/3_5-initial.png)
 
 MC simulation to find what we would expect from the data.
 (Simulated distribution matches quite well to measured distribution.)
