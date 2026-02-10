@@ -118,41 +118,30 @@ Given a function \( \vec{f}\colon \reals^N \to \reals^M \) which is sufficiently
 \end{equation}
 in the following way:
 \begin{equation}
+    \label{eq:introduction:covariance_of_function}
     \mat{E} = \mat{G} \cdot \mat{C} \cdot \mat{G}\transpose.
 \end{equation}
 
+\subsection{Examples of Distributions}
+In general, a probability function might belong to a family of probability functions indexed by some parameter \( λ \).
+If this is the case, we work with the PMF or PDF of such a random variable given the value of this parameter, \( f_X(x \given λ) \), in the sense of conditional probability defined above.
 
-% This is strictly an estimator of the population covariance, not the covariance of two random variables... 
-% If two discrete variables \( x \) and \( y \), with means \( \mu_x \) and \( \mu_y \) respectively, are measured simultaneously for \( N \) samples, the covariances are calculated in the following way.
-% \begin{gather}
-%     \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \mu_{x}) (y_i - \mu_{y})
-%     \label{eq:introduction:covariance_discrete_def} \\ % referenced in least_squares.tex
-%     \var (x) = \cov (x, x)
-% \end{gather}
-
-\subsection{The Gaussian Distribution}
-
-To complete the introduction, we will discuss some relevant probability distribution functions. These will obviously be needed in the Analysis section later. Some simpler distributions will also be introduced later, but these are the most important and interesting ones to discuss in more detail here.
-
-The Gaussian distribution is one of the \quoteapprox{standard} distributions in statistics. It is defined as follows.
-
+A random variable is distributed according to the \define{Gaussian distribution}, if its PDF is of the form
 \begin{gather}
-    P(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2 \pi}} e^{\frac{(x - μ)^2}{2 \sigma^2}} \\
-    \text{Mean: } \ev{x} = \mu \\
-    \text{Variance: } \sigma_{x}^2 = \sigma^2
+    f(x \given μ, σ^2) = \frac{1}{\sqrt{2 π σ^2}} \exp(\frac{(x - μ)^2}{2 σ^2}).
 \end{gather}
+It is a family of distributions indexed by its mean and variance, \( \vec{λ} = (μ, σ^2)\transpose \).
 
-This distribution is often assumed as a kind of \quoteapprox{default} for many randomly distributed variables in nature. This is due to the \define{central limit theorem}. It states that for the average value \( X = 
+This distribution is often assumed as a kind of \quoteapprox{default} for many randomly distributed variables in nature. 
+This is due to the \define{central limit theorem}. 
+It states that for the average value \( X = 
 \frac{1}{n} \sum_{i=1}^n x_i \), when \( n \rightarrow \infty \), the distribution of \( X \) approaches a Gaussian distribution.
+Because measurements are influenced by the addition of many statistical errors (which behave as randomly distributed variables), it is usually assumed that a measurement comes from a Gaussian distribution centred around the true value (mean \( \mu \)) with an error (standard deviation \( \sigma \)).
 
-Because measurements are influenced by the addition of many different statistical errors (which behave as randomly distributed variables), it is usually assumed that a measurement comes from a Gaussian distribution centered around the true value (mean \( \mu \) of the distribution) with an error \( \sigma \) (the square root of the variance \( \sigma_x^2 \) of the distribution).
-
-\subsection{\texorpdfstring{The \( \chi^2 \)-Distribution}{The Chi-Squared-Distribution}}
-
-If \( n \) random variables \( x_1, \dotsc, x_n \) all follow standard Gaussian distributions with \( \mu = 0 \) and \( \sigma = 1 \), the sum of their squares follows the \( \chi^2 \)-distribution for \( n \) so-called \quotedef{degrees of freedom}.
+If \( n \) random variables \( x_1, \dotsc, x_n \) all follow standard Gaussian distributions with \( \mu = 0 \) and \( \sigma = 1 \), the sum of their squares follows the \define{\( \chi^2 \)-distribution} for \( n \) so-called \quotedef{degrees of freedom}.
 \begin{gather}
     z = \chi^2 = x_1^2 + \dotsb + x_n^2 \\
-    f(z; \, n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
+    f(z \given n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
     \label{eq:introduction:chi_square_distribution}
 \end{gather}
 
@@ -162,3 +151,13 @@ When analyzing a model, the number of fit parameters for the model must be subtr
 
 The differences between prediction and measurement are sometimes called residuals, leading to the name for this test statistic \( \chi^2_{obs} \): \quotedef{the (normalized) sum of the square residuals}.
 
+\subsection{Estimation}
+
+This is strictly an estimator of the population covariance, not the covariance of two random variables
+
+If two discrete variables \( x \) and \( y \), with means \( \mu_x \) and \( \mu_y \) respectively, are measured simultaneously for \( N \) samples, the covariances are calculated in the following way.
+\begin{gather}
+    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \mu_{x}) (y_i - \mu_{y})
+    \label{eq:introduction:covariance_discrete_def} \\ % referenced in least_squares.tex
+    \var (x) = \cov (x, x)
+\end{gather}
