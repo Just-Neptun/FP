@@ -49,6 +49,8 @@ It follows that integrating the p.d.f. over an interval gives the probability of
 \end{equation}
 Furthermore, \( f_X \) is non-negative and normalized on \( \reals \).
 
+
+\subsection{Mean, Variance, and Covariance}
 The \define{expectation value} of a function \( g\colon \reals \to \reals \) of a random variable is
 \begin{subequations}
 \label{eq:introduction:definition_expectation}
@@ -67,9 +69,6 @@ From this, we define the \define{mean} and \define{variance} of a random variabl
 \end{gather}
 \end{subequations}
 The last equality follows from the fact that \autoref{eq:introduction:definition_expectation} implies the linearity of the expectation value, \( \ev{aX + b} = a \ev{X} + b \).
-
-% do we need anything except for this? (discrete covariance only)
-\subsection{Defining Covariances}
 
 The covariance is an important concept. The covariance function defined below computes how one random variable depends on another when their distribution is governed by a multi-variable probability distribution.
 
