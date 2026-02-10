@@ -1,4 +1,4 @@
-% !TEX root = ./../ausarbeitung.tex
+% !TEX root = ../ausarbeitung.tex
 \section{Introduction}
 \label{sec:introduction}
 Before we can focus on error propagation and parameter estimation, we need to introduce the basics of probability theory.
@@ -7,7 +7,7 @@ We formally model a random process using a \define{probability space}.
 This is a triple consisting of a \define{sample space} \( Ω \), an \define{event space} \( F \), and a \define{probability function} \( P\colon F \to [0, 1] \).
 An \define{outcome} \( ω \in Ω \) is a possible result, an \define{event} \( E \in F \) is a set of outcomes, and \( P(E) \) is the \define{probability} of an event occurring.
 
-An event \( E \) occurred, if the result \( ω \) of the process is in \( E \), \( ω \in E \).
+An event \( E \) occurred if the result \( ω \) of the process is in \( E \), \( ω \in E \).
 Since \( ω \in Ω \), we know \( P(Ω) = 1 \).
 If two events \( E_1, E_2 \) are \define{mutually exclusive}, \( E_1 \cap E_2 = \emptyset \), then the probability of either one happening is the sum of their individual probabilities, \( P(E_1 \cup E_2) = P(E_1) + P(E_2) \).
 The \define{conditional probability} of event \( A \) occurring, given the information that event \( B \) with \( P(B) \neq 0 \) has occurred, is 
@@ -48,24 +48,50 @@ It follows that integrating the p.d.f. over an interval gives the probability of
 Furthermore, \( f_X \) is non-negative and normalized on \( \reals \).
 
 The \define{expectation value} of a function \( g\colon \reals \to \reals \) of a random variable is
-\begin{equation}
+\begin{alignat}{4}
     \label{eq:introduction:definition_expectation}
-    \ev{g(X)} \coloneq 
-    \begin{cases*}
-        \sum_{x \in X(Ω)} g(x) p_X(x) & if \( X \) is discrete, \\
-        \int_{\reals} g(x) f_X(x) \difl{x} & if \( X \) is continuous.
-    \end{cases*}
-\end{equation}
+    \ev{g(X)} &\coloneq \sum_{x \in X(Ω)} g(x) p_X(x) &&\quad \text{if \( X \) is discrete} \\
+    \ev{g(X)} &\coloneq \int_{\reals} g(x) f_X(x) \difl{x} &&\quad \text{if \( X \) is continuous}
+\end{alignat}
 From this, we define the \define{mean} and \define{variance} of a random variable as
 \begin{subequations}
 \begin{gather}
     \label{eq:introduction:definition_mean}
     \mean(X) = \mu_X \coloneq \ev{X}, \\
     \label{eq:introduction:definition_variance}
-    \var(X) = σ_X^2 \coloneq \ev{(X - μ_X)^2} = \ev{X^2} - μ_X^2.\footnotemark
+    \var(X) \coloneq σ_X^2 \coloneq \ev{(X - μ_X)^2} = \ev{X^2} - μ_X^2.
 \end{gather}
 \end{subequations}
-\footnotetext{
-    According to \autoref{eq:introduction:definition_expectation}, the expectation value is linear, \( \ev{aX + b} = a \ev{X} + b \).
-}%
+
+It follows from \autoref{eq:introduction:definition_expectation} that the expectation value is linear, \( \ev{aX + b} = a \ev{X} + b \).
+
+\subsection{The Gaussian Distribution}
+
+The Gaussian distribution is one of the \quoteapprox{standard} distributions in statistics. It is defined as follows.
+
+\begin{gather}
+    P(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2 \pi}} e^{\frac{(x - μ)^2}{2 \sigma^2}} \\
+    \text{Mean: } \ev{x} = \mu \\
+    \text{Variance: } \sigma_{x}^2 = \sigma^2
+\end{gather}
+
+This distribution is often assumed as a kind of \quoteapprox{default} for many randomly distributed variables in nature. This is due to the \define{central limit theorem}. It states that for the average value \( X = 
+\frac{1}{n} \sum_{i=1}^n x_i \), when \( n \rightarrow \infty \), the distribution of \( X \) approaches a Gaussian distribution.
+
+Because measurements are influenced by the addition of many different statistical errors (which behave as randomly distributed variables), it is usually assumed that a measurement comes from a Gaussian distribution centered around the true value (mean \( \mu \) of the distribution) with an error \( \sigma \) (the square root of the variance \( \sigma_x^2 \) of the distribution).
+
+\subsection{\texorpdfstring{The \( \chi^2 \)-Distribution}{The Chi-Squared-Distribution}}
+
+If \( n \) random variables \( x_1, \dotsc, x_n \) all follow standard Gaussian distributions with \( \mu = 0 \) and \( \sigma = 1 \), the sum of their squares follows the \( \chi^2 \)-distribution for \( n \) so-called \quotedef{degrees of freedom}.
+\begin{gather}
+    z = \chi^2 = x_1^2 + \dotsb + x_n^2 \\
+    f(z; \, n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
+    \label{eq:introduction:chi_square_distribution}
+\end{gather}
+
+This is relevant for analyzing the quality of a model relative to measured data, as the differences between prediction and measurement should be distributed around \( \mu = 0 \). If it is assumed that the measurement errors cause a Gaussian distribution of the measurement values, then the width of the distributions can also be normalized to \( \sigma = 1 \), producing \( n \) Gaussian distributions.
+
+When analyzing a model, the number of fit parameters for the model must be subtracted off from the total number of measurement points to obtain the degrees of freedom. Intuitively, this is because a model with \( n_F \) parameters (such as a polynomial) could perfectly capture the that many data points, causing a deviation of \( 0 \) for all of those measurements. Deviation from the model due to statistical errors can only occur for the \quoteapprox{leftover} data points when the model has fewer parameters than data points, meaning degrees of freedom \( f = n - n_F \).
+
+The differences between prediction and measurement are sometimes called residuals, leading to the name for this test statistic \( \chi^2_{obs} \): \quotedef{the (normalized) sum of the square residuals}.
 
