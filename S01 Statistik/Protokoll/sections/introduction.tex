@@ -64,7 +64,14 @@ We can similarly define PMFs, CDFs, and PDFs:
 The notation is to be understood component-wise, i.e. \( \vec{X} \leq \vec{x} \iff \forall i \in \set{1, \dots, N}\colon X_i \leq x_i \).
 
 Again, \( P(\vec{X} \in M \subseteq \reals^N) = \int_M f_{\vec{X}}(\vec{x}) \difl{\vec{x}} \), with the PDF being non-negative and normalized on \( \reals^N \).
-
+A \define{marginal distribution} is achieved by integrating (or summing, in case of a PMF) over all but one dimensions,
+\begin{equation}
+    f_{X_1}(x_1) = \int_{\reals^{N-1}} f_{\vec{X}}(\vec{x}) \difl{x_2} \cdots \difl{x_N}.
+\end{equation}
+We call two random variables \define{independent} if their \define{joint distribution} factorises,
+\begin{equation}
+    f_{X,Y}(x,y) = f_X(x) \cdot f_Y(y).
+\end{equation}
 
 \subsection{Mean, Variance, and Covariance}
 The \define{expectation value} of a function \( g\colon \reals \to \reals \) of a random variable is
