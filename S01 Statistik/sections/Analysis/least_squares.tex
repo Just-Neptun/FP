@@ -1,4 +1,4 @@
-% !TEX root = ../../ausarbeitung.tex
+% !TEX root = ../ausarbeitung.tex
 \subsection{Using the Least Squares Method for Finding Parameters of Best Fit Curves}
 \label{sec:least squares}
 
@@ -6,7 +6,7 @@
 
 \subsubsection{Finding Best Fit Parameters}
 
-For the next part, we will use the method of least squares to find fit parameters of a function from some data. We are given some independent measurements (see appendix\typeout{TODO: add an appendix with least squares given data!}).
+For the next part, we will use the method of least squares to find fit parameters of a function from some data. We are given some independent measurements (see \autoref{tab:appendix:least_squares_data}).
 
 Assuming the data came from a third-order polynomial, the fit function is of the form:
 \begin{gather}
@@ -134,8 +134,8 @@ Now we will use a linear fit function (first degree polynomial, see \autoref{eq:
 
 For this fit, the parameters are given below. In \autoref{fig:least_squares:linear_fit}, we then use the same error propagation method to plot the fit function with a $1\sigma$ error band.
 \begin{gather}
-    \label{eq:least_squares:linear_fit}
-    y(x) = \theta_0 + \theta_1 x \\
+    y(x) = \theta_0 + \theta_1 x
+    \label{eq:least_squares:linear_fit} \\
     \theta_0 = \num{3.64 \pm 0.22} \\
     \theta_1 = \num{1.5 \pm 0.4}
 \end{gather}
