@@ -3,6 +3,7 @@
 \label{sec:introduction}
 Before we can focus on error propagation and parameter estimation, we need to introduce the basics of probability theory.
 
+\subsection{Basic Probability Theory}
 We formally model a random process using a \define{probability space}.
 This is a triple consisting of a \define{sample space} \( Ω \), an \define{event space} \( F \), and a \define{probability function} \( P\colon F \to [0, 1] \).
 An \define{outcome} \( ω \in Ω \) is a possible result, an \define{event} \( E \in F \) is a set of outcomes, and \( P(E) \) is the \define{probability} of an event occurring.
@@ -22,6 +23,7 @@ The probability that \( X \) takes on a state in \( A \subseteq \reals \) is giv
     P(X \in A) \coloneq P(\set{ω \in Ω \mid X(ω) = x}) = P(X^{-1}(A)).
 \end{equation}
 
+\subsection{Probability Mass and Density Functions}
 A random variable may be either \define{discrete} (if \( X(Ω) \) is at most countably infinite) or \define{continuous} (if \( X(Ω) \) is uncountably infinite).
 A discrete random variable admits a \define{probability mass function} (p.m.f.) \( p_X\colon \reals \to [0, 1] \), which gives the probability that \( X \) is in state \( x \in \reals\),
 \begin{equation}
