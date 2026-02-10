@@ -15,7 +15,7 @@ Assuming the data came from a third-order polynomial, the fit function is of the
 \end{gather}
 
 This kind of polynomial function is linear in its parameters (the coefficients \( \theta_i \)), meaning an exact solution exists.
-% \typeout{Is this real? Explain in intro?}
+% % Is this real? Explain in intro?
 % \begin{gather}
 %     f(x ; \vec{\theta}) = \sum \limits _{k = 0}^{3} x^{k} \cdot \theta_k
 %     \label{eq:least_squares:general_form_fit_polynomial}
@@ -106,7 +106,7 @@ The null hypothesis is that there is nothing remarkable going on, and that the p
 
 Next we want to visually plot the fit curve, using the calculated parameters. In addition to this, a \( 1 \sigma \) band should be plotted around the model curve itself. This will give a better idea about how certain the model is about its prediction.
 
-To calculate the error band, as well as evaluating the fit function at every point, we use the known full error propagation formula with covariances. \typeout{autoref or just ref, reference the formula in introduction or the formula here?}\( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mathbf{A} \) comes from the Jacobian \( \mathbf{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
+To calculate the error band, as well as evaluating the fit function at every point, we use the known full error propagation formula with covariances. \typeout{! autoref or just ref, reference the formula in introduction or the formula here?}\( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mathbf{A} \) comes from the Jacobian \( \mathbf{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
 \begin{gather}
     \sigma_y^2 = \mathbf{A} \mathbf{C} \mathbf{A}^\mathrm{T}
     \label{eq:least_squares:covariance_error} \\
@@ -186,10 +186,13 @@ After this, we perform the same goodness of fit analysis as before. Because the 
     \label{fig:least_squares:chi_square_distribution_linear_2}
 \end{figure}
 
-Because of the reduction in \( \chi^2_\mathrm{obs} \), the \( p \)-value is increased significantly (\( p = 0.224 \)). Again, the null hypothesis of this test is that the fit function does correctly model the \( y \) vs. \( x \) relationship. Because the \( p \)-value is much larger than the \( 0.05 \) significance level, we fail to reject the null hypothesis. In other words, the probability of the data varying at least this much from the model due to random error is \num{0.224}. Because this is quite likely, we would gain a lot of confidence in this model.
+Because of the reduction in \( \chi^2_\mathrm{obs} \), the \( p \)-value is increased significantly (\( p = 0.224 \)). Again, the null hypothesis of this test is that the fit function does correctly model the \( y \) vs. \( x \) relationship. Because the \( p \)-value is much larger than the \( 0.05 \) significance level, we fail to reject the null hypothesis. In other words, the probability of the data varying at least this much from the model due to random error is \num{0.224}. Because this is quite likely, we gain a lot of confidence in the validity of the model.
 
+This calculation clearly shows how estimating errors is a very important part of data collection. It is clear that a third degree polynomial is a much better model of the data, but by simply increasing the errors other models seem to fit as well. Overestimating errors is therefore also harmful.
 
-\typeout{... we see how increasing error estimates must be done carefully..., maybe in discussion section?}
+To mitigate this problem, real data analysis can also include looking at the residuals (difference between measurement and model prediction) for each data point. In this case, with a linear fit, it may be visible that the residuals are consistently more positive for low values of \( x \), while high values of \( x \) cause low and even negative residuals. This corresponds to what is seen visually on \autoref{fig:least_squares:linear_fit_double_errors}: The model is consistently too high on the left while too low on the right.
+
+Finding a pattern in the residuals like this means the measurements are not randomly distributed around the model prediction, and that there is some kind of systematic problem, indicating that the model is not correct for the data set. It does not capture the shape of the data properly.
 
 
 \subsection{Fitting Sample Data from Harmonic Oscillators}
@@ -279,4 +282,4 @@ The fit parameters are given below. The new fit functions are graphed alongside 
 
 We note that the \( p \)-value of this fit is quite high, giving us confidence that our combined model fits the data well.
 
-\typeout{discuss difference between simultaneous and independent fits (small difference) here or in discussion?}
+% discuss difference between simultaneous and independent fits (small difference)

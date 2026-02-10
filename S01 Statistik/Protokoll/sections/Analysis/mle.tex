@@ -10,9 +10,7 @@ Another way of finding fit parameters for a model is the \quotedef{Maximum Likel
 
 \subsubsection{Applying the MLE Method to find a Fit Parameter with Uncertainty}
 
-\typeout{stuff in introduction to explain why/how:}
-
-Using the MLE method, the goal is to find the fit parameters (in this case \( \tau \)) which maximize the likelihood that the data came from the distribution. We will solve this analytically.
+Using the MLE method, the goal is to find the fit parameters (in this case \( \tau \)) which maximize the likelihood that the data came from the distribution. This is a reasonable way of estimating the parameters of the distribution, as we are assuming that nothing extremely unlikely happened during measurement (as that would by definition be unlikely to happen). In this case, we can find the parameter \( \tau \) by solving analytically.
 
 We start with the general log-likelihood function. Inserting the decay distribution function $f(t ; \tau)$ from \autoref{eq:mle:decay_function} and simplifying gives us a different expression for the log-likelihood.
 \begin{align}
@@ -99,7 +97,7 @@ By generating many data sets with large numbers of samples, we approximate the l
 
 From the total number of runs and the number of successes we can calculate the success ratio: For \num{1000} data sets of \num{500} samples, we get about \num{670} successful predictions, meaning a success rate of \qty{67}{\percent}. This success rate is our estimate/expectation for the probability of a successful prediction of \( \tau \) when using the MLE method.
 
-\typeout{discuss how good 67 percent is? (discussion?)}
+\typeout{! discuss how good 67 percent is? (discussion?)}
 
 \subsection{MLE Analysis on a Second Dataset}
 
