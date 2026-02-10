@@ -70,11 +70,20 @@ It follows from \autoref{eq:introduction:definition_expectation} that the expect
 % unfinished here!
 \typeout{! Unfinished here!}
 
+\subsection{Defining Covariances}
+
+The covariance is an important concept. The covariance function defined below computes how one random variable depends on another when their distribution is governed by a multi-variable probability distribution.
+
+If two discrete variables \( x \) and \( y \), with means \( \mu_x \) and \( \mu_y \) respectively, are measured simultaneously for \( N \) samples, the covariances are calculated in the following way.
 \begin{gather}
-    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \bar{x}) (y_i - \bar{y})
-    \label{eq:introduction:covariance_discrete_def}
+    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \mu_{x}) (y_i - \mu_{y})
+    \label{eq:introduction:covariance_discrete_def} \\ % referenced in least_squares.tex
+    \var (x) = \cov (x, x)
 \end{gather}
 
+As long as the covariance is nonzero, this means that the two variables depend on each other. The size of the covariance indicates how strong the correlation is, while the sign indicates if the values are positively or negatively correlated. For example, a large positive covariance reflects that a sample with large \( x \) will also tend to correspond with a large \( y \) measurement. A negative covariance means large \( x \) corresponds to small \( y \).
+
+Lastly, we note that the covariance function is symmetric (see definition), meaning \( \cov (x, y) = \cov (y, x) \). The above examples also work if \( x \) and \( y \) are reversed.
 
 \subsection{The Gaussian Distribution}
 
