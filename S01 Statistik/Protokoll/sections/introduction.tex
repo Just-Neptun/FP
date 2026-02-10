@@ -18,9 +18,9 @@ The \define{conditional probability} of event \( A \) occurring, given the infor
 
 A \define{random variable} \( X \) is a function from the sample space to the real numbers, \( X\colon Ω \to \reals \), and its values \( x = X(ω) \in \reals \) are called its \define{states}.
 We naturally define the \define{image} \( X(E) = \set{X(ω) \in \reals \mid ω \in E} \) of an event \( E \) and the \define{pre-image} \( X^{-1}(A) = \set{ω \in Ω \mid X(ω) \in A} \) of a set of states \( A \).
-The probability that \( X \) takes on a state in \( A \subseteq \reals \) is given by
+The probability that \( X \) takes on a state in \( A \subseteq \reals \) is given by its pre-image,
 \begin{equation}
-    P(X \in A) \coloneq P(\set{ω \in Ω \mid X(ω) = x}) = P(X^{-1}(A)).
+    P(X \in A) \coloneq P(\set{ω \in Ω \mid X(ω) \in A}) = P(X^{-1}(A)).
 \end{equation}
 
 \subsection{Probability Mass and Density Functions}
