@@ -1,6 +1,8 @@
 % !TEX root = ../ausarbeitung.tex
 \section{Introduction}
 \label{sec:introduction}
+
+\subsection{Probability Theory}
 Before we can focus on error propagation and parameter estimation, we need to introduce the basics of probability theory.
 
 \subsection{Basic Probability Theory}
@@ -68,7 +70,25 @@ From this, we define the \define{mean} and \define{variance} of a random variabl
 \end{subequations}
 The last equality follows from the fact that \autoref{eq:introduction:definition_expectation} implies the linearity of the expectation value, \( \ev{aX + b} = a \ev{X} + b \).
 
+% do we need anything except for this? (discrete covariance only)
+\subsection{Defining Covariances}
+
+The covariance is an important concept. The covariance function defined below computes how one random variable depends on another when their distribution is governed by a multi-variable probability distribution.
+
+If two discrete variables \( x \) and \( y \), with means \( \mu_x \) and \( \mu_y \) respectively, are measured simultaneously for \( N \) samples, the covariances are calculated in the following way.
+\begin{gather}
+    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \mu_{x}) (y_i - \mu_{y})
+    \label{eq:introduction:covariance_discrete_def} \\ % referenced in least_squares.tex
+    \var (x) = \cov (x, x)
+\end{gather}
+
+As long as the covariance is nonzero, this means that the two variables depend on each other. The size of the covariance indicates how strong the correlation is, while the sign indicates if the values are positively or negatively correlated. For example, a large positive covariance reflects that a sample with large \( x \) will also tend to correspond with a large \( y \) measurement. A negative covariance means large \( x \) corresponds to small \( y \).
+
+Lastly, we note that the covariance function is symmetric, meaning \( \cov (x, y) = \cov (y, x) \). The above examples also work if \( x \) and \( y \) are reversed.
+
 \subsection{The Gaussian Distribution}
+
+To complete the introduction, we will discuss some relevant probability distribution functions. These will obviously be needed in the Analysis section later. Some simpler distributions will also be introduced later, but these are the most important and interesting ones to discuss in more detail here.
 
 The Gaussian distribution is one of the \quoteapprox{standard} distributions in statistics. It is defined as follows.
 

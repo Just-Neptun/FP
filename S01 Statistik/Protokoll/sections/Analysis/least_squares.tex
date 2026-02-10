@@ -48,7 +48,7 @@ Translating these matrix operations into code gives an analytic solution for the
     \theta_3 &= \num{ 2.3 \pm 0.5}
 \end{align}
 \begin{gather}
-    \mathbf{C} = 
+    \mathbf{C}_\theta = 
     \begin{pmatrix}
         \num{ 0.114 } & \num{-0.0261} & \num{-0.0879} & \num{ 0.0163} \\
         \num{-0.0261} & \num{ 0.566 } & \num{ 0.0111} & \num{-0.334 } \\
@@ -106,7 +106,7 @@ The null hypothesis is that there is nothing remarkable going on, and that the p
 
 Next we want to visually plot the fit curve, using the calculated parameters. In addition to this, a \( 1 \sigma \) band should be plotted around the model curve itself. This will give a better idea about how certain the model is about its prediction.
 
-To calculate the error band, as well as evaluating the fit function at every point, we use the known full error propagation formula with covariances. \typeout{! autoref or just ref, reference the formula in introduction or the formula here?}\( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mathbf{A} \) comes from the Jacobian \( \mathbf{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
+To calculate the error band, as well as evaluating the fit function at every point, we use the known full error propagation formula with covariances from \autoref{eq:introduction:covariance_discrete_def}. In \autoref{eq:least_squares:covariance_error}, this formula is rewritten in matrix form. The matrix \( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mathbf{A} \) comes from the Jacobian \( \mathbf{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
 \begin{gather}
     \sigma_y^2 = \mathbf{A} \mathbf{C} \mathbf{A}^\mathrm{T}
     \label{eq:least_squares:covariance_error} \\
