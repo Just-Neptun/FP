@@ -68,13 +68,13 @@ A \define{marginal distribution} is achieved by integrating (or summing, in case
 \begin{equation}
     f_{X_1}(x_1) = \int_{\reals^{N-1}} f_{\vec{X}}(\vec{x}) \difl{x_2} \cdots \difl{x_N}.
 \end{equation}
-We call two random variables \define{independent} if their \define{joint distribution} factorises,
+We call two random variables \define{independent} if their \define{joint distribution} factorizes,
 \begin{equation}
     f_{X,Y}(x,y) = f_X(x) \cdot f_Y(y).
 \end{equation}
 
 \subsection{Mean, Variance, and Covariance}
-The \define{expectation value} of a function \( g\colon \reals \to \reals \) of a random variable is
+The \define{expectation value} of a function \( g\colon \reals^N \to \reals \) of a random vector is
 \begin{subequations}
 \label{eq:introduction:definition_expectation}
 \begin{alignat}{2}
@@ -92,19 +92,29 @@ From this, we define the \define{mean} and \define{variance} of a random variabl
 \end{gather}
 \end{subequations}
 The last equality follows from the fact that \autoref{eq:introduction:definition_expectation} implies the linearity of the expectation value, \( \ev{aX + b} = a \ev{X} + b \).
+If there are multiple random variables, we use the marginal distributions to determine the mean and variance of each variable.
+The square-root of the variance is called the \define{standard deviation}.
 
-The covariance is an important concept. The covariance function defined below computes how one random variable depends on another when their distribution is governed by a multi-variable probability distribution.
+The \define{covariance} of two random variables is defined as 
+\begin{equation}
+    \cov(X, Y) \coloneq \ev{(X - μ_X)(Y - μ_Y)} = \ev{XY} - μ_X μ_Y.
+\end{equation}
+If the covariance is not zero, this means that the two variables depend on each other. 
+We normalize it to receive the \define{correlation}
+\begin{equation}
+    ρ = \frac{\cov(X, Y)}{σ_X σ_Y}.
+\end{equation}
+If \( ρ \) is close to \( 1 \) or \( -1 \), it reflects that \( X \) taking on large values will also tend to correspond with \( Y \) taking on large values. 
+A small \( ρ \) means large \( X \) corresponds to small \( Y \).
+A positive value for \( ρ \) means that \( X \) and \( Y \) tend to be on the same side of their respective mean, while negative \( ρ \) means the opposite.
 
-If two discrete variables \( x \) and \( y \), with means \( \mu_x \) and \( \mu_y \) respectively, are measured simultaneously for \( N \) samples, the covariances are calculated in the following way.
-\begin{gather}
-    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \mu_{x}) (y_i - \mu_{y})
-    \label{eq:introduction:covariance_discrete_def} \\ % referenced in least_squares.tex
-    \var (x) = \cov (x, x)
-\end{gather}
-
-As long as the covariance is nonzero, this means that the two variables depend on each other. The size of the covariance indicates how strong the correlation is, while the sign indicates if the values are positively or negatively correlated. For example, a large positive covariance reflects that a sample with large \( x \) will also tend to correspond with a large \( y \) measurement. A negative covariance means large \( x \) corresponds to small \( y \).
-
-Lastly, we note that the covariance function is symmetric, meaning \( \cov (x, y) = \cov (y, x) \). The above examples also work if \( x \) and \( y \) are reversed.
+% This is strictly an estimator of the population covariance, not the covariance of two random variables... 
+% If two discrete variables \( x \) and \( y \), with means \( \mu_x \) and \( \mu_y \) respectively, are measured simultaneously for \( N \) samples, the covariances are calculated in the following way.
+% \begin{gather}
+%     \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \mu_{x}) (y_i - \mu_{y})
+%     \label{eq:introduction:covariance_discrete_def} \\ % referenced in least_squares.tex
+%     \var (x) = \cov (x, x)
+% \end{gather}
 
 \subsection{The Gaussian Distribution}
 
