@@ -65,3 +65,23 @@ From this, we define the \define{mean} and \define{variance} of a random variabl
 
 It follows from \autoref{eq:introduction:definition_expectation} that the expectation value is linear, \( \ev{aX + b} = a \ev{X} + b \).
 
+
+
+
+\subsection{Common Distributions}
+
+\subsubsection{\( \chi^2 \)-Distribution}
+
+If \( n \) random variables \( x_1, \dotsc, x_n \) all follow standard Gaussian distributions with \( \mu = 0 \) and \( \sigma = 1 \), the sum of their squares follows the \( \chi^2 \)-distribution for \( n \) so-called \quotedef{degrees of freedom}.
+\begin{gather}
+    z = \chi^2 = x_1^2 + \dotsb + x_n^2 \\
+    f(z; \, n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
+    \label{eq:introduction:chi_square_distribution}
+\end{gather}
+
+This is relevant for analyzing the quality of a model relative to measured data, as the differences between prediction and measurement should be distributed around \( \mu = 0 \). If it is assumed that the measurement errors cause a Gaussian distribution of the measurement values, then the width of the distributions can also be normalized to \( \sigma = 1 \), producing \( n \) Gaussian distributions.
+
+When analyzing a model, the number of fit parameters for the model must be subtracted off from the total number of measurement points to obtain the degrees of freedom. Intuitively, this is because a model with \( n_F \) parameters (such as a polynomial) could perfectly capture the that many data points, causing a deviation of \( 0 \) for all of those measurements. Deviation from the model due to statistical errors can only occur for the \quoteapprox{leftover} data points when the model has fewer parameters than data points, meaning degrees of freedom \( f = n - n_F \).
+
+The differences between prediction and measurement are sometimes called residuals, leading to the name for this test statistic \( \chi^2_{obs} \): \quotedef{the (normalized) sum of the square residuals}.
+

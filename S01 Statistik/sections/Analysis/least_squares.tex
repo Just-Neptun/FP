@@ -76,7 +76,7 @@ The results match quite well, which can be seen visually in \autoref{fig:least_s
 
 To analyze how well our model fits the data, we use the final minimized sum of the square residuals. For this we simply input the fit parameters which by definition minimize this value into the function \autoref{eq:least_squares:sum_square_residuals_matrix_represenation}. With the given data, \( \chi_\mathrm{obs}^2 = \num{10.5} \).
 
-To understand this value, we compare it to the family of distributions which the statistic should come from.
+To understand this value, we compare it to the family of distributions which the statistic should come from. As previously explained, it comes from the \( \chi^2 \)-distribution. Its general form was given earlier in \autoref{eq:introduction:chi_square_distribution}.
 
 % The number of degrees of freedom is the total number of data points minus the number of fit parameters. This number is important because it takes into account how complicated the model is. As an extreme example, if a model has as many parameters as there are data points, obviously the data is matched perfectly. However, this is an extreme overfit. Really we are looking for models which are very good at predicting the data even with much fewer parameters than data points.
 
@@ -87,7 +87,7 @@ To understand this value, we compare it to the family of distributions which the
 %     \text{Degrees of Freedom: } 9
 % \end{gather*}
 
-The number of degrees of freedom is the total number of data points minus the number of fit parameters: \( 13 - 4 = 9 \). Knowing this, we can plot the $\chi^2$-distribution for this number of degrees of freedom in \autoref{fig:least_squares:chi_square_distribution_1}. This lets us compare the test statistic of our fit with the expected distribution. 
+The number of degrees of freedom is the total number of data points minus the number of fit parameters: \( 13 - 4 = 9 \). Knowing this, we can plot the $\chi^2$-distribution for this number of degrees of freedom in \autoref{fig:least_squares:chi_square_distribution_1}. This lets us compare the test statistic of our fit with the expected distribution.
 
 \begin{figure}[htbp]
     \centering
