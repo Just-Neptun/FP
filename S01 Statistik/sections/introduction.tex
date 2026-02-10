@@ -65,12 +65,22 @@ From this, we define the \define{mean} and \define{variance} of a random variabl
 
 It follows from \autoref{eq:introduction:definition_expectation} that the expectation value is linear, \( \ev{aX + b} = a \ev{X} + b \).
 
+\subsection{The Gaussian Distribution}
 
+The Gaussian distribution is one of the \quoteapprox{standard} distributions in statistics. It is defined as follows.
 
+\begin{gather}
+    P(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2 \pi}} e^{\frac{(x - μ)^2}{2 \sigma^2}} \\
+    \text{Mean: } \ev{x} = \mu \\
+    \text{Variance: } \sigma_{x}^2 = \sigma^2
+\end{gather}
 
-\subsection{Common Distributions}
+This distribution is often assumed as a kind of \quoteapprox{default} for many randomly distributed variables in nature. This is due to the \define{central limit theorem}. It states that for the average value \( X = 
+\frac{1}{n} \sum_{i=1}^n x_i \), when \( n \rightarrow \infty \), the distribution of \( X \) approaches a Gaussian distribution.
 
-\subsubsection{\( \chi^2 \)-Distribution}
+Because measurements are influenced by the addition of many different statistical errors (which behave as randomly distributed variables), it is usually assumed that a measurement comes from a Gaussian distribution centered around the true value (mean \( \mu \) of the distribution) with an error \( \sigma \) (the square root of the variance \( \sigma_x^2 \) of the distribution).
+
+\subsection{\texorpdfstring{The \( \chi^2 \)-Distribution}{The Chi-Squared-Distribution}}
 
 If \( n \) random variables \( x_1, \dotsc, x_n \) all follow standard Gaussian distributions with \( \mu = 0 \) and \( \sigma = 1 \), the sum of their squares follows the \( \chi^2 \)-distribution for \( n \) so-called \quotedef{degrees of freedom}.
 \begin{gather}
