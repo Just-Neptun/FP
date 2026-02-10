@@ -49,6 +49,22 @@ It follows that integrating the PDF over an interval gives the probability of fi
 \end{equation}
 Furthermore, \( f_X \) is non-negative and normalized on \( \reals \).
 
+\subsection{Multiple Random Variables}
+A \define{random vector} \( \vec{X} \) is a generalization of a random variable to \( N \) dimensions, \( \vec{X}\colon Ω \to \reals^N \).
+It can be understood as a vector of random variables, \( \vec{X} = (X_1, \dots, X_N)\transpose \).
+Its states are vectors in \( \reals^N \), and it can be discrete or continuous.\footnote{
+    We disregard the possibility of there being cross-terms, for example \( X_1 \) being discrete and \( X_2 \) being continuous.
+}
+We can similarly define PMFs, CDFs, and PDFs:
+\begin{gather} 
+    p_{\vec{X}}(\vec{x}) \coloneq P(\vec{X} = \vec{x}) = P(\vec{X}^{-1}(\set{\vec{x}})), \\
+    F_{\vec{X}}(\vec{x}) \coloneq P(\vec{X} \leq \vec{x}) = P(\vec{X}^{-1}((-\infty, \vec{x}])), \\
+    f_{\vec{X}}(\vec{x}) \coloneq \lim_{\vec{h} \to \vec{0}} \frac{P(\vec{X} \in [\vec{x}, \vec{x} + \vec{h}])}{\prod_{i} h_i} = \eval{\diffp<n>{F_{\vec{X}}}{x_1,x_2,...,x_n}}{\vec{x}}.
+\end{gather}
+The notation is to be understood component-wise, i.e. \( \vec{X} \leq \vec{x} \iff \forall i \in \set{1, \dots, N}\colon X_i \leq x_i \).
+
+Again, \( P(\vec{X} \in M \subseteq \reals^N) = \int_M f_{\vec{X}}(\vec{x}) \difl{\vec{x}} \), with the PDF being non-negative and normalized on \( \reals^N \).
+
 
 \subsection{Mean, Variance, and Covariance}
 The \define{expectation value} of a function \( g\colon \reals \to \reals \) of a random variable is
