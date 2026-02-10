@@ -1,4 +1,4 @@
-% !TEX root = ./../ausarbeitung.tex
+% !TEX root = ../ausarbeitung.tex
 \section{Introduction}
 \label{sec:introduction}
 Before we can focus on error propagation and parameter estimation, we need to introduce the basics of probability theory.
@@ -7,7 +7,7 @@ We formally model a random process using a \define{probability space}.
 This is a triple consisting of a \define{sample space} \( Ω \), an \define{event space} \( F \), and a \define{probability function} \( P\colon F \to [0, 1] \).
 An \define{outcome} \( ω \in Ω \) is a possible result, an \define{event} \( E \in F \) is a set of outcomes, and \( P(E) \) is the \define{probability} of an event occurring.
 
-An event \( E \) occurred, if the result \( ω \) of the process is in \( E \), \( ω \in E \).
+An event \( E \) occurred if the result \( ω \) of the process is in \( E \), \( ω \in E \).
 Since \( ω \in Ω \), we know \( P(Ω) = 1 \).
 If two events \( E_1, E_2 \) are \define{mutually exclusive}, \( E_1 \cap E_2 = \emptyset \), then the probability of either one happening is the sum of their individual probabilities, \( P(E_1 \cup E_2) = P(E_1) + P(E_2) \).
 The \define{conditional probability} of event \( A \) occurring, given the information that event \( B \) with \( P(B) \neq 0 \) has occurred, is 
@@ -48,24 +48,20 @@ It follows that integrating the p.d.f. over an interval gives the probability of
 Furthermore, \( f_X \) is non-negative and normalized on \( \reals \).
 
 The \define{expectation value} of a function \( g\colon \reals \to \reals \) of a random variable is
-\begin{equation}
+\begin{alignat}{4}
     \label{eq:introduction:definition_expectation}
-    \ev{g(X)} \coloneq 
-    \begin{cases*}
-        \sum_{x \in X(Ω)} g(x) p_X(x) & if \( X \) is discrete, \\
-        \int_{\reals} g(x) f_X(x) \difl{x} & if \( X \) is continuous.
-    \end{cases*}
-\end{equation}
+    \ev{g(X)} &\coloneq \sum_{x \in X(Ω)} g(x) p_X(x) &&\quad \text{if \( X \) is discrete} \\
+    \ev{g(X)} &\coloneq \int_{\reals} g(x) f_X(x) \difl{x} &&\quad \text{if \( X \) is continuous}
+\end{alignat}
 From this, we define the \define{mean} and \define{variance} of a random variable as
 \begin{subequations}
 \begin{gather}
     \label{eq:introduction:definition_mean}
     \mean(X) = \mu_X \coloneq \ev{X}, \\
     \label{eq:introduction:definition_variance}
-    \var(X) = σ_X^2 \coloneq \ev{(X - μ_X)^2} = \ev{X^2} - μ_X^2.\footnotemark
+    \var(X) \coloneq σ_X^2 \coloneq \ev{(X - μ_X)^2} = \ev{X^2} - μ_X^2.
 \end{gather}
 \end{subequations}
-\footnotetext{
-    According to \autoref{eq:introduction:definition_expectation}, the expectation value is linear, \( \ev{aX + b} = a \ev{X} + b \).
-}%
+
+It follows from \autoref{eq:introduction:definition_expectation} that the expectation value is linear, \( \ev{aX + b} = a \ev{X} + b \).
 
