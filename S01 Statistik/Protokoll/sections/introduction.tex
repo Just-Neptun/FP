@@ -1,6 +1,8 @@
 % !TEX root = ../ausarbeitung.tex
 \section{Introduction}
 \label{sec:introduction}
+
+\subsection{Probability Theory}
 Before we can focus on error propagation and parameter estimation, we need to introduce the basics of probability theory.
 
 We formally model a random process using a \define{probability space}.
@@ -64,6 +66,15 @@ From this, we define the \define{mean} and \define{variance} of a random variabl
 \end{subequations}
 
 It follows from \autoref{eq:introduction:definition_expectation} that the expectation value is linear, \( \ev{aX + b} = a \ev{X} + b \).
+
+% unfinished here!
+\typeout{! Unfinished here!}
+
+\begin{gather}
+    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \bar{x}) (y_i - \bar{y})
+    \label{eq:introduction:covariance_discrete_def}
+\end{gather}
+
 
 \subsection{The Gaussian Distribution}
 
