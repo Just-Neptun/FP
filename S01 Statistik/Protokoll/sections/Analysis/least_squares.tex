@@ -6,55 +6,53 @@
 
 \subsubsection{Finding Best Fit Parameters}
 
-For the next part, we will use the method of least squares to find fit parameters of a function from some data. We are given some independent measurements (see \autoref{tab:appendix:least_squares_data}).
-
+For the next part, we will use the method of least squares to find fit parameters of a function from some data. 
+We are given some independent measurements (see \autoref{tab:appendix:least_squares_data}).
 Assuming the data came from a third-order polynomial, the fit function is of the form:
 \begin{gather}
-    y(x) = \theta_0 + \theta_1 x + \theta_2 x^2 + \theta_3 x^3
     \label{eq:least_squares:fit_polynomial}
+    y(x) = θ_0 + θ_1 x + θ_2 x^2 + θ_3 x^3.
 \end{gather}
-
-This kind of polynomial function is linear in its parameters (the coefficients \( \theta_i \)), meaning an exact solution exists.
+This kind of polynomial function is linear in its parameters (the coefficients \( θ_i \)), meaning an exact solution exists.
 % % Is this real? Explain in intro?
 % \begin{gather}
-%     f(x ; \vec{\theta}) = \sum \limits _{k = 0}^{3} x^{k} \cdot \theta_k
+%     f(x ; \vec{θ}) = \sum \limits _{k = 0}^{3} x^{k} \cdot θ_k
 %     \label{eq:least_squares:general_form_fit_polynomial}
 % \end{gather}
 
-For a set of \( n \) inputs $\vec{x}$, our model predicts outputs: $ \vec{\mu} = \mathbf{A} \vec{\theta} $, with $ A_{ij} = x_i^j$. When given measurement data, $\vec{x}$ represents the independent variable and $\vec{y}$ represents the dependent variable.
-
-This lets the sum of the square residuals ($\chi^2$) be calculated like in \autoref{eq:least_squares:sum_square_residuals_matrix_represenation}. After taking the gradient of this expression and setting to zero, matrix algebra finds us the $\vec{\theta}$ which minimizes the square residuals.
-\begin{gather}
-    % \chi^2 = \sum \limits_{i = 0} ^n \frac{(x_i - \mu_i)^2}{\sigma^2}     <----- only for single variable
-    \chi^2 = (\vec{y} - \mathbf{A}\vec{\theta})^\mathsf{T} \mathbf{C}^{-1} (\vec{y} - \mathbf{A}\vec{\theta})
-    \label{eq:least_squares:sum_square_residuals_matrix_represenation} \\
-    \vec{\theta} = (\mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \mathbf{A})^{-1} \mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \vec{y} \\
-    \vec{\theta} = \mathbf{G} \vec{y}
+For a set of \( n \) inputs $\vec{x}$, our model predicts outputs: $ \vec{\mu} = \mat{A} \vec{\theta} $, with $ A_{ij} = x_i^j$. 
+When given measurement data, $\vec{x}$ represents the independent variable and $\vec{y}$ represents the dependent variable.
+This lets the sum of the square residuals ($\chi^2$) be calculated:
+\begin{equation}
+    \label{eq:least_squares:sum_square_residuals_matrix_representation}
+    \chi^2 = (\vec{y} - \mat{A}\vec{\theta})\transpose \mat{C}^{-1} (\vec{y} - \mat{A}\vec{\theta}).
+\end{equation}
+$\mat{C}$ is the matrix representing the covariances of $\vec{y}$.
+After taking the gradient of this expression and setting to zero, matrix algebra finds us the estimate $\hat{\vec{\theta}}$ which minimizes the square residuals.
+\begin{equation}
     \label{eq:least_squares:finding_theta}
-\end{gather}
-
-$\mathbf{C}$ is the matrix representing the covariances of $\vec{y}$. To find the covariances $\mathbf{C}_\theta $ of our fit parameters, we transform this matrix. Terms cancel again to obtain a simplified result in \autoref{eq:least_squares:covariances_theta}.
-\begin{gather}
-    \mathbf{C}_\theta = \mathbf{G} \mathbf{C} \mathbf{G}^\mathsf{T} \\
-    \mathbf{C}_\theta = (\mathbf{A}^\mathsf{T} \mathbf{C}^{-1} \mathbf{A})^{-1}
+    \hat{\vec{\theta}} = (\mat{A}\transpose \mat{C}^{-1} \mat{A})^{-1} \mat{A}\transpose \mat{C}^{-1} \vec{y} \eqcolon \mat{G} \vec{y}
+\end{equation}
+To find the covariances $\mat{C}_{\vec{\theta}} $ of our fit parameters, we transform \( \mat{C} \):
+\begin{equation}
     \label{eq:least_squares:covariances_theta}
-\end{gather}
+    \mat{C}_{\vec{\theta}} = \mat{G} \mat{C} \mat{G}\transpose  = (\mat{A}\transpose \mat{C}^{-1} \mat{A})^{-1}.
+\end{equation}
 
-Translating these matrix operations into code gives an analytic solution for the least squares regression. For the given data, we find the following fit parameters and covariances.
-\begin{align}
-    \theta_0 &= \num{ 4.4 \pm 0.3} \\
-    \theta_1 &= \num{-0.4 \pm 0.8} \\
-    \theta_2 &= \num{-2.6 \pm 0.4} \\
-    \theta_3 &= \num{ 2.3 \pm 0.5}
-\end{align}
+Translating these matrix operations into code gives an analytic solution for the least squares regression.
+For the given data, we find the following fit parameters and covariances:
 \begin{gather}
-    \mathbf{C}_\theta = 
+    θ_0 = \num{ 4.4 \pm 0.3}, \quad
+    θ_1 = \num{-0.4 \pm 0.8}, \quad
+    θ_2 = \num{-2.6 \pm 0.4}, \quad
+    θ_3 = \num{ 2.3 \pm 0.5}, \\
+    \mat{C}_{\vec{θ}} = 
     \begin{pmatrix}
         \num{ 0.114 } & \num{-0.0261} & \num{-0.0879} & \num{ 0.0163} \\
         \num{-0.0261} & \num{ 0.566 } & \num{ 0.0111} & \num{-0.334 } \\
         \num{-0.0879} & \num{ 0.0111} & \num{ 0.170 } & \num{-0.0172} \\
         \num{ 0.0163} & \num{-0.334 } & \num{-0.0172} & \num{ 0.257 }
-    \end{pmatrix}
+    \end{pmatrix}.
 \end{gather}
 
 \subsubsection{Numerical Minimization for Finding Best Fit Parameters}
@@ -74,7 +72,7 @@ The results match quite well, which can be seen visually in \autoref{fig:least_s
 
 \subsubsection{Goodness of Fit Analysis}
 
-To analyze how well our model fits the data, we use the final minimized sum of the square residuals. For this we simply input the fit parameters which by definition minimize this value into the function \autoref{eq:least_squares:sum_square_residuals_matrix_represenation}. With the given data, \( \chi_\mathrm{obs}^2 = \num{10.5} \).
+To analyze how well our model fits the data, we use the final minimized sum of the square residuals. For this we simply input the fit parameters which by definition minimize this value into the function \autoref{eq:least_squares:sum_square_residuals_matrix_representation}. With the given data, \( \chi_\mathrm{obs}^2 = \num{10.5} \).
 
 To understand this value, we compare it to the family of distributions which the statistic should come from. As previously explained, it comes from the \( \chi^2 \)-distribution. Its general form was given earlier in \autoref{eq:introduction:chi_square_distribution}.
 
@@ -106,11 +104,11 @@ The null hypothesis is that there is nothing remarkable going on, and that the p
 
 Next we want to visually plot the fit curve, using the calculated parameters. In addition to this, a \( 1 \sigma \) band should be plotted around the model curve itself. This will give a better idea about how certain the model is about its prediction.
 
-To calculate the error band, as well as evaluating the fit function at every point, we use the known full error propagation formula with covariances from \autoref{eq:introduction:covariance_discrete_def}. In \autoref{eq:least_squares:covariance_error}, this formula is rewritten in matrix form. The matrix \( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mathbf{A} \) comes from the Jacobian \( \mathbf{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
+To calculate the error band, as well as evaluating the fit function at every point, we use the known full error propagation formula with covariances from \autoref{eq:introduction:covariance_discrete_def}. In \autoref{eq:least_squares:covariance_error}, this formula is rewritten in matrix form. The matrix \( \sigma_y \) represents the uncertainty in the predicted \( y \)-output of the fit function. \( \mat{A} \) comes from the Jacobian \( \mat{J}(x) \) of the fit function, evaluated at the input point \( x \). Because the function is linear in the parameters \( \theta_i \), the Jacobian is always the same, as seen in \autoref{eq:least_squares:jacobian_of_polynomial_3rd_degree}.
 \begin{gather}
-    \sigma_y^2 = \mathbf{A} \mathbf{C} \mathbf{A}^\mathrm{T}
+    \sigma_y^2 = \mat{A} \mat{C} \mat{A}^\mathrm{T}
     \label{eq:least_squares:covariance_error} \\
-    \mathbf{J}(x) =
+    \mat{J}(x) =
     \begin{pmatrix}
         1, x, x^2, x^3
     \end{pmatrix}
