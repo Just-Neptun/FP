@@ -4,17 +4,26 @@
 
 Another way of finding fit parameters for a model is the \quotedef{Maximum Likelihood Estimator} method. For this part, we will analyze simulated data from a radioactive decay, which will be generated within the code. Specifically, we will match a fit function (\autoref{eq:mle:decay_function}) to the lifetimes of decaying particles. This function takes the mean lifetime \( \tau \) as a parameter, so finding the fit function also returns this an estimate of this value.
 \begin{gather}
-    f(t, \tau) = \frac{1}{\tau} e^{-t/\tau}
+    f(t \given \tau) = \frac{1}{\tau} e^{-t/\tau}
     \label{eq:mle:decay_function}
 \end{gather}
+
+The \define{likelihood} function \( L \) is defined as the probability of finding the measured data, given the parameters of a model.
+For independent measurements this factorizes nicely:
+\begin{equation}
+    L(\vec{x} \given \vec{λ}) = \prod_{x_i \in \vec{x}} f(x_i \given \vec{λ}).
+\end{equation}
+The point is that the likelihood function treats the parameter as the independent variable.
+This lets us estimate the parameter by maximizing the likelihood.
+Equivalently, it is often easier to maximize the \define{log-likelihood} function.
 
 \subsubsection{Applying the MLE Method to find a Fit Parameter with Uncertainty}
 
 Using the MLE method, the goal is to find the fit parameters (in this case \( \tau \)) which maximize the likelihood that the data came from the distribution. This is a reasonable way of estimating the parameters of the distribution, as we are assuming that nothing extremely unlikely happened during measurement (as that would by definition be unlikely to happen). In this case, we can find the parameter \( \tau \) by solving analytically.
 
-We start with the general log-likelihood function. Inserting the decay distribution function $f(t ; \tau)$ from \autoref{eq:mle:decay_function} and simplifying gives us a different expression for the log-likelihood.
+We start with the general log-likelihood function. Inserting the decay distribution function $f(t \given \tau)$ from \autoref{eq:mle:decay_function} and simplifying gives us a different expression for the log-likelihood.
 \begin{align}
-    \ln L(\vec{t} ; \tau) &= \sum \limits_{i = 1}^{n} \ln f(t_i ; \tau) \\
+    \ln L(\vec{t} \given \tau) &= \sum \limits_{i = 1}^{n} \ln f(t_i \given \tau) \\
     &= \sum \limits_{i = 1}^{n} \ln \Big( \frac{1}{\tau} e^{\frac{-t_i}{\tau}} \Big) \\
     &= \sum \limits_{i = 1}^{n} \Big( - \ln (\tau) - \frac{t_i}{\tau} \Big) \\
     &= - n \ln (\tau) - \frac{1}{\tau} \sum \limits_{i = 1}^{n} t_i \\
@@ -22,7 +31,7 @@ We start with the general log-likelihood function. Inserting the decay distribut
 
 It is much easier to take the derivative in this form. Because the logarithm is monotonic, the maximum of the likelihood will be at the same point as the maximum of the log-likelihood. This is at the inflection point of the function, where the first derivative is zero.
 \begin{gather}
-    \frac{\partial}{\partial \tau} \ln L(\vec{t} ; \tau) = -\frac{n}{\tau} + \frac{1}{\tau^2} \sum \limits_{i = 1}^{n} t_i \\
+    \frac{\partial}{\partial \tau} \ln L(\vec{t} \given \tau) = -\frac{n}{\tau} + \frac{1}{\tau^2} \sum \limits_{i = 1}^{n} t_i \\
     \frac{n}{\tau} = \frac{1}{\tau^2} \sum \limits_{i = 1}^{n} t_i \\
     \tau = \frac{1}{n} \sum \limits_{i = 1}^{n} t_i := \hat{\tau}
     \label{eq:mle:tau_hat_mle}
@@ -32,7 +41,7 @@ The calculated value \( \hat{\tau} \) is called the maximum likelihood estimate 
 
 To find the uncertainty of this estimate, we compute the second derivative and insert this into the known equation for $\sigma_\tau^2$.
 \begin{align}
-    \frac{\partial^2}{\partial \tau^2} \ln L(\vec{t} ; \tau) &= \frac{n}{\tau^2} - \frac{2}{\tau^3} \sum \limits_{i = 1}^{n} t_i \\
+    \frac{\partial^2}{\partial \tau^2} \ln L(\vec{t} \given \tau) &= \frac{n}{\tau^2} - \frac{2}{\tau^3} \sum \limits_{i = 1}^{n} t_i \\
     &= \frac{n}{\tau^2} - \frac{2 n}{\tau^3} \cdot \frac{1}{n} \sum \limits_{i = 1}^{n} t_i \\
     &= \frac{n}{\tau^2} - \frac{2 n \hat{\tau}}{\tau^3}
 \end{align}
@@ -104,7 +113,7 @@ From the total number of runs and the number of successes we can calculate the s
 
 We want to examine another generated dataset (see attached \verb|.csv| files). For this one, the probability density function for the distribution of an angle $\alpha$ is given by \autoref{eq:mle:pdf_02}.
 \begin{gather}
-    f(x; a) = \frac{1 + a x}{2}, \quad x = \cos \alpha
+    f(x\given a) = \frac{1 + a x}{2}, \quad x = \cos \alpha
     \label{eq:mle:pdf_02}
 \end{gather}
 
@@ -113,8 +122,8 @@ The parameter $a$ is in the range $-1 \le a \le 1$.
 For the generated dataset $\vec{x}$ with $n$ values, the log-likelihood of is therefore:
 
 \begin{align}
-    \ln L(\vec{x}; a) &= \sum \limits_{i=1}^{n} \ln f(\vec{x}; a) \\
-    \ln L(\vec{x}; a) &= \sum \limits_{i=1}^{n} \ln \frac{1 + a x_i}{2}
+    \ln L(\vec{x}\given a) &= \sum \limits_{i=1}^{n} \ln f(\vec{x}\given a) \\
+    \ln L(\vec{x}\given a) &= \sum \limits_{i=1}^{n} \ln \frac{1 + a x_i}{2}
 \end{align}
 
 Using the same MLE method and numerical minimization tool \texttt{iminuit} with this new function, we obtain the maximum likelihood estimate $\hat{a} = \num{0.19 \pm 0.05}$.
