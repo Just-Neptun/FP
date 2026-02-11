@@ -62,7 +62,7 @@ We run the cutting process on all the events on the following files, creating in
 
 ![MC Muons Graph of Invariant Mass](Plots_pngs/Part04/4_3-MCZmumu.png)
 
-![MC Muons Graph of Invariant Mass](Plots_pngs/Part04/4_3-MCZtautau-revised.png)
+![MC Tauons Graph of Invariant Mass](Plots_pngs/Part04/4_3-MCZtautau-revised.png)
 
 <!--
 TODO:
