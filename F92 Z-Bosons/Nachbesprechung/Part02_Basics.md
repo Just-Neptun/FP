@@ -2,53 +2,57 @@
 
 ## 2. The `vxp_z` variable
 
-Plotting `vxp_z`:
+#### Plotting `vxp_z`:
 
 ![vxp_z graph](Plots_pngs/Part02/2_2.png)
 
 `vxp_z` is a float data type \
 it is the z-position of the primary vertex in mm \
-z-position is along the path of the particles, z axis along the beam pipe
-center of the collider is at $z=0$
+z-position is along the path of the particles, z axis along the beam pipe \
+center of the collider/collision is at $z=0$
 
 The graph shows number of measurements / entries at each position. It is a histogram with number of entries vs position of collision in millimeters. \
 We can read off the average position of the vertex (mean), as well as the standard deviation of the distribution.
 
-Why this (mostly Gauss) distribution? \
+#### Why this (mostly Gauss) distribution?
 Random variable is normally distributed. \
 Aim is to have collision at $z=0$, different sources of random error combine to cause Gauss distribution of position. \
-Also CLT.
+Also Central Limit Theorem (CLT) means the sum of many random variables follows a distribution approaching a Gaussian.
 
 ## 3. Describe data
 
 LHC Bunches are about 30 cm long, taking about 1 ns to travel their length. \
-They make up a beam of particles. It is easier to concentrate particles more closely when theuy are in bunches rather than a uniform beam. \
-They are spaced by 25 ns. 2808 bunches out of 3564 can contain protons.
+They make up a beam of particles. It is easier to concentrate particles more closely when they are in bunches rather than a uniform beam. \
+They are spaced by 25 ns. For each beam 2808 bunches out of 3564 can contain protons.
 
-Really there are two peaks very close to each other.
+Really there are two peaks very close to each other in the `vxp_z` graph.
 
-### Questions:
+TODO: \
 What are LHC bunches, and how are they related to the vxp_z plot in question 2? How many peaks do you see in the vxp_z distribution? Explain possible reasons. What type of plot could help you answering this question? Hint: Maybe you can even find it under https: // twiki. cern. ch/ twiki/ bin/ view/ AtlasPublic/ BeamSpotPublicResults .
 
 ## 4. `lep_n` variable
 
-Plotting `lep_n`:
+#### Plotting `lep_n`:
 
 ![lep_n graph](Plots_pngs/Part02/2_4.png)
 
 `lep_n` = Number of preselected leptons
 
-Shown is how many leptons were detected for the relevant event. \
+The graph shows how many leptons were detected for the measurement/event. \
 This is the number of counted leptons in the final state.
 
 ## 5. Describe data
 
-We expect 1, 2 or 3 leptons in the final state, depending on the specific decay process.
+We expect 1, 2 or 3 leptons in the final state of a Z decay.
+depending on the specific decay process.
 In leading order we expect 2 leptons.
 The other numbers correspond to non-leading-order processes.
 Also, neutrinos are not detected, allowing odd numbers of leptons.
 
 Feynman diagrams of the 1, 2, 3 lepton processes go here!
+
+TOOD: \
+What is the dominant process for the 1-lepton final state? Draw Feynman diagrams for 1-lepton, 2-lepton and 3-lepton final states.
 
 ## 6. `lep_pt`, `lep_eta` and `lep_phi`
 
@@ -67,5 +71,6 @@ For graphing `lep_pt` and `lep_eta`, these are saved as vectors (conceptually `l
 
 The histograms consolidate all of these measurements, so they can have more total entries/measurements than there were collisions.
 
-### Many Questions
+TODO: \
+How many entries do you expect and why? What are the general features of the distributions? Why are there gaps in the η distribution? Hint: Consult figure 11 and have a closer look on the tracker coverage as well as dead material distribution. Where does the steep rise around 25 GeV in the pT spectrum come from? Explain the concept of a trigger.
 
