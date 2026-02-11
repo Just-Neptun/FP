@@ -42,7 +42,7 @@ A continuous random vector admits a \define{probability density function} (PDF) 
     \label{eq:introduction:definition_pdf}
     f_{\vec{X}}(\vec{x}) \coloneq \lim_{\vec{h} \to \vec{0}} \frac{P(\vec{X} \in [\vec{x}, \vec{x} + \vec{h}])}{\prod_{i} h_i} = \eval{\diffp<n>{F_{\vec{X}}}{x_1,x_2,...,x_n}}{\vec{x}}.
 \end{equation}
-The notation is to be understood component-wise, i.e. \( \vec{X} \in [\vec{x}, \vec{x} + \vec{h}] \iff X_i \in [x_i, x_i + h_i] \forall i \in \set{1,\dots, N} \).
+The notation is to be understood component-wise, i.e. \( \vec{X} \in [\vec{x}, \vec{x} + \vec{h}] \iff \forall i \in \set{1,\dots, N}\colon X_i \in [x_i, x_i + h_i] \).
 We implicitly defined the \define{cumulative distribution function} (CDF) \( F_{\vec{X}}\colon \reals^N \to [0, 1] \), as 
 \begin{equation}
     \label{eq:introduction:definition_cdf}
@@ -162,7 +162,10 @@ An \define{estimator} \( S_{λ} \) determines a value \( \hat{λ} \) from a set 
 \begin{equation}
     S_{λ}(\vec{x}) = \hat{λ}.
 \end{equation}
-We gernerally want estimators with at least some of the following properties. It should be \define{unbiased}, meaning \( \ev{S_{λ}} = λ \). An estimator should also be \define{consistent} meaning \( \lim_{n \to \infty} \hat{λ} = λ \). Lastly, a desirable estimator is \define{efficient}, so that \( \ev{(S - λ)^2} = σ_{S_{λ}}^2 \leq σ_{S'_{λ}}^2 \), for all other estimators \( S'_{λ} \).
+We want estimators with at least some of the following properties. 
+It should be \define{unbiased}, meaning \( \ev{S_{λ}} = λ \). 
+An estimator should also be \define{consistent} meaning \( \lim_{n \to \infty} \hat{λ} = λ \). 
+Lastly, a desirable estimator is \define{efficient}, so that \( \ev{(S - λ)^2} = σ_{S_{λ}}^2 \leq σ_{S'_{λ}}^2 \), for all other estimators \( S'_{λ} \).
 
 An estimator of the mean of a Gaussian distribution meeting all these criteria is given by
 \begin{equation}
