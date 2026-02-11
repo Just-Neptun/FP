@@ -11,66 +11,59 @@ An \define{outcome} \( ω \in Ω \) is a possible result, an \define{event} \( E
 An event \( E \) occurred if the result \( ω \) of the process is in \( E \), \( ω \in E \).
 Since \( ω \in Ω \), we know \( P(Ω) = 1 \).
 If two events \( E_1, E_2 \) are \define{mutually exclusive}, \( E_1 \cap E_2 = \emptyset \), then the probability of either one happening is the sum of their individual probabilities, \( P(E_1 \cup E_2) = P(E_1) + P(E_2) \).
+Two events are \define{independent} if \( P(E_1 \cap E_2) = P(E_1) P(E_2) \).
 The \define{conditional probability} of event \( A \) occurring, given the information that event \( B \) with \( P(B) \neq 0 \) has occurred, is 
 \begin{equation}
     P(A \given B) = \frac{P(A \cap B)}{P(B)}.
 \end{equation}
 
 A \define{random variable} \( X \) is a function from the sample space to the real numbers, \( X\colon Ω \to \reals \), and its values \( x = X(ω) \in \reals \) are called its \define{states}.
-We naturally define the \define{image} \( X(E) = \set{X(ω) \in \reals \mid ω \in E} \) of an event \( E \) and the \define{pre-image} \( X^{-1}(A) = \set{ω \in Ω \mid X(ω) \in A} \) of a set of states \( A \).
-The probability that \( X \) takes on a state in \( A \subseteq \reals \) is given by its pre-image,
+A \define{random vector} \( \vec{X} = (X_1, \dots, X_N)\transpose \) is a generalization of a random variable to \( N \) dimensions, \( \vec{X}\colon Ω \to \reals^N \).
+We naturally define the \define{image} \( \vec{X}(E) = \set{\vec{X}(ω) \in \reals \mid ω \in E} \) of an event \( E \) and the \define{pre-image} \( \vec{X}^{-1}(A) = \set{ω \in Ω \mid \vec{X}(ω) \in A} \) of a set of states \( A \).
+The probability that \( \vec{X} \) takes on a state in \( A \subseteq \reals^N \) is given by its pre-image,
 \begin{equation}
-    P(X \in A) \coloneq P(\set{ω \in Ω \mid X(ω) \in A}) = P(X^{-1}(A)).
+    P(\vec{X} \in A) \coloneq P(\set{ω \in Ω \mid \vec{X}(ω) \in A}) = P(\vec{X}^{-1}(A)).
 \end{equation}
+We call the random vector \( \vec{X} \) \define{independent} if for any \( A_i \subseteq \reals \), we have \( P(\vec{X} \in A_1 \times \cdots \times A_2) = P(X_1 \in A_1) \cdots P(X_N \in A_N) \).\footnote{
+    Note that while this definition restricts independence to product sets, the \define{uniqueness of extension} ensures that the joint distribution is uniquely determined for all Borel measurable sets in \( \reals^N \).
+}
 
 \subsection{Probability Mass and Density Functions}
-A random variable may be either \define{discrete} (if \( X(Ω) \) is at most countably infinite) or \define{continuous} (if \( X(Ω) \) is uncountably infinite).
-A discrete random variable admits a \define{probability mass function} (PMF) \( p_X\colon \reals \to [0, 1] \), which gives the probability that \( X \) is in state \( x \in \reals\),
+A random variable or a random vector may be either \define{discrete} (if \( X(Ω) \) is at most countably infinite) or \define{continuous} (if \( X(Ω) \) is uncountably infinite).\footnote{
+    For random vectors, we disregard the possibility of there being cross-terms, for example \( X_1 \) being discrete and \( X_2 \) being continuous.
+}
+A discrete random vector admits a \define{probability mass function} (PMF) \( p_{\vec{X}}\colon \reals^N \to [0, 1] \), which gives the probability that \( \vec{X} \) is in state \( \vec{x} \in \reals^N\),
 \begin{equation}
     \label{eq:introduction:definiton_pmf}
-    p_X(x) \coloneq P(X = x) = P(X^{-1}(\set{x})).
+    p_{\vec{X}}(\vec{x}) \coloneq P(\vec{X} = \vec{x}) = P(\vec{X}^{-1}(\set{\vec{x}})).
 \end{equation}
-A continuous random variable admits a \define{probability density function} (PDF) \( f_X\colon \reals \to \reals \), which gives the probability \emph{per unit length} of finding \( X \) in state \( x \in \reals \),
+A continuous random vector admits a \define{probability density function} (PDF) \( f_{\vec{X}}\colon \reals^N \to \reals \), which gives the probability \emph{per unit volume} of finding \( \vec{X} \) in state \( \vec{x} \in \reals^N \),
 \begin{equation}
     \label{eq:introduction:definition_pdf}
-    f_X(x) \coloneq \lim_{h \to 0} \frac{P(X \in [x, x + h])}{h} = \eval{\diff{F_X}{x}}{x}.
+    f_{\vec{X}}(\vec{x}) \coloneq \lim_{\vec{h} \to \vec{0}} \frac{P(\vec{X} \in [\vec{x}, \vec{x} + \vec{h}])}{\prod_{i} h_i} = \eval{\diffp<n>{F_{\vec{X}}}{x_1,x_2,...,x_n}}{\vec{x}}.
 \end{equation}
-Here we implicitly defined the \define{cumulative distribution function} (CDF) \( F_X\colon \reals \to [0, 1] \), as 
+The notation is to be understood component-wise, i.e. \( \vec{X} \in [\vec{x}, \vec{x} + \vec{h}] \iff X_i \in [x_i, x_i + h_i] \forall i \in \set{1,\dots, N} \).
+We implicitly defined the \define{cumulative distribution function} (CDF) \( F_{\vec{X}}\colon \reals^N \to [0, 1] \), as 
 \begin{equation}
     \label{eq:introduction:definition_cdf}
-    F_X(x) \coloneq P(X \leq x) = P(X^{-1}((-\infty, x])).\footnotemark
+    F_{\vec{X}}(\vec{x}) \coloneq P(\vec{X} \leq \vec{x}) = P(\vec{X}^{-1}((-\infty, \vec{x}])).\footnotemark
 \end{equation}
 \footnotetext{
-    This definition satisfies \autoref{eq:introduction:definition_pdf} since \( F_X(x + h) - F_X(x) = P(X \leq x + h) - P(X \leq x) = P(x \leq X \leq x + h). \)
+    This definition satisfies \autoref{eq:introduction:definition_pdf} since \( F_{\vec{X}}(\vec{x} + \vec{h}) - F_{\vec{X}}(\vec{x}) = P(\vec{X} \leq \vec{x} + \vec{h}) - P(\vec{X} \leq \vec{x}) = P(\vec{x} \leq \vec{X} \leq \vec{x} + \vec{h}). \)
 }%
-It follows that integrating the PDF over an interval gives the probability of finding the random variable in that interval,
+It follows that integrating the PDF (or summing the PMF) over a region gives the probability of finding the random vector in that region,
 \begin{equation}
-    P(a \leq X \leq b) = \int_a^b f_X(x) \difl{x}.
+    P(\vec{X} \in M \subseteq \reals^N) = \int_M f_{\vec{X}}(\vec{x}) \difl{\vec{x}}.
 \end{equation}
-Furthermore, \( f_X \) is non-negative and normalized on \( \reals \).
+Furthermore, the PMF and PDF are non-negative and normalized on \( \reals^N \).
 
-\subsection{Multiple Random Variables}
-A \define{random vector} \( \vec{X} \) is a generalization of a random variable to \( N \) dimensions, \( \vec{X}\colon Ω \to \reals^N \).
-It can be understood as a vector of random variables, \( \vec{X} = (X_1, \dots, X_N)\transpose \).
-Its states are vectors in \( \reals^N \), and it can be discrete or continuous.\footnote{
-    We disregard the possibility of there being cross-terms, for example \( X_1 \) being discrete and \( X_2 \) being continuous.
-}
-We can similarly define PMFs, CDFs, and PDFs:
-\begin{gather} 
-    p_{\vec{X}}(\vec{x}) \coloneq P(\vec{X} = \vec{x}) = P(\vec{X}^{-1}(\set{\vec{x}})), \\
-    F_{\vec{X}}(\vec{x}) \coloneq P(\vec{X} \leq \vec{x}) = P(\vec{X}^{-1}((-\infty, \vec{x}])), \\
-    f_{\vec{X}}(\vec{x}) \coloneq \lim_{\vec{h} \to \vec{0}} \frac{P(\vec{X} \in [\vec{x}, \vec{x} + \vec{h}])}{\prod_{i} h_i} = \eval{\diffp<n>{F_{\vec{X}}}{x_1,x_2,...,x_n}}{\vec{x}}.
-\end{gather}
-The notation is to be understood component-wise, i.e. \( \vec{X} \leq \vec{x} \iff \forall i \in \set{1, \dots, N}\colon X_i \leq x_i \).
-
-Again, \( P(\vec{X} \in M \subseteq \reals^N) = \int_M f_{\vec{X}}(\vec{x}) \difl{\vec{x}} \), with the PDF being non-negative and normalized on \( \reals^N \).
 A \define{marginal distribution} is achieved by integrating (or summing, in case of a PMF) over all but one dimensions,
 \begin{equation}
     f_{X_1}(x_1) = \int_{\reals^{N-1}} f_{\vec{X}}(\vec{x}) \difl{x_2} \cdots \difl{x_N}.
 \end{equation}
-We call two random variables \define{independent} if their \define{joint distribution} factorizes,
+A random vector is independent, as defined above, if its distribution factorizes,
 \begin{equation}
-    f_{X,Y}(x,y) = f_X(x) \cdot f_Y(y).
+    f_{\vec{X}}(\vec{x}) = \prod\limits_{i = 1}^n f_{X_i}(x_i).
 \end{equation}
 
 \subsection{Mean, Variance, and Covariance}
