@@ -25,10 +25,14 @@ LHC Bunches are about 30 cm long, taking about 1 ns to travel their length. \
 They make up a beam of particles. It is easier to concentrate particles more closely when they are in bunches rather than a uniform beam. \
 They are spaced by 25 ns. For each beam 2808 bunches out of 3564 can contain protons.
 
-Really there are two peaks very close to each other in the `vxp_z` graph.
+Every filled bunch slot contains typically $N_i = O(10^{11})$ protons.
 
-TODO: \
-What are LHC bunches, and how are they related to the vxp_z plot in question 2? How many peaks do you see in the vxp_z distribution? Explain possible reasons. What type of plot could help you answering this question? Hint: Maybe you can even find it under https: // twiki. cern. ch/ twiki/ bin/ view/ AtlasPublic/ BeamSpotPublicResults .
+We see the distribution of the collision of two bunches.
+
+Really there are two peaks very close to each other in the `vxp_z` graph. This could be because of the collision center moving between fills.
+
+From website, we can see that for the 2012 run the collision center moved over time. Maybe this caused the two peaks.
+![Beam Spot Position Graph from Website](Plots_pngs/Extra/beamspot-2012-plot-posZ.png)
 
 ## 4. `lep_n` variable
 
