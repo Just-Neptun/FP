@@ -62,31 +62,42 @@ Also, neutrinos are not detected, allowing odd numbers of leptons.
 Feynman diagrams of the 1, 2, 3 lepton processes go here!
 
 The dominant process for 1-lep final:
-$$ \bar u + d \overset{W^-}{\longrightarrow} e^- + \bar \nu_{e^-} $$
+$$ \bar u + d \overset{W^-}{\longrightarrow} e^- + \bar \nu_{e} $$
 
 The dominant process for 2-lep final (q is any quark):
 $$ \bar q + q \overset{Z^0}{\longrightarrow} e^- + e^+ $$
 
 The dominant process for 3-lep final (combine previous 2):
-$$ \bar u + d \longrightarrow e^- + \bar \nu_{e^-} + e^+ + e^- $$
+$$ \bar u + d \longrightarrow e^- + \bar \nu_{e} + e^+ + e^- $$
 
 ## 6. `lep_pt`, `lep_eta` and `lep_phi`
 
 Plotting `lep_pt`, `lep_eta` and `lep_phi`:
 
 ![lep_pt graph](Plots_pngs/Part03/3_2-lep_pt.png)
+
+`lep_pt` is the Transverse momentum of the lepton (transverse to the beam direction)
+
+The cutoff happens because an event must contain at least one lepton with $p_T > 25$ GeV. Otherwise, it is not recorded. This is a systematic cut off/*trigger* (not triggering means the event is not recorded/it is cut from the data).
+
+The second cutoff is for events with two or more leptons, (at least one with $p_T > 25$ GeV). The other momenta measurements are not considered leptons if $p_T > 5$ GeV. An event like this is considered a 1 lepton event.
+
 ![lep_eta graph](Plots_pngs/Part03/3_2-lep_eta.png)
 ![lep_eta log scale graph](Plots_pngs/Part03/3_2-lep_eta-log.png)
+
+`lep_eta` is the Pseudorapidity of the lepton
+
+Leptons are distributed uniformly in pseudorapidity. The gaps/cutoffs are because of detector geometry.
+
 ![lep_phi graph](Plots_pngs/Part03/3_2-lep_phi.png)
 
-`lep_pt` is the Transverse momentum of the lepton (transverse to what!?) \
-`lep_eta` is the Pseudorapidity of the lepton \
 `lep_phi` is the Azimuthal angle of the lepton
 
-For graphing `lep_pt` and `lep_eta`, these are saved as vectors (conceptually `list`s like in `python`) because multiple leptons can be detected in one collision. Each one has its own momentum and pseudorapitity which are single components of the `lep_pt` and `lep_eta` vectors.
+Leptons are again distributed uniformly in azimuthal angle.
+
+---
+
+For graphing `lep_pt` and `lep_eta`, these are saved as vectors (conceptually `list`s like in `python`) because multiple leptons can be detected in one collision. Each one has its own momentum and pseudorapidity which are single components of the `lep_pt` and `lep_eta` vectors.
 
 The histograms consolidate all of these measurements, so they can have more total entries/measurements than there were collisions.
-
-TODO: \
-How many entries do you expect and why? What are the general features of the distributions? Why are there gaps in the η distribution? Hint: Consult figure 11 and have a closer look on the tracker coverage as well as dead material distribution. Where does the steep rise around 25 GeV in the pT spectrum come from? Explain the concept of a trigger.
 
