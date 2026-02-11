@@ -2,6 +2,8 @@
 
 ## 2. `eventloop.py`
 
+#### What the script does:
+
 In order:
 
 - catch input errors
@@ -16,17 +18,27 @@ In order:
 - by default, create a popup window/canvas with the created histogram
     - wait for user input before the popup is closed
 
+We limited to 100,000 entries.
+
 ![vxp_z graph](Plots_pngs/Part03/3_2-vxp_z.png)
+
+![lep_n graph](Plots_pngs/Part03/3_2-lep_n.png)
+
+Converted MeV to GeV:
+
+![lep_pt graph](Plots_pngs/Part03/3_2-lep_pt.png)
+
+![lep_eta graph](Plots_pngs/Part03/3_2-lep_eta.png)
 
 ## 3. Invariant Mass
 
 Rapidity:
-$$ y = \frac{1}{2} \ln \frac{E + p_z}{E - p_z} $$
+$$ y = \frac{1}{2} \ln (\frac{E + p_z}{E - p_z}) $$
 For low ratio of jet mass / jet energy:
 $$ p_z \approx E \cos \theta $$
-For negligible jet mass, pseudorapidity:
+For negligible jet mass, we can use the pseudorapidity:
 $$ \eta = - \ln \Big( \tan \frac{\theta}{2} \Big) \\
-\eta = y $$
+\eta \approx y $$
 
 Invariant mass of the two leading leptons:
 
