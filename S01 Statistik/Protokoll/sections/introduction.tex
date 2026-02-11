@@ -122,14 +122,14 @@ If this is the case, we work with the PMF or PDF of such a random variable given
 The \define{Bernoulli trial} is an experiment with two possible outcomes, \( k \in \set{0, 1} \), such that \( p \) is the probability (in the usual sense) of \( k = 1 \).
 Its PMF, the \define{Bernoulli distribution}, can be written in terms of the parameter \( p \),
 \begin{equation}
-    p(k \given p) = \begin{cases*}
+    P(k \given p) = \begin{cases*}
         p & if \( k = 1 \), \\
         1-p & if \( k = 0 \).
     \end{cases*}
 \end{equation}
 The sum \( k = k_1 + \dots + k_n \) of \( n \) independent Bernoulli trials with the same parameter \( p \) is governed by the \define{Binomial distribution},
 \begin{equation}
-    p(k \given n, p) = \binom{n}{k} p^k (1 - p)^{n - k}.
+    P(k \given n, p) = \binom{n}{k} p^k (1 - p)^{n - k}.
 \end{equation}
 
 A random variable is distributed according to the \define{Gaussian distribution}, if its PDF is of the form
@@ -151,7 +151,7 @@ If \( n \) random variables \( X_1, \dotsc, X_n \) all follow standard Gaussian 
     f(z \given n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
     \label{eq:introduction:chi_square_distribution}
 \end{gather}
-This is relevant for analysing the quality of a model relative to measured data, as one can change variables to a standard Gaussian.
+This is relevant for analyzing the quality of a model relative to measured data, as one can change variables to a standard Gaussian.
 
 One might use the measurements to determine the model parameters, as we will explain next.
 In that case, \( χ^2 \) is distributed according to \( f(z, n - m) \), where \( m \) is the number of parameters.
@@ -162,7 +162,7 @@ An \define{estimator} \( S_{λ} \) determines a value \( \hat{λ} \) from a set 
 \begin{equation}
     S_{λ}(\vec{x}) = \hat{λ}.
 \end{equation}
-We want an estimator to be \define{unbiased}, \( \ev{S_{λ}} = λ \), \define{consistent}, \( \lim_{n \to \infty} \hat{λ} = λ \), and \define{efficient}, \( \ev{(S - λ)^2} = σ_{S_{λ}}^2 \leq σ_{S'_{λ}}^2 \), for all other estimators \( S'_{λ} \).
+We gernerally want estimators with at least some of the following properties. It should be \define{unbiased}, meaning \( \ev{S_{λ}} = λ \). An estimator should also be \define{consistent} meaning \( \lim_{n \to \infty} \hat{λ} = λ \). Lastly, a desirable estimator is \define{efficient}, so that \( \ev{(S - λ)^2} = σ_{S_{λ}}^2 \leq σ_{S'_{λ}}^2 \), for all other estimators \( S'_{λ} \).
 
 An estimator of the mean of a Gaussian distribution meeting all these criteria is given by
 \begin{equation}
@@ -174,9 +174,9 @@ If two Gaussian variables \( x \) and \( y \) are measured simultaneously, an es
     \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \bar{x}) (y_i - \bar{y}).
 \end{equation}
 
-In \autoref{sec:analysis}, we introduce three general frameworks which let us estimate the parameters of models.
+Later in \autoref{sec:analysis}, we will introduce three general frameworks which let us estimate the parameters of models.
 The \define{method of least squares} determines the parameters by minimizing \( χ^2 \).
 The \define{maximum likelihood estimator} seeks to maximize the likelihood function.
 \define{Bayesian parameter estimation} assigns the parameter a probability distribution and updates it using the measured data.
 
-But first, we use our now-acquired knowledge to implement symbolic error propagation in Python.
+Before this, we will use the now-acquired knowledge to implement symbolic error propagation in Python.
