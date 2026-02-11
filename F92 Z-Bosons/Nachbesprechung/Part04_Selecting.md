@@ -2,6 +2,8 @@
 
 ## 1. Cut Flow Histogram
 
+We apply a series of cuts to our data and create a cut-flow histogram to show how much data is being removed/kept at each step.
+
 ![Cut Flow Histogram](Plots_pngs/Part04/4-2-cutflow-real.png)
 
 List of cuts:
@@ -21,11 +23,7 @@ List of cuts:
 The most effective cut is the cut requiring at least two leptons be produced and measured in the event. \
 Next most effective is the $p_T$ cut.
 
-## 2. Applied Cuts
-
-We apply a series of cuts to our data and create a cut-flow histogram to show how much data is being removed/kept at each step.
-
-#### Isolation cut:
+### Isolation cut:
 
 We want events *without* other particles around our collision products. This means we should cut out events which have other energy/momentum in the same region of the detector where the lepton passed through.
 
@@ -33,18 +31,40 @@ This cuts out events where the lepton might have interacted with other particles
 
 We create a histogram of $p_{Tcone}/p_T$ to see its distribution and to select a reasonable cutoff.
 
-We restrict `Etcone20 / E` and `ptcone30 / pt` to $\leq 0.13$ 
+![pt Cone Ratio](Plots_pngs/Part04/4_2-isolation-pt.png)
 
-#### $M_Z$ cut:
+We restrict `Etcone20 / E` and `ptcone30 / pt` to $\leq 0.13$ as our cutoff limits.
+
+### $M_Z$ cut:
 
 We restrict the invariant mass to a reasonable range:
 
 $$ 60 \ \mathrm{GeV}/c^2 \leq M_Z \leq 120 \ \mathrm{GeV}/c^2 $$
 
-We run the cutting process on all of the events on the following files, creating invariant mass histograms for all of them.
+
+## 3. Applying to Datasets
+
+We run the cutting process on all the events on the following files, creating invariant mass histograms for all of them.
 
 - `DataEgamma.root`
 - `DataMuons.root`
 - `mc_147770.Zee.root`
 - `mc_147771.Zmumu.root`
 - `mc_147772.Ztautu.root`
+
+---
+
+![DataEgamma Graph of Invariant Mass](Plots_pngs/Part04/4_3-DataEgamma.png)
+
+![DataMuons Graph of Invariant Mass](Plots_pngs/Part04/4_3-DataMuons.png)
+
+![MC Electrons Graph of Invariant Mass](Plots_pngs/Part04/4_3-MCZee.png)
+
+![MC Muons Graph of Invariant Mass](Plots_pngs/Part04/4_3-MCZmumu.png)
+
+![MC Muons Graph of Invariant Mass](Plots_pngs/Part04/4_3-MCZtautau-revised.png)
+
+<!--
+TODO:
+why does the last one look like this?
+-->
