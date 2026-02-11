@@ -64,8 +64,11 @@ Feynman diagrams of the 1, 2, 3 lepton processes go here!
 The dominant process for 1-lep final:
 $$ \bar u + d \overset{W^-}{\longrightarrow} e^- + \bar \nu_{e^-} $$
 
-TODO: \
-Draw Feynman diagrams for 1-lepton, 2-lepton and 3-lepton final states.
+The dominant process for 2-lep final (q is any quark):
+$$ \bar q + q \overset{Z^0}{\longrightarrow} e^- + e^+ $$
+
+The dominant process for 3-lep final (combine previous 2):
+$$ \bar u + d \longrightarrow e^- + \bar \nu_{e^-} + e^+ + e^- $$
 
 ## 6. `lep_pt`, `lep_eta` and `lep_phi`
 
