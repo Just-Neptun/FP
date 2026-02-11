@@ -1,0 +1,187 @@
+% !TEX root = ../ausarbeitung.tex
+\section{Introduction}
+\label{sec:introduction}
+Before we can focus on error propagation and parameter estimation, we need to introduce the basics of probability theory.
+The content is determined by \cite{anleitung}.
+Further background is taken from \cite{chan}.
+
+\subsection{Basic Probability Theory}
+We formally model a random process using a \define{probability space}.
+This is a triple consisting of a \define{sample space} \( Ω \), an \define{event space} \( F \), and a \define{probability function} \( P\colon F \to [0, 1] \).
+An \define{outcome} \( ω \in Ω \) is a possible result, an \define{event} \( E \in F \) is a set of outcomes, and \( P(E) \) is the \define{probability} of an event occurring.
+
+An event \( E \) occurred if the result \( ω \) of the process is in \( E \), \( ω \in E \).
+Since \( ω \in Ω \), we know \( P(Ω) = 1 \).
+If two events \( E_1, E_2 \) are \define{mutually exclusive}, \( E_1 \cap E_2 = \emptyset \), then the probability of either one happening is the sum of their individual probabilities, \( P(E_1 \cup E_2) = P(E_1) + P(E_2) \).
+Two events are \define{independent} if \( P(E_1 \cap E_2) = P(E_1) P(E_2) \).
+The \define{conditional probability} of event \( A \) occurring, given the information that event \( B \) with \( P(B) \neq 0 \) has occurred, is 
+\begin{equation}
+    P(A \given B) = \frac{P(A \cap B)}{P(B)}.
+\end{equation}
+
+A \define{random variable} \( X \) is a function from the sample space to the real numbers, \( X\colon Ω \to \reals \), and its values \( x = X(ω) \in \reals \) are called its \define{states}.
+A \define{random vector} \( \vec{X} = (X_1, \dots, X_N)\transpose \) is a generalization of a random variable to \( N \) dimensions, \( \vec{X}\colon Ω \to \reals^N \).
+We naturally define the \define{image} \( \vec{X}(E) = \set{\vec{X}(ω) \in \reals \mid ω \in E} \) of an event \( E \) and the \define{pre-image} \( \vec{X}^{-1}(A) = \set{ω \in Ω \mid \vec{X}(ω) \in A} \) of a set of states \( A \).
+The probability that \( \vec{X} \) takes on a state in \( A \subseteq \reals^N \) is given by its pre-image,
+\begin{equation}
+    P(\vec{X} \in A) \coloneq P(\set{ω \in Ω \mid \vec{X}(ω) \in A}) = P(\vec{X}^{-1}(A)).
+\end{equation}
+We call the random vector \( \vec{X} \) \define{independent} if for any \( A_i \subseteq \reals \), we have \( P(\vec{X} \in A_1 \times \cdots \times A_2) = P(X_1 \in A_1) \cdots P(X_N \in A_N) \).\footnote{
+    Note that while this definition restricts independence to product sets, the \define{uniqueness of extension} ensures that the joint distribution is uniquely determined for all Borel measurable sets in \( \reals^N \).
+}
+
+\subsection{Probability Mass and Density Functions}
+A random variable or a random vector may be either \define{discrete} (if \( X(Ω) \) is at most countably infinite) or \define{continuous} (if \( X(Ω) \) is uncountably infinite).\footnote{
+    For random vectors, we disregard the possibility of there being cross-terms, for example \( X_1 \) being discrete and \( X_2 \) being continuous.
+}
+A discrete random vector admits a \define{probability mass function} (PMF) \( p_{\vec{X}}\colon \reals^N \to [0, 1] \), which gives the probability that \( \vec{X} \) is in state \( \vec{x} \in \reals^N\),
+\begin{equation}
+    \label{eq:introduction:definiton_pmf}
+    p_{\vec{X}}(\vec{x}) \coloneq P(\vec{X} = \vec{x}) = P(\vec{X}^{-1}(\set{\vec{x}})).
+\end{equation}
+A continuous random vector admits a \define{probability density function} (PDF) \( f_{\vec{X}}\colon \reals^N \to \reals \), which gives the probability \emph{per unit volume} of finding \( \vec{X} \) in state \( \vec{x} \in \reals^N \),
+\begin{equation}
+    \label{eq:introduction:definition_pdf}
+    f_{\vec{X}}(\vec{x}) \coloneq \lim_{\vec{h} \to \vec{0}} \frac{P(\vec{X} \in [\vec{x}, \vec{x} + \vec{h}])}{\prod_{i} h_i} = \eval{\diffp<n>{F_{\vec{X}}}{x_1,x_2,...,x_n}}{\vec{x}}.
+\end{equation}
+The notation is to be understood component-wise, i.e. \( \vec{X} \in [\vec{x}, \vec{x} + \vec{h}] \iff \forall i \in \set{1,\dots, N}\colon X_i \in [x_i, x_i + h_i] \).
+We implicitly defined the \define{cumulative distribution function} (CDF) \( F_{\vec{X}}\colon \reals^N \to [0, 1] \), as 
+\begin{equation}
+    \label{eq:introduction:definition_cdf}
+    F_{\vec{X}}(\vec{x}) \coloneq P(\vec{X} \leq \vec{x}) = P(\vec{X}^{-1}((-\infty, \vec{x}])).\footnotemark
+\end{equation}
+\footnotetext{
+    This definition satisfies \autoref{eq:introduction:definition_pdf} since \( F_{\vec{X}}(\vec{x} + \vec{h}) - F_{\vec{X}}(\vec{x}) = P(\vec{X} \leq \vec{x} + \vec{h}) - P(\vec{X} \leq \vec{x}) = P(\vec{x} \leq \vec{X} \leq \vec{x} + \vec{h}). \)
+}%
+It follows that integrating the PDF (or summing the PMF) over a region gives the probability of finding the random vector in that region,
+\begin{equation}
+    P(\vec{X} \in M \subseteq \reals^N) = \int_M f_{\vec{X}}(\vec{x}) \difl{\vec{x}}.
+\end{equation}
+Furthermore, the PMF and PDF are non-negative and normalized on \( \reals^N \).
+
+A \define{marginal distribution} is achieved by integrating (or summing, in case of a PMF) over all but one dimensions,
+\begin{equation}
+    f_{X_1}(x_1) = \int_{\reals^{N-1}} f_{\vec{X}}(\vec{x}) \difl{x_2} \cdots \difl{x_N}.
+\end{equation}
+A random vector is independent, as defined above, if its distribution factorizes,
+\begin{equation}
+    f_{\vec{X}}(\vec{x}) = \prod\limits_{i = 1}^n f_{X_i}(x_i).
+\end{equation}
+
+\subsection{Mean, Variance, and Covariance}
+The \define{expectation value} of a function \( g\colon \reals^N \to \reals \) of a random vector is
+\begin{subequations}
+\label{eq:introduction:definition_expectation}
+\begin{alignat}{2}
+    \ev{g(\vec{X})} &\coloneq \sum_{\vec{x} \in \vec{X}(Ω)} g(\vec{x}) p_{\vec{X}}(\vec{x}) &&\qquad\text{if \( \vec{X} \) is discrete} \\
+    \ev{g(\vec{X})} &\coloneq \int_{\reals} g(\vec{x}) f_{\vec{X}}(\vec{x}) \difl{\vec{x}} &&\qquad\text{if \( \vec{X} \) is continuous}
+\end{alignat}
+\end{subequations}
+From this, we define the \define{mean} and \define{variance} of a random variable as
+\begin{subequations}
+\begin{gather}
+    \label{eq:introduction:definition_mean}
+    \mean(X) = \mu_X \coloneq \ev{X}, \\
+    \label{eq:introduction:definition_variance}
+    \var(X) \coloneq σ_X^2 \coloneq \ev{(X - μ_X)^2} = \ev{X^2} - μ_X^2.
+\end{gather}
+\end{subequations}
+The last equality follows from the fact that \autoref{eq:introduction:definition_expectation} implies the linearity of the expectation value, \( \ev{aX + b} = a \ev{X} + b \).
+If there are multiple random variables, we use the marginal distributions to determine the mean and variance of each variable.
+The square-root of the variance is called the \define{standard deviation}.
+
+The \define{covariance} of two random variables is defined as 
+\begin{equation}
+    \cov(X, Y) \coloneq \ev{(X - μ_X)(Y - μ_Y)} = \ev{XY} - μ_X μ_Y.
+\end{equation}
+If the covariance is not zero, this means that the two variables depend on each other. 
+We normalize it to receive the \define{correlation}
+\begin{equation}
+    ρ = \frac{\cov(X, Y)}{σ_X σ_Y}.
+\end{equation}
+If \( ρ \) is close to \( 1 \) or \( -1 \), it reflects that \( X \) taking on large values will also tend to correspond with \( Y \) taking on large values. 
+A small \( ρ \) means large \( X \) corresponds to small \( Y \).
+A positive value for \( ρ \) means that \( X \) and \( Y \) tend to be on the same side of their respective mean, while negative \( ρ \) means the opposite.
+
+We define the \define{covariance matrix} of a random vector \( \vec{X} \) as
+\begin{equation}
+    \mat{C}_{ij} = \cov(X_i, X_j).
+\end{equation}
+Given a function \( \vec{f}\colon \reals^N \to \reals^M \) which is sufficiently well represented by its first degree Taylor series, we can calculate the covariance matrix of the random variable \( \vec{Y} = \vec{f}(\vec{X}) \) using the (Jacobian) transition matrix,
+\begin{equation}
+    \mat{G}_{ij} = \frac{\partial f_i}{\partial x_j},
+\end{equation}
+in the following way:
+\begin{equation}
+    \label{eq:introduction:covariance_of_function}
+    \mat{E} = \mat{G} \cdot \mat{C} \cdot \mat{G}\transpose.
+\end{equation}
+
+\subsection{Examples of Distributions}
+In general, a probability function might belong to a family of probability functions indexed by some parameter \( λ \).
+If this is the case, we work with the PMF or PDF of such a random variable given the value of this parameter, \( f(x \given λ) \), in the sense of conditional probability defined above.
+
+The \define{Bernoulli trial} is an experiment with two possible outcomes, \( k \in \set{0, 1} \), such that \( p \) is the probability (in the usual sense) of \( k = 1 \).
+Its PMF, the \define{Bernoulli distribution}, can be written in terms of the parameter \( p \),
+\begin{equation}
+    p_K(k \given p) = \begin{cases*}
+        p & if \( k = 1 \), \\
+        1-p & if \( k = 0 \).
+    \end{cases*}
+\end{equation}
+The sum \( k = k_1 + \dots + k_n \) of \( n \) independent Bernoulli trials with the same parameter \( p \) is governed by the \define{Binomial distribution},
+\begin{equation}
+    p_K(k \given n, p) = \binom{n}{k} p^k (1 - p)^{n - k}.
+\end{equation}
+
+A random variable is distributed according to the \define{Gaussian distribution}, if its PDF is of the form
+\begin{gather}
+    f_X(x \given μ, σ^2) = \frac{1}{\sqrt{2 π σ^2}} \exp\left(\frac{(x - μ)^2}{2 σ^2}\right).
+\end{gather}
+It is a family of distributions indexed by its mean and variance, \( λ = (μ, σ^2)\transpose \).
+
+This distribution is often assumed as a kind of \quoteapprox{default} for many randomly distributed variables in nature. 
+This is due to the \define{central limit theorem}. 
+It states that for the average value \( X = 
+\frac{1}{n} \sum_{i=1}^n x_i \), when \( n \rightarrow \infty \), the distribution of \( X \) approaches a Gaussian distribution.
+Because measurements are influenced by the addition of many statistical errors (which behave as randomly distributed variables), it is usually assumed that a measurement comes from a Gaussian distribution centred around the true value (mean \( \mu \)) with an error (standard deviation \( \sigma \)).
+
+A change of variables to \( Y = (X - μ) / σ \) gives the \define{standard Gaussian distribution} \( f(y \given μ = 0, σ^2 = 1) \).
+If \( n \) random variables \( X_1, \dotsc, X_n \) all follow standard Gaussian distributions, the sum of their squares follows the \define{\( \chi^2 \)-distribution} for \( n \) so-called \quotedef{degrees of freedom}.
+\begin{gather}
+    Z = \chi^2 = X_1^2 + \dotsb + X_n^2 \\
+    f_Z(z \given n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
+    \label{eq:introduction:chi_square_distribution}
+\end{gather}
+This is relevant for analyzing the quality of a model relative to measured data, as one can change variables to a standard Gaussian.
+
+One might use the measurements to determine the model parameters, as we will explain next.
+In that case, \( χ^2 \) is distributed according to \( f_Z(z, n - m) \), where \( m \) is the number of parameters.
+
+\subsection{Estimation}
+Often, the measurement follows a model indexed by a parameter \( λ \) which is generally unknown.
+An \define{estimator} \( S_{λ} \) determines a value \( \hat{λ} \) from a set of \( n \) measurements \( \vec{x} \),
+\begin{equation}
+    S_{λ}(\vec{x}) = \hat{λ}.
+\end{equation}
+We want estimators with at least some of the following properties. 
+It should be \define{unbiased}, meaning \( \ev{S_{λ}} = λ \). 
+An estimator should also be \define{consistent} meaning \( \lim_{n \to \infty} \hat{λ} = λ \). 
+Lastly, a desirable estimator is \define{efficient}, so that \( \ev{(S - λ)^2} = σ_{S_{λ}}^2 \leq σ_{S'_{λ}}^2 \), for all other estimators \( S'_{λ} \).
+
+An estimator of the mean of a Gaussian distribution meeting all these criteria is given by
+\begin{equation}
+    \bar{x} = \frac{1}{n} \sum_{i = 1}^n x_i.
+\end{equation}
+If two Gaussian variables \( x \) and \( y \) are measured simultaneously, an estimator of their covariances is
+\begin{equation}
+    \label{eq:introduction:covariance_discrete_def}
+    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \bar{x}) (y_i - \bar{y}).
+\end{equation}
+
+Later in \autoref{sec:analysis}, we will introduce three general frameworks which let us estimate the parameters of models.
+The \define{method of least squares} determines the parameters by minimizing \( χ^2 \).
+The \define{maximum likelihood estimator} seeks to maximize the likelihood function.
+\define{Bayesian parameter estimation} assigns the parameter a probability distribution and updates it using the measured data.
+
+Before this, we will use the now-acquired knowledge to implement symbolic error propagation in Python.
