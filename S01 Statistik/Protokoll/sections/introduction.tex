@@ -122,19 +122,19 @@ If this is the case, we work with the PMF or PDF of such a random variable given
 The \define{Bernoulli trial} is an experiment with two possible outcomes, \( k \in \set{0, 1} \), such that \( p \) is the probability (in the usual sense) of \( k = 1 \).
 Its PMF, the \define{Bernoulli distribution}, can be written in terms of the parameter \( p \),
 \begin{equation}
-    P(k \given p) = \begin{cases*}
+    p_K(k \given p) = \begin{cases*}
         p & if \( k = 1 \), \\
         1-p & if \( k = 0 \).
     \end{cases*}
 \end{equation}
 The sum \( k = k_1 + \dots + k_n \) of \( n \) independent Bernoulli trials with the same parameter \( p \) is governed by the \define{Binomial distribution},
 \begin{equation}
-    P(k \given n, p) = \binom{n}{k} p^k (1 - p)^{n - k}.
+    p_K(k \given n, p) = \binom{n}{k} p^k (1 - p)^{n - k}.
 \end{equation}
 
 A random variable is distributed according to the \define{Gaussian distribution}, if its PDF is of the form
 \begin{gather}
-    f(x \given μ, σ^2) = \frac{1}{\sqrt{2 π σ^2}} \exp\left(\frac{(x - μ)^2}{2 σ^2}\right).
+    f_X(x \given μ, σ^2) = \frac{1}{\sqrt{2 π σ^2}} \exp\left(\frac{(x - μ)^2}{2 σ^2}\right).
 \end{gather}
 It is a family of distributions indexed by its mean and variance, \( λ = (μ, σ^2)\transpose \).
 
@@ -148,13 +148,13 @@ A change of variables to \( Y = (X - μ) / σ \) gives the \define{standard Gaus
 If \( n \) random variables \( X_1, \dotsc, X_n \) all follow standard Gaussian distributions, the sum of their squares follows the \define{\( \chi^2 \)-distribution} for \( n \) so-called \quotedef{degrees of freedom}.
 \begin{gather}
     Z = \chi^2 = X_1^2 + \dotsb + X_n^2 \\
-    f(z \given n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
+    f_Z(z \given n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
     \label{eq:introduction:chi_square_distribution}
 \end{gather}
 This is relevant for analyzing the quality of a model relative to measured data, as one can change variables to a standard Gaussian.
 
 One might use the measurements to determine the model parameters, as we will explain next.
-In that case, \( χ^2 \) is distributed according to \( f(z, n - m) \), where \( m \) is the number of parameters.
+In that case, \( χ^2 \) is distributed according to \( f_Z(z, n - m) \), where \( m \) is the number of parameters.
 
 \subsection{Estimation}
 Often, the measurement follows a model indexed by a parameter \( λ \) which is generally unknown.
