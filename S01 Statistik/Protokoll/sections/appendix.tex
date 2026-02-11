@@ -1,0 +1,45 @@
+% !TeX root = ./ausarbeitung.tex
+
+\section{Linear Least Squares Fit Data}
+
+The functions given in the Analysis as \autoref{eq:least_squares:fit_polynomial} and \autoref{eq:least_squares:linear_fit} and reproduced here were fitted to the following thirteen independent measurements of $(x_i, y_i)$.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Given 13 Data Points for Applying Linear Least Squares Fit}
+    \label{tab:appendix:least_squares_data}
+    \(
+    \begin{array}{
+            c@{}
+            S[table-format=+1.2]@{}
+            c
+            S[table-format=+1.1(2)]@{}
+            c
+        }
+        ( &  {x}  & , &  {y}         & ) \\ \hline
+        ( & -1.5  & , & -8.0 \pm 2.5 & ) \\
+        ( & -1.25 & , & -2.5 \pm 2.0 & ) \\
+        ( & -1.0  & , & -1.5 \pm 1.5 & ) \\
+        ( & -0.75 & , &  1.0 \pm 1.0 & ) \\
+        ( & -0.5  & , &  4.0 \pm 1.0 & ) \\
+        ( & -0.25 & , &  4.0 \pm 0.5 & ) \\
+        ( &  0.0  & , &  5.5 \pm 0.5 & ) \\
+        ( & 0.25  & , &  4.5 \pm 0.5 & ) \\
+        ( & 0.5   & , &  5.5 \pm 0.5 & ) \\
+        ( & 0.75  & , &  3.0 \pm 1.0 & ) \\
+        ( & 1.0   & , &  3.0 \pm 1.0 & ) \\
+        ( & 1.25  & , &  4.5 \pm 1.5 & ) \\
+        ( & 1.5   & , &  7.0 \pm 2.0 & )
+    \end{array}
+    \)
+\end{table}
+
+% applied fitfunctions
+% \begin{gather}
+%     y(x) = \theta_0 + \theta_1 x + \theta_2 x^2 + \theta_3 x^3
+%     \label{eq:appendix:fit_polynomial} \\
+%     y(x) = \theta_0 + \theta_1 x
+%     \label{eq:appendix:linear_fit}
+% \end{gather}
+
+The other datasets used in the least squares method and maximum likelihood method sections are included as attached \verb|.csv| files.
