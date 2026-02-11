@@ -1,0 +1,4 @@
+.vscode/
+.venv/
+.out_dir/
+**/out_dir/
