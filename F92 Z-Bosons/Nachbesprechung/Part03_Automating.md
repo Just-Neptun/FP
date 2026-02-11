@@ -36,13 +36,17 @@ Rapidity:
 $$ y = \frac{1}{2} \ln (\frac{E + p_z}{E - p_z}) $$
 For low ratio of jet mass / jet energy:
 $$ p_z \approx E \cos \theta $$
-In addition to this, for highly relativistic particles, $E \approx p$, so:
+<!-- In addition to this, for highly relativistic particles, $E \approx p$, so:
 $$ y = \frac{1}{2} \ln (\frac{p + p_z}{p - p_z}) $$
-$$ y = \frac{1}{2} \ln (\frac{p + p_z}{p - p_z}) $$
+$$ p_z = p \cdot \cos (\theta) $$
+$$ y = \frac{1}{2} \ln (\frac{p + p \cdot \cos (\theta)}{p - p \cdot \cos (\theta)}) $$
+$$ y = \frac{1}{2} \ln (\frac{1 + \cos (\theta)}{1 - \cos (\theta)}) $$
+$$ y = \frac{1}{2} \ln (\frac{1 + \cos (\theta)}{1 - \cos (\theta)}) $$ -->
 
 For negligible jet mass, we can use the pseudorapidity:
 $$ \eta = - \ln \Big( \tan \frac{\theta}{2} \Big) \\
 \eta \approx y $$
+$$ e^{-\eta} = \tan \frac{\theta}{2} $$
 
 Invariant mass of the two leading leptons:
 
@@ -53,8 +57,6 @@ Measured values: $p_T, \eta$, but we want $p_z$ as well.
 
 ---
 **SHOW THIS:**
-$$ p_z = p \cdot \cos (\theta) $$
-
 $$ p_z = p_T \cdot \sinh (\eta) $$
 Then:
 $$ p_T^2 = p_x^2 + p_y^2 \\
@@ -66,8 +68,8 @@ Now substitute into the equation for invariant mass:
 $$ m_0^2 = \frac{E^2}{c^4} - \frac{\vec{p}^2}{c^2} \\
 m_0^2 = \frac{E^2}{c^4} - p_T^2 \cdot (1 + \sinh^2 (\eta)) / c^2 $$
 
-<!--
-könnte sogar stimmen!
+
+<!-- könnte sogar stimmen!
 
 Rearranging rapidity for E and then setting $ y = \eta$
 $$ e^{2 y} = \frac{E + p_z}{E - p_z} \\
@@ -77,8 +79,8 @@ e^{2 y} (E - p_z) = E + p_z \\
 - p_z \frac{1 + e^{2 y}}{1 - e^{2 y}} = E \\
 - p_z \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} = E $$
 
-$$ m_0^2 = p_z^2 \bigg( \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} \bigg)^2 / c^4 - (p_T^2 + (p_T \cdot \sinh (\eta))^2)/c^2 $$
--->
+$$ m_0^2 = p_z^2 \bigg( \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} \bigg)^2 / c^4 - (p_T^2 + (p_T \cdot \sinh (\eta))^2)/c^2 $$ -->
+
 
 ![Invariant Mass graph](Plots_pngs/Part03/3_3-inv_mass.png)
 
