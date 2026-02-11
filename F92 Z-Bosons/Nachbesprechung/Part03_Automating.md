@@ -24,7 +24,7 @@ We limited to 100,000 entries.
 
 ![lep_n graph](Plots_pngs/Part03/3_2-lep_n.png)
 
-Converted MeV to GeV:
+Converted MeV to GeV in below graph:
 
 ![lep_pt graph](Plots_pngs/Part03/3_2-lep_pt.png)
 
@@ -34,29 +34,34 @@ Converted MeV to GeV:
 
 Rapidity:
 $$ y = \frac{1}{2} \ln (\frac{E + p_z}{E - p_z}) $$
-For low ratio of jet mass / jet energy:
-$$ p_z \approx E \cos \theta $$
-<!-- In addition to this, for highly relativistic particles, $E \approx p$, so:
-$$ y = \frac{1}{2} \ln (\frac{p + p_z}{p - p_z}) $$
-$$ p_z = p \cdot \cos (\theta) $$
-$$ y = \frac{1}{2} \ln (\frac{p + p \cdot \cos (\theta)}{p - p \cdot \cos (\theta)}) $$
-$$ y = \frac{1}{2} \ln (\frac{1 + \cos (\theta)}{1 - \cos (\theta)}) $$
-$$ y = \frac{1}{2} \ln (\frac{1 + \cos (\theta)}{1 - \cos (\theta)}) $$ -->
+By trigonometry:
+$$ p_z = |\vec{p}| \cdot \cos (\theta)  $$
+For low ratio of jet mass / jet energy (highly relativistic particles):
+$$ E \approx p $$
+$$ y \approx \frac{1}{2} \ln (\frac{p + p_z}{p - p_z}) $$
+$$ y \approx \frac{1}{2} \ln (\frac{p + p \cdot \cos (\theta)}{p - p \cdot \cos (\theta)}) $$
+$$ y \approx \frac{1}{2} \ln (\frac{1 + \cos (\theta)}{1 - \cos (\theta)}) $$
+$$ y \approx \frac{1}{2} \ln (\frac{2 \cos^2 (\frac{\theta}{2})}{2 \sin^2 (\frac{\theta}{2})}) $$
+$$ y \approx \frac{1}{2} \ln (\tan^{-2} (\frac{\theta}{2})) $$
 
-For negligible jet mass, we can use the pseudorapidity:
+This gives us the pseudorapidity:
 $$ \eta = - \ln \Big( \tan \frac{\theta}{2} \Big) \\
 \eta \approx y $$
-$$ e^{-\eta} = \tan \frac{\theta}{2} $$
 
 Invariant mass of the two leading leptons:
 
 $$ m_0^2 c^2 = \frac{E^2}{c^2} - \vec{p}^2 $$
 
 ---
-Measured values: $p_T, \eta$, but we want $p_z$ as well.
+Measured values: $E, p_T, \eta$, but we want to calculate mass, which needs $p_z$ as well.
 
 ---
-**SHOW THIS:**
+
+$$ p_z = p_T \cdot \cot (\theta) $$
+$$ p_z = p_T \cdot \frac{\cos (\theta)}{\sin (\theta)} $$
+$$ p_z = p_T \cdot \frac{\cos^2 (\frac{\theta}{2}) - \sin^2 (\frac{\theta}{2})}{2 \sin (\frac{\theta}{2}) \cos (\frac{\theta}{2})} $$
+$$ p_z = p_T \cdot \frac{\cot (\frac{\theta}{2}) - \tan (\frac{\theta}{2})}{2} $$
+$$ p_z = p_T \cdot \frac{e^\eta - e^{-\eta}}{2} $$
 $$ p_z = p_T \cdot \sinh (\eta) $$
 Then:
 $$ p_T^2 = p_x^2 + p_y^2 \\
@@ -68,19 +73,7 @@ Now substitute into the equation for invariant mass:
 $$ m_0^2 = \frac{E^2}{c^4} - \frac{\vec{p}^2}{c^2} \\
 m_0^2 = \frac{E^2}{c^4} - p_T^2 \cdot (1 + \sinh^2 (\eta)) / c^2 $$
 
-
-<!-- könnte sogar stimmen!
-
-Rearranging rapidity for E and then setting $ y = \eta$
-$$ e^{2 y} = \frac{E + p_z}{E - p_z} \\
-e^{2 y} (E - p_z) = E + p_z \\
--p_z e^{2 y} - p_z = E (1 - e^{2 y}) \\
--p_z (1 + e^{2 y}) = E (1 - e^{2 y}) \\
-- p_z \frac{1 + e^{2 y}}{1 - e^{2 y}} = E \\
-- p_z \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} = E $$
-
-$$ m_0^2 = p_z^2 \bigg( \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} \bigg)^2 / c^4 - (p_T^2 + (p_T \cdot \sinh (\eta))^2)/c^2 $$ -->
-
+We apply the equation to variables and graph histogram of result. We restrict/disallow negative $m_0^2$ so that all masses are positive.
 
 ![Invariant Mass graph](Plots_pngs/Part03/3_3-inv_mass.png)
 
@@ -88,13 +81,14 @@ $$ m_0^2 = p_z^2 \bigg( \frac{1 + e^{2 \eta}}{1 - e^{2 \eta}} \bigg)^2 / c^4 - (
 
 ![Invariant Mass graph](Plots_pngs/Part03/3_4.png)
 
-Both methods do the same thing and produce exactly the same histogram.
+Both methods do the same thing and produce very similar histograms.
 
 ## 5. Expected Distribution
-
-![Invariant Mass graph](Plots_pngs/Part03/3_5-initial.png)
 
 MC simulation to find what we would expect from the data.
 (Simulated distribution matches quite well to measured distribution.)
 
-### More questions
+![Invariant Mass graph](Plots_pngs/Part03/3_5-initial.png)
+
+TODO:
+How do you expect the distribution to look like for the decay of a Z boson – and why might it not look like your expectation when running over the DataEgamma.root file? How many peaks can you identify, and what do they belong to? Hint: Try single and/or double logarithmic axis scales. Now run your analysis over the Monte Carlo file mc_147770.Zee.root and compare the results for the invariant mass distribution.
