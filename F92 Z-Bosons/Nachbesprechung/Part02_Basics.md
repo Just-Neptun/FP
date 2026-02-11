@@ -34,6 +34,10 @@ Really there are two peaks very close to each other in the `vxp_z` graph. This c
 From website, we can see that for the 2012 run the collision center moved over time. Maybe this caused the two peaks.
 ![Beam Spot Position Graph from Website](Plots_pngs/Extra/beamspot-2012-plot-posZ.png)
 
+Additionally, the distribution of protons inside a bunch is relevant.
+A plot of this would be helpful.
+If their distribution has two humps, so might the vertex position. 
+
 ## 4. `lep_n` variable
 
 #### Plotting `lep_n`:
