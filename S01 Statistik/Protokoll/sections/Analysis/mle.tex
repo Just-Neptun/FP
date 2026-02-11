@@ -129,11 +129,22 @@ For the generated dataset $\vec{x}$ with $n$ values, the log-likelihood of is th
 Using the same MLE method and numerical minimization tool \texttt{iminuit} with this new function, we obtain the maximum likelihood estimate $\hat{a} = \num{0.19 \pm 0.05}$.
 
 To confirm this result, the log-likelihood function and the MLE parameter are plotted in \autoref{fig:mle:lllh_part_02}. Visually we can confirm that $\hat{a}$ maximizes the likelihood of obtaining the given dataset $\vec{x}$.
-\begin{figure}[htbp]
+
+\begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/MLE/lllh_part_02.png}
-    \caption{Log-Likelihood Function using Generated Data Set with \( n = 1000 \) Samples}
-    \label{fig:mle:lllh_part_02}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Graphs/MLE/lllh_part_02.png}
+        \caption{Log-Likelihood Function using Generated Data Set with \( n = 1000 \) Samples}
+        \label{fig:mle:lllh_part_02}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Graphs/MLE/data_and_mle_part_02.png}
+        \caption{Generated Data Alongside the Calculated Fit Function}
+        \label{fig:mle:data_and_mle_part_02}
+    \end{subfigure}
+    \caption{Generated Data Set.}
 \end{figure}
 
 \subsubsection{Plotting the Fit Function}
@@ -141,12 +152,6 @@ To confirm this result, the log-likelihood function and the MLE parameter are pl
 We plot the histogram of the data and the distribution function (using our determined fit parameter $\hat{a}$) on the same graph.
 
 We make sure to graph the histogram using density/relative frequency. This ensures that we have the same scaling for both elements in the graph, which visually shows that the shape of the histogram matches relatively well with the distribution. We can therefore see that the type of distribution is correct and that the estimate $\hat{a}$ for the parameter $a$ is generally accurate. The next section on errors will show this numerically.
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/MLE/data_and_mle_part_02.png}
-    \caption{Generated Data Alongside the Calculated Fit Function}
-    \label{fig:mle:data_and_mle_part_02}
-\end{figure}
 
 \subsubsection{Determining Convergence of Upper and Lower Uncertainties}
 
