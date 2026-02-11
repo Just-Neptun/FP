@@ -140,11 +140,21 @@ For this fit, the parameters are given below. In \autoref{fig:least_squares:line
     \theta_1 = \num{1.5 \pm 0.4}
 \end{gather}
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/linear_fit_1.png}
-    \caption{Linear Best Fit Function with \( 1 \sigma \)-Error Band}
-    \label{fig:least_squares:linear_fit}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Graphs/Least_Squares/linear_fit_1.png}
+        \caption{Linear Best Fit Function with \qty{1}{\sigma}-Error Band.}
+        \label{fig:least_squares:linear_fit}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Graphs/Least_Squares/linear_fit_chi_dist_11_dof}
+        \caption{Corresponding \( \chi^2 \)-Distribution with \num{11} Degrees of Freedom.}
+        \label{fig:least_squares:chi_square_distribution_linear_1}
+    \end{subfigure}
+    \caption{Best Linear Fit Function.}
 \end{figure}
 
 Lastly, we check the $\chi^2_{\mathrm{obs}}$ statistic and the $p$-value to see if the model is valid:
@@ -152,13 +162,6 @@ Lastly, we check the $\chi^2_{\mathrm{obs}}$ statistic and the $p$-value to see 
     \chi^2_{\mathrm{obs}} = 56.6 \\
     p = \num{3.88e-8}
 \end{gather}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/linear_fit_chi_dist_11_dof}
-    \caption{\( \chi^2 \)-Distribution with \num{11} Degrees of Freedom, Comparison to Test Statistic of the Linear Fit Function}
-    \label{fig:least_squares:chi_square_distribution_linear_1}
-\end{figure}
 
 As we can also see on the $\chi^2$-distribution graph in \autoref{fig:least_squares:chi_square_distribution_linear_1}, the obtained $\chi^2_{\mathrm{obs}}$ statistic is extremely large compared to the bulk of the distribution. Therefore, we are not surprised that this means the probability of obtaining a result at least this large is very small. The $p$-value of \( p = \num{3.88e-8} \) is most definitely under the significance level of $0.05$, leading to us \emph{rejecting} the null hypothesis (which is that this model reflects the distribution which produced the data).
 
@@ -170,21 +173,24 @@ Continuing with the linear fit function, we examine what would happen if the mea
 
 The data with doubled error is shown alongside the best fit curve and its error band in \autoref{fig:least_squares:linear_fit_double_errors}. Uniformly changing the errors will clearly not affect the line of best fit, only the uncertainty. As we expect, the line of best fit is the same as before.
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/linear_fit_2.png}
-    \caption{Line of Best Fit and \( \qty{1}{\sigma} \)-Uncertainty Band, Data with Doubled Errors}
-    \label{fig:least_squares:linear_fit_double_errors}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Graphs/Least_Squares/linear_fit_2.png}
+        \caption{Line of Best Fit and \qty{1}{\sigma}-Uncertainty Band.}
+        \label{fig:least_squares:linear_fit_double_errors}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Graphs/Least_Squares/linear_fit_chi_dist_11_dof_2.png}
+        \caption{Corresponding \( \chi^2 \)-Distribution with \num{11} Degrees of Freedom.}
+        \label{fig:least_squares:chi_square_distribution_linear_2}
+    \end{subfigure}
+    \caption{Linear Best Fit Function, Data with Doubled Errors.}
 \end{figure}
 
-After this, we perform the same goodness of fit analysis as before. Because the model/fit function is the same, we have the same number of parameters and the degrees of freedom remain at \num{11}. As seen in \autoref{fig:least_squares:chi_square_distribution_linear_2}, the \( \chi^2 \) test statistic is reduced a lot compared to before. 
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/linear_fit_chi_dist_11_dof_2.png}
-    \caption{\( \chi^2 \)-Distribution with \num{11} Degrees of Freedom, Showing Resulting Test Statistic}
-    \label{fig:least_squares:chi_square_distribution_linear_2}
-\end{figure}
+After this, we perform the same goodness of fit analysis as before. Because the model/fit function is the same, we have the same number of parameters and the degrees of freedom remain at \num{11}. As seen in \autoref{fig:least_squares:chi_square_distribution_linear_2}, the \( \chi^2 \) test statistic is reduced a lot compared to before.
 
 Because of the reduction in \( \chi^2_\mathrm{obs} \), the \( p \)-value is increased significantly (\( p = 0.224 \)). Again, the null hypothesis of this test is that the fit function does correctly model the \( y \) vs. \( x \) relationship. Because the \( p \)-value is much larger than the \( 0.05 \) significance level, we fail to reject the null hypothesis. In other words, the probability of the data varying at least this much from the model due to random error is \num{0.224}. Because this is quite likely, we gain a lot of confidence in the validity of the model.
 
@@ -266,18 +272,21 @@ The fit parameters are given below. The new fit functions are graphed alongside 
     p \text{-Value}: \num{0.543} \\
 \end{gather}
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/position_vs_time_2.png}
-    \caption{Position vs. Time for a Damped Harmonic Oscillator Showing Data with Independently and Jointly Calculated Fits}
-    \label{fig:least_squares_02:position_vs_time_2}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Graphs/Least_Squares/amplitude_vs_frequency_2.png}
-    \caption{Amplitude vs. Frequency of a Driven Harmonic Oscillator Showing Data with Independent and Jointly Calculated Fits}
-    \label{fig:least_squares_02:amplitude_vs_frequency_2}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Graphs/Least_Squares/position_vs_time_2.png}
+        \caption{Position vs. Time}
+        \label{fig:least_squares_02:position_vs_time_2}
+    \end{subfigure}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Graphs/Least_Squares/amplitude_vs_frequency_2.png}
+        \caption{Amplitude vs. Frequency}
+        \label{fig:least_squares_02:amplitude_vs_frequency_2}
+    \end{subfigure}
+    \caption{Damped Harmonic Oscillator Showing Data with Independently and Jointly Calculated Fits.}
 \end{figure}
 
 We note that the \( p \)-value of this fit is quite high, giving us confidence that our combined model fits the data well.
