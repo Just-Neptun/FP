@@ -32,7 +32,7 @@ We see the distribution of the collision of two bunches.
 Really there are two peaks very close to each other in the `vxp_z` graph. This could be because of the collision center moving between fills.
 
 From website, we can see that for the 2012 run the collision center moved over time. Maybe this caused the two peaks.
-![Beam Spot Position Graph from Website](Plots_pngs/Extra/beamspot-2012-plot-posZ.png)
+![Beam Spot Position Graph from Website](Analysis_Images/Part02/beamspot-2012-plot-posZ.png)
 
 ## 4. `lep_n` variable
 
