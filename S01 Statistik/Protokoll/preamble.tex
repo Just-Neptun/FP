@@ -1,0 +1,85 @@
+% !TEX root = ./ausarbeitung.tex
+
+\KOMAoptions{DIV=13}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}[scale=MatchLowercase]
+\setmonofont{Libertinus Mono}[scale=MatchLowercase]
+
+\usepackage{import}     % local file paths for \input
+
+% Seitenlayout
+\usepackage[
+    % headsepline,
+    % footsepline,
+    automark,
+    draft=false
+]{scrlayer-scrpage}
+\ihead{Fortgeschrittenen-Praktikum S01}
+\ohead{Frederik Hollis, Justus Zimmermann}
+\setcounter{tocdepth}{2}
+
+% Mathe 
+\usepackage{amsmath}
+\usepackage{mathtools}
+\numberwithin{equation}{section}
+
+\usepackage[
+    warnings-off={mathtools-colon,mathtools-overbracket},
+    math-style=TeX,
+    bold-style=TeX,
+    partial=upright,
+    nabla=upright
+]{unicode-math}
+\setmathfont{Libertinus Math}
+
+\usepackage{graphicx} % Graphiken
+
+\usepackage{microtype} % Spacing
+\usepackage{pdfpages} % PDFs einfügen
+\usepackage{booktabs} % Bessere Tabellen
+\usepackage{subcaption} % Bessere Captions
+\captionsetup{margin=10pt,font=small,labelfont=sc}
+\usepackage{diffcoeff} % Ableitungen
+\usepackage{listings}
+
+\usepackage[autostyle=true]{csquotes}    % Language aware quotations
+\newcommand{\quoteactual}[1]{\enquote{#1}}   % Quoting someone's words
+\newcommand{\quotemention}[1]{\enquote{#1}}  % Talk about the word 'word'
+\newcommand{\quoteapprox}[1]{\enquote{#1}}   % Saying something not quite right
+\newcommand{\quotedef}[1]{\enquote{#1}}    % Defining something
+
+\usepackage{siunitx} % Einheiten
+\sisetup{uncertainty-mode=separate}
+\sisetup{exponent-product=\ensuremath{\cdot}}
+\sisetup{power-half-as-sqrt}
+\sisetup{output-decimal-marker={.}}
+\sisetup{table-align-uncertainty=true}
+% \sisetup{list-final-separator = {,\,}}    % \qtylist{numbers}{unit}, \numlist{numbers}
+% \sisetup{list-separator = {,\,}}    % keep spacing the same between numbers
+% for listing multiple quantities if you want compacter list of \num{1;2;3} with better spacing/remove "and"
+
+\DeclareSIUnit{\Vss}{V\textsubscript{SS}}
+\DeclareSIUnit{\VRMS}{V\textsubscript{RMS}}
+\DeclareSIUnit{\decibelvolt}{dBV}
+\DeclareSIUnit{\sigma}{σ}
+
+% Bibliography
+\usepackage[
+    backend=biber,
+    style=phys,
+    sorting=none
+]{biblatex}
+\addbibresource{./ref.bib}
+
+\usepackage[pageanchor]{hyperref} % Links
+\definecolor{myNavy}{RGB}{0,0,80}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=myNavy,
+    urlcolor=blue,
+}
+\urlstyle{same}
