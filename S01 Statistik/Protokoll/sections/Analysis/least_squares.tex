@@ -41,20 +41,18 @@ $\mathbf{C}$ is the matrix representing the covariances of $\vec{y}$. To find th
 \end{gather}
 
 Translating these matrix operations into code gives an analytic solution for the least squares regression. For the given data, we find the following fit parameters and covariances.
-\begin{align}
-    \theta_0 &= \num{ 4.4 \pm 0.3} \\
-    \theta_1 &= \num{-0.4 \pm 0.8} \\
-    \theta_2 &= \num{-2.6 \pm 0.4} \\
-    \theta_3 &= \num{ 2.3 \pm 0.5}
-\end{align}
 \begin{gather}
-    \mathbf{C}_\theta = 
+    θ_0 = \num{ 4.4 \pm 0.3}, \quad
+    θ_1 = \num{-0.4 \pm 0.8}, \quad
+    θ_2 = \num{-2.6 \pm 0.4}, \quad
+    θ_3 = \num{ 2.3 \pm 0.5}, \\
+    \mathbf{C}_θ = 
     \begin{pmatrix}
         \num{ 0.114 } & \num{-0.0261} & \num{-0.0879} & \num{ 0.0163} \\
         \num{-0.0261} & \num{ 0.566 } & \num{ 0.0111} & \num{-0.334 } \\
         \num{-0.0879} & \num{ 0.0111} & \num{ 0.170 } & \num{-0.0172} \\
         \num{ 0.0163} & \num{-0.334 } & \num{-0.0172} & \num{ 0.257 }
-    \end{pmatrix}
+    \end{pmatrix}.
 \end{gather}
 
 \subsubsection{Numerical Minimization for Finding Best Fit Parameters}
