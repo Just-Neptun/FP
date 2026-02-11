@@ -85,10 +85,14 @@ Both methods do the same thing and produce very similar histograms.
 
 ## 5. Expected Distribution
 
+A priori, one might expect a symmetric distribution around the expected value of ~$90\,\mathrm{GeV}$.
+For example, a Gaussian or Breit-Wigner distribution.
+
+This is the case, but there are smaller peaks at around ~$3\,\mathrm{GeV}$ and ~$9.5\,\mathrm{GeV}$.
+These coincide with the rest masses of the $\mathrm{J}/\Psi$ and $\Upsilon$ mesons.
+We also see a "hill" due to the $25\,\mathrm{GeV}$ cutoff.
+
 MC simulation to find what we would expect from the data.
 (Simulated distribution matches quite well to measured distribution.)
 
 ![Invariant Mass graph](Plots_pngs/Part03/3_5-initial.png)
-
-TODO:
-How do you expect the distribution to look like for the decay of a Z boson – and why might it not look like your expectation when running over the DataEgamma.root file? How many peaks can you identify, and what do they belong to? Hint: Try single and/or double logarithmic axis scales. Now run your analysis over the Monte Carlo file mc_147770.Zee.root and compare the results for the invariant mass distribution.
