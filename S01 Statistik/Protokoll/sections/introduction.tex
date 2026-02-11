@@ -140,7 +140,7 @@ A random variable is distributed according to the \define{Gaussian distribution}
 \begin{gather}
     f(x \given μ, σ^2) = \frac{1}{\sqrt{2 π σ^2}} \exp\left(\frac{(x - μ)^2}{2 σ^2}\right).
 \end{gather}
-It is a family of distributions indexed by its mean and variance, \( \vec{λ} = (μ, σ^2)\transpose \).
+It is a family of distributions indexed by its mean and variance, \( λ = (μ, σ^2)\transpose \).
 
 This distribution is often assumed as a kind of \quoteapprox{default} for many randomly distributed variables in nature. 
 This is due to the \define{central limit theorem}. 
@@ -161,12 +161,26 @@ One might use the measurements to determine the model parameters, as we will exp
 In that case, \( χ^2 \) is distributed according to \( f(z, n - m) \), where \( m \) is the number of parameters.
 
 \subsection{Estimation}
+Often, the measurement follows a model indexed by a parameter \( λ \) which is generally unknown.
+An \define{estimator} \( S_{λ} \) determines a value \( \hat{λ} \) from a set of \( n \) measurements \( \vec{x} \),
+\begin{equation}
+    S_{λ}(\vec{x}) = \hat{λ}.
+\end{equation}
+We want an estimator to be \define{unbiased}, \( \ev{S_{λ}} = λ \), \define{consistent}, \( \lim_{n \to \infty} \hat{λ} = λ \), and \define{efficient}, \( \ev{(S - λ)^2} = σ_{S_{λ}}^2 \leq σ_{S'_{λ}}^2 \), for all other estimators \( S'_{λ} \).
 
-This is strictly an estimator of the population covariance, not the covariance of two random variables
+An estimator of the mean of a Gaussian distribution meeting all these criteria is given by
+\begin{equation}
+    \bar{x} = \frac{1}{n} \sum_{i = 1}^n x_i.
+\end{equation}
+If two Gaussian variables \( x \) and \( y \) are measured simultaneously, an estimator of their covariances is
+\begin{equation}
+    \label{eq:introduction:covariance_discrete_def}
+    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \bar{x}) (y_i - \bar{y}).
+\end{equation}
 
-If two discrete variables \( x \) and \( y \), with means \( \mu_x \) and \( \mu_y \) respectively, are measured simultaneously for \( N \) samples, the covariances are calculated in the following way.
-\begin{gather}
-    \cov (x, y) \coloneq \frac{1}{N-1} \sum_{i = 1}^{N} (x_i - \mu_{x}) (y_i - \mu_{y})
-    \label{eq:introduction:covariance_discrete_def} \\ % referenced in least_squares.tex
-    \var (x) = \cov (x, x)
-\end{gather}
+In \autoref{sec:analysis}, we introduce three general frameworks which let us estimate the parameters of models.
+The \define{method of least squares} determines the parameters by minimizing \( χ^2 \).
+The \define{maximum likelihood estimator} seeks to maximize the likelihood function.
+\define{Bayesian parameter estimation} assigns the parameter a probability distribution and updates it using the measured data.
+
+But first, we use our now-acquired knowledge to implement symbolic error propagation in Python.
