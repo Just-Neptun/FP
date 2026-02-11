@@ -129,9 +129,12 @@ If this is the case, we work with the PMF or PDF of such a random variable given
 The \define{Bernoulli trial} is an experiment with two possible outcomes, \( k \in \set{0, 1} \), such that \( p \) is the probability (in the usual sense) of \( k = 1 \).
 Its PMF, the \define{Bernoulli distribution}, can be written in terms of the parameter \( p \),
 \begin{equation}
-    p(k \given p) = p^k (1 - p)^{1 - k}.
+    p(k \given p) = \begin{cases*}
+        p & if \( k = 1 \), \\
+        1-p & if \( k = 0 \).
+    \end{cases*}
 \end{equation}
-The sum \( k = k_1 + \dots + k_n \) of \( n \) independent Bernoulli trials is governed by the \define{Binomial distribution},
+The sum \( k = k_1 + \dots + k_n \) of \( n \) independent Bernoulli trials with the same parameter \( p \) is governed by the \define{Binomial distribution},
 \begin{equation}
     p(k \given n, p) = \binom{n}{k} p^k (1 - p)^{n - k}.
 \end{equation}
