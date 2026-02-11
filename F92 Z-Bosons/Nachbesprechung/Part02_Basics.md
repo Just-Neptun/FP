@@ -61,8 +61,11 @@ Also, neutrinos are not detected, allowing odd numbers of leptons.
 
 Feynman diagrams of the 1, 2, 3 lepton processes go here!
 
-TOOD: \
-What is the dominant process for the 1-lepton final state? Draw Feynman diagrams for 1-lepton, 2-lepton and 3-lepton final states.
+The dominant process for 1-lep final:
+$$ \bar u + d \overset{W^-}{\longrightarrow} e^- + \bar \nu_{e^-} $$
+
+TODO: \
+Draw Feynman diagrams for 1-lepton, 2-lepton and 3-lepton final states.
 
 ## 6. `lep_pt`, `lep_eta` and `lep_phi`
 
