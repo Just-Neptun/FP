@@ -36,6 +36,10 @@ Rapidity:
 $$ y = \frac{1}{2} \ln (\frac{E + p_z}{E - p_z}) $$
 For low ratio of jet mass / jet energy:
 $$ p_z \approx E \cos \theta $$
+In addition to this, for highly relativistic particles, $E \approx p$, so:
+$$ y = \frac{1}{2} \ln (\frac{p + p_z}{p - p_z}) $$
+$$ y = \frac{1}{2} \ln (\frac{p + p_z}{p - p_z}) $$
+
 For negligible jet mass, we can use the pseudorapidity:
 $$ \eta = - \ln \Big( \tan \frac{\theta}{2} \Big) \\
 \eta \approx y $$
@@ -45,10 +49,12 @@ Invariant mass of the two leading leptons:
 $$ m_0^2 c^2 = \frac{E^2}{c^2} - \vec{p}^2 $$
 
 ---
-Measured values: $ p_T, p_z, \eta $
+Measured values: $p_T, \eta$, but we want $p_z$ as well.
 
 ---
 **SHOW THIS:**
+$$ p_z = p \cdot \cos (\theta) $$
+
 $$ p_z = p_T \cdot \sinh (\eta) $$
 Then:
 $$ p_T^2 = p_x^2 + p_y^2 \\
