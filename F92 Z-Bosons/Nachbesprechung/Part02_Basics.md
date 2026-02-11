@@ -51,8 +51,10 @@ This is the number of counted leptons in the final state.
 
 ## 5. Describe data
 
-We expect 1, 2 or 3 leptons in the final state of a Z decay.
-depending on the specific decay process.
+In this part, we are talking only about how many leptons we actually *detected* in the final state. Therefore, neutrinos are ignored.
+
+We expect 2 leptons in the final state.
+1, 2 or 3 leptons in the final state are also possible, depending on the specific decay process. \
 In leading order we expect 2 leptons.
 The other numbers correspond to non-leading-order processes.
 Also, neutrinos are not detected, allowing odd numbers of leptons.
