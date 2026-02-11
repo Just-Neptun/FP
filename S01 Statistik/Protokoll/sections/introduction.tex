@@ -124,11 +124,21 @@ in the following way:
 
 \subsection{Examples of Distributions}
 In general, a probability function might belong to a family of probability functions indexed by some parameter \( λ \).
-If this is the case, we work with the PMF or PDF of such a random variable given the value of this parameter, \( f_X(x \given λ) \), in the sense of conditional probability defined above.
+If this is the case, we work with the PMF or PDF of such a random variable given the value of this parameter, \( f(x \given λ) \), in the sense of conditional probability defined above.
+
+The \define{Bernoulli trial} is an experiment with two possible outcomes, \( k \in \set{0, 1} \), such that \( p \) is the probability (in the usual sense) of \( k = 1 \).
+Its PMF, the \define{Bernoulli distribution}, can be written in terms of the parameter \( p \),
+\begin{equation}
+    p(k \given p) = p^k (1 - p)^{1 - k}.
+\end{equation}
+The sum \( k = k_1 + \dots + k_n \) of \( n \) independent Bernoulli trials is governed by the \define{Binomial distribution},
+\begin{equation}
+    p(k \given n, p) = \binom{n}{k} p^k (1 - p)^{n - k}.
+\end{equation}
 
 A random variable is distributed according to the \define{Gaussian distribution}, if its PDF is of the form
 \begin{gather}
-    f(x \given μ, σ^2) = \frac{1}{\sqrt{2 π σ^2}} \exp(\frac{(x - μ)^2}{2 σ^2}).
+    f(x \given μ, σ^2) = \frac{1}{\sqrt{2 π σ^2}} \exp\left(\frac{(x - μ)^2}{2 σ^2}\right).
 \end{gather}
 It is a family of distributions indexed by its mean and variance, \( \vec{λ} = (μ, σ^2)\transpose \).
 
@@ -138,18 +148,17 @@ It states that for the average value \( X =
 \frac{1}{n} \sum_{i=1}^n x_i \), when \( n \rightarrow \infty \), the distribution of \( X \) approaches a Gaussian distribution.
 Because measurements are influenced by the addition of many statistical errors (which behave as randomly distributed variables), it is usually assumed that a measurement comes from a Gaussian distribution centred around the true value (mean \( \mu \)) with an error (standard deviation \( \sigma \)).
 
-If \( n \) random variables \( x_1, \dotsc, x_n \) all follow standard Gaussian distributions with \( \mu = 0 \) and \( \sigma = 1 \), the sum of their squares follows the \define{\( \chi^2 \)-distribution} for \( n \) so-called \quotedef{degrees of freedom}.
+A change of variables to \( Y = (X - μ) / σ \) gives the \define{standard Gaussian distribution} \( f(y \given μ = 0, σ^2 = 1) \).
+If \( n \) random variables \( X_1, \dotsc, X_n \) all follow standard Gaussian distributions, the sum of their squares follows the \define{\( \chi^2 \)-distribution} for \( n \) so-called \quotedef{degrees of freedom}.
 \begin{gather}
-    z = \chi^2 = x_1^2 + \dotsb + x_n^2 \\
+    Z = \chi^2 = X_1^2 + \dotsb + X_n^2 \\
     f(z \given n) = \frac{z^{\frac{n}{2} - 1} \cdot e^{-\frac{z}{2}}}{2^{\frac{n}{2}} \cdot \Gamma{\big( \frac{n}{2} \big)}} \quad (z ≥ 0)
     \label{eq:introduction:chi_square_distribution}
 \end{gather}
+This is relevant for analysing the quality of a model relative to measured data, as one can change variables to a standard Gaussian.
 
-This is relevant for analyzing the quality of a model relative to measured data, as the differences between prediction and measurement should be distributed around \( \mu = 0 \). If it is assumed that the measurement errors cause a Gaussian distribution of the measurement values, then the width of the distributions can also be normalized to \( \sigma = 1 \), producing \( n \) Gaussian distributions.
-
-When analyzing a model, the number of fit parameters for the model must be subtracted off from the total number of measurement points to obtain the degrees of freedom. Intuitively, this is because a model with \( n_F \) parameters (such as a polynomial) could perfectly capture the that many data points, causing a deviation of \( 0 \) for all of those measurements. Deviation from the model due to statistical errors can only occur for the \quoteapprox{leftover} data points when the model has fewer parameters than data points, meaning degrees of freedom \( f = n - n_F \).
-
-The differences between prediction and measurement are sometimes called residuals, leading to the name for this test statistic \( \chi^2_{obs} \): \quotedef{the (normalized) sum of the square residuals}.
+One might use the measurements to determine the model parameters, as we will explain next.
+In that case, \( χ^2 \) is distributed according to \( f(z, n - m) \), where \( m \) is the number of parameters.
 
 \subsection{Estimation}
 
