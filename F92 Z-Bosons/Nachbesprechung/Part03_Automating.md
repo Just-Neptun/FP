@@ -88,8 +88,10 @@ Both methods do the same thing and produce very similar histograms.
 A priori, one might expect a symmetric distribution around the expected value of ~$90\,\mathrm{GeV}$.
 For example, a Gaussian or Breit-Wigner distribution.
 
-This is the case, but there are smaller peaks at around ~$3\,\mathrm{GeV}$ and ~$9.5\,\mathrm{GeV}$.
+This generally true, but we can also see smaller peaks at around ~$3\,\mathrm{GeV}$ and ~$9.5\,\mathrm{GeV}$.
 These coincide with the rest masses of the $\mathrm{J}/\Psi$ and $\Upsilon$ mesons.
+These can decay into a $\gamma^*$, which can then become two leptons (meaning the event is included in the data, even after filtering).
+
 We also see a "hill" due to the $25\,\mathrm{GeV}$ cutoff.
 
 MC simulation to find what we would expect from the data.
