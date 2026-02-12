@@ -64,7 +64,18 @@ We run the cutting process on all the events on the following files, creating in
 
 ![MC Tauons Graph of Invariant Mass](Plots_pngs/Part04/4_3-MCZtautau-revised.png)
 
-<!--
-TODO:
-why does the last one look like this?
--->
+The last graph clearly does not show have a peak at the expected ~$90$ GeV. This is because the tauons produced in a Z decay can themselves decay very quickly in many ways:
+
+$$ \tau^- \overset{W^-}\longrightarrow \ell^- + \bar \nu_\ell + \nu_\tau $$
+$$ \tau^- \overset{W^-}\longrightarrow \text{hadrons} + \nu_\tau $$
+
+And for anti-tauons:
+
+$$ \tau^+ \overset{W^+}\longrightarrow \ell^+ + \nu_\ell + \bar \nu_\tau $$
+$$ \tau^+ \overset{W^+}\longrightarrow \text{hadrons} + \nu_\tau $$
+
+(about 17% per lepton branch, 65% decay into hadrons)
+
+Firstly, we are only looking at lepton decays. Filtering out the most likely decay means we are losing a lot of tauon events.
+
+For the decays where Z bosons become $\tau^\pm$, these can decay again into the above leptons. Because neutrinos are not detected, we do not measure the total energy/mass/momentum. Without the neutrinos, the reconstructed Z candidate has too low mass.
