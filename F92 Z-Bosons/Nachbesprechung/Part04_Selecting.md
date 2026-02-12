@@ -11,7 +11,7 @@ List of cuts:
 - Trigger: Check `trigE` or `trigM` is true (electron or muon trigger from dataset)
 - GRL: Good run list, checks if event is marked as a good run (Data Quality Group assessment)
 - Vertex: Check `hasGoodVertex` variable, meaning primary vertex/position of collision is well determined.
-- ≥ 2 Leptons: Check that at least two leptons were detected (otherwise it is not a Z decay event)
+- >= 2 Leptons: Check that at least two leptons were detected (otherwise it is not a Z decay event)
 - PDGID (Particle Data Group Identifiers): check `lep_type` variable and make sure the measured particles are leptons ($e, \mu, \tau$).
 - Charge: Z Boson is neutral so the decay products must have opposite charges.
 - $p_T$ Cut: leptons must have at least $25$ GeV of transverse momentum (leptons are expected to split their momenta to half of the Z mass), cutoff below this.
@@ -79,3 +79,4 @@ $$ \tau^+ \overset{W^+}\longrightarrow \text{hadrons} + \nu_\tau $$
 Firstly, we are only looking at lepton decays. Filtering out the most likely decay means we are losing a lot of tauon events.
 
 For the decays where Z bosons become $\tau^\pm$, these can decay again into the above leptons. Because neutrinos are not detected, we do not measure the total energy/mass/momentum. Without the neutrinos, the reconstructed Z candidate has too low mass.
+
