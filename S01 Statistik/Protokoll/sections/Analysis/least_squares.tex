@@ -195,25 +195,42 @@ Similarly to before, we also do a goodness of fit analysis on the models. The mo
 
 Importantly, here we will apply the method completely independently to both datasets. The parameters are given below. The fit functions are plotted in the next section, see \autoref{fig:least_squares_02:position_vs_time_2} and \autoref{fig:least_squares_02:amplitude_vs_frequency_2}.
 
-\begin{gather}
-    x(t) = x_0 e^{- \beta t} \cos(\omega t + \varphi_0); \quad \omega = \sqrt{\omega_0^2 - \beta^2}
-    \label{eq:least_squares_02:damped_oszi_fitfunction} \\
-    \begin{aligned}
-        x_0 &= \num{0.098 \pm 0.003} \\
-        \varphi_0 &= \num{-0.03 \pm 0.03} \\
-        \omega_0 &= \num{4.027 \pm 0.014} \\
-        \beta &= \num{0.282 \pm 0.014}
-    \end{aligned} \\
-    p \text{-Value}: \num{0.966} \\
-    A(\omega) = \frac{K}{\sqrt{(\omega^2 - \omega_0^2)^2 + 4 \beta^2 \omega^2}}; \quad K = \frac{f}{m}
-    \label{eq:least_squares_02:driven_oszi_fitfunction} \\
-    \begin{aligned}
-        \omega_0 &= \num{4.000 \pm 0.009} \\
-        \beta &= \num{0.301 \pm 0.012} \\
-        K &= \num{0.199 \pm 0.005}
-    \end{aligned} \\
-    p \text{-Value}: \num{0.0458} \\
-\end{gather}
+\begin{table}[ht]
+    \caption{Determined parameters of the harmonic oscillators}
+    \centering
+    \(
+    \begin{array}{rlS[table-format=+1.3(4)]|rlS[table-format=+1.3(4)]}
+        \multicolumn{3}{c|}{\text{Damped Oscillator}} & \multicolumn{3}{c}{\text{Driven Oscillator}} \\
+        \multicolumn{3}{c|}{x(t) = x_0 e^{- \beta t} \cos(\omega t + \varphi_0); \quad \omega = \sqrt{\omega_0^2 - \beta^2}} & \multicolumn{3}{c}{A(\omega) = \frac{K}{\sqrt{(\omega^2 - \omega_0^2)^2 + 4 \beta^2 \omega^2}}; \quad K = \frac{f}{m}} \\ \hline
+        x_0       & = &  0.098 \pm 0.003 &          &   &                 \\
+        \varphi_0 & = & -0.03  \pm 0.03  & K        & = & 0.199 \pm 0.005 \\
+        \omega_0  & = &  4.027 \pm 0.014 & \omega_0 & = & 4.000 \pm 0.009 \\
+        \beta     & = &  0.282 \pm 0.014 & \beta    & = & 0.301 \pm 0.012 \\
+        p \text{-Value} & : &  0.966           & p \text{-Value} & : & 0.0458
+    \end{array}
+    \)
+    \label{tab:least_squares:harmonic_oscillator_independent_fits}
+\end{table}
+
+% \begin{gather}
+%     x(t) = x_0 e^{- \beta t} \cos(\omega t + \varphi_0); \quad \omega = \sqrt{\omega_0^2 - \beta^2}
+%     \label{eq:least_squares_02:damped_oszi_fitfunction} \\
+%     \begin{aligned}
+%         x_0 &= \num{0.098 \pm 0.003} \\
+%         \varphi_0 &= \num{-0.03 \pm 0.03} \\
+%         \omega_0 &= \num{4.027 \pm 0.014} \\
+%         \beta &= \num{0.282 \pm 0.014}
+%     \end{aligned} \\
+%     p \text{-Value}: \num{0.966} \\
+%     A(\omega) = \frac{K}{\sqrt{(\omega^2 - \omega_0^2)^2 + 4 \beta^2 \omega^2}}; \quad K = \frac{f}{m}
+%     \label{eq:least_squares_02:driven_oszi_fitfunction} \\
+%     \begin{aligned}
+%         \omega_0 &= \num{4.000 \pm 0.009} \\
+%         \beta &= \num{0.301 \pm 0.012} \\
+%         K &= \num{0.199 \pm 0.005}
+%     \end{aligned} \\
+%     p \text{-Value}: \num{0.0458} \\
+% \end{gather}
 
 %%% MOST ÜBERFLÜSSIGE GRAPHS HERE
 % \begin{figure}[htbp]
