@@ -20,7 +20,16 @@ Can you observe the membrane time constant? Note the impact of the individual po
 
 We see \( V_{mem} \) (potential over the membrane) increase mostly linearly before reaching a peak. This causes a spike where the voltage falls to zero. This corresponds to the lights showing on the neuron.
 
-Increasing the leak potential using the potentiometer causes 
+Changing the leak potential \( V_{leak} \) using the potentiometer changes the rest potential \( u_{rest} \) of the neuron. This is the potential which the neuron falls to when no spikes or outside potential is present. Increasing this increases the rest potential and vice versa.
+
+% Images here
+
+The membrane time constant \( \tau_{mem} \) affects how fast the potential reaches its equilibrium state.
+When the parameters are set to cause repeating spikes, this constant affects the time period of this process.
+Observing this constant is done by measuring the exponential convergence to equilibrium state or peak voltage, depending on if the threshold is met.
+
+Increasing the potentiometer marked \( \tau_{mem} \) increases \( \tau_{mem} \) as expected.
+
 
 • Connect two or multiple neurons to form a simple network and note how signals propagate across neurons, e.g.,
 while playing with the synaptic weights and the synaptic time constant.
