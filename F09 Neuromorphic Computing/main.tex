@@ -13,10 +13,9 @@
 
 \section{Lu.i Experiment}
 
-5.2.1 Getting familiar with Lu.i's parameters
-Before you begin, connect Lu.i's membrane to the oscilloscope.
-• Familiarize yourself with the parameters of the neuron emulation. What happens if you increase the leak potential?
-Can you observe the membrane time constant? Note the impact of the individual potentiometers.
+\subsection{5.2.1 Getting familiar with Lu.i's parameters}
+\subsubsection{Familiarize yourself with the parameters of the neuron emulation. What happens if you increase the leak potential?
+Can you observe the membrane time constant? Note the impact of the individual potentiometers.}
 
 We see \( V_{mem} \) (potential over the membrane) increase mostly linearly before reaching a peak. This causes a spike where the voltage falls to zero. This corresponds to the lights showing on the neuron.
 
@@ -30,11 +29,14 @@ Observing this constant is done by measuring the exponential convergence to equi
 
 Increasing the potentiometer marked \( \tau_{mem} \) increases \( \tau_{mem} \) as expected.
 
+Changing the potentiometer for \( \tau_{syn} \) does not produce a visible difference on the oscilloscope when only one neuron is connected.
+This is expected.
 
-• Connect two or multiple neurons to form a simple network and note how signals propagate across neurons, e.g.,
+
+\subsubsection{Connect two or multiple neurons to form a simple network and note how signals propagate across neurons, e.g.,
 while playing with the synaptic weights and the synaptic time constant.
 Pick a configuration where you can approximately measure τref and the threshold ϑ. Take notes of your results and
-your methods of determining the individual parameters.
+your methods of determining the individual parameters.}
 
 
 
