@@ -41,3 +41,12 @@ This process compounds, until the last population spikes approximately 25 times.
 Needless to say, this would not benefit a human brain.
 
 ## Visualize the membrane potential of the neuron using the oscilloscope.
+
+- Turns out we cloned the wrong branch
+- Save image task1 from osc and plot
+
+# Adjusting the number of neurons
+
+## Which hardware feature limits the minimal number of neurons in each population?
+
+## What is the maximal chain length that you can produce?
