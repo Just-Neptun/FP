@@ -27,6 +27,10 @@ The lower subplot shows further how fast the inhibitory populations counteract t
 
 ## Which connection affects the synfire chain behavior the most?
 
+The connection responsible for the characteristic behaviour of a synfire chain is `inh_exc`.
+Of course all others are also necessary, but this connection makes it such that each population has the explicit function of exciting the next population before it gets killed off.
+This is what distinguishes the synfire chain from a network of repeatedly spiking populations, in which no structure is present.
+
 ## What happens if you disable inhibition?
 
 ## Visualize the membrane potential of the neuron using the oscilloscope.
