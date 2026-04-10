@@ -19,6 +19,12 @@ The allowed values are integers from 0-63 (negative in the last case).
 
 ## Explain how the visualized plot relates to the synfire chain behavior.
 
+In the upper subplot, we see the pair (time of spike, neuron id) for each spiked neuron.
+There are two regions, the excitatory populations show up in the lower (red) region, while the inhibitory populations show up in the upper (blue) region.
+In our case, there are eight clusters each, each representing a population.
+This implies that each population only has one simultaneous spike and then returns to their resting potential, which is exactly the behaviour of a synfire chain.
+The lower subplot shows further how fast the inhibitory populations counteract the spiking behaviour of the excitatory populations.
+
 ## Which connection affects the synfire chain behavior the most?
 
 ## What happens if you disable inhibition?
