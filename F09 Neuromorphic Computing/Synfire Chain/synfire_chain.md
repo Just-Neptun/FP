@@ -33,4 +33,11 @@ This is what distinguishes the synfire chain from a network of repeatedly spikin
 
 ## What happens if you disable inhibition?
 
+We test this by setting `stim_inh` and `exc_inh` to zero.
+
+As predicted in the last answer, each excitatory population keeps spiking until it runs out of fuel.
+Meanwhile, it repeatedly excites the following population, which therefore can keep spiking for longer.
+This process compounds, until the last population spikes approximately 25 times.
+Needless to say, this would not benefit a human brain.
+
 ## Visualize the membrane potential of the neuron using the oscilloscope.
