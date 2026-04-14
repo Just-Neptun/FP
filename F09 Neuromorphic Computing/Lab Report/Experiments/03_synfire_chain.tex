@@ -1,2 +1,11 @@
 % !TeX root = ../main.tex
+\section{A simple feedforward network}
+
+In this task, we simulate a network of neurons in an aim to achieve complex behavior.
+We connect several populations of neurons with each other, such that they form a chain.
+After an initial excitation, each population in the chain spikes and then excites the next population in the chain.
+These are the \quotedef{excitatory} populations.
+For each excitatory population, we introduce an \quotedef{inhibitory} population which gets excited by the same (previous) population.
+After spiking, it inhibits its accompanying excitatory population, thereby hindering it from spiking again.
+In this way, the initial stimulation travels through this so-called \quotedef{synfire chain.}
 
