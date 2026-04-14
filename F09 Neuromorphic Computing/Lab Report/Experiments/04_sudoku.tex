@@ -56,11 +56,27 @@ We also note the small number of \quoteapprox{misfires}, were a neuron represent
 
 \subsection{Varying the Number of Clues}
 
+We examine how the program performs when given different numbers of clues.
 
-\subsubsection{Setting Clues to Zero}
+As it was successful with 8 clues, it is no surprise that it also solves the Sudoku when given more clues. This makes sense, as more clues mean fewer fields need to be solved for. More clues also constrain the solution more, preventing the network from \quoteapprox{guessing} and cementing numbers which make the board impossible to solve further.
 
+Interestingly, this guessing behavior has both advantages and disadvantages. It is most apparent when \emph{no} clues are given. In this case, the solution is underdetermined. There is not enough information to logically solve the Sudoku. Some assumptions or guesses need to be made in order to continue. The network achieves this well, leading to valid solution boards for zero clues. This also applies when 1 or 2 clues are given.
+
+However, the guessing becomes a problem for an intermediate number of clues, between 4 and 5. In this range, the system only sometimes solves the problem correctly. The solution might still be underdetermined, but it is constrained much more than for only 1 or 2 clues.
+
+In many cases, the network seems to have made a guess which fits within what is allowed by the clues but is not logically justified. After this point, logically consistent arguments can be made to solve more fields until the problem is almost finished. However, the model runs into a problem at this point because the clues constrain the final fields too much.
+
+An example of this is seen in \autoref{fig:sudoku_underdetermined}. Ignoring the duplicate 4 in the lower right, we see that the rest of the Sudoku is solved correctly. The network seems to have run into a \quotedef{dead-end} during the solve. All the numbers which fit together correctly inhibit other neurons from activating. Because the Sudoku is in large part solved, the neurons can no longer be inhibited and stopped from spiking, leading to an invalid end state.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./04 Sudoku/underdetermined_sudoku.png}
+    \caption{A Failed Attempt at Solving the Sudoku With 5 Clues}
+    \label{fig:sudoku_underdetermined}
+\end{figure}
 
 \subsection{Investigating Success Rate and Number of Clues}
+
 
 
 \subsection{Unnecessary Constraint}
