@@ -75,6 +75,8 @@ An example of this is seen in \autoref{fig:sudoku_underdetermined}. Ignoring the
     \label{fig:sudoku_underdetermined}
 \end{figure}
 
+\subsubsection{Improving the Program}
+
 To reduce these errors, the Poisson noise or its weight could be adjusted. This makes guesses less likely overall. The weights of the other synapses could also be tweaked to see what makes the success rate highest.
 
 Excitatory synapses could also be used to encourage the numbers other than the current number in other fields in a row/column/block. This would reduce random guesses while still allowing logical steps.
@@ -100,9 +102,18 @@ The graph validates and quantifies the previous explanation that the solver some
 
 \subsection{Unnecessary Constraint}
 
+One could investigate if all constraints are necessary. This would certainly reduce the number of needed synapses and reduce computational intensity.
+
+To create a valid Sudoku, all the row/column/block rules are needed. The only constraint which might be possible to remove is the restriction on one number per field.
+
+To implement this but still produce a valid output, the last neuron spike in each field needs to be used to determine which number should go in each field. This would ignore other neurons firing in the same field at the same time. An average number of firings could also be considered to stabilize the result.
+
+However, this will probably be a much more unstable/unpredictable solving method with a lower success rate overall. Therefore, all constraints are useful to include in the implementation in order to solve the problem.
 
 \subsection{Implementation and Counting Required Neurons and Synapses}
 \label{sec:sudoku_counting_neurons}
+
+The implemented network topology will be explained next.
 
 We set up neurons to represent the board state. We also use additional neurons to add random noise to the calculation (this avoids dead-ends where a mistake in the solve happened). These are connected by synapses.
 
@@ -112,23 +123,8 @@ The constraints/rules of the Sudoku are encoded in other synapses between differ
 
 These will be explained for a \( 4 \times 4 \) and a \( 9 \times 9 \) Sudoku grid. The exact number of neurons and synapses needed will be calculated as well.
 
+We note that with increasing size, the number of neurons and synapses rapidly increases.
+
 \subimport{./04 Sudoku/}{4x4_summary.tex}
 
 \subimport{./04 Sudoku/}{9x9_summary.tex}
-
-\begin{itemize}
-    \item Task 1: Run the network without any constrains, observe the spike pattern and the solution of the sudoku. Try to
-    explain.
-    \item Task 2: Now implement the four constraint rules discussed above. If they are correctly implemented you should
-    get a solved sudoku (keep number of hints and seed).
-    Now you have a working sudoku solver. Let’s test it:
-    \item Task 3: Vary the number of clues. If the solver fails can you find an explanation for that behavior? Can you think
-    of possible strategies to reduce such errors? (It might help to inspect the code and numpy documentation)
-    \item Task 4: What do you expect to happen, if you set the number of clues to zero? Check your hypothesis. Can you
-    explain your observation?
-    \item Task 5: Now, investigate how the success rate is related to the number of clues. For this, vary the number of clues
-    from four to ten. Repeat each configuration ten times, while keeping the sudoku fixed. Visualize your result.
-    \item Task 6: Is there a constraint that is not necessarily required? Why?
-    \item Task 7: Crunching some numbers: How many neurons and how many synaptic connections were required in this
-    task? How many would be required for a 9x9 sudoku?
-\end{itemize}
