@@ -4,9 +4,7 @@
 
 \subsection{A Continuously Spiking Neuron}
 
-As a first exercise, set the neuron up such that it spikes continuously without any external input. For that purpose, play
-with the function’s parameters and note down a suitable configuration in the following cell. Make sure to also save the
-resulting plot.
+As a first exercise, set the neuron up such that it spikes continuously without any external input. For that purpose, play with the function’s parameters and note down a suitable configuration in the following cell. Make sure to also save the resulting plot.
 
 
 
@@ -25,7 +23,7 @@ Hint: You may use, e.g., np.diff, np.mean, and np.std to complete these tasks.
 
 Next, we want to study the behavior of a single neuron stimulated with a current source. For this, we introduce a new
 parameter for our neuron model. This will allow to enable/disable a constant current source and observe the impact.
-Add \texttt{constant_current_enable} (True/False) and \texttt{constant_current_i_offset} \( (range=0-1022) \) as parameters into your experiment
+Add \verb|constant_current_enable| (True/False) and \verb|constant_current_i_offset| \( (range=0-1022) \) as parameters into your experiment
 Configure a non firing neuron
 Vary the current and observe the impact
 To quantify your observations write a program that sweeps over a current range from 0 up to 800.
@@ -35,7 +33,7 @@ Plot the neuron’s mean instantaneous firing rate including its error over curr
 \subsection{Synaptic Stimuli and PSP Stacking}
 
 Your goal is to reproduce the image of PSP-Stacking
-(summation) from the introduction. For this, you might find it helpful to look into \texttt{pynn_introduction} again.
+(summation) from the introduction. For this, you might find it helpful to look into \verb|pynn_introduction| again.
 Set up a population of one neuron with the default neuron parameters to record its membrane potential.
 Create a population of one SpikeSourceArray as a stimulating population.
 Connect the stimulating population to the neuron population.
