@@ -6,7 +6,68 @@ We will apply the simulated neurons to solve a given Sudoku problem. For an \( n
 
 We will use the Brainscales-2 system within Python to set up the neurons and synapses in order to solve the Sudoku. The created and used code is included as attached \texttt{.ipynb} and \texttt{.py} files.
 
-\subsection{Implementation}
+The rules of Sudoku are encoded as constraints of the program. This means inhibitory synapses are set up so that spiking neurons inhibit activity in other neurons which would cause a disallowed board state.
+
+These rules include:
+\begin{itemize}
+    \item Only one number per field
+    \item Only one of each number per row
+    \item Only one of each number per column
+    \item Only one of each number within smaller grid boxes which cover the whole Sudoku
+\end{itemize}
+
+The implementation of these rules by connecting neurons is explained further in \autoref{sec:sudoku_counting_neurons}.
+
+\subsection{Running Network with No Constraints}
+
+As a \quoteapprox{control}, we will run the program on a \( 4 \times 4 \) Sudoku without implementing any constraint rules. The resulting \quoteapprox{solution} is shown in \autoref{fig:sudoku_no_constraints}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./04 Sudoku/no_constraints_sudoku.png}
+    \caption{Sudoku Solver Without Constraint Synapses}
+    \label{fig:sudoku_no_constraints}
+\end{figure}
+
+Clearly, without implementing the actual rules/constraints of Sudoku, the solver is incomplete. The resulting grid contains multiple of the same number in the same row, column and box!
+
+In the graph of the neuron activity on the right, we can see the initial clues given within the first \( \approx \qty{0.02}{\milli \second} \). These neurons are continually stimulated by the clue-giving neurons, so we see their activation is consistent and high throughout the solve.
+
+Due to the Poisson noise stimulating every neuron, they all spike randomly during the whole process as well. There are no inhibitory synapses, so they do not influence each other or \quoteapprox{settle down} into a stable solution state.
+
+We also note that the desired output (one-hot encoding) is not followed. Multiple neurons representing different numbers (different colors on the graph) in the same field (within the same thick horizontal lines) are firing at the same time.
+
+\subsection{Running Network With Constraints}
+
+After implementing the rules of Sudoku as inhibitory synapses in the network, we rerun the program, obtaining the solution seen in \autoref{fig:sudoku_with_constraints}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./04 Sudoku/with_constraints_sudoku.png}
+    \caption{Sudoku Solver With Constraint Synapses}
+    \label{fig:sudoku_with_constraints}
+\end{figure}
+
+This time, the Sudoku is actually solved (as evident by inspection as well as the green border).
+
+Again we can see the clues as constant spiking neurons in the activity graph. These inhibit other numbers from being activated within their fields. The \quoteapprox{deduced} numbers can be seen after at least \qty{0.04}{\milli \second}. These are less consistent spikes, but they even out towards the end as the simulation approaches the solution.
+
+We also note the small number of \quoteapprox{misfires}, were a neuron representing a different number fires, even though a different number is correct. This sometimes happens even if that number was already deduced, or is given as the clue. This is caused by the Poisson noise, which also allows the system to work at all, so it is necessary and expected. Luckily, these neurons do not continuously activate. They are quickly inhibited by the other neurons again, so their effects do not cause the solution to fail.
+
+\subsection{Varying the Number of Clues}
+
+
+\subsubsection{Setting Clues to Zero}
+
+
+\subsection{Investigating Success Rate and Number of Clues}
+
+
+\subsection{Unnecessary Constraint}
+
+
+\subsection{Implementation and Counting Required Neurons and Synapses}
+\label{sec:sudoku_counting_neurons}
 
 We set up neurons to represent the board state. We also use additional neurons to add random noise to the calculation (this avoids dead-ends where a mistake in the solve happened). These are connected by synapses.
 
@@ -16,80 +77,23 @@ The constraints/rules of the Sudoku are encoded in other synapses between differ
 
 These will be explained for a \( 4 \times 4 \) and a \( 9 \times 9 \) Sudoku grid. The exact number of neurons and synapses needed will be calculated as well.
 
-\subsubsection{Summary of Neurons and Synapses for a \( 4 \times 4 \) Sudoku Grid}
+\subimport{./04 Sudoku/}{4x4_summary.tex}
 
-For a \( 4 \times 4 \) Sudoku, 64 neurons are needed to represent the state of the board.
+\subimport{./04 Sudoku/}{9x9_summary.tex}
 
-In addition to this, 64 stimulating input neurons/spikes are used.
-Each of these is connected to one neuron, meaning 64 stimulating synapses.
-
-There is 1 additional stimulating input spiking neuron connected to all neurons.
-The synapse weights for this neuron are adjusted to 0 or 63 depending on if the corresponding clue was given or not.
-This leads to a maximum of \( 4^2 = 16 \) \quoteapprox{active} synapses with weight \( ≠ 0 \), if each field has a clue.
-
-Constraint Synapses:
 \begin{itemize}
-    \item The constraint for one number per field means for each of the \( 4^2 = 16 \) fields, inhibitory synapses are needed to connect each of the 4 neurons representing each number to the other 3.
-    \subitem This means \( 4^2 \cdot 4 \cdot 3 = 192 \) synapses.
-
-    \item The constraint for no repeat numbers in each row means for each of the \( [4 \ \text{numbers} \cdot 4 \ \text{rows} = 16] \) neurons in rows,
-    inhibitory synapses are needed connecting each of the 4 neurons to the other 3.
-    \subitem This means \( 4^2 \cdot 4 \cdot 3 = 192 \) synapses.
-
-    \item The constraint for no repeat numbers in each column similarly means each of the \( [4 \ \text{numbers} \cdot 4 \ \text{rows} = 16] \) neurons columns,
-    inhibitory synapses connect each of the 4 neurons to the other 3.
-    \subitem This means \( 4^2 \cdot 4 \cdot 3 = 192 \) synapses.
-
-    \item The last constraint calls for no repeat numbers in each of the \( [2^2 = 4] \) blocks with shape: \( (2 x 2) \), as the rules of Sudoku dictate.
-    This constraint applies to each number, so there are in total \( [2^3 = 8] \) blocks of 4 neurons.
-    Inhibitory synapses must connect each of the 4 neurons in each block (with same number) to the other 3.
-    \subitem This means \( 2^3 \cdot 4 \cdot 3 = 96 \) synapses.
+    \item Task 1: Run the network without any constrains, observe the spike pattern and the solution of the sudoku. Try to
+    explain.
+    \item Task 2: Now implement the four constraint rules discussed above. If they are correctly implemented you should
+    get a solved sudoku (keep number of hints and seed).
+    Now you have a working sudoku solver. Let’s test it:
+    \item Task 3: Vary the number of clues. If the solver fails can you find an explanation for that behavior? Can you think
+    of possible strategies to reduce such errors? (It might help to inspect the code and numpy documentation)
+    \item Task 4: What do you expect to happen, if you set the number of clues to zero? Check your hypothesis. Can you
+    explain your observation?
+    \item Task 5: Now, investigate how the success rate is related to the number of clues. For this, vary the number of clues
+    from four to ten. Repeat each configuration ten times, while keeping the sudoku fixed. Visualize your result.
+    \item Task 6: Is there a constraint that is not necessarily required? Why?
+    \item Task 7: Crunching some numbers: How many neurons and how many synaptic connections were required in this
+    task? How many would be required for a 9x9 sudoku?
 \end{itemize}
-
-Concluding the summary:
-
-There are 64 main neurons doing the calculations.
-Counting the \( [64 + 1 = 65] \) stimulating input spike neurons leads to a total of:
-\[129 \ \text{neurons.}\]
-The calculations considering \( [64 + 16 = 80] \) stimulating neurons and 672 inhibiting neurons lead to a total of:
-\[752 \ \text{synapses.}\]
-
-
-\subsubsection{Summary of Neurons and Synapses for a \( 9 \times 9 \) Sudoku Grid}
-
-For a \( (9 \times 9) \) Sudoku, 729 neurons are needed to represent the state of the board.
-
-In addition to this, 729 stimulating input neurons/spikes are used.
-Each of these is connected to one neuron, meaning 729 stimulating synapses.
-
-There is 1 additional stimulating input spiking neuron connected to all neurons.
-The synapse weights for this neuron are adjusted to 0 or 63 depending on if the corresponding clue was given or not.
-This leads to a maximum of \( 9^2 = 81 \) "active" synapses with weight \( ≠ 0 \), if each field has a clue.
-
-Constraint Synapses:
-\begin{itemize}
-    \item The constraint for one number per field means for each of the \( 9^2 = 81 \) fields,
-    inhibitory synapses were needed to connect each of the 9 neurons representing each number to the other 8.
-    \subitem This means \( 9^2 \cdot 9 \cdot 8 = 5832 \) synapses.
-
-    \item The constraint for no repeat numbers in each row means for each of the \( [9 numbers \cdot 9 rows = 81] \) neurons in rows,
-    inhibitory synapses are needed connecting each of the 9 neurons to the other 8.
-    \subitem This means \( 9^2 \cdot 9 \cdot 8 = 5832 \) synapses.
-
-    \item The constraint for no repeat numbers in each column similarly means each of the \( [9 numbers \cdot 9 rows = 81] \) neurons columns,
-    inhibitory synapses connect each of the 9 neurons to the other 8.
-    \subitem This means \( 9^2 \cdot 9 \cdot 8 = 5832 \) synapses.
-
-    \item The last constraint calls for no repeat numbers in each of the \( [3^2 = 9] \) blocks of shape \( (3 \times 3) \), as the rules of Sudoku dictate.
-    This constraint applies to each number, so there are in total \( [3^3 = 27] \) blocks of 9 neurons.
-    Inhibitory synapses must connect each of the 9 neurons in each block (with same number) to the other 8.
-    \subitem This means \( 3^3 \cdot 9 \cdot 8 = 1944 \) synapses.
-\end{itemize}
-
-Concluding the summary:
-
-There are 729 main neurons doing the calculations.
-Counting the \( [729 + 1 = 730] \) stimulating input spike neurons leads to a total of:
-\[1459 \ \text{neurons.}\]
-The calculations considering \( [729 + 81 = 810] \) stimulating neurons and 19440 inhibiting neurons lead to a total of:
-\[20250 \ \text{synapses.}\]

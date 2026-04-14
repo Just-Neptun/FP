@@ -1,0 +1,40 @@
+% !TeX root = ../../main.tex
+
+\subsubsection{Summary of Neurons and Synapses for a \( 9 \times 9 \) Sudoku Grid}
+
+For a \( (9 \times 9) \) Sudoku, 729 neurons are needed to represent the state of the board.
+
+In addition to this, 729 stimulating input neurons/spikes are used.
+Each of these is connected to one neuron, meaning 729 stimulating synapses.
+
+There is 1 additional stimulating input spiking neuron connected to all neurons.
+The synapse weights for this neuron are adjusted to 0 or 63 depending on if the corresponding clue was given or not.
+This leads to a maximum of \( 9^2 = 81 \) "active" synapses with weight \( ≠ 0 \), if each field has a clue.
+
+Constraint Synapses:
+\begin{itemize}
+    \item The constraint for one number per field means for each of the \( 9^2 = 81 \) fields,
+    inhibitory synapses were needed to connect each of the 9 neurons representing each number to the other 8.
+    \subitem This means \( 9^2 \cdot 9 \cdot 8 = 5832 \) synapses.
+
+    \item The constraint for no repeat numbers in each row means for each of the \( [9 numbers \cdot 9 rows = 81] \) neurons in rows,
+    inhibitory synapses are needed connecting each of the 9 neurons to the other 8.
+    \subitem This means \( 9^2 \cdot 9 \cdot 8 = 5832 \) synapses.
+
+    \item The constraint for no repeat numbers in each column similarly means each of the \( [9 numbers \cdot 9 rows = 81] \) neurons columns,
+    inhibitory synapses connect each of the 9 neurons to the other 8.
+    \subitem This means \( 9^2 \cdot 9 \cdot 8 = 5832 \) synapses.
+
+    \item The last constraint calls for no repeat numbers in each of the \( [3^2 = 9] \) blocks of shape \( (3 \times 3) \), as the rules of Sudoku dictate.
+    This constraint applies to each number, so there are in total \( [3^3 = 27] \) blocks of 9 neurons.
+    Inhibitory synapses must connect each of the 9 neurons in each block (with same number) to the other 8.
+    \subitem This means \( 3^3 \cdot 9 \cdot 8 = 1944 \) synapses.
+\end{itemize}
+
+Concluding the summary:
+
+There are 729 main neurons doing the calculations.
+Counting the \( [729 + 1 = 730] \) stimulating input spike neurons leads to a total of:
+\[1459 \ \text{neurons.}\]
+The calculations considering \( [729 + 81 = 810] \) stimulating neurons and 19440 inhibiting neurons lead to a total of:
+\[20250 \ \text{synapses.}\]
