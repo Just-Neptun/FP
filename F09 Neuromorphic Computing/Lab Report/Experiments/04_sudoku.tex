@@ -75,6 +75,14 @@ An example of this is seen in \autoref{fig:sudoku_underdetermined}. Ignoring the
     \label{fig:sudoku_underdetermined}
 \end{figure}
 
+To reduce these errors, the Poisson noise or its weight could be adjusted. This makes guesses less likely overall. The weights of the other synapses could also be tweaked to see what makes the success rate highest.
+
+Excitatory synapses could also be used to encourage the numbers other than the current number in other fields in a row/column/block. This would reduce random guesses while still allowing logical steps.
+
+Lastly, the program could be set to repeat if the solution is not found the first time. This could also be done while saving some information about the failed board state to avoid those mistakes in the future. From the example in \autoref{fig:sudoku_underdetermined}, the duplicate 4 could be saved and the solver run two more times with the 4 in each spot as an additional clue.
+
+These methods might increase the success rate by preventing dead-end solution attempts and to encourage more logical reasoning.
+
 \subsection{Investigating Success Rate and Number of Clues}
 
 
