@@ -15,65 +15,11 @@
 \clearpage
 
 
-\import{./Experiments/}{00_familiarize.tex}
-\clearpage
-
 \section{Lu.i Experiment}
-
-\subsection{5.2.1 Getting familiar with Lu.i's parameters}
-\subsubsection{Familiarize yourself with the parameters of the neuron emulation. What happens if you increase the leak potential?
-Can you observe the membrane time constant? Note the impact of the individual potentiometers.}
-
-\begin{equation}
-    u_{i} (t) = u_{\mathrm{rest}} + I R (1 - {\symup{e}}^{- t / τ_{\mathrm{mem}}})
-\end{equation}
-
-We see \( V_{mem} \) (potential over the membrane) increase mostly linearly before reaching a peak. This causes a spike where the voltage falls to zero. This corresponds to the lights showing on the neuron.
-
-Changing the leak potential \( V_{leak} \) using the potentiometer changes the rest potential \( u_{rest} \) of the neuron. This is the potential which the neuron falls to when no spikes or outside potential is present. Increasing this increases the rest potential and vice versa.
-
-% Images here
-
-The membrane time constant \( \tau_{mem} \) affects how fast the potential reaches its equilibrium state.
-When the parameters are set to cause repeating spikes, this constant affects the time period of this process.
-Observing this constant is done by measuring the exponential convergence to equilibrium state or peak voltage, depending on if the threshold is met.
-
-Increasing the potentiometer marked \( \tau_{mem} \) increases \( \tau_{mem} \) as expected.
-
-Changing the potentiometer for \( \tau_{syn} \) does not produce a visible difference on the oscilloscope when only one neuron is connected.
-This is expected.
-
-\subsubsection{Connect two or multiple neurons to form a simple network and note how signals propagate across neurons, e.g.,
-while playing with the synaptic weights and the synaptic time constant.}
-
-Multiple neurons were connected into a network.
-Different patterns of activation can be achieved.
-For example, a neuron can be set up to only pass its threshold if multiple previous neurons spike at the same time.
-It is also noted that neurons can obviously be linked in loops.
-
-% Images here
-
-
-\subsubsection{Pick a configuration where you can approximately measure τref and the threshold ϑ. Take notes of your results and
-your methods of determining the individual parameters.}
-
-The oscilloscope was used to focus on the area right after the threshold is reached and the spike happens.
-This is done using the trigger on descending voltage mode and zooming in on horizontal and vertical axes as much as possible.
-This decreases uncertainties for the measurements.
-
-\( \tau_{ref} \) is the refractory time from the spike to the time when \( V_{mem} \) begins to rise again. In the meantime it should have quickly approached \( u_{reset} \) and then stayed there (see images).
-
-\( \vartheta \) is the threshold voltage at which the spike will occur. This is the highest voltage reached, measured just before the spike (see images).
-
-\( \tau_{ref} = \qty{12.6}{\milli \second}  \)
-\( \vartheta = \qty{1.20}{\volt} \)
-
-% Images here
-
-Fixed for this setup:
-\( u_{reset} = \qty{0.00}{\milli \volt} \)
-
-\clearpage
+    \import{./Experiments/}{00_familiarize.tex}
+    \clearpage
+    \import{./Experiments/}{01_f-I_curve.tex}
+    \clearpage
 
 \import{./Experiments/}{02_single_neuron.tex}
 \clearpage
