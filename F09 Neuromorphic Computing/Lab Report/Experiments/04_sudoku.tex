@@ -62,7 +62,7 @@ As it was successful with 8 clues, it is no surprise that it also solves the Sud
 
 Interestingly, this guessing behavior has both advantages and disadvantages. It is most apparent when \emph{no} clues are given. In this case, the solution is underdetermined. There is not enough information to logically solve the Sudoku. Some assumptions or guesses need to be made in order to continue. The network achieves this well, leading to valid solution boards for zero clues. This also applies when 1 or 2 clues are given.
 
-However, the guessing becomes a problem for an intermediate number of clues, between 4 and 5. In this range, the system only sometimes solves the problem correctly. The solution might still be underdetermined, but it is constrained much more than for only 1 or 2 clues.
+However, the guessing becomes a problem for an intermediate number of clues, between 4 and 6. In this range, the system only sometimes solves the problem correctly. The solution might still be underdetermined, but it is constrained much more than for only 1 or 2 clues.
 
 In many cases, the network seems to have made a guess which fits within what is allowed by the clues but is not logically justified. After this point, logically consistent arguments can be made to solve more fields until the problem is almost finished. However, the model runs into a problem at this point because the clues constrain the final fields too much.
 
@@ -83,9 +83,20 @@ Lastly, the program could be set to repeat if the solution is not found the firs
 
 These methods might increase the success rate by preventing dead-end solution attempts and to encourage more logical reasoning.
 
-\subsection{Investigating Success Rate and Number of Clues}
+\subsubsection{Quantitative Investigation}
 
+We further investigate the relationship between number of clues and successes by repeating the solve for 10 trials using random clue positions each time. The success/failure of the solve attempt is recorded to be analyzed.
 
+The success rates are determined and shown in \autoref{fig:sudoku_num_clues_bar_chart}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./04 Sudoku/num_clues_bar_chart_sudoku.png}
+    \caption{Success Rate of Sudoku Solver vs. Number of Clues}
+    \label{fig:sudoku_num_clues_bar_chart}
+\end{figure}
+
+The graph validates and quantifies the previous explanation that the solver sometimes fails when given 4 to 6 clues. We see that the solver is much worse for only 4 clues, although 5 and 6 clues also only have an \qty{80}{\percent} success rate.
 
 \subsection{Unnecessary Constraint}
 
