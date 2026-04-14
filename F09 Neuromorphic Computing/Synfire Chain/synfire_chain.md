@@ -49,4 +49,6 @@ Needless to say, this would not benefit a human brain.
 
 ## Which hardware feature limits the minimal number of neurons in each population?
 
+There is only a finite number of neurons.
+
 ## What is the maximal chain length that you can produce?
