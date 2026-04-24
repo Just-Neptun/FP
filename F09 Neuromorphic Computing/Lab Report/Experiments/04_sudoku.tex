@@ -18,7 +18,7 @@ These rules include:
 
 The implementation of these rules by connecting neurons is explained further in \autoref{sec:sudoku_counting_neurons}.
 
-\subsection{Running Network with No Constraints}
+\subsection{Running the Network with No Constraints}
 
 As a \quoteapprox{control}, we will run the program on a \( 4 \times 4 \) Sudoku without implementing any constraint rules. The resulting \quoteapprox{solution} is shown in \autoref{fig:sudoku_no_constraints}.
 
@@ -52,7 +52,7 @@ This time, the Sudoku is actually solved (as evident by inspection as well as th
 
 Again we can see the clues as constant spiking neurons in the activity graph. These inhibit other numbers from being activated within their fields. The \quoteapprox{deduced} numbers can be seen after at least \qty{0.04}{\milli \second}. These are less consistent spikes, but they even out towards the end as the simulation approaches the solution.
 
-We also note the small number of \quoteapprox{misfires}, were a neuron representing a different number fires, even though a different number is correct. This sometimes happens even if that number was already deduced, or is given as the clue. This is caused by the Poisson noise, which also allows the system to work at all, so it is necessary and expected. Luckily, these neurons do not continuously activate. They are quickly inhibited by the other neurons again, so their effects do not cause the solution to fail.
+We also note the small number of \quoteapprox{misfires}, where a neuron representing a different number fires, even though a different number is correct. This sometimes happens even if that number was already deduced, or is given as the clue. This is caused by the Poisson noise, which also allows the system to work at all, so it is necessary and expected. Luckily, these neurons do not continuously activate. They are quickly inhibited by the other neurons again, so their effects do not cause the solution to fail.
 
 \subsection{Varying the Number of Clues}
 
@@ -66,7 +66,7 @@ However, the guessing becomes a problem for an intermediate number of clues, bet
 
 In many cases, the network seems to have made a guess which fits within what is allowed by the clues but is not logically justified. After this point, logically consistent arguments can be made to solve more fields until the problem is almost finished. However, the model runs into a problem at this point because the clues constrain the final fields too much.
 
-An example of this is seen in \autoref{fig:sudoku_underdetermined}. Ignoring the duplicate 4 in the lower right, we see that the rest of the Sudoku is solved correctly. The network seems to have run into a \quotedef{dead-end} during the solve. All the numbers which fit together correctly inhibit other neurons from activating. Because the Sudoku is in large part solved, the neurons can no longer be inhibited and stopped from spiking, leading to an invalid end state.
+An example of this is seen in \autoref{fig:sudoku_underdetermined}. Ignoring the duplicate 4 in the lower right, we see that the rest of the Sudoku is solved correctly. The network seems to have run into a \quotedef{dead-end} during the solve. All the numbers which fit together correctly inhibit other neurons from activating. Because the Sudoku is in large part solved, the neurons can no longer be inhibited and stopped from spiking. The network cannot reverse the state of so many neurons at once, leading to an invalid end state.
 
 \begin{figure}[htbp]
     \centering
@@ -83,13 +83,11 @@ Excitatory synapses could also be used to encourage the numbers other than the c
 
 Lastly, the program could be set to repeat if the solution is not found the first time. This could also be done while saving some information about the failed board state to avoid those mistakes in the future. From the example in \autoref{fig:sudoku_underdetermined}, the duplicate 4 could be saved and the solver run two more times with the 4 in each spot as an additional clue.
 
-These methods might increase the success rate by preventing dead-end solution attempts and to encourage more logical reasoning.
+These methods might increase the success rate by preventing dead-end solution attempts and encouraging more logical reasoning.
 
 \subsubsection{Quantitative Investigation}
 
-We further investigate the relationship between number of clues and successes by repeating the solve for 10 trials using random clue positions each time. The success/failure of the solve attempt is recorded to be analyzed.
-
-The success rates are determined and shown in \autoref{fig:sudoku_num_clues_bar_chart}.
+We further investigate the relationship between number of clues and successes by repeating the solve for 10 trials using random clue positions each time. The success/failure of the solve attempt is recorded to be analyzed. The success rates are determined and shown in \autoref{fig:sudoku_num_clues_bar_chart}.
 
 \begin{figure}[htbp]
     \centering
@@ -102,13 +100,13 @@ The graph validates and quantifies the previous explanation that the solver some
 
 \subsection{Unnecessary Constraint}
 
-One could investigate if all constraints are necessary. This would certainly reduce the number of needed synapses and reduce computational intensity.
+It would be beneficial to investigate if all constraints are necessary. If some can be removed, this would certainly reduce the number of needed synapses and reduce computational intensity.
 
 To create a valid Sudoku, all the row/column/block rules are needed. The only constraint which might be possible to remove is the restriction on one number per field.
 
 To implement this but still produce a valid output, the last neuron spike in each field needs to be used to determine which number should go in each field. This would ignore other neurons firing in the same field at the same time. An average number of firings could also be considered to stabilize the result.
 
-However, this will probably be a much more unstable/unpredictable solving method with a lower success rate overall. Therefore, all constraints are useful to include in the implementation in order to solve the problem.
+However, this will probably be a much more unstable/unpredictable solving method with a lower success rate overall. While it would be beneficial to study this in more detail, all constraints \emph{are} useful to include in the implementation in order to solve the problem.
 
 \subsection{Implementation and Counting Required Neurons and Synapses}
 \label{sec:sudoku_counting_neurons}
