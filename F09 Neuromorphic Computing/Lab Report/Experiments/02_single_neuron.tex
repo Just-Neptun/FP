@@ -4,8 +4,23 @@
 
 \subsection{A Continuously Spiking Neuron}
 
-As a first exercise, set the neuron up such that it spikes continuously without any external input. For that purpose, play with the function’s parameters and note down a suitable configuration in the following cell. Make sure to also save the resulting plot.
+We investigate the \texttt{Brainscales-2} System with a single neuron.
 
+First, we will choose parameters such that the neuron spikes continuously without external input. The resulting membrane potential over time is given in \autoref{fig:single_neuron_continuous_spike}. The configured parameters are also given below.
+
+\begin{gather}
+    \text{\texttt{v\_leak}} = 580 \\
+    \text{\texttt{v\_threshold}} = 220 \\
+    \text{\texttt{v\_reset}} = 370 \\
+    \text{\texttt{i\_bias\_leak}} = 100
+\end{gather}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./02_Single_Neuron/Graphs/fp_task1_continuous_spikes.png}
+    \caption{A Single Neuron, Parameters Set So It Continuously Spikes}
+    \label{fig:single_neuron_continuous_spike}
+\end{figure}
 
 
 \subsection{Simple Spike Train Statistics}
