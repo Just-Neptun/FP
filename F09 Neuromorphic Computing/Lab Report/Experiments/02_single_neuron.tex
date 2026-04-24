@@ -37,15 +37,20 @@ Once these parameters were determined, we analyzed the neuron's average firing r
 
 \subsection{Recording the f-I curve of a silicon neuron}
 
-Next, we want to study the behavior of a single neuron stimulated with a current source. For this, we introduce a new
-parameter for our neuron model. This will allow us to enable/disable a constant current source and observe the impact.
+Next, we want to study the behavior of a single neuron stimulated with a current source. For this, we introduce a new parameter for our neuron model. This will allow us to enable/disable a constant current source and observe the impact.
 
+We varied the constant current source between \num{0} and \num{800} and calculated the frequency of firing for each trial. The resulting firing rates were plotted against current in \autoref{fig:f-I_curve_freq_vs_I}. Standard deviations were calculated within each trial to obtain an error. While are present in the graph, the uncertainties are very small and are therefore not easily visible.
 
-% Add constant_current_enable (True/False) and constant_current_i_offset (range=0-1022) as parameters into your experiment
-% Configure a non firing neuron
-% Vary the current and observe the impact
-% To quantify your observations write a program that sweeps over a current range from 0 up to 800.
-% Plot the neuron’s mean instantaneous firing rate including its error over current.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./02_Single_Neuron/Graphs/fp_task1_freq_vs_I.png}
+    \caption{Dependence of Firing Rate of Neuron on Constant Current Source}
+    \label{fig:f-I_curve_freq_vs_I}
+\end{figure}
+
+As is visible in the graph, increasing the current applied to the neuron increases its spiking frequency. This makes sense because a higher current will charge the capacitance of the neuron faster. This causes \( V_\mathrm{mem} \) to also increase faster, meaning the threshold voltage is arrived sooner after each spike.
+
+The relationship seems to be somewhat linear, but more examination might be required to rule out a more logarithmic relationship. This depends on the importance of the seemingly shallower slope at the \num{800} current end of the scale relative to the low currents.
 
 
 \subsection{Synaptic Stimuli and PSP Stacking}
