@@ -38,26 +38,30 @@ Once these parameters were determined, we analyzed the neuron's average firing r
 \subsection{Recording the f-I curve of a silicon neuron}
 
 Next, we want to study the behavior of a single neuron stimulated with a current source. For this, we introduce a new
-parameter for our neuron model. This will allow to enable/disable a constant current source and observe the impact.
-Add \verb|constant_current_enable| (True/False) and \verb|constant_current_i_offset| \( (range=0-1022) \) as parameters into your experiment
-Configure a non firing neuron
-Vary the current and observe the impact
-To quantify your observations write a program that sweeps over a current range from 0 up to 800.
-Plot the neuron’s mean instantaneous firing rate including its error over current.
+parameter for our neuron model. This will allow us to enable/disable a constant current source and observe the impact.
+
+
+% Add constant_current_enable (True/False) and constant_current_i_offset (range=0-1022) as parameters into your experiment
+% Configure a non firing neuron
+% Vary the current and observe the impact
+% To quantify your observations write a program that sweeps over a current range from 0 up to 800.
+% Plot the neuron’s mean instantaneous firing rate including its error over current.
 
 
 \subsection{Synaptic Stimuli and PSP Stacking}
 
-Your goal is to reproduce the image of PSP-Stacking
-(summation) from the introduction. For this, you might find it helpful to look into \verb|pynn_introduction| again.
-Set up a population of one neuron with the default neuron parameters to record its membrane potential.
-Create a population of one SpikeSourceArray as a stimulating population.
-Connect the stimulating population to the neuron population.
-Find a suitable spike pattern to recreate the plot (you might require multiple spikes).
-Can the neuron spike with the current neuron configuration? Explain.
-Suggest and implement changes in the configuration so that the neuron spikes. Try to apply one change at a time.
-Explain your choices.
-Can you tell which changes can be theoretically equivalent?
-Hint: Changes can be related to neuron parameters, projection, or population.
+
+
+% Your goal is to reproduce the image of PSP-Stacking
+% (summation) from the introduction. For this, you might find it helpful to look into \verb|pynn_introduction| again.
+% Set up a population of one neuron with the default neuron parameters to record its membrane potential.
+% Create a population of one SpikeSourceArray as a stimulating population.
+% Connect the stimulating population to the neuron population.
+% Find a suitable spike pattern to recreate the plot (you might require multiple spikes).
+% Can the neuron spike with the current neuron configuration? Explain.
+% Suggest and implement changes in the configuration so that the neuron spikes. Try to apply one change at a time.
+% Explain your choices.
+% Can you tell which changes can be theoretically equivalent?
+% Hint: Changes can be related to neuron parameters, projection, or population.
 
 
