@@ -55,14 +55,21 @@ The relationship seems to be somewhat linear, but more examination might be requ
 
 \subsection{Synaptic Stimuli and PSP Stacking}
 
-
-% add original PSP stacking plot from introduction?
-
+Next we will explore the phenomenon of PSP stacking in a single neuron. This is when multiple successive spikes of other neurons cause a spike in the neuron under observation. An example is given in \autoref{fig:PSP_stacking_example}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{./Single_Neuron/Graphs/fp_task1_PSP_stacking.png}
-    \caption{Recreated PSP Stacking to Cause a Neuron Spike}
+    \includegraphics[width=0.7\textwidth]{./02_Single_Neuron/Graphs/fp_introduction_PSP_stacking.png}
+    \caption{Example of PSP Stacking Causing a Neuron to Spike}
+    \label{fig:PSP_stacking_example}
+\end{figure}
+
+We tried to reproduce this graph by setting up a spiking neuron population and setting the spike pattern in order to cause our neuron to spike. The general shape was matched quite well. It is given in \autoref{fig:PSP_stacking_recreated}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./02_Single_Neuron/Graphs/fp_task1_PSP_stacking.png}
+    \caption{Recreated PSP Stacking to Cause a Neuron to Spike}
     \label{fig:PSP_stacking_recreated}
 \end{figure}
 
