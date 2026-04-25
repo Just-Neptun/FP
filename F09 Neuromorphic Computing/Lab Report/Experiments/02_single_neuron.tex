@@ -64,7 +64,29 @@ Next we will explore the phenomenon of PSP stacking in a single neuron. This is 
     \label{fig:PSP_stacking_example}
 \end{figure}
 
-We tried to reproduce this graph by setting up a spiking neuron population and setting the spike pattern in order to cause our neuron to spike. The general shape was matched quite well. It is given in \autoref{fig:PSP_stacking_recreated}.
+We tried to reproduce this graph using the \emph{default neuron parameters}. We created a spiking neuron population and carefully and intentionally set the spike pattern in order to cause our neuron to spike.
+
+The obtained pattern is given in \autoref{fig:PSP_stacking_recreated}.The general shape was matched quite well, although the specific scaling is not quite the same. This was deemed to be acceptable, as the membrane potential is in arbitrary units anyway. The axes were specifically made the same as in the example graph to compare the times exactly.
+
+The configured spiking times used are reported below.
+
+\begin{table}
+    \centering
+    \caption{Chosen Spike Times for Source Population to Recreate PSP Stacking Image in a Neuron}
+    \label{tab:PSP_stacking}
+    \(
+    \begin{array}{S[table-format=1.3]}
+        \hline \hline
+        \text{\texttt{spike\_times}} \ / \ \unit{\milli \second} \\ \hline
+        0.01 \\
+        0.035 \\
+        0.06 \\
+        0.06 \\
+        0.07 \\
+        0.078 \\ \hline \hline
+    \end{array}
+    \)
+\end{table}
 
 \begin{figure}[htbp]
     \centering
@@ -73,14 +95,4 @@ We tried to reproduce this graph by setting up a spiking neuron population and s
     \label{fig:PSP_stacking_recreated}
 \end{figure}
 
-
-% Your goal is to reproduce the image of PSP-Stacking
-% (summation) from the introduction.
-% Find a suitable spike pattern to recreate the plot (you might require multiple spikes).
-% Can the neuron spike with the current neuron configuration? Explain.
-% Suggest and implement changes in the configuration so that the neuron spikes. Try to apply one change at a time.
-% Explain your choices.
-% Can you tell which changes can be theoretically equivalent?
-% Hint: Changes can be related to neuron parameters, projection, or population.
-
-
+From this we see that it is indeed possible to cause various membrane potential curves in neurons. In this case we only altered the spiking times of the source population, but it is of course also feasible to tweak parameters of the main neuron to even better match arbitrary patterns, including the \( y \)-axis scaling.
