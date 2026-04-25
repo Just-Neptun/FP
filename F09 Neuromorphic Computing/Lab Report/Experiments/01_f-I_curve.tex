@@ -2,8 +2,6 @@
 
 \subsection{Measuring an f-I Curve}
 
-\PackageWarning{mydoc}{TODO: this section.}
-
 Next, we used an oscilloscope to examine the neuron spiking frequency in response to different input currents. We measured the firing frequency of the Lu.i neuron for \num{20} different input currents (determined through the voltages).
 
 After calculating the input current from the measured voltages, the \( f\) - \( I \) curve could be graphed in \autoref{fig:f-I_curve}.
@@ -14,13 +12,6 @@ After calculating the input current from the measured voltages, the \( f\) - \( 
     \caption{\( f \) - \( I \) Curve of the Lu.i Neuron}
     \label{fig:f-I_curve}
 \end{figure}
-
-
-% work off the .ipynb in Tasks/01 f-I Curve
-
-% Derive an equation for ftheo(I). Your function should depend on the chosen parametrization of the LIF equation, namely ϑ, Cm, R, and τref. Here R is the membrane resistance of the Lu.i. board, the inverse of the membrane conductance, and Cm is the membrane capacitance. You might need to define your integration limits.
-
-% CALCS IN JUPYTER NOTEBOOK
 
 We want to fit a function to this, so we must derive the theoretical frequency \( f_{theo} \) as a function of current \( I \). This is explained in the following derivation.
 
@@ -48,6 +39,6 @@ The obtained function is then fit to the data. We see the results in \autoref{fi
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{./01_Lui/Graphs/f-I_curve_fitfunc.png}
-    \caption{\( f \) - \( I \) Curve of the Lu.i Neuron with Fitfunction}
+    \caption{\( f \) - \( I \) Curve of the Lu.i Neuron with Fit Function}
     \label{fig:f-I_curve_fitfunc}
 \end{figure}
