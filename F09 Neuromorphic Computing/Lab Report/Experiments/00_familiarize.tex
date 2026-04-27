@@ -16,9 +16,14 @@ We see \( V_{mem} \) (potential over the membrane) increase mostly linearly befo
 
 % Familiarize yourself with the parameters of the neuron emulation. What happens if you increase the leak potential?
 
-Changing the leak potential \( V_{leak} \) using the potentiometer changes the rest potential \( u_{rest} \) of the neuron. This is the potential which the neuron falls to when no spikes or outside potential is present. Increasing this increases the rest potential and vice versa.
+Changing the leak potential \( V_{leak} \) using the potentiometer changes the rest potential \( u_{rest} \) of the neuron. This is the potential which the neuron falls to when no spikes or outside potential is present. Increasing this increases the rest potential and vice versa. As long as the rest potential is not higher than the threshold, with no outside inputs it goes to a constant value, as seen in \autoref{fig:famililarize_v_leak}.
 
-% Images here
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./00_Familiarize/Images/v_leak.png}
+    \caption{Rest Potential of Membrane, Kept Below Threshold, \( V_{leak} \) Changed Halfway Through}
+    \label{fig:famililarize_v_leak}
+\end{figure}
 
 % Can you observe the membrane time constant? Note the impact of the individual potentiometers.
 
