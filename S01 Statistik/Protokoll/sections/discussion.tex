@@ -2,5 +2,35 @@
 \section{Critical Discussion}
 \label{sec:discussion}
 
-% reminder:
+\subsection{Least Squares Method}
+
+Using the least squares regression method, we successfully determined the coefficients of a polynomial fit function. The resulting parameters and covariance matrix are given in their entirety in the analysis section.
+
+It is clearly very nice to obtain an analytical solution. We can see that the diagonal elements of the covariance matrix are positive, as they correspond to the square of the errors in the parameters (if they are independent of each other). The other covariance elements are indeed generally much smaller, showing that the parameters are most likely uncorrelated.
+
+We also used a numerical approach to fit the function to the data. This is more robust when given more complicated functions to fit, although it relies on an iterative approach and parameters converging to values. \autoref{fig:least_squares:3rd_polynomial_analytic_and_numeric} shows the slight difference between the two approaches. We can see that they generally fit together quite well.
+
+To test how well the fit function models the data, we used a \( \chi^2 \) goodness of fit test. The distribution and test statistic is shown in \autoref{fig:least_squares:chi_square_distribution_1}. The \( p \)-value of the fit was \( \boxed{p \approx \num{0.310}} \).
+
+This value gives the probability of obtaining a $\chi^2$-value equal to or more extreme (larger) than this one, under the assumption that the determined parameters are the true values. Often, hypothesis testing is done with significance levels of \( p > 0.05 \). Because our \( p \)-value is much larger than any reasonable significance level, we \emph{fail} to reject the null hypothesis. The null hypothesis is that there is nothing remarkable going on, and that the parameters are correct. This goodness of fit test therefore leaves us with fairly high confidence that our fit parameters are quite close to the true values.
+
+To compare to the 3rd degree polynomial, we also fitted a linear model. The resulting function and its goodness of fit can be seen in \autoref{fig:least_squares:linear_fit}. As we can also see on the $\chi^2$-distribution graph in \autoref{fig:least_squares:chi_square_distribution_linear_1}, the obtained $\chi^2_{\mathrm{obs}}$ statistic is extremely large compared to the bulk of the distribution. Therefore, we are not surprised that  the probability of obtaining a \( \chi^2_{obs} \) at least this large is very small. The $p$-value of \( p = \num{3.88e-8} \) is most definitely under the significance level of $0.05$, leading to us \emph{rejecting} the null hypothesis (which is that this model reflects the distribution which produced the data).
+
+Therefore, this model is \emph{not} an acceptable description of the data. The analyzed data most likely comes from a different (nonlinear) distribution, for example the third degree polynomial which we examined earlier.
+
+However, if the errors in the data are simply made three times larger, the \( \chi^2 \) statistic suddenly looks much better. Because of the reduction in \( \chi^2_\mathrm{obs} \), the \( p \)-value is increased significantly (\( p = 0.224 \)).
+
+Using a naive analysis, the null hypothesis of this test is again that the fit function does correctly model the \( y \) vs. \( x \) relationship. Because the \( p \)-value is much larger than the \( 0.05 \) significance level, we fail to reject the null hypothesis. In other words, the probability of the data varying at least this much from the model due to random error is \num{0.224}. Because this is quite likely, we gain a lot of confidence in the validity of the model.
+
+This calculation shows how estimating errors is a very important part of data collection. It is clear that a third degree polynomial is a much better model of the data, but by simply increasing the errors other models seem to fit as well. Overestimating errors is therefore also harmful.
+
+To mitigate this problem, real data analysis can also include looking at the residuals (difference between measurement and model prediction) for each data point. In this case, with a linear fit, it may be visible that the residuals are consistently more positive for low values of \( x \), while high values of \( x \) cause low and even negative residuals. This corresponds to what is seen visually on \autoref{fig:least_squares:linear_fit_double_errors}: The model is consistently too high on the left while too low on the right.
+
+Finding a pattern in the residuals like this means the measurements are not randomly distributed around the model prediction, and that there is some kind of systematic problem, indicating that the model is not correct for the data set. It does not capture the shape of the data properly.
+
+
+
+
+
+% reminder for subimports:
 % \subimport{Analysis/}{bayes_theorem.tex}

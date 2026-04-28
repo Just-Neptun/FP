@@ -75,11 +75,7 @@ The number of degrees of freedom is the total number of data points minus the nu
     \label{fig:least_squares:chi_square_distribution_1}
 \end{figure}
 
-Using the cumulative density function of the distribution, we can calculate the \( p \)-value of the fit: \( p \approx \num{0.310} \).
-
-This value gives the probability of obtaining a $\chi^2$-value equal to or more extreme (larger) than this one, under the assumption that the determined parameters are the true values. Often, hypothesis testing is done with significance levels of \( p > 0.05 \). Because our \( p \)-value is much larger than any reasonable significance level, we \emph{fail} to reject the null hypothesis.
-
-The null hypothesis is that there is nothing remarkable going on, and that the parameters are correct. This goodness of fit test therefore leaves us with fairly high confidence that our fit parameters are quite close to the true values.
+Using the cumulative density function of the distribution, we can calculate the \( p \)-value of the fit: \( p \approx \num{0.310} \). Its relevance will be explained in the discussion.
 
 \subsubsection{Plotting the Best Fit Curve}
 
@@ -142,10 +138,6 @@ Lastly, we check the $\chi^2_{\mathrm{obs}}$ statistic and the $p$-value to see 
     p = \num{3.88e-8}
 \end{gather}
 
-As we can also see on the $\chi^2$-distribution graph in \autoref{fig:least_squares:chi_square_distribution_linear_1}, the obtained $\chi^2_{\mathrm{obs}}$ statistic is extremely large compared to the bulk of the distribution. Therefore, we are not surprised that this means the probability of obtaining a result at least this large is very small. The $p$-value of \( p = \num{3.88e-8} \) is most definitely under the significance level of $0.05$, leading to us \emph{rejecting} the null hypothesis (which is that this model reflects the distribution which produced the data).
-
-Therefore, this model is \emph{not} an acceptable description of the data. The analyzed data most likely comes from a different (nonlinear) distribution, for example the third degree polynomial which we examined earlier.
-
 \subsubsection{Relationship Between Measurement Uncertainty and Resulting \( p \)-Value}
 
 Continuing with the linear fit function, we examine what would happen if the measurement uncertainties were doubled. To calculate this we simply input the new errors into the \( \chi^2 \) function and again minimize it with respect to the \( \theta_i \).
@@ -169,16 +161,7 @@ The data with doubled error is shown alongside the best fit curve and its error 
     \caption{Linear Best Fit Function, Data with Doubled Errors.}
 \end{figure}
 
-After this, we perform the same goodness of fit analysis as before. Because the model/fit function is the same, we have the same number of parameters and the degrees of freedom remain at \num{11}. As seen in \autoref{fig:least_squares:chi_square_distribution_linear_2}, the \( \chi^2 \) test statistic is reduced a lot compared to before.
-
-Because of the reduction in \( \chi^2_\mathrm{obs} \), the \( p \)-value is increased significantly (\( p = 0.224 \)). Again, the null hypothesis of this test is that the fit function does correctly model the \( y \) vs. \( x \) relationship. Because the \( p \)-value is much larger than the \( 0.05 \) significance level, we fail to reject the null hypothesis. In other words, the probability of the data varying at least this much from the model due to random error is \num{0.224}. Because this is quite likely, we gain a lot of confidence in the validity of the model.
-
-This calculation clearly shows how estimating errors is a very important part of data collection. It is clear that a third degree polynomial is a much better model of the data, but by simply increasing the errors other models seem to fit as well. Overestimating errors is therefore also harmful.
-
-To mitigate this problem, real data analysis can also include looking at the residuals (difference between measurement and model prediction) for each data point. In this case, with a linear fit, it may be visible that the residuals are consistently more positive for low values of \( x \), while high values of \( x \) cause low and even negative residuals. This corresponds to what is seen visually on \autoref{fig:least_squares:linear_fit_double_errors}: The model is consistently too high on the left while too low on the right.
-
-Finding a pattern in the residuals like this means the measurements are not randomly distributed around the model prediction, and that there is some kind of systematic problem, indicating that the model is not correct for the data set. It does not capture the shape of the data properly.
-
+After this, we perform the same goodness of fit analysis as before. Because the model/fit function is the same, we have the same number of parameters and the degrees of freedom remain at \num{11}. As seen in \autoref{fig:least_squares:chi_square_distribution_linear_2}, the \( \chi^2 \) test statistic is reduced a lot compared to before. This is will be explained further in the discussion.
 
 \subsection{Fitting Sample Data from Harmonic Oscillators}
 
