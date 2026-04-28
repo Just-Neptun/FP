@@ -161,7 +161,7 @@ The data with doubled error is shown alongside the best fit curve and its error 
     \caption{Linear Best Fit Function, Data with Doubled Errors.}
 \end{figure}
 
-After this, we perform the same goodness of fit analysis as before. Because the model/fit function is the same, we have the same number of parameters and the degrees of freedom remain at \num{11}. As seen in \autoref{fig:least_squares:chi_square_distribution_linear_2}, the \( \chi^2 \) test statistic is reduced a lot compared to before. This is will be explained further in the discussion.
+After this, we perform the same goodness of fit analysis as before. Because the model/fit function is the same, we have the same number of parameters and the degrees of freedom remain at \num{11}. As seen in \autoref{fig:least_squares:chi_square_distribution_linear_2}, the \( \chi^2 \) test statistic is reduced a lot compared to before. This will be explained further in the discussion.
 
 \subsection{Fitting Sample Data from Harmonic Oscillators}
 
@@ -169,7 +169,7 @@ Continuing with the least squares method of finding fit curves, more complicated
 
 In this case we are given generated data from damped and driven harmonic oscillators. One data set is measurements of displacement vs. time. Secondly we have the relationship between amplitude of the oscillation and the driving frequency.
 
-Once again we define the two functions which we want to fit to our data sets (\autoref{eq:least_squares_02:damped_oszi_fitfunction} and \autoref{eq:least_squares_02:driven_oszi_fitfunction}). Then we use the same method as before, defining the sum of the square residuals ($\chi^2$) as our parameter to optimize. Using \verb|iminuit| we find the parameters which minimize this function.
+Once again we define the two functions which we want to fit to our data sets (see \autoref{tab:least_squares:harmonic_oscillator_independent_fits}). Then we use the same method as before, defining the sum of the square residuals ($\chi^2$) as our parameter to optimize. Using \verb|iminuit| we find the parameters which minimize this function.
 
 Similarly to before, we also do a goodness of fit analysis on the models. The most relevant value to report is the \( p \)-value for both fit functions.
 
