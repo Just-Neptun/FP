@@ -50,5 +50,13 @@ We can also observe that (at least with our dataset) the difference in upper and
 Interestingly, the \texttt{minos()} method finds very different values of $\sigma^+$ and $\sigma^-$, leading to a much smaller difference in their values overall. Their values have a difference of below $5 \%$ for all sample sizes above about $n = 50$.
 
 
+\subsection{Applying Bayes' Theorem}
+
+We applied Bayes' theorem to estimate the chance of a particle decaying to a specific channel. It allows us to update our beliefs when given more and more data. The probability distribution of the parameter $f_\alpha$ is given for 1, 5 and 100 decays in \autoref{fig:bayes_theorem:posteriors}.
+
+As was expected and is logical, getting more samples increases our confidence in predicting the true value of a parameter, so the distribution gets sharper and the peak converges to a certain position.
+
+We successfully applied Bayes' theorem using a robust method with hyperparameters to efficiently calculate and predict \( f_\alpha \).
+
 % reminder for subimports:
 % \subimport{Analysis/}{bayes_theorem.tex}
