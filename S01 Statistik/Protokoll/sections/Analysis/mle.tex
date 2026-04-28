@@ -22,11 +22,12 @@ Equivalently, it is often easier to maximize the \define{log-likelihood} functio
 Using the MLE method, the goal is to find the fit parameters (in this case \( \tau \)) which maximize the likelihood that the data came from the distribution. This is a reasonable way of estimating the parameters of the distribution, as we are assuming that nothing extremely unlikely happened during measurement (as that would by definition be unlikely to happen). In this case, we can find the parameter \( \tau \) by solving analytically.
 
 We start with the general log-likelihood function. Inserting the decay distribution function $f(t \given \tau)$ from \autoref{eq:mle:decay_function} and simplifying gives us a different expression for the log-likelihood.
+
 \begin{align}
     \ln L(\vec{t} \given \tau) &= \sum \limits_{i = 1}^{n} \ln f(t_i \given \tau) \\
     &= \sum \limits_{i = 1}^{n} \ln \Big( \frac{1}{\tau} e^{\frac{-t_i}{\tau}} \Big) \\
     &= \sum \limits_{i = 1}^{n} \Big( - \ln (\tau) - \frac{t_i}{\tau} \Big) \\
-    &= - n \ln (\tau) - \frac{1}{\tau} \sum \limits_{i = 1}^{n} t_i \\
+    &= - n \ln (\tau) - \frac{1}{\tau} \sum \limits_{i = 1}^{n} t_i
 \end{align}
 
 It is much easier to take the derivative in this form. Because the logarithm is monotonic, the maximum of the likelihood will be at the same point as the maximum of the log-likelihood. This is at the inflection point of the function, where the first derivative is zero.
@@ -47,7 +48,6 @@ To find the uncertainty of this estimate, we compute the second derivative and i
 \end{align}
 
 Lastly we can evaluate the second derivative at $\tau = \hat{\tau}$ and use it in the known equation for $\sigma_\tau^2$.
-
 \begin{align}
     \sigma_\tau^2 &= - \left(\frac{\partial^2 \ln L(\tau)}{\partial^2 \tau} \Big|_{\tau = \hat{\tau}} \right)^{-1} \\
     &= - \left(- \frac{n}{\hat{\tau}^2} \right)^{-1} \\
