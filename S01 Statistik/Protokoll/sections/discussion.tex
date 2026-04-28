@@ -2,6 +2,22 @@
 \section{Critical Discussion}
 \label{sec:discussion}
 
+\subsection{Symbolic Error Propagation}
+We made use of the Python library \verb|SymPy| by implementing symbolic error propagation.
+First, we created the function \verb|calc_E|, which calculates the covariance matrix \( \mat{E} \) of a function \( \vec{f} \) of a random vector \( \vec{x} \) with covariance matrix \( \mat{C} \).
+If \( \vec{x} \) represents the result of a measurement, this gives the associated uncertainties.
+This approach is quite general and can handle any (finite) dimension of \( \vec{x} \) and \( \vec{f} \).
+
+One specific case of interest is \( \vec{f} \) being a scalar function \( f \).
+We handled this using the function \verb|calc_unc|.
+It returns the uncertainty of the value \( f(\vec{x}) \) inherited from \( \vec{x} \).
+
+Using these two functions let us propagate the uncertainties of several specific examples.
+While the expressions \verb|SymPy| produced were not always immediately visually appealing, making use of the built-in methods gave rise to a satisfactory result.
+Symbolic error propagation using \verb|SymPy| lends itself well to performing tedious calculations, which one would otherwise need to do manually.
+Furthermore, the built-in method for variable substitution leverages the numeric capabilities of the Python programming language.
+This lets one combine the symbolic and numeric parts of a calculation in one interface, thereby reducing the opportunity for human error.
+
 \subsection{Least Squares Method} 
 
 We used a numerical approach to fit a polynomial to some data. \autoref{fig:least_squares:3rd_polynomial_analytic_and_numeric} shows the difference between analytical and numerical regression approaches. We can see that they generally fit together quite well.
