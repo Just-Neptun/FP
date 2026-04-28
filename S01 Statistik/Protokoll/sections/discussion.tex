@@ -49,10 +49,6 @@ Therefore, the parabolic approximation is valid within a region around the maxim
 
 We ran an experiment to calculate how successful the log-likelihood method is for estimating the true value of \( \tau \). The success rate was \qty{67}{\percent}. This success rate is our estimate/expectation for the probability of a successful prediction of \( \tau \) when using the MLE method.
 
-%%% please cut this because I am worried it is wrong
-%%% or shorten and only keep one of the methods!
-%%% or does this go in a discussion section?
-
 Analyzing specific numbers of samples, clearly very small samples have very large errors and have no power to accurately determine a parameter $a$. The errors are not just large, but also unbalanced: The difference between $\sigma^+$ and $\sigma^-$ is greater than $5 \%$ for small samples.
 
 The $\hat{a}$ estimate appears to converge relatively quickly. However, we see that even reducing the sample number by only $10$, to $n = 990$, the difference between $\sigma^+$ and $\sigma^-$ already grows to over $5 \%$. This value seems to converge much more slowly.
@@ -66,7 +62,7 @@ Interestingly, the \texttt{minos()} method finds very different values of $\sigm
 
 We applied Bayes' theorem to estimate the chance of a particle decaying to a specific channel. It allows us to update our beliefs when given more and more data. The probability distribution of the parameter $f_\alpha$ is given for 1, 5 and 100 decays in \autoref{fig:bayes_theorem:posteriors}.
 
-As was expected and is logical, getting more samples increases our confidence in predicting the true value of a parameter, so the distribution gets sharper and the peak converges to a certain position.
+As was expected and is logical, getting more samples increases our confidence in predicting the true value of a parameter, so the distribution gets sharper, and the peak converges to a certain position.
 
 We successfully applied Bayes' theorem using a robust method with hyperparameters to efficiently calculate and predict \( f_\alpha \).
 
