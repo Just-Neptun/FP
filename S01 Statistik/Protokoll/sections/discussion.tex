@@ -2,13 +2,9 @@
 \section{Critical Discussion}
 \label{sec:discussion}
 
-\subsection{Least Squares Method}
+\subsection{Least Squares Method} 
 
-Using the least squares regression method, we successfully determined the coefficients of a polynomial fit function. The resulting parameters and covariance matrix are given in their entirety in the analysis section.
-
-It is clearly very nice to obtain an analytical solution. We can see that the diagonal elements of the covariance matrix are positive, as they correspond to the square of the errors in the parameters (if they are independent of each other). The other covariance elements are indeed generally much smaller, showing that the parameters are most likely uncorrelated.
-
-We also used a numerical approach to fit the function to the data. This is more robust when given more complicated functions to fit, although it relies on an iterative approach and parameters converging to values. \autoref{fig:least_squares:3rd_polynomial_analytic_and_numeric} shows the slight difference between the two approaches. We can see that they generally fit together quite well.
+We used a numerical approach to fit a polynomial to some data. \autoref{fig:least_squares:3rd_polynomial_analytic_and_numeric} shows the difference between analytical and numerical regression approaches. We can see that they generally fit together quite well.
 
 To test how well the fit function models the data, we used a \( \chi^2 \) goodness of fit test. The distribution and test statistic is shown in \autoref{fig:least_squares:chi_square_distribution_1}. The \( p \)-value of the fit was \( \boxed{p \approx \num{0.310}} \).
 
@@ -20,7 +16,7 @@ Therefore, this model is \emph{not} an acceptable description of the data. The a
 
 However, if the errors in the data are simply made three times larger, the \( \chi^2 \) statistic suddenly looks much better. Because of the reduction in \( \chi^2_\mathrm{obs} \), the \( p \)-value is increased significantly (\( p = 0.224 \)).
 
-Using a naive analysis, the null hypothesis of this test is again that the fit function does correctly model the \( y \) vs. \( x \) relationship. Because the \( p \)-value is much larger than the \( 0.05 \) significance level, we fail to reject the null hypothesis. In other words, the probability of the data varying at least this much from the model due to random error is \num{0.224}. Because this is quite likely, we gain a lot of confidence in the validity of the model.
+Using a naive analysis, the null hypothesis of this test is again that the fit function does correctly model the \( y \) vs. \( x \) relationship. The high \( p \)-value indicates that the probability of the data varying at least this much from the model due to random error is \num{0.224}. Because this is quite likely, we would gain a lot of confidence in the validity of the model.
 
 This calculation shows how estimating errors is a very important part of data collection. It is clear that a third degree polynomial is a much better model of the data, but by simply increasing the errors other models seem to fit as well. Overestimating errors is therefore also harmful.
 
@@ -33,25 +29,25 @@ After this, we used the least squares method on a data set of a driven harmonic 
 
 \subsection{Maximum Likelihood Estimator Method}
 
-As $n$ increases, we see in the graphs that the log-likelihood (as well as its approximation) gets much more strongly peaked (note the changing $y$-axis scales). The maximum likelihood is correctly predicted by both calculations, because the approximation is a Taylor expansion around the MLE. Increasing the sample size means the approximation becomes better near the maximum. However, the log-likelihood function clearly does not globally approach a quadratic, as we can see that the two sides remain very asymmetric, even at large sample sizes.
+We also used the MLE method to estimate parameters of model distributions. The resulting graphs are given in \autoref{fig:mle:lllh_30_data_points}.
+
+We see that as number of samples $n$ increases, the log-likelihood (as well as its approximation) gets much more strongly peaked (note the changing $y$-axis scales). The maximum likelihood is correctly predicted by both calculations, because the approximation is a Taylor expansion around the MLE. Increasing the sample size means the approximation becomes better near the maximum. However, the log-likelihood function clearly does not globally approach a quadratic, as we can see that the two sides remain very asymmetric, even at large sample sizes.
 
 Therefore, the parabolic approximation is valid within a region around the maximum likelihood, even though the function is more complicated than this when viewed globally. This was expected due to the parabola being calculated from the Taylor expansion of $\ln L(\tau)$ around the maximum (to the second order).
 
-We calculated how successful the log-likelihood method is for estimating the true value of \( \tau \) The success rate was \qty{67}{\percent}. This success rate is our estimate/expectation for the probability of a successful prediction of \( \tau \) when using the MLE method. It seems quite effective at estimating the parameters effectively, especially if the samples would be increased even further.
+We ran an experiment to calculate how successful the log-likelihood method is for estimating the true value of \( \tau \) The success rate was \qty{67}{\percent}. This success rate is our estimate/expectation for the probability of a successful prediction of \( \tau \) when using the MLE method. It seems quite effective at estimating the parameters effectively, especially if the samples would be increased even further.
 
 %%% please cut this because I am worried it is wrong
 %%% or shorten and only keep one of the methods!
 %%% or does this go in a discussion section?
 
-In order to examine how the number of data points impacts the errors of the estimated parameter, we select some interesting numbers of events for which to try the MLE method (see attached code). Clearly very small samples have very large errors and have no power to accurately determine a parameter $a$. The errors are not just large, but also unbalanced: The difference between $\sigma^+$ and $\sigma^-$ is greater than $5 \%$ for small samples.
+We selected some specific numbers of events for which to try the MLE method and analyze the uncertainties (see attached code). Clearly very small samples have very large errors and have no power to accurately determine a parameter $a$. The errors are not just large, but also unbalanced: The difference between $\sigma^+$ and $\sigma^-$ is greater than $5 \%$ for small samples.
 
 The $\hat{a}$ estimate appears to converge relatively quickly. However, we see that even reducing the sample number by only $10$, to $n = 990$, the difference between $\sigma^+$ and $\sigma^-$ already grows to over $5 \%$. This value seems to converge much more slowly.
 
 We can also observe that (at least with our dataset) the difference in upper and lower uncertainties does not monotonically reduce with sample size. For example, from $200$ to $750$ samples the difference increases by about $4$ percentage points. From $n = 995$ to $n = 996$ the difference also jumps up, although after this point it reduces sharply. At the maximum number of samples, we include the entire dataset and $n = 1000$. At this point the difference in errors is only $1.4 \%$.
 
 Interestingly, the \texttt{minos()} method finds very different values of $\sigma^+$ and $\sigma^-$, leading to a much smaller difference in their values overall. Their values have a difference of below $5 \%$ for all sample sizes above about $n = 50$.
-
-
 
 
 % reminder for subimports:
