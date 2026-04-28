@@ -63,7 +63,7 @@ We arrive at \autoref{eq:mle:uncertainty_of_tau_hat}, which gives the uncertaint
 
 To understand the shapes of log-likelihood functions better, we generate some data from the distribution \autoref{eq:mle:decay_function}, using the true value of \( \tau = \num{2} \). The log-likelihood function is calculated and plotted for different values of the parameter \( \tau \) for datasets with \( n \in \{ 30, 300 \} \) data points (see \autoref{fig:mle:lllh}).
 
-We will also plot the second order approximation of the log-likelihood function. With both functions on the same graph, we can examine how well the approximation holds.
+We will also plot the second order approximation of the log-likelihood function. With both functions on the same graph, we can examine how well the approximation holds. The resulting graphs will be explained in the discussion.
 \begin{gather}
     \ln L(\tau) \approx \ln L_\mathrm{max} - \frac{(\tau - \hat{\tau})^2}{2 \sigma_\tau^2}
 \end{gather}
@@ -92,10 +92,6 @@ We will also plot the second order approximation of the log-likelihood function.
     \label{fig:mle:lllh}
 \end{figure}
 
-As $n$ increases, we see in the graphs that the log-likelihood (as well as its approximation) gets much more strongly peaked (note the changing $y$-axis scales). The maximum likelihood is correctly predicted by both calculations, because the approximation is a Taylor expansion around the MLE. Increasing the sample size means the approximation becomes better near the maximum. However, the log-likelihood function clearly does not globally approach a quadratic, as we can see that the two sides remain very asymmetric, even at large sample sizes.
-
-Therefore, the parabolic approximation is valid within a region around the maximum likelihood, even though the function is more complicated than this when viewed globally. This was expected due to the parabola being calculated from the Taylor expansion of $\ln L(\tau)$ around the maximum (to the second order).
-
 \subsubsection{Effectiveness of the MLE Method}
 
 We will now examine how effective the MLE method really is at finding/predicting the correct \( \tau \).
@@ -104,7 +100,7 @@ In this case we define a prediction of \( \tau \) as \quotedef{successful} if th
 
 By generating many data sets with large numbers of samples, we approximate the long-term expected number of successful predictions of $\tau$. Following the frequentist interpretation of probability, the long-term ratio of successes to failures is by definition the probability of success.
 
-From the total number of runs and the number of successes we can calculate the success ratio: For \num{1000} data sets of \num{500} samples, we get about \num{670} successful predictions, meaning a success rate of \qty{67}{\percent}. This success rate is our estimate/expectation for the probability of a successful prediction of \( \tau \) when using the MLE method.
+From the total number of runs and the number of successes we can calculate the success ratio: For \num{1000} data sets of \num{500} samples, we get about \num{670} successful predictions, meaning a success rate of \qty{67}{\percent}.
 
 % discuss how good 67 percent is?
 % not that important, happy to ignore
@@ -149,9 +145,7 @@ To confirm this result, the log-likelihood function and the MLE parameter are pl
 
 \subsubsection{Plotting the Fit Function}
 
-We plot the histogram of the data and the distribution function (using our determined fit parameter $\hat{a}$) on the same graph.
-
-We make sure to graph the histogram using density/relative frequency. This ensures that we have the same scaling for both elements in the graph, which visually shows that the shape of the histogram matches relatively well with the distribution. We can therefore see that the type of distribution is correct and that the estimate $\hat{a}$ for the parameter $a$ is generally accurate. The next section on errors will show this numerically.
+We plot the histogram of the data and the distribution function (using our determined fit parameter $\hat{a}$) on the same graph. We make sure to graph the histogram using density/relative frequency. This ensures that we have the same scaling for both elements in the graph, which visually shows that the shape of the histogram matches relatively well with the distribution. We can therefore see that the type of distribution is correct and that the estimate $\hat{a}$ for the parameter $a$ is generally accurate. The next section on errors will show this numerically.
 
 \subsubsection{Determining Convergence of Upper and Lower Uncertainties}
 
@@ -162,8 +156,7 @@ We want to analyze the upper and lower errors of the MLE approach. These $\sigma
     f(\hat{a} \pm \sigma_a) = 0 &= \ln L (\hat{a} \pm \sigma_a)  - \big( \ln L_\mathrm{max} - \frac{1}{2} \big)
 \end{align}
 
-Now we can use the standard \texttt{scipy.optimize.root\_scalar} function to find these roots and solve for the positive and negative deviations from \( \hat{a} \).
-
+Now we can use the standard \texttt{scipy.optimize.root\_scalar} function to find these roots and solve for the positive and negative deviations from \( \hat{a} \). The results for different data sets will be explained in the discussion.
 \begin{gather}
     f(\hat{a} \pm \sigma_a) = 0 \\
     \Rightarrow a^+ = \hat{a} + \sigma_a^+ \\
@@ -171,15 +164,3 @@ Now we can use the standard \texttt{scipy.optimize.root\_scalar} function to fin
     \sigma_a^+ = a^+ - \hat{a} \\
     \sigma_a^- = \hat{a} - a^-
 \end{gather}
-
-%%% please cut this because I am worried it is wrong
-%%% or shorten and only keep one of the methods!
-%%% or does this go in a discussion section?
-
-In order to analyze how the number of data points impacts the errors, we select some interesting numbers of events for which to try the MLE method (see attached code). Clearly very small samples have very large errors and have no power to accurately determine the parameter $a$. The errors are not just large, but also unbalanced: The difference between $\sigma^+$ and $\sigma^-$ is greater than $5 \%$ for small samples.
-
-The $\hat{a}$ estimate appears to converge relatively quickly. However, we see that even reducing the sample number by only $10$, to $n = 990$, the difference between $\sigma^+$ and $\sigma^-$ already grows to over $5 \%$. This value seems to converge much more slowly.
-
-We can also observe that (at least with this dataset) the difference in upper and lower uncertainties does not monotonically reduce with sample size. For example, from $200$ to $750$ samples the difference increases by about $4$ percentage points. From $n = 995$ to $n = 996$ the difference also jumps up, although after this point it reduces sharply. At the maximum number of samples, we include the entire dataset and $n = 1000$. At this point the difference in errors is only $1.4 \%$.
-
-Interestingly, the \texttt{minos()} method finds very different values of $\sigma^+$ and $\sigma^-$, leading to a much smaller difference in their values overall. Their values have a difference of below $5 \%$ for all sample sizes above about $n = 50$.

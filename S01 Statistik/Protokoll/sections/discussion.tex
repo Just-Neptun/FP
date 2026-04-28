@@ -28,6 +28,28 @@ To mitigate this problem, real data analysis can also include looking at the res
 
 Finding a pattern in the residuals like this means the measurements are not randomly distributed around the model prediction, and that there is some kind of systematic problem, indicating that the model is not correct for the data set. It does not capture the shape of the data properly.
 
+After this, we used the least squares method on a data set of a driven harmonic oscillator. In \autoref{fig:least_squares_02:position_vs_time_2} we see that combining datasets can give us more confidence in our fit functions and change the \( p \)-value, although in this case the combination method didn't change the resulting fit functions by much.
+
+
+\subsection{Maximum Likelihood Estimator Method}
+
+As $n$ increases, we see in the graphs that the log-likelihood (as well as its approximation) gets much more strongly peaked (note the changing $y$-axis scales). The maximum likelihood is correctly predicted by both calculations, because the approximation is a Taylor expansion around the MLE. Increasing the sample size means the approximation becomes better near the maximum. However, the log-likelihood function clearly does not globally approach a quadratic, as we can see that the two sides remain very asymmetric, even at large sample sizes.
+
+Therefore, the parabolic approximation is valid within a region around the maximum likelihood, even though the function is more complicated than this when viewed globally. This was expected due to the parabola being calculated from the Taylor expansion of $\ln L(\tau)$ around the maximum (to the second order).
+
+We calculated how successful the log-likelihood method is for estimating the true value of \( \tau \) The success rate was \qty{67}{\percent}. This success rate is our estimate/expectation for the probability of a successful prediction of \( \tau \) when using the MLE method. It seems quite effective at estimating the parameters effectively, especially if the samples would be increased even further.
+
+%%% please cut this because I am worried it is wrong
+%%% or shorten and only keep one of the methods!
+%%% or does this go in a discussion section?
+
+In order to examine how the number of data points impacts the errors of the estimated parameter, we select some interesting numbers of events for which to try the MLE method (see attached code). Clearly very small samples have very large errors and have no power to accurately determine a parameter $a$. The errors are not just large, but also unbalanced: The difference between $\sigma^+$ and $\sigma^-$ is greater than $5 \%$ for small samples.
+
+The $\hat{a}$ estimate appears to converge relatively quickly. However, we see that even reducing the sample number by only $10$, to $n = 990$, the difference between $\sigma^+$ and $\sigma^-$ already grows to over $5 \%$. This value seems to converge much more slowly.
+
+We can also observe that (at least with our dataset) the difference in upper and lower uncertainties does not monotonically reduce with sample size. For example, from $200$ to $750$ samples the difference increases by about $4$ percentage points. From $n = 995$ to $n = 996$ the difference also jumps up, although after this point it reduces sharply. At the maximum number of samples, we include the entire dataset and $n = 1000$. At this point the difference in errors is only $1.4 \%$.
+
+Interestingly, the \texttt{minos()} method finds very different values of $\sigma^+$ and $\sigma^-$, leading to a much smaller difference in their values overall. Their values have a difference of below $5 \%$ for all sample sizes above about $n = 50$.
 
 
 
