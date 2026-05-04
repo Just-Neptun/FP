@@ -55,3 +55,9 @@ The lower subplot shows further how fast the inhibitory populations counteract t
 The connection responsible for the characteristic behavior of a synfire chain is \verb|inh_exc|.
 Of course all others are also necessary, but this connection makes it such that each population has the explicit function of exciting the next population before it gets killed off.
 This is what distinguishes the synfire chain from a network of repeatedly spiking populations, in which no structure is present.
+
+We test the effect of disabling inhibition by setting \verb|stim_inh| and \verb|exc_inh| to zero.
+As predicted, each excitatory population keeps spiking until it runs out of fuel.
+Meanwhile, it repeatedly excites the following population, which therefore can keep spiking for longer.
+This process compounds, until the last population spikes approximately 25 times.
+Needless to say, this would not benefit a human brain.
