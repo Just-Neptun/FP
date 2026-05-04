@@ -20,3 +20,11 @@ We are asked to fill in the weights which determine how much one population exci
 There are five weights: \verb|stim_exc|, \verb|stim_inh|, \verb|exc_exc|, \verb|exc_inh|, and \verb|inh_exc|.
 The allowed values are integers from 0-63 (negative in the last case).
 
+In order to achieve the behavior of a synfire chain, we tune the weights.
+We start by setting \verb|stim_exc = 63| and \verb|stim_inh = 31| to observe how the populations evolve without interaction by looking at the resulting plot.
+We see that the excitatory population has two spikes before returning to its resting potential, while the inhibitory only has one.
+Including \verb|inh_exc = -31| counteracts the second peak of the excitatory population.
+This is the desired behavior of a single population.
+Finally, including \verb|exc_exc = 63| and \verb|exc_inh = 31| mimics the initial stimulation and thus lets the following populations show the same behavior.
+The plots of this behavior can be seen in \autoref{fig:synfire-chain:single:plot}.
+
