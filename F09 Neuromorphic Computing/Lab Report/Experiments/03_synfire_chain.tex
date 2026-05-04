@@ -51,3 +51,7 @@ There are two regions, the excitatory populations show up in the lower (red) reg
 In our case, there are eight clusters in both regions, each representing a population.
 This implies that each population only has one simultaneous spike and then returns to their resting potential, which is exactly the behavior of a synfire chain.
 The lower subplot shows further how fast the inhibitory populations counteract the spiking behavior of the excitatory populations.
+
+The connection responsible for the characteristic behavior of a synfire chain is \verb|inh_exc|.
+Of course all others are also necessary, but this connection makes it such that each population has the explicit function of exciting the next population before it gets killed off.
+This is what distinguishes the synfire chain from a network of repeatedly spiking populations, in which no structure is present.
