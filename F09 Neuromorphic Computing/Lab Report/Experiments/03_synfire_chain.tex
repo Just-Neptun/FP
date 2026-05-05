@@ -28,17 +28,17 @@ This is the desired behavior of a single population.
 Finally, including \verb|exc_exc = 63| and \verb|exc_inh = 31| mimics the initial stimulation and thus lets the following populations show the same behavior.
 The plots of this behavior can be seen in \autoref{fig:synfire-chain:single:plot}.
 
-\begin{figure}
+\begin{figure}[hbp]
     \centering
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=0.95\textwidth]{./03_Synfire_chain/Graphs/sc-1.5-plot.png}
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_chain/Graphs/sc-1.5-plot.png}
         \caption{Plot}
         \label{fig:synfire-chain:single:plot}
     \end{subfigure}
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=0.95\textwidth]{./03_Synfire_Chain/Graphs/sc-1.5-osc.png}
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_Chain/Graphs/sc-1.5-osc.png}
         \caption{Oscilloscope}
         \label{fig:synfire-chain:single:oscilloscope}
     \end{subfigure}
@@ -70,3 +70,7 @@ Comparing to the corresponding plot in \autoref{fig:synfire-chain:single:plot}, 
 Now that we have a functioning synfire chain, we may further investigate basic questions.
 Currently, our chain consists of eight sections, each containing one excitatory and one inhibitory population.
 Each population consists of seven neurons.
+
+First, we ask by how much we can reduce the number of neurons per population, while consistently maintaining the behavior of a synfire chain.
+Obviously, each population needs at least one neuron to fire.
+One might think that each neuron is individually produced, and that therefore 

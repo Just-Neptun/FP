@@ -24,7 +24,7 @@ As a \quoteapprox{control}, we will run the program on a \( 4 \times 4 \) Sudoku
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{./04 Sudoku/no_constraints_sudoku.png}
+    \includegraphics[width=0.7\textwidth]{./Experiments/04_Sudoku/no_constraints_sudoku.png}
     \caption{Sudoku Solver Without Constraint Synapses}
     \label{fig:sudoku_no_constraints}
 \end{figure}
@@ -43,7 +43,7 @@ After implementing the rules of Sudoku as inhibitory synapses in the network, we
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{./04 Sudoku/with_constraints_sudoku.png}
+    \includegraphics[width=0.7\textwidth]{./Experiments/04_Sudoku/with_constraints_sudoku.png}
     \caption{Sudoku Solver With Constraint Synapses}
     \label{fig:sudoku_with_constraints}
 \end{figure}
@@ -70,7 +70,7 @@ An example of this is seen in \autoref{fig:sudoku_underdetermined}. Ignoring the
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{./04 Sudoku/underdetermined_sudoku.png}
+    \includegraphics[width=0.7\textwidth]{./Experiments/04_Sudoku/underdetermined_sudoku.png}
     \caption{A Failed Attempt at Solving the Sudoku With 5 Clues}
     \label{fig:sudoku_underdetermined}
 \end{figure}
@@ -91,7 +91,7 @@ We further investigate the relationship between number of clues and successes by
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{./04 Sudoku/num_clues_bar_chart_sudoku.png}
+    \includegraphics[width=0.7\textwidth]{./Experiments/04_Sudoku/num_clues_bar_chart_sudoku.png}
     \caption{Success Rate of Sudoku Solver vs. Number of Clues}
     \label{fig:sudoku_num_clues_bar_chart}
 \end{figure}
@@ -123,6 +123,6 @@ These will be explained for a \( 4 \times 4 \) and a \( 9 \times 9 \) Sudoku gri
 
 We note that with increasing size, the number of neurons and synapses rapidly increases.
 
-\subimport{./04 Sudoku/}{4x4_summary.tex}
+\input{./Experiments/04_Sudoku/4x4_summary.tex}
 
-\subimport{./04 Sudoku/}{9x9_summary.tex}
+\input{./Experiments/04_Sudoku/9x9_summary.tex}
