@@ -12,7 +12,7 @@ In this way, the initial stimulation travels through this so-called \quotedef{sy
 The notebook corresponding to this task was pre-filled with an implementation of a synfire chain.
 In the following, we use this implementation to answer several questions about the inner workings of a feedforward network.
 Specifically useful for quick inspection are the two plots which the notebook produced for each run.
-The first subplot is a plot of the pair (time of spike, neuron id) for each spiked neuron.
+The first subplot is a plot of the pair (time of spike, neuron ID) for each spiked neuron.
 The second subplot is the membrane trace of the first excited neuron.
 
 \subsection{Adjusting Weights}
@@ -46,7 +46,7 @@ The plots of this behavior can be seen in \autoref{fig:synfire-chain:single:plot
     \label{fig:synfire-chain:single}
 \end{figure}
 
-As explained, we see the pair (time of spike, neuron id) for each spiked neuron in the upper subplot.
+As explained, we see the pair (time of spike, neuron ID) for each spiked neuron in the upper subplot.
 There are two regions, the excitatory populations show up in the lower (red) region, while the inhibitory populations show up in the upper (blue) region.
 In our case, there are eight clusters in both regions, each representing a population.
 This implies that each population only has one simultaneous spike and then returns to their resting potential, which is exactly the behavior of a synfire chain.
