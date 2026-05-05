@@ -19,25 +19,25 @@ Various parameters of the neuron will be tweaked and their effects explained, st
     \label{fig:familiarize_setup}
 \end{figure}
 
-We see \( V_{mem} \) (potential over the membrane) increase mostly linearly before reaching a peak. This causes a spike where the voltage falls to zero. This corresponds to the lights showing on the neuron.
+We see \( V_{\mathrm{mem}} \) (potential over the membrane) increase mostly linearly before reaching a peak. This causes a spike where the voltage falls to zero. This corresponds to the lights showing on the neuron.
 
 % Familiarize yourself with the parameters of the neuron emulation. What happens if you increase the leak potential?
 
-Changing the leak potential \( V_{leak} \) using the potentiometer changes the rest potential \( u_{rest} \) of the neuron. This is the potential which the neuron falls to when no spikes or outside potential is present. Increasing this increases the rest potential and vice versa. As long as the rest potential is not higher than the threshold, with no outside inputs it goes to a constant value, as seen in \autoref{fig:famililarize_v_leak}.
+Changing the leak potential \( V_{\mathrm{leak}} \) using the potentiometer changes the rest potential \( u_{\mathrm{rest}} \) of the neuron. This is the potential which the neuron falls to when no spikes or outside potential is present. Increasing this increases the rest potential and vice versa. As long as the rest potential is not higher than the threshold, with no outside inputs it goes to a constant value, as seen in \autoref{fig:famililarize_v_leak}.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{./Experiments/00_Familiarize/Images/v_leak.png}
-    \caption{Rest Potential of Membrane, Kept Below Threshold, \( V_{leak} \) Changed Halfway Through}
+    \caption{Rest Potential of Membrane, Kept Below Threshold, \( V_{\mathrm{leak}} \) Changed Halfway Through}
     \label{fig:famililarize_v_leak}
 \end{figure}
 
 % Can you observe the membrane time constant? Note the impact of the individual potentiometers.
 
-The membrane time constant \( \tau_{mem} \) affects how fast the potential reaches its equilibrium state.
+The membrane time constant \( \tau_{\mathrm{mem}} \) affects how fast the potential reaches its equilibrium state.
 When the parameters are set to cause repeating spikes, this constant affects the time period of this process.
 Observing this constant is done by measuring the exponential convergence to equilibrium state or peak voltage, depending on if the threshold is met.
-Increasing the potentiometer marked \( \tau_{mem} \) increases \( \tau_{mem} \) as expected.
+Increasing the potentiometer marked \( \tau_{\mathrm{mem}} \) increases \( \tau_{\mathrm{mem}} \) as expected.
 The expected and experimentally confirmed effect is seen in \autoref{fig:famililarize_tau_mem_spiking}, where different settings cause different spiking frequencies.
 
 \begin{figure}[htbp]
@@ -54,11 +54,11 @@ The expected and experimentally confirmed effect is seen in \autoref{fig:familil
         \centering
         \includegraphics[width=0.95\textwidth]{./Experiments/00_Familiarize/Images/spiking3.png}
     \end{subfigure}
-    \caption{Continuously Spiking Neuron at Different \( \tau_{mem} \)}
+    \caption{Continuously Spiking Neuron at Different \( \tau_{\mathrm{mem}} \)}
     \label{fig:famililarize_tau_mem_spiking}
 \end{figure}
 
-Changing the potentiometer for \( \tau_{syn} \) does not produce a visible difference on the oscilloscope when only one neuron is connected. This is expected.
+Changing the potentiometer for \( \tau_{\mathrm{syn}} \) does not produce a visible difference on the oscilloscope when only one neuron is connected. This is expected.
 
 % Connect two or multiple neurons to form a simple network and note how signals propagate across neurons, e.g., while playing with the synaptic weights and the synaptic time constant.
 
@@ -89,14 +89,14 @@ The oscilloscope was used to focus on the area right after the threshold is reac
 This is done using the trigger on descending voltage mode and zooming in on horizontal and vertical axes as much as possible.
 This decreases uncertainties for the following measurements.
 
-\( \tau_{ref} \) is the refractory time between the neuron spiking to the time when \( V_{mem} \) begins to rise again. In the meantime the voltage should have quickly approached \( u_{reset} \) and then stayed there (see images).
+\( \tau_{\mathrm{ref}} \) is the refractory time between the neuron spiking to the time when \( V_{\mathrm{mem}} \) begins to rise again. In the meantime the voltage should have quickly approached \( u_{\mathrm{reset}} \) and then stayed there (see images).
 
 \( \vartheta \) is the threshold voltage at which the spike will occur. This is the highest voltage reached, measured just before the spike happens (see images).
 
 \begin{gather}
-    \tau_{ref} = \qty{12.6}{\milli \second} \\
+    \tau_{\mathrm{ref}} = \qty{12.6}{\milli \second} \\
     \vartheta = \qty{1.20}{\volt} \\
-    \text{Fixed for this setup:} \ u_{reset} = \qty{0.00}{\milli \volt}
+    \text{Fixed for this setup:} \ u_{\mathrm{reset}} = \qty{0.00}{\milli \volt}
 \end{gather}
 
 % Images here
