@@ -77,3 +77,13 @@ Furthermore, one might think that more neurons are necessary in order to counter
 But in fact, digital configuration due to 64 bit of local SRAM (static random-access memory) and analog configuration due to 8 reference voltages and 16 current parameters per neuron allow this fixed-pattern noise to be counteracted.
 Instead, the problem lies with the resistances/conductances associated with the synapse and leak.
 If the leak conductance of a neuron is greater than the total conductance of the incoming synaptic signals, the post-synaptic neuron will never fire.
+
+Now, we can ask what chain length we might achieve at maximum.
+We know that there are only 512 neurons on a given chip.
+If we denote the maximal number of sections as \( L_{\mathrm{max}} \) and the minimal number of neurons in a given population as \( N_{\mathrm{min}} \), we have
+\begin{equation}
+    2 N_{\mathrm{min}} L_{\mathrm{max}} = 512.
+\end{equation}
+The factor of 2 stems from the fact that there are 2 populations in each section.
+Through trial and error, we found the lowest stable value for \( N_{\mathrm{min}} \) to 4.
+This gives us a maximal chain length of 64.
