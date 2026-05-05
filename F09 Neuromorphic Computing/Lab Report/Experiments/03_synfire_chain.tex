@@ -73,4 +73,7 @@ Each population consists of seven neurons.
 
 First, we ask by how much we can reduce the number of neurons per population, while consistently maintaining the behavior of a synfire chain.
 Obviously, each population needs at least one neuron to fire.
-One might think that each neuron is individually produced, and that therefore 
+Furthermore, one might think that more neurons are necessary in order to counteract the variability due to each neuron being individually produced.
+But in fact, digital configuration due to 64 bit of local SRAM (static random-access memory) and analog configuration due to 8 reference voltages and 16 current parameters per neuron allow this fixed-pattern noise to be counteracted.
+Instead, the problem lies with the resistances/conductances associated with the synapse and leak.
+If the leak conductance of a neuron is greater than the total conductance of the incoming synaptic signals, the post-synaptic neuron will never fire.
