@@ -28,24 +28,6 @@ This is the desired behavior of a single population.
 Finally, including \verb|exc_exc = 63| and \verb|exc_inh = 31| mimics the initial stimulation and thus lets the following populations show the same behavior.
 The plots of this behavior can be seen in \autoref{fig:synfire-chain:single:plot}.
 
-\begin{figure}[hbp]
-    \centering
-    \begin{subfigure}{.45\textwidth}
-        \centering
-        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_chain/Graphs/sc-1.5-plot.png}
-        \caption{Plot}
-        \label{fig:synfire-chain:single:plot}
-    \end{subfigure}
-    \begin{subfigure}{.45\textwidth}
-        \centering
-        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_Chain/Graphs/sc-1.5-osc.png}
-        \caption{Oscilloscope}
-        \label{fig:synfire-chain:single:oscilloscope}
-    \end{subfigure}
-    \caption{Visualization of the behavior of a synfire chain.}
-    \label{fig:synfire-chain:single}
-\end{figure}
-
 As explained, we see the pair (time of spike, neuron ID) for each spiked neuron in the upper subplot.
 There are two regions, the excitatory populations show up in the lower (red) region, while the inhibitory populations show up in the upper (blue) region.
 In our case, there are eight clusters in both regions, each representing a population.
@@ -65,6 +47,24 @@ Needless to say, this would not benefit a human brain.
 Next, we connect to the oscilloscope in order to visualize the membrane potential.
 This can be seen in \autoref{fig:synfire-chain:single:oscilloscope}.
 Comparing to the corresponding plot in \autoref{fig:synfire-chain:single:plot}, we find great agreement between them.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_chain/Graphs/sc-1.5-plot.png}
+        \caption{Plot}
+        \label{fig:synfire-chain:single:plot}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_Chain/Graphs/sc-1.5-osc.png}
+        \caption{Oscilloscope}
+        \label{fig:synfire-chain:single:oscilloscope}
+    \end{subfigure}
+    \caption{Visualization of the behavior of a synfire chain.}
+    \label{fig:synfire-chain:single}
+\end{figure}
 
 \subsection{Adjusting the Number of Neurons per Population}
 Now that we have a functioning synfire chain, we may further investigate basic questions.
