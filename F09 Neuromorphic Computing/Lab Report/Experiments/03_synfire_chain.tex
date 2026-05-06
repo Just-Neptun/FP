@@ -82,8 +82,19 @@ Now, we can ask what chain length we might achieve at maximum.
 We know that there are only 512 neurons on a given chip.
 If we denote the maximal number of sections as \( L_{\mathrm{max}} \) and the minimal number of neurons in a given population as \( N_{\mathrm{min}} \), we have
 \begin{equation}
-    2 N_{\mathrm{min}} L_{\mathrm{max}} = 512.
+    2 N_{\mathrm{min}} L_{\mathrm{max}} \leq 512.
 \end{equation}
 The factor of 2 stems from the fact that there are 2 populations in each section.
-Through trial and error, we found the lowest stable value for \( N_{\mathrm{min}} \) to 4.
-This gives us a maximal chain length of 64.
+Through trial and error, we found the lowest stable value for \( N_{\mathrm{min}} \) to be 6.
+This gives us a maximal chain length of 42.
+The resulting chain is visualized in \autoref{fig:synfire-chain:maximal-length}.
+We found that varying the sizes of excitatory and inhibitory populations separately did not produce better outcomes.
+Note that we did not investigate how different weights might change this result.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\textwidth]{./Experiments/03_Synfire_Chain/Graphs/sc-2-plot.png}
+    \caption{Plot of the behavior of a synfire chain with maximal length.}
+    \label{fig:synfire-chain:maximal-length}
+\end{figure}
+
