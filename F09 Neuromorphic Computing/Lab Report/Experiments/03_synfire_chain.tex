@@ -98,3 +98,50 @@ Note that we did not investigate how different weights might change this result.
     \label{fig:synfire-chain:maximal-length}
 \end{figure}
 
+\subsection{Closing the Loop}
+Finally, we may connect the last section to the first.
+This creates a loop wherein the signal travels through the chain again and again.
+We increase the population size to 16 in order to ensure stable propagation, while decreasing the chain length to 8.
+
+We investigate both a loop with the weights as before and a loop without inhibition.
+This enables us to examine what the difference between a synfire chain and a continuously spiking neuron population is.
+The resulting plots and a screenshot of the oscilloscope are shown in \autoref{fig:synfire-chain:loop}.
+
+In the case with inhibition, one can see the chain loop for a few cycles.
+But instead of continuing on indefinitely, the behavior becomes more and more dispersed.
+This means that at some point, an inhibitory population will spike before its corresponding excitatory population, thereby stopping it from exciting the next section and disrupting the chain behavior.
+This is reflected in the trace of the membrane potential.
+Its later spikes happen farther apart, meaning that its excitation becomes more and more dispersed.
+This happens until it is inhibited before it can spike, after which the potential drops even below its reset level and only slowly returns to its resting level. 
+
+In the case without inhibition, one can clearly see the robust periodic pattern.
+The populations keep firing indefinitely even after the software has completed.
+The membrane potential trace similarly shows a periodic pattern.
+The height of the peaks and valleys vary minimally, but are still very robust.
+This is especially impressive given that the BrainScaleS-2 system operates at an acceleration of about \num{1e3} compared to the biological processes.
+
+This comparison showcases the trade-offs associated
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_chain/Graphs/sc-3.1-plot-real.png}
+        \caption{Plot with Inhibition}
+        \label{fig:synfire-chain:loop:plot-with-inhibition}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_chain/Graphs/sc-3.1-plot.png}
+        \caption{Plot without Inhibition}
+        \label{fig:synfire-chain:loop:plot-without-inhibition}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_Chain/Graphs/sc-3.1-osc.png}
+        \caption{Oscilloscope}
+        \label{fig:synfire-chain:loop:oscilloscope}
+    \end{subfigure}
+    \caption{Visualization of the behavior of a looping synfire chain.}
+    \label{fig:synfire-chain:loop}
+\end{figure}
