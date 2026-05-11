@@ -120,7 +120,11 @@ The membrane potential trace similarly shows a periodic pattern.
 The height of the peaks and valleys vary minimally, but are still very robust.
 This is especially impressive given that the BrainScaleS-2 system operates at an acceleration of about \num{1e3} compared to the biological processes.
 
-This comparison showcases the trade-offs associated
+This comparison showcases the trade-off between precision and robustness.
+Preventing the individual populations from firing indefinitely lets us achieve high temporal resolution, while maintaining controlled behavior.
+While this is very useful in practical applications of neuromorphic computing, it also requires a high amount of engineering.
+On the other hand, letting each population fire continuously similar to a harmonic oscillator ensures the stability at relative ease.
+But there is little practical utility in such an uncontrollable system.
 
 \begin{figure}
     \centering
