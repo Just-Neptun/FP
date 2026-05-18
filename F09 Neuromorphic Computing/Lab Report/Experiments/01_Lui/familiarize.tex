@@ -1,0 +1,100 @@
+% !TeX root = ../main.tex
+
+\subsection{Getting Familiar With Lu.i's Parameters}
+
+We begin the investigation by exploring the Lu.i neuron circuit boards. For constant input current we expect them to behave according to the following equation.
+
+\begin{equation}
+    u_{i} (t) = u_{\mathrm{rest}} + I R (1 - {\symup{e}}^{- t / τ_{\mathrm{mem}}})
+\end{equation}
+
+Various parameters of the neuron will be tweaked and their effects explained, starting from the first encounter with the circuit board and measuring it using an oscilloscope. The initial setup is shown in \autoref{fig:familiarize_setup}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./Experiments/01_Lui/Images/setup.png}
+    \caption{Experimental Setup With Lu.i Neuron and Oscilloscope}
+    \label{fig:familiarize_setup}
+\end{figure}
+
+We see \( V_{\mathrm{mem}} \) (potential over the membrane) increase mostly linearly before reaching a peak. This causes a spike where the voltage falls to zero. This corresponds to the lights showing on the neuron.
+
+% Familiarize yourself with the parameters of the neuron emulation. What happens if you increase the leak potential?
+
+Changing the leak potential \( V_{\mathrm{leak}} \) using the potentiometer changes the rest potential \( u_{\mathrm{rest}} \) of the neuron. This is the potential which the neuron falls to when no spikes or outside potential is present. Increasing this increases the rest potential and vice versa. As long as the rest potential is not higher than the threshold, with no outside inputs it goes to a constant value, as seen in \autoref{fig:famililarize_v_leak}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./Experiments/01_Lui/Images/v_leak.png}
+    \caption{Rest Potential of Membrane, Kept Below Threshold, \( V_{\mathrm{leak}} \) Changed Halfway Through}
+    \label{fig:famililarize_v_leak}
+\end{figure}
+
+% Can you observe the membrane time constant? Note the impact of the individual potentiometers.
+
+The membrane time constant \( \tau_{\mathrm{mem}} \) affects how fast the potential reaches its equilibrium state.
+When the parameters are set to cause repeating spikes, this constant affects the time period of this process.
+Observing this constant is done by measuring the exponential convergence to equilibrium state or peak voltage, depending on if the threshold is met.
+Increasing the potentiometer marked \( \tau_{\mathrm{mem}} \) increases \( \tau_{\mathrm{mem}} \) as expected.
+The expected and experimentally confirmed effect is seen in \autoref{fig:famililarize_tau_mem_spiking}, where different settings cause different spiking frequencies.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{./Experiments/01_Lui/Images/spiking1.png}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{./Experiments/01_Lui/Images/spiking2.png}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{./Experiments/01_Lui/Images/spiking3.png}
+    \end{subfigure}
+    \caption{Continuously Spiking Neuron at Different \( \tau_{\mathrm{mem}} \)}
+    \label{fig:famililarize_tau_mem_spiking}
+\end{figure}
+
+Changing the potentiometer for \( \tau_{\mathrm{syn}} \) does not produce a visible difference on the oscilloscope when only one neuron is connected. This is expected.
+
+% Connect two or multiple neurons to form a simple network and note how signals propagate across neurons, e.g., while playing with the synaptic weights and the synaptic time constant.
+
+Multiple neurons were connected into a network.
+Different patterns of activation can be achieved.
+For example, a neuron can be set up to only pass its threshold voltage if multiple previous neurons spike at the same time. It is also noted that neurons can obviously be linked in loops, so that stimulation is propagated back to themselves, and they continue spiking.
+A simple example network is given in \autoref{fig:famililarize_neuron_network}. The oscilloscope was also used here to record the membrane potential over time. The complex behavior is interesting to note.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{./Experiments/01_Lui/Images/neuron_network.png}
+        \caption{Simple Network of Lu.i neurons}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{./Experiments/01_Lui/Images/network_behaviour.png}
+        \caption{Membrane Potential of One of the Neurons in the Network}
+    \end{subfigure}
+    \caption{Connecting Lu.i Neurons into a Network, Causing Complex Behavior}
+    \label{fig:famililarize_neuron_network}
+\end{figure}
+
+% Pick a configuration where you can approximately measure τref and the threshold ϑ. Take notes of your results and your methods of determining the individual parameters.
+
+The oscilloscope was used to focus on the area right after the threshold is reached and the spike happens.
+This is done using the trigger on descending voltage mode and zooming in on horizontal and vertical axes as much as possible.
+This decreases uncertainties for the following measurements.
+
+\( \tau_{\mathrm{ref}} \) is the refractory time between the neuron spiking to the time when \( V_{\mathrm{mem}} \) begins to rise again. In the meantime the voltage should have quickly approached \( u_{\mathrm{reset}} \) and then stayed there (see images).
+
+\( \vartheta \) is the threshold voltage at which the spike will occur. This is the highest voltage reached, measured just before the spike happens (see images).
+
+\begin{gather}
+    \tau_{\mathrm{ref}} = \qty{12.6}{\milli \second} \\
+    \vartheta = \qty{1.20}{\volt} \\
+    \text{Fixed for this setup:} \ u_{\mathrm{reset}} = \qty{0.00}{\milli \volt}
+\end{gather}
+
+% Images here

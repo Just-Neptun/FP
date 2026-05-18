@@ -1,0 +1,95 @@
+% !TeX root = ../main.tex
+
+\section{Investigating a Single Neuron}
+
+\subsection{A Continuously Spiking Neuron}
+
+We investigate the \texttt{Brainscales-2} System with a single neuron.
+
+First, we will choose parameters such that the neuron spikes continuously without external input. The resulting membrane potential over time is given in \autoref{fig:single_neuron_continuous_spike}. The configured parameters are also given below.
+
+\begin{gather}
+    \text{\texttt{v\_leak}} = 580 \\
+    \text{\texttt{v\_threshold}} = 220 \\
+    \text{\texttt{v\_reset}} = 370 \\
+    \text{\texttt{i\_bias\_leak}} = 100
+\end{gather}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./Experiments/02_Single_Neuron/Graphs/fp_task1_continuous_spikes.png}
+    \caption{A Single Neuron, Parameters Set So It Continuously Spikes}
+    \label{fig:single_neuron_continuous_spike}
+\end{figure}
+
+
+\subsection{Simple Spike Train Statistics}
+
+Once these parameters were determined, we analyzed the neuron's average firing rate, otherwise known as its frequency. This was done by calculating the times between each spike and then averaging them. The average firing rate was \qty{36.8 \pm 0.3}{\hertz}.
+
+% Derive the inter-spike intervals (ISIs) of the spike train recorded in the previous exercise. The inter-spike interval denotes the time between two consecutive spikes of a neuron.
+% Plot a histogram of the ISIs.
+% Identify a method to calculate the mean and standard deviation of the neuron’s instantaneous firing rate. The instantaneous firing rate provides a moment-by-moment measure of the neuron’s activity.
+
+
+\subsection{Recording the f-I curve of a silicon neuron}
+
+Next, we want to study the behavior of a single neuron stimulated with a current source. For this, we introduce a new parameter for our neuron model. This will allow us to enable/disable a constant current source and observe the impact.
+
+We varied the constant current source between \num{0} and \num{800} and calculated the frequency of firing for each trial. The resulting firing rates were plotted against current in \autoref{fig:f-I_curve_freq_vs_I}. Standard deviations were calculated within each trial to obtain an error. While are present in the graph, the uncertainties are very small and are therefore not easily visible.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./Experiments/02_Single_Neuron/Graphs/fp_task1_freq_vs_I.png}
+    \caption{Dependence of Firing Rate of Neuron on Constant Current Source}
+    \label{fig:f-I_curve_freq_vs_I}
+\end{figure}
+
+As is visible in the graph, increasing the current applied to the neuron increases its spiking frequency. This makes sense because a higher current will charge the capacitance of the neuron faster. This causes \( V_\mathrm{mem} \) to also increase faster, meaning the threshold voltage is arrived sooner after each spike.
+
+The relationship seems to be somewhat linear, but more examination might be required to rule out a more logarithmic relationship. This depends on the importance of the seemingly shallower slope at the \num{800} current end of the scale relative to the low currents.
+
+
+\subsection{Synaptic Stimuli and PSP Stacking}
+
+Next we will explore the phenomenon of PSP stacking in a single neuron. This is when multiple successive spikes of other neurons cause a spike in the neuron under observation. An example is given in \autoref{fig:PSP_stacking_example}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./Experiments/02_Single_Neuron/Graphs/fp_introduction_PSP_stacking.png}
+    \caption{Example of PSP Stacking Causing a Neuron to Spike}
+    \label{fig:PSP_stacking_example}
+\end{figure}
+
+We tried to reproduce this graph using the \emph{default neuron parameters}. We created a spiking neuron population and carefully and intentionally set the spike pattern in order to cause our neuron to spike.
+
+The obtained pattern is given in \autoref{fig:PSP_stacking_recreated}. The general shape was matched quite well, although the specific scaling is not quite the same. This was deemed to be acceptable, as the membrane potential is in arbitrary units anyway. The axes were specifically made the same as in the example graph to compare the times exactly.
+
+The configured spiking times used are reported below.
+
+\begin{table}
+    \centering
+    \caption{Chosen Spike Times for Source Population to Recreate PSP Stacking Image in a Neuron}
+    \label{tab:PSP_stacking}
+    \(
+    \begin{array}{S[table-format=1.3]}
+        \hline \hline
+        \text{\texttt{spike\_times}} \ / \ \unit{\milli \second} \\ \hline
+        0.01 \\
+        0.035 \\
+        0.06 \\
+        0.06 \\
+        0.07 \\
+        0.078 \\ \hline \hline
+    \end{array}
+    \)
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./Experiments/02_Single_Neuron/Graphs/fp_task1_PSP_stacking.png}
+    \caption{Recreated PSP Stacking to Cause a Neuron to Spike}
+    \label{fig:PSP_stacking_recreated}
+\end{figure}
+
+From this we see that it is indeed possible to cause various membrane potential curves in neurons. In this case we only altered the spiking times of the source population, but it is of course also feasible to tweak parameters of the main neuron to even better match arbitrary patterns, including the \( y \)-axis scaling.

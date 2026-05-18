@@ -1,0 +1,128 @@
+% !TeX root = ../main.tex
+
+\section{Solving Sudokus With Brainscales-2}
+
+We will apply the simulated neurons to solve a given Sudoku problem. For an \( n \times n \) Sudoku grid, there are \( n^2 \) fields which could each be \( n \) different numbers. We will use \( n \) neurons for each field. These will each represent one of the possible output numbers, using a \quotedef{one hot encoding}.
+
+We will use the Brainscales-2 system within Python to set up the neurons and synapses in order to solve the Sudoku. The created and used code is included as attached \texttt{.ipynb} and \texttt{.py} files.
+
+The rules of Sudoku are encoded as constraints of the program. This means inhibitory synapses are set up so that spiking neurons inhibit activity in other neurons which would cause a disallowed board state.
+
+These rules include:
+\begin{itemize}
+    \item Only one number per field
+    \item Only one of each number per row
+    \item Only one of each number per column
+    \item Only one of each number within smaller grid boxes which cover the whole Sudoku
+\end{itemize}
+
+The implementation of these rules by connecting neurons is explained further in \autoref{sec:sudoku_counting_neurons}.
+
+\subsection{Running the Network with No Constraints}
+
+As a \quoteapprox{control}, we will run the program on a \( 4 \times 4 \) Sudoku without implementing any constraint rules. The resulting \quoteapprox{solution} is shown in \autoref{fig:sudoku_no_constraints}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./Experiments/04_Sudoku/no_constraints_sudoku.png}
+    \caption{Sudoku Solver Without Constraint Synapses}
+    \label{fig:sudoku_no_constraints}
+\end{figure}
+
+Clearly, without implementing the actual rules/constraints of Sudoku, the solver is incomplete. The resulting grid contains multiple of the same number in the same row, column and box!
+
+In the graph of the neuron activity on the right, we can see the initial clues given within the first \( \approx \qty{0.02}{\milli \second} \). These neurons are continually stimulated by the clue-giving neurons, so we see their activation is consistent and high throughout the solve.
+
+Due to the Poisson noise stimulating every neuron, they all spike randomly during the whole process as well. There are no inhibitory synapses, so they do not influence each other or \quoteapprox{settle down} into a stable solution state.
+
+We also note that the desired output (one-hot encoding) is not followed. Multiple neurons representing different numbers (different colors on the graph) in the same field (within the same thick horizontal lines) are firing at the same time.
+
+\subsection{Running Network With Constraints}
+
+After implementing the rules of Sudoku as inhibitory synapses in the network, we rerun the program, obtaining the solution seen in \autoref{fig:sudoku_with_constraints}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./Experiments/04_Sudoku/with_constraints_sudoku.png}
+    \caption{Sudoku Solver With Constraint Synapses}
+    \label{fig:sudoku_with_constraints}
+\end{figure}
+
+This time, the Sudoku is actually solved (as evident by inspection as well as the green border).
+
+Again we can see the clues as constant spiking neurons in the activity graph. These inhibit other numbers from being activated within their fields. The \quoteapprox{deduced} numbers can be seen after at least \qty{0.04}{\milli \second}. These are less consistent spikes, but they even out towards the end as the simulation approaches the solution.
+
+We also note the small number of \quoteapprox{misfires}, where a neuron representing a different number fires, even though a different number is correct. This sometimes happens even if that number was already deduced, or is given as the clue. This is caused by the Poisson noise, which also allows the system to work at all, so it is necessary and expected. Luckily, these neurons do not continuously activate. They are quickly inhibited by the other neurons again, so their effects do not cause the solution to fail.
+
+\subsection{Varying the Number of Clues}
+
+We examine how the program performs when given different numbers of clues.
+
+As it was successful with 8 clues, it is no surprise that it also solves the Sudoku when given more clues. This makes sense, as more clues mean fewer fields need to be solved for. More clues also constrain the solution more, preventing the network from \quoteapprox{guessing} and cementing numbers which make the board impossible to solve further.
+
+Interestingly, this guessing behavior has both advantages and disadvantages. It is most apparent when \emph{no} clues are given. In this case, the solution is underdetermined. There is not enough information to logically solve the Sudoku. Some assumptions or guesses need to be made in order to continue. The network achieves this well, leading to valid solution boards for zero clues. This also applies when 1 or 2 clues are given.
+
+However, the guessing becomes a problem for an intermediate number of clues, between 4 and 6. In this range, the system only sometimes solves the problem correctly. The solution might still be underdetermined, but it is constrained much more than for only 1 or 2 clues.
+
+In many cases, the network seems to have made a guess which fits within what is allowed by the clues but is not logically justified. After this point, logically consistent arguments can be made to solve more fields until the problem is almost finished. However, the model runs into a problem at this point because the clues constrain the final fields too much.
+
+An example of this is seen in \autoref{fig:sudoku_underdetermined}. Ignoring the duplicate 4 in the lower right, we see that the rest of the Sudoku is solved correctly. The network seems to have run into a \quotedef{dead-end} during the solve. All the numbers which fit together correctly inhibit other neurons from activating. Because the Sudoku is in large part solved, the neurons can no longer be inhibited and stopped from spiking. The network cannot reverse the state of so many neurons at once, leading to an invalid end state.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./Experiments/04_Sudoku/underdetermined_sudoku.png}
+    \caption{A Failed Attempt at Solving the Sudoku With 5 Clues}
+    \label{fig:sudoku_underdetermined}
+\end{figure}
+
+\subsubsection{Improving the Program}
+
+To reduce these errors, the Poisson noise or its weight could be adjusted. This makes guesses less likely overall. The weights of the other synapses could also be tweaked to see what makes the success rate highest.
+
+Excitatory synapses could also be used to encourage the numbers other than the current number in other fields in a row/column/block. This would reduce random guesses while still allowing logical steps.
+
+Lastly, the program could be set to repeat if the solution is not found the first time. This could also be done while saving some information about the failed board state to avoid those mistakes in the future. From the example in \autoref{fig:sudoku_underdetermined}, the duplicate 4 could be saved and the solver run two more times with the 4 in each spot as an additional clue.
+
+These methods might increase the success rate by preventing dead-end solution attempts and encouraging more logical reasoning.
+
+\subsubsection{Quantitative Investigation}
+
+We further investigate the relationship between number of clues and successes by repeating the solve for 10 trials using random clue positions each time. The success/failure of the solve attempt is recorded to be analyzed. The success rates are determined and shown in \autoref{fig:sudoku_num_clues_bar_chart}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./Experiments/04_Sudoku/num_clues_bar_chart_sudoku.png}
+    \caption{Success Rate of Sudoku Solver vs. Number of Clues}
+    \label{fig:sudoku_num_clues_bar_chart}
+\end{figure}
+
+The graph validates and quantifies the previous explanation that the solver sometimes fails when given 4 to 6 clues. We see that the solver is much worse for only 4 clues, although 5 and 6 clues also only have an \qty{80}{\percent} success rate.
+
+\subsection{Unnecessary Constraint}
+
+It would be beneficial to investigate if all constraints are necessary. If some can be removed, this would certainly reduce the number of needed synapses and reduce computational intensity.
+
+To create a valid Sudoku, all the row/column/block rules are needed. The only constraint which might be possible to remove is the restriction on one number per field.
+
+To implement this but still produce a valid output, the last neuron spike in each field needs to be used to determine which number should go in each field. This would ignore other neurons firing in the same field at the same time. An average number of firings could also be considered to stabilize the result.
+
+However, this will probably be a much more unstable/unpredictable solving method with a lower success rate overall. While it would be beneficial to study this in more detail, all constraints \emph{are} useful to include in the implementation in order to solve the problem.
+
+\subsection{Implementation and Counting Required Neurons and Synapses}
+\label{sec:sudoku_counting_neurons}
+
+The implemented network topology will be explained next.
+
+We set up neurons to represent the board state. We also use additional neurons to add random noise to the calculation (this avoids dead-ends where a mistake in the solve happened). These are connected by synapses.
+
+In order to sustain activity and \quoteapprox{save} a value when a number is determined, neurons are linked to themselves.
+
+The constraints/rules of the Sudoku are encoded in other synapses between different groups of neurons.
+
+These will be explained for a \( 4 \times 4 \) and a \( 9 \times 9 \) Sudoku grid. The exact number of neurons and synapses needed will be calculated as well.
+
+We note that with increasing size, the number of neurons and synapses rapidly increases.
+
+\input{./Experiments/04_Sudoku/4x4_summary.tex}
+
+\input{./Experiments/04_Sudoku/9x9_summary.tex}

@@ -1,0 +1,151 @@
+% !TeX root = ../main.tex
+\section{A simple feedforward network}
+
+In this task, we simulate a network of neurons in an aim to achieve complex behavior.
+We connect several populations of neurons with each other, such that they form a chain.
+After an initial excitation, each population in the chain spikes and then excites the next population in the chain.
+These are the \quotedef{excitatory} populations.
+For each excitatory population, we introduce an \quotedef{inhibitory} population which gets excited by the same (previous) population.
+After spiking, it inhibits its accompanying excitatory population, thereby hindering it from spiking again.
+In this way, the initial stimulation travels through this so-called \quotedef{synfire chain}.
+
+The notebook corresponding to this task was pre-filled with an implementation of a synfire chain.
+In the following, we use this implementation to answer several questions about the inner workings of a feedforward network.
+Specifically useful for quick inspection are the two plots which the notebook produced for each run.
+The first subplot is a plot of the pair (time of spike, neuron ID) for each spiked neuron.
+The second subplot is the membrane trace of the first excited neuron.
+
+\subsection{Adjusting Weights}
+We are asked to fill in the weights which determine how much one population excites or inhibits another.
+There are five weights: \verb|stim_exc|, \verb|stim_inh|, \verb|exc_exc|, \verb|exc_inh|, and \verb|inh_exc|.
+The allowed values are integers from 0-63 (negative in the last case).
+
+In order to achieve the behavior of a synfire chain, we tune the weights.
+We start by setting \verb|stim_exc = 63| and \verb|stim_inh = 31| to observe how the populations evolve without interaction by looking at the resulting plot.
+We see that the excitatory population has two spikes before returning to its resting potential, while the inhibitory only has one.
+Including \verb|inh_exc = -31| counteracts the second peak of the excitatory population.
+This is the desired behavior of a single population.
+Finally, including \verb|exc_exc = 63| and \verb|exc_inh = 31| mimics the initial stimulation and thus lets the following populations show the same behavior.
+The plots of this behavior can be seen in \autoref{fig:synfire-chain:single:plot}.
+
+As explained, we see the pair (time of spike, neuron ID) for each spiked neuron in the upper subplot.
+There are two regions, the excitatory populations show up in the lower (red) region, while the inhibitory populations show up in the upper (blue) region.
+In our case, there are eight clusters in both regions, each representing a population.
+This implies that each population only has one simultaneous spike and then returns to their resting potential, which is exactly the behavior of a synfire chain.
+The lower subplot shows further how fast the inhibitory populations counteract the spiking behavior of the excitatory populations.
+
+The connection responsible for the characteristic behavior of a synfire chain is \verb|inh_exc|.
+Of course all others are also necessary, but this connection makes it such that each population has the explicit function of exciting the next population before it gets killed off.
+This is what distinguishes the synfire chain from a network of repeatedly spiking populations, in which no structure is present.
+
+We test the effect of disabling inhibition by setting \verb|stim_inh| and \verb|exc_inh| to zero.
+As predicted, each excitatory population keeps spiking until it runs out of fuel.
+Meanwhile, it repeatedly excites the following population, which therefore can keep spiking for longer.
+This process compounds, until the last population spikes approximately 25 times.
+Needless to say, this would not benefit a human brain.
+
+Next, we connect to the oscilloscope in order to visualize the membrane potential.
+This can be seen in \autoref{fig:synfire-chain:single:oscilloscope}.
+Comparing to the corresponding plot in \autoref{fig:synfire-chain:single:plot}, we find great agreement between them.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_chain/Graphs/sc-1.5-plot.png}
+        \caption{Plot}
+        \label{fig:synfire-chain:single:plot}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_Chain/Graphs/sc-1.5-osc.png}
+        \caption{Oscilloscope}
+        \label{fig:synfire-chain:single:oscilloscope}
+    \end{subfigure}
+    \caption{Visualization of the behavior of a synfire chain.}
+    \label{fig:synfire-chain:single}
+\end{figure}
+
+\subsection{Adjusting the Number of Neurons per Population}
+Now that we have a functioning synfire chain, we may further investigate basic questions.
+Currently, our chain consists of eight sections, each containing one excitatory and one inhibitory population.
+Each population consists of seven neurons.
+
+First, we ask by how much we can reduce the number of neurons per population, while consistently maintaining the behavior of a synfire chain.
+Obviously, each population needs at least one neuron to fire.
+Furthermore, one might think that more neurons are necessary in order to counteract the variability due to each neuron being individually produced.
+But in fact, digital configuration due to 64 bit of local SRAM (static random-access memory) and analog configuration due to 8 reference voltages and 16 current parameters per neuron allow this fixed-pattern noise to be counteracted.
+Instead, the problem lies with the resistances/conductances associated with the synapse and leak.
+If the leak conductance of a neuron is greater than the total conductance of the incoming synaptic signals, the post-synaptic neuron will never fire.
+
+Now, we can ask what chain length we might achieve at maximum.
+We know that there are only 512 neurons on a given chip.
+If we denote the maximal number of sections as \( L_{\mathrm{max}} \) and the minimal number of neurons in a given population as \( N_{\mathrm{min}} \), we have
+\begin{equation}
+    2 N_{\mathrm{min}} L_{\mathrm{max}} \leq 512.
+\end{equation}
+The factor of 2 stems from the fact that there are 2 populations in each section.
+Through trial and error, we found the lowest stable value for \( N_{\mathrm{min}} \) to be 6.
+This gives us a maximal chain length of 42.
+The resulting chain is visualized in \autoref{fig:synfire-chain:maximal-length}.
+We found that varying the sizes of excitatory and inhibitory populations separately did not produce better outcomes.
+Note that we did not investigate how different weights might change this result.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\textwidth]{./Experiments/03_Synfire_Chain/Graphs/sc-2-plot.png}
+    \caption{Plot of the behavior of a synfire chain with maximal length.}
+    \label{fig:synfire-chain:maximal-length}
+\end{figure}
+
+\subsection{Closing the Loop}
+Finally, we may connect the last section to the first.
+This creates a loop wherein the signal travels through the chain again and again.
+We increase the population size to 16 in order to ensure stable propagation, while decreasing the chain length to 8.
+
+We investigate both a loop with the weights as before and a loop without inhibition.
+This enables us to examine what the difference between a synfire chain and a continuously spiking neuron population is.
+The resulting plots and a screenshot of the oscilloscope are shown in \autoref{fig:synfire-chain:loop}.
+
+In the case with inhibition, one can see the chain loop for a few cycles.
+But instead of continuing on indefinitely, the behavior becomes more and more dispersed.
+This means that at some point, an inhibitory population will spike before its corresponding excitatory population, thereby stopping it from exciting the next section and disrupting the chain behavior.
+This is reflected in the trace of the membrane potential.
+Its later spikes happen farther apart, meaning that its excitation becomes more and more dispersed.
+This happens until it is inhibited before it can spike, after which the potential drops even below its reset level and only slowly returns to its resting level. 
+
+In the case without inhibition, one can clearly see the robust periodic pattern.
+The populations keep firing indefinitely even after the software has completed.
+The membrane potential trace similarly shows a periodic pattern.
+The height of the peaks and valleys vary minimally, but are still very robust.
+This is especially impressive given that the BrainScaleS-2 system operates at an acceleration of about \num{1e3} compared to the biological processes.
+
+This comparison showcases the trade-off between precision and robustness.
+Preventing the individual populations from firing indefinitely lets us achieve high temporal resolution, while maintaining controlled behavior.
+While this is very useful in practical applications of neuromorphic computing, it also requires a high amount of engineering.
+On the other hand, letting each population fire continuously similar to a harmonic oscillator ensures the stability at relative ease.
+But there is little practical utility in such an uncontrollable system.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_chain/Graphs/sc-3.1-plot-real.png}
+        \caption{Plot with Inhibition}
+        \label{fig:synfire-chain:loop:plot-with-inhibition}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_chain/Graphs/sc-3.1-plot.png}
+        \caption{Plot without Inhibition}
+        \label{fig:synfire-chain:loop:plot-without-inhibition}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{./Experiments/03_Synfire_Chain/Graphs/sc-3.1-osc.png}
+        \caption{Oscilloscope}
+        \label{fig:synfire-chain:loop:oscilloscope}
+    \end{subfigure}
+    \caption{Visualization of the behavior of a looping synfire chain.}
+    \label{fig:synfire-chain:loop}
+\end{figure}
