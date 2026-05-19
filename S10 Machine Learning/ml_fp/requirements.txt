@@ -1,0 +1,13 @@
+numpy
+scipy
+matplotlib
+ipykernel
+pandas
+jupyter
+h5py
+tqdm
+torch
+torchvision
+git+https://github.com/mwalmsley/galaxy_mnist.git
+scikit-learn
+umap-learn

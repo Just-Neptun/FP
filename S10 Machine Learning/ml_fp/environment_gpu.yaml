@@ -1,0 +1,23 @@
+name: mlfp
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - scikit-learn
+  - pytorch
+  - pytorch-cuda=12.1
+  - torchvision
+  - matplotlib
+  - ipykernel
+  - pandas
+  - jupyter
+  - h5py
+  - tqdm
+  - umap-learn
+  - pip:
+    - git+https://github.com/mwalmsley/galaxy_mnist.git
