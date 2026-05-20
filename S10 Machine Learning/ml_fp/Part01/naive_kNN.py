@@ -10,9 +10,6 @@ def get_most_common_entry(lst: list[int | float]) -> int | float:
 def euclidean_distance(input_data: torch.Tensor, data: torch.Tensor) -> torch.Tensor:
     '''Calculate distances for all items in input_data to all items in data.
     Returns a (rank 2) tensor: input elements x data elements'''
-    if input_data.shape[1:] != data.shape[1:]:
-        raise ValueError(f'''Test data and training data feature shapes/dimensions do not match after first dimension!
-                         test ≠ input: {input_data.shape} ≠ {data.shape}''')
     data = data[None,:]
     input_data = input_data[:, None]
     difference = input_data - data
@@ -22,6 +19,7 @@ def euclidean_distance(input_data: torch.Tensor, data: torch.Tensor) -> torch.Te
 
 def classify_from_distances(distances: torch.Tensor, labels: torch.Tensor, k: int) -> int | float:
     '''Return the most common label of the nearest k training vectors given a 1d list of distances to all training vectors.'''
+    if not (k > 0 and int(k) == k): raise ValueError(f'k is not a positive integer! --> k = {k}')
     labelled_distances = torch.stack([distances, labels], dim=-1)
     labelled_distances = labelled_distances.tolist()
     labelled_distances.sort(key=lambda x: x[0])
@@ -38,6 +36,13 @@ def kNN_classify(
 ) -> torch.Tensor:
     '''Classify a list of input vectors according to training data/labels.
     Return a list of classifications according to k-NN of input vectors.'''
+    if input_data.shape[1:] != data.shape[1:]:
+        raise ValueError(
+            f'''Test data and training data feature shapes/dimensions do not match after first dimension!
+            test ≠ input: {input_data.shape} ≠ {data.shape}'''
+        )
+    input_data = torch.flatten(input_data, 1)
+    data = torch.flatten(data, 1)
     distances_tensor = euclidean_distance(input_data, data)
     input_nearest_labels = (classify_from_distances(distances, labels, k) for distances in distances_tensor)
     if debug: input_nearest_labels = tqdm(input_nearest_labels)
