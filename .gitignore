@@ -2,3 +2,4 @@
 .venv/
 .out_dir/
 **/out_dir/
+**/__pycache__
