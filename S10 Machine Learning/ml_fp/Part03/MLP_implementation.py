@@ -20,12 +20,6 @@ class NeuralNetwork(nn.Module):
         logits = self.linear_relu_stack(x)
         return logits
 
-    # def classify(self, input):
-    #     logits = self(input)
-    #     pred_probab = nn.Softmax(dim=1)(logits)
-    #     y_pred = pred_probab.argmax(1)
-    #     return y_pred
-
 # =====-----=====-----=====-----=====
 
 def train(
@@ -33,7 +27,8 @@ def train(
         model,
         loss_fn,
         optimizer,
-        device
+        device,
+        print_info: bool = False
     ) -> dict:
     size = len(dataloader.dataset)
     num_batches = len(dataloader)
@@ -52,10 +47,10 @@ def train(
         optimizer.zero_grad()
 
         # Accumulate loss and corrects
-        training_loss += loss
+        training_loss += loss.item()
         correct += (pred.argmax(1) == y).type(torch.float).sum().item()
 
-        if batch % 100 == 0:
+        if print_info and (batch % 100 == 0):
             loss, current = loss.item(), (batch + 1) * len(X)
             print(f"Completed: {current:>5d}/{size:>5d}    loss: {loss:>7f}")
     training_loss /= num_batches
@@ -69,7 +64,8 @@ def test(
         dataloader: torch.utils.data.DataLoader,
         model,
         loss_fn,
-        device
+        device,
+        print_info: bool = False
     ) -> dict:
     size = len(dataloader.dataset)
     num_batches = len(dataloader)
@@ -83,7 +79,8 @@ def test(
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
     test_loss /= num_batches
     correct /= size
-    print(f"Test Error: \nAccuracy: {(100*correct):>0.1f} %    Avg. loss: {test_loss:>8f}")
+    if print_info:
+        print(f"Test Accuracy: {(100*correct):>0.1f} %    Test Avg. loss: {test_loss:>8f}")
     return {
         'test_avg_loss': test_loss,
         'test_accuracy': correct
