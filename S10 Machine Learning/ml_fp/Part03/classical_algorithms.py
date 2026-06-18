@@ -2,59 +2,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
+from typing import Literal
+
 from matplotlib.colors import ListedColormap
 
-from sklearn.datasets import make_circles, make_classification, make_moons
-from sklearn.gaussian_process import GaussianProcessClassifier
-from sklearn.gaussian_process.kernels import RBF
 from sklearn.inspection import DecisionBoundaryDisplay
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
 
-classifiers_names = [
-    "RBF SVM",
-    "Gaussian Process",
-    "Naive Bayes",
-]
-classifiers = [
-    SVC(gamma=2, C=1, random_state=42),
-    GaussianProcessClassifier(1.0 * RBF(1.0), random_state=42),
-    GaussianNB(),
-]
-results = []
+def example_of_algorithms(
+        classifiers,
+        classifiers_names,
+        datasets,
+        datasets_names,
+):
+    results = []
 
-X, y = make_classification(
-    n_features=2,
-    n_redundant=0,
-    n_informative=2,
-    random_state=1,
-    n_clusters_per_class=1,
-)
-rng = np.random.RandomState(2)
-X += 2 * rng.uniform(size=X.shape)
-linearly_separable = (X, y)
-
-datasets = [
-    make_moons(noise=0.3, random_state=0),
-    make_circles(noise=0.2, factor=0.5, random_state=1),
-    linearly_separable,
-]
-datasets_names = [
-    'moons',
-    'circles',
-    'linearly_separable',
-]
-
-
-
-def example_of_algorithms():
     figure = plt.figure(figsize=(9, 6))
     i = 1
     # iterate over datasets
     for ds_cnt, (ds, ds_name) in enumerate(zip(datasets, datasets_names)):
+        # print(f'Using ds_cnt: {ds_cnt}, ds: {ds}, ds_name: {ds_name}')
         # preprocess dataset, split into training and test part
         X, y = ds
         X_train, X_test, y_train, y_test = train_test_split(
@@ -131,3 +100,40 @@ def example_of_algorithms():
 
     plt.tight_layout()
     plt.show()
+
+    return results
+
+
+High_or_Low = Literal["high", "low"]
+
+LEVEL_TO_BOOL = {
+    "high": True,
+    "low": False,
+}
+
+def style_dataframe(df, labels_to_style: list[str], good_sides: list[High_or_Low]):
+    # create a desaturated cmap
+    cmap = plt.get_cmap("RdYlGn")
+    colors = cmap(np.linspace(0, 1, 256))
+    desat_factor = 0.8   # 0 = grayscale, 1 = original
+    gray = np.mean(colors[:, :3], axis=1, keepdims=True)
+    colors[:, :3] = gray + desat_factor * (colors[:, :3] - gray)
+    desat_cmap = ListedColormap(colors)
+
+    styled = df.style
+
+    for label, good_side in zip(labels_to_style, good_sides):
+        high_is_green = LEVEL_TO_BOOL[good_side]
+        if high_is_green:
+            styled.background_gradient(subset=[label], cmap=desat_cmap)    # low is red, high is green
+        else:
+            styled.background_gradient(subset=[label], cmap=desat_cmap.reversed())    # low is green, high is red
+
+    return styled
+
+    # styled = (
+    #     df.style
+    #     .background_gradient(subset=["score"], cmap=desat_cmap)    # low scores red, high scores green
+    #     .background_gradient(subset=["train_runtime"], cmap=desat_cmap.reversed())    # low runtime green, high runtime red
+    #     .background_gradient(subset=["test_runtime"], cmap=desat_cmap.reversed())    # low runtime green, high runtime red
+    # )
