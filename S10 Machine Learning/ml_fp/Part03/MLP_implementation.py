@@ -1,7 +1,4 @@
-import torch
 from torch import nn
-
-from typing import Literal
 
 class NeuralNetwork(nn.Module):
     def __init__(self):

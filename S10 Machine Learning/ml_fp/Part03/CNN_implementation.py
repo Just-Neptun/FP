@@ -1,9 +1,11 @@
 from torch import nn
 
 
+
 class Neural_Network(nn.Module):
     def __init__(self):
         super().__init__()
+        # comments show expected/decided shape between steps in sequence
         # ----- input -----
         # batch *  3 * 64 * 64
         self.conv_layers = nn.Sequential(
