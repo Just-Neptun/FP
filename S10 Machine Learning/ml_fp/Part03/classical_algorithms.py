@@ -11,15 +11,25 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
+SUBFIG_WIDTH = 3
+SUBFIG_HEIGHT = 3
+
 def example_of_algorithms(
         classifiers,
         classifiers_names,
         datasets,
         datasets_names,
-):
+    ):
+    '''
+    Create a figure with subfigures: (x=classifiers+empty, y=datasets).
+    During this, record runtimes and accuracy score to return as list of dicts.
+    '''
     results = []
 
-    figure = plt.figure(figsize=(9, 6))
+    figure = plt.figure(figsize=(
+        SUBFIG_WIDTH * len(classifiers),
+        SUBFIG_HEIGHT * len(datasets)
+    ))
     i = 1
     # iterate over datasets
     for ds_cnt, (ds, ds_name) in enumerate(zip(datasets, datasets_names)):
@@ -104,22 +114,29 @@ def example_of_algorithms(
     return results
 
 
-High_or_Low = Literal["high", "low"]
-
 LEVEL_TO_BOOL = {
     "high": True,
     "low": False,
 }
 
-def style_dataframe(df, labels_to_style: list[str], good_sides: list[High_or_Low]):
-    # create a desaturated cmap
-    cmap = plt.get_cmap("RdYlGn")
-    colors = cmap(np.linspace(0, 1, 256))
-    desat_factor = 0.8   # 0 = grayscale, 1 = original
-    gray = np.mean(colors[:, :3], axis=1, keepdims=True)
-    colors[:, :3] = gray + desat_factor * (colors[:, :3] - gray)
-    desat_cmap = ListedColormap(colors)
+# create a desaturated cmap
+cmap = plt.get_cmap("RdYlGn")
+colors = cmap(np.linspace(0, 1, 256))
+desat_factor = 0.8   # 0 = grayscale, 1 = original
+gray = np.mean(colors[:, :3], axis=1, keepdims=True)
+colors[:, :3] = gray + desat_factor * (colors[:, :3] - gray)
+desat_cmap = ListedColormap(colors)
 
+def style_dataframe(
+        df,
+        labels_to_style: list[str],
+        good_sides: list[Literal["high", "low"]]
+    ):
+    '''
+    Return a pandas style object which colors backgrounds of chosen columns (labels_to_style) with a gradient.
+    green = good    ;    red = bad
+    Pick the good/green values in good_sides from "high" or "low".
+    '''
     styled = df.style
 
     for label, good_side in zip(labels_to_style, good_sides):
