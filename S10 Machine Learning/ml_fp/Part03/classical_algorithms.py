@@ -137,9 +137,19 @@ def style_dataframe(
     green = good    ;    red = bad
     Pick the good/green values in good_sides from "high" or "low".
     '''
+
+    styling_list = list(zip(labels_to_style, good_sides))
+
+    # filter out columns which would be all NaNs
+    # these will not be styled
+    styling_list = [
+        (label, good_side)
+        for label, good_side in styling_list
+        if df[label].notna().all()
+    ]
     styled = df.style
 
-    for label, good_side in zip(labels_to_style, good_sides):
+    for label, good_side in styling_list:
         high_is_green = LEVEL_TO_BOOL[good_side]
         if high_is_green:
             styled.background_gradient(subset=[label], cmap=desat_cmap)    # low is red, high is green
@@ -147,10 +157,3 @@ def style_dataframe(
             styled.background_gradient(subset=[label], cmap=desat_cmap.reversed())    # low is green, high is red
 
     return styled
-
-    # styled = (
-    #     df.style
-    #     .background_gradient(subset=["score"], cmap=desat_cmap)    # low scores red, high scores green
-    #     .background_gradient(subset=["train_runtime"], cmap=desat_cmap.reversed())    # low runtime green, high runtime red
-    #     .background_gradient(subset=["test_runtime"], cmap=desat_cmap.reversed())    # low runtime green, high runtime red
-    # )
