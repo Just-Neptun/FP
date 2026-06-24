@@ -11,8 +11,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
-SUBFIG_WIDTH = 3
-SUBFIG_HEIGHT = 3
+SUBFIG_WIDTH = 2.5
+SUBFIG_HEIGHT = 2.1
 
 def example_of_algorithms(
         classifiers,
@@ -129,27 +129,23 @@ desat_cmap = ListedColormap(colors)
 
 def style_dataframe(
         df,
-        labels_to_style: list[str],
-        good_sides: list[Literal["high", "low"]]
+        labels_and_styles: list[tuple[str, Literal["high", "low"]]]
     ):
     '''
     Return a pandas style object which colors backgrounds of chosen columns (labels_to_style) with a gradient.
     green = good    ;    red = bad
     Pick the good/green values in good_sides from "high" or "low".
     '''
-
-    styling_list = list(zip(labels_to_style, good_sides))
-
     # filter out columns which would be all NaNs
     # these will not be styled
-    styling_list = [
+    labels_and_styles = [
         (label, good_side)
-        for label, good_side in styling_list
+        for label, good_side in labels_and_styles
         if df[label].notna().all()
     ]
     styled = df.style
 
-    for label, good_side in styling_list:
+    for label, good_side in labels_and_styles:
         high_is_green = LEVEL_TO_BOOL[good_side]
         if high_is_green:
             styled.background_gradient(subset=[label], cmap=desat_cmap)    # low is red, high is green
