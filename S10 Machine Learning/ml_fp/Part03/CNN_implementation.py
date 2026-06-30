@@ -67,17 +67,21 @@ class Neural_Network_Optimized(nn.Module):
 
             nn.Conv2d(
                 in_channels=32,
-                out_channels=32,
+                out_channels=64,
                 kernel_size=3,
                 stride=1,
                 padding=1
             ),
-            nn.BatchNorm2d(32),
+            nn.BatchNorm2d(64),
             nn.ReLU(),
+            nn.MaxPool2d(
+                kernel_size=2,
+                stride=2
+            ),
 
             nn.Conv2d(
-                in_channels=32,
-                out_channels=16,
+                in_channels=64,
+                out_channels=32,
                 kernel_size=3,
                 stride=1,
                 padding=1
@@ -90,9 +94,11 @@ class Neural_Network_Optimized(nn.Module):
         )
         self.classifier = nn.Sequential(
             nn.Flatten(),
-            nn.Linear((16 * 16 * 16), 128),
+
+            nn.Linear((32 * 8 * 8), 128),
             nn.ReLU(),
             nn.Dropout(0.5),
+
             nn.Linear(128, 4)
         )
 
