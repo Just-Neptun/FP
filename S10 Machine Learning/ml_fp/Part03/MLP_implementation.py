@@ -7,9 +7,13 @@ class NeuralNetwork(nn.Module):
         self.linear_relu_stack = nn.Sequential(
             nn.Linear(3*64*64, 512),    # RGB 64 x 64 images (from GalaxyMNIST datset)
             nn.ReLU(),
-            nn.Linear(512, 512),
+            nn.Dropout(0.5),
+
+            nn.Linear(512, 256),
             nn.ReLU(),
-            nn.Linear(512, 4),    # 4 classes (types of galaxies in dataset)
+            nn.Dropout(0.5),
+
+            nn.Linear(256, 4),    # 4 classes (types of galaxies in dataset)
         )
 
     def forward(self, x):
