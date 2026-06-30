@@ -21,9 +21,7 @@ def train(
         model,
         loss_fn,
         optimizer,
-        device,
-        print_info: bool = False,
-        print_function: Callable = print
+        device
     ) -> dict:
     size = get_dataloader_len(dataloader)
     model.train()
@@ -44,9 +42,6 @@ def train(
         training_loss += loss.item() * len(X)
         correct += (pred.argmax(1) == y).type(torch.float).sum().item()
 
-        if print_info and (batch != 0) and (batch % 50 == 0):
-            loss, current = loss.item(), (batch + 1) * len(X)
-            print_function(f"Completed: {current:>5d}/{size:>5d}    loss: {loss:>7f}")
     # calculate average loss and accuracy over whole training step
     training_loss /= size
     correct /= size
@@ -59,9 +54,7 @@ def test(
         dataloader: DataLoader,
         model,
         loss_fn,
-        device,
-        print_info: bool = False,
-        print_function: Callable = print
+        device
     ) -> dict:
     size = get_dataloader_len(dataloader)
     model.eval()
@@ -74,8 +67,6 @@ def test(
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
     test_loss /= size
     correct /= size
-    if print_info:
-        print_function(f"Test Accuracy: {(100*correct):>0.1f} %    Test Avg. loss: {test_loss:>8f}")
     return {
         'test_avg_loss': test_loss,
         'test_accuracy': correct
@@ -97,17 +88,13 @@ def training_step(
         model,
         loss_fn,
         optimizer,
-        device,
-        print_info=print_info,
-        print_function=print_function
+        device
     )
     test_result: dict = test(
         test_dataloader,
         model,
         loss_fn,
-        device,
-        print_info=print_info,
-        print_function=print_function
+        device
     )
     result: dict = train_result | test_result    # union of dicts, no overwrites happen because no keys overlap
     return result
@@ -122,11 +109,8 @@ def training_loop(
         epochs: int,
         DEVICE
     ) -> list[dict]:
-    print_function = tqdm.write    # choose instead of print for compatibility with tqdm progress bar
     result: list[dict] = []
     for t in tqdm(range(epochs)):
-        print_info = True if (t % 5 == 0 or t == epochs - 1) else False
-        if print_info: print_function(f"---------- Epoch {t} ----------")
         res: dict = training_step(
             model,
             train_dataloader,
@@ -134,9 +118,6 @@ def training_loop(
             loss_fn,
             optimizer,
             DEVICE,
-            print_info,
-            print_function=print_function
         )
         result.append({'epoch': t} | res)    # union of dicts, no overwrites happen because no keys overlap
-    print_function("Done!")
     return result
