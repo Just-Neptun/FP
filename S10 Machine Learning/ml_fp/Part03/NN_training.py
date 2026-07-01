@@ -5,7 +5,7 @@ import pandas as pd
 from tqdm.notebook import tqdm
 
 from collections.abc import Sized
-from typing import cast, Callable
+from typing import cast
 
 def get_dataloader_len(
         dataloader: DataLoader
@@ -80,9 +80,7 @@ def training_step(
         test_dataloader: DataLoader,
         loss_fn,
         optimizer,
-        device,
-        print_info: bool = False,
-        print_function: Callable = print
+        device
     ) -> dict:
     train_result: dict = train(
         train_dataloader,
