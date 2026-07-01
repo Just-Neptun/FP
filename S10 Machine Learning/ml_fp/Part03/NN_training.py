@@ -1,5 +1,6 @@
 import torch
 from torch.utils.data import DataLoader
+import pandas as pd
 
 from tqdm.notebook import tqdm
 
@@ -121,3 +122,20 @@ def training_loop(
         )
         result.append({'epoch': t} | res)    # union of dicts, no overwrites happen because no keys overlap
     return result
+
+def loss_and_accuracy_plot(axes, df: pd.DataFrame) -> None:
+    ax1, ax2 = axes[0], axes[1]
+
+    ax1.plot(df['epoch'], df['training_avg_loss'], label='Training', marker='.')
+    ax1.plot(df['epoch'], df['test_avg_loss'], label='Testing', marker='.')
+    ax1.set_xlabel('Epoch')
+    ax1.set_ylabel('Average Loss')
+    ax1.set_title('Loss During Training and Testing')
+    ax1.legend()
+
+    ax2.plot(df['epoch'], df['training_accuracy'], label='Training', marker='.')
+    ax2.plot(df['epoch'], df['test_accuracy'], label='Testing', marker='.')
+    ax2.set_xlabel('Epoch')
+    ax2.set_ylabel('Accuracy')
+    ax2.set_title('Accuracy During Training and Testing')
+    ax2.legend()
