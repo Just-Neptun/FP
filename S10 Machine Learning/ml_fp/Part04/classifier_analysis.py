@@ -7,7 +7,7 @@ def clf_analysis_plots(
     target_accuracy,
     figsize,
     target_line_padding = 0.75,
-    xticks_rotation = 20
+    xticks_rotation = 25
     ):
     N_clf = len(df)
 
