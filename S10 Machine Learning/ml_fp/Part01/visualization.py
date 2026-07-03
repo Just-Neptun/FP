@@ -17,15 +17,14 @@ def show_galaxy(image: torch.Tensor, ax, title: str = "") -> None:
     return
 
 
-def show_first_galaxies_of_class(
-    N: int, images: torch.Tensor, label_name: str, cols: int = 3
-) -> None:
+def show_galaxies(images: torch.Tensor, title: str, cols: int = 3) -> None:
+    N = images.shape[0]
     rows: int = (N - 1) // cols + 1
 
     fig, axes = plt.subplots(rows, cols, figsize=(3 * cols, 3 * rows))
     axes = axes.flatten()
 
-    fig.suptitle(f"Class: {label_name}")
+    fig.suptitle(title)
     for i in range(N):
         show_galaxy(images[i], axes[i])
     for j in range(N, len(axes)):
