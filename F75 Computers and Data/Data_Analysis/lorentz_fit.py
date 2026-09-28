@@ -35,3 +35,20 @@ def calc_Q_factor(params, params_err):
     Q = omega_0 / gamma
     Q_err = Q * np.sqrt((omega_0 / omega_0_err)**2 + (gamma_err / gamma)**2)
     return Q, Q_err
+
+def do_fit(ax, freq, A, A_err, p0=(0.002, 1, 1)):
+    result_dict = {}
+
+    params, params_err = fit_analysis(ax, freq, A, A_err, p0)
+    for param_name, param, param_err in zip(FIT_PARAM_NAMES, params, params_err):
+        result_dict[param_name] = param
+        result_dict[param_name + '_err'] = param_err
+
+    Q, Q_err = calc_Q_factor(params, params_err)
+
+    result_dict['fit_Q_factor'] = Q
+    result_dict['fit_Q_err'] = Q_err
+    result_dict['params_list'] = params
+    result_dict['params_err_list'] = params_err
+
+    return result_dict
