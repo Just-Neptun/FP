@@ -26,5 +26,6 @@ def pd_read_exp_file(loc, skip_data_rows=0):
         skiprows=1
     )
     df = df[skip_data_rows:]
+    df = df.rename({"A_std": "A_err", "phi_std": "phi_err"}, axis="columns")
     metadata = read_metadata(loc)
     return df, metadata
