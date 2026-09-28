@@ -1,0 +1,110 @@
+\documentclass[a4paper]{scrartcl}
+
+\input{preamble}
+
+\title{F75: Neuromorphic Computing}
+\author{Justus Zimmermann and Frederik Hollis}
+\date{\today}
+\publishers{Tutor: Pablo Jimenez}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\include{./...}
+A
+Nehmen Sie die Resonanzkurven fur die drei Frequenzen ν0, ν1 und ν2 auf.
+
+B
+Temperaturabhangigkeit der Resonanzfrequenz
+
+I
+Sie nehmen eine komplette Resonanzkurve fur jede eingestellte Temperatur.
+
+II
+Mit dieser Methode kann man die Temperaturabhangigkeit viel schneller messen und ohne Nacht- ¨
+messung auskommen. Man benutzt dabei das A cos ϕ-Signal des Lock-In-Verstarkers. Zun ¨ achst stellt ¨
+man die Spannung im Peltier-Element entsprechend der Temper
+
+
+
+
+(
+• Was wollen wir im Abschnitt A und B messen?
+• Versuchsplanung: Wie wollen Sie die Resonanzfrequenzen im Abschnitt A finden?
+• Was sind Vor- und Nachteile der beiden Methoden fur die Messung im Abschnitt B?
+)
+
+
+Auswertung
+
+Bei der Datenauswertung lernen wir Antworten auf zwei fundamentale Fragen:
+• Wie werden die Werte der Parameter eines theoretischen Modells ermittelt, mit denen die
+Daten optimal beschrieben werden?
+• Wie pr ¨uft man quantitativ, ob das Modell die Daten beschreibt?
+
+
+“durch Fits mit der χ
+2
+-Methode”
+
+Least squares
+
+A
+Die aufgenommenen Resonanzkurven sollen graphisch dargestellt werden. Genauer gesagt sollen
+die Kurven fur die Messgr ¨ oßen ¨ X und Y sowie die abgeleitete Phase gegen die Frequenz aufgetragen werden. Weiterhin sind mit Hilfe eines nichtlinearen parametrischen χ
+2
+-Fits die Parameter
+der Funktion aus Gl. (1.2) an die gemessenen Daten der Amplitude anzupassen
+
+p-value
+residuals graph
+
+Gute des Resonators ¨ Q mittels Gl. (1.6) 
+Die Gute kann man auch aus der Breite der Kurven gem ¨ aß Gl. (1.8) 
+Bestimmen Sie die Gute f ¨ ur mindestens ein Re- ¨
+sonanzsignal mit einer diesen Methoden und vergleichen Sie das Ergebnis mit dem aus dem Fit
+gewonnenen Wert.
+
+See Anleitung for Fehlerquellen
+
+B
+I
+Wenn Sie die Methode I benutzt haben, ermitteln Sie jetzt fur jede eingestellte Temperatur mit einem ¨
+χ
+2
+-Fit die Resonanzfrequenz mit ihrem Fehler. Die Resonanzfrequenzen sollten, gegen die Temperatur aufgetragen, naherungsweise auf einer Geraden liegen
+
+II
+Bei der Methode II haben Sie die Werte bereits bei der Messung gespeichert. Hier gibt es keine
+Abschatzung f ¨ ur die Fehler der Frequenzmessungen. Deswegen k ¨ onnen Sie einen ¨ ublichen ¨ χ
+2
+-Fit
+mit den Fehlern der Temperaturmessung durchfuhren.
+
+
+Aus der Steigung ergibt sich ein Temperaturkoeffizient fur die Resonanzfrequenz (wiederum samt ¨
+statistischem Fehler). Kommentieren Sie das Ergebnis: Wie kann man das Vorzeichen der Steigung
+qualitativ (physikalisch) verstehen?
+
+
+Kritische Diskussion
+
+
+------
+
+4.9 Fragen zur Auswertung
+• Wozu macht man Fits gemessener Daten?
+• Wie lautet der zentrale Grenzwertsatz? Am besten in einem Statistik-Lehrbuch nachschlagen!
+• Bei einer Reihe von N Messungen in einem Messpunkt mit Standardabweichung σ, wie groß
+ist der statistische Fehler δ des Mittelwerts?
+• Bei mehreren Reihen mit je N Messungen im selben Messpunkt, wie ist die Verteilung der
+Mittelwerte?
+• Was zeichnet die ”
+Least Squares“-Methode aus? Wie ist χ
+2 definiert?
+• Wie schatzt man quantitativ die Qualit ¨ at eines Fits ab? Was f ¨ ur Schl ¨ usse lassen sich aus der ¨
+Abschatzung ziehen? 
+
+\end{document}
