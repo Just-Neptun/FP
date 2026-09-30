@@ -9,6 +9,16 @@ def curve(f, f_0, omega_0, gamma):
     omega = 2 * np.pi * f
     return f_0 / np.sqrt((omega_0**2 - omega**2)**2 + gamma**2 * omega**2)
 
+def peak_position(params, params_err):
+    '''Find position (and error) of Lorentz curve peak in frequency space, given parameters and parameter errors.'''
+    f_0, omega_0, gamma = params
+    f_0_err, omega_0_err, gamma_err = params_err
+    omega_pos = np.sqrt(omega_0**2 - gamma**2 / 2)
+    omega_pos_err = 1 / omega_pos * np.sqrt((omega_0 * omega_0_err)**2 + (gamma * gamma_err)**2 / 4)
+    f_pos = omega_pos / (2 * np.pi)
+    f_pos_err = omega_pos_err / (2 * np.pi)
+    return f_pos, f_pos_err
+
 def fit_analysis(ax, freq, A, A_err, p0):
     '''Fit Lorentz curve to given data and plot on given axes `ax`'''
     params, pcov = curve_fit(
