@@ -10,9 +10,14 @@
 \begin{document}
 
 \maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
 \tableofcontents
 
-\include{./...}
+\section{Measurement}
 A
 Nehmen Sie die Resonanzkurven fur die drei Frequenzen ν0, ν1 und ν2 auf.
 
@@ -28,16 +33,14 @@ messung auskommen. Man benutzt dabei das A cos ϕ-Signal des Lock-In-Verstarkers
 man die Spannung im Peltier-Element entsprechend der Temper
 
 
-
-
 (
 • Was wollen wir im Abschnitt A und B messen?
 • Versuchsplanung: Wie wollen Sie die Resonanzfrequenzen im Abschnitt A finden?
 • Was sind Vor- und Nachteile der beiden Methoden fur die Messung im Abschnitt B?
 )
 
-
-Auswertung
+\clearpage
+\section{Data Analysis}
 
 Bei der Datenauswertung lernen wir Antworten auf zwei fundamentale Fragen:
 • Wie werden die Werte der Parameter eines theoretischen Modells ermittelt, mit denen die
@@ -51,6 +54,8 @@ Daten optimal beschrieben werden?
 
 Least squares
 
+\clearpage
+\import{./exp_a/}{analysis.tex}
 A
 Die aufgenommenen Resonanzkurven sollen graphisch dargestellt werden. Genauer gesagt sollen
 die Kurven fur die Messgr ¨ oßen ¨ X und Y sowie die abgeleitete Phase gegen die Frequenz aufgetragen werden. Weiterhin sind mit Hilfe eines nichtlinearen parametrischen χ
@@ -69,14 +74,16 @@ gewonnenen Wert.
 
 See Anleitung for Fehlerquellen
 
-B
-I
+
+\clearpage
+\import{./exp_b/}{analysis.tex}
+Methode I
 Wenn Sie die Methode I benutzt haben, ermitteln Sie jetzt fur jede eingestellte Temperatur mit einem ¨
 χ
 2
 -Fit die Resonanzfrequenz mit ihrem Fehler. Die Resonanzfrequenzen sollten, gegen die Temperatur aufgetragen, naherungsweise auf einer Geraden liegen
 
-II
+Methode II
 Bei der Methode II haben Sie die Werte bereits bei der Messung gespeichert. Hier gibt es keine
 Abschatzung f ¨ ur die Fehler der Frequenzmessungen. Deswegen k ¨ onnen Sie einen ¨ ublichen ¨ χ
 2
@@ -88,6 +95,8 @@ Aus der Steigung ergibt sich ein Temperaturkoeffizient fur die Resonanzfrequenz 
 statistischem Fehler). Kommentieren Sie das Ergebnis: Wie kann man das Vorzeichen der Steigung
 qualitativ (physikalisch) verstehen?
 
+\clearpage
+\section{Discussion}
 
 Kritische Diskussion
 
