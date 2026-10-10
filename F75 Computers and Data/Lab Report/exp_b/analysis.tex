@@ -1,0 +1,96 @@
+% !TeX root = ./../main.tex
+
+\subsection{Experiment B}
+
+In this experiment part, we focus only on the lowest harmonic at about \qty{125}{\hertz}.
+The same measurements of amplitude, phase shift, $X$ and $Y$ were carried out over a frequency range with the target frequency at the center of the range.
+This time, the experiment is repeated at various temperatures.
+Similarly to experiment A, we fit a Lorentz curve (\autoref{eq:analysis_lorentz}) fit to the recorded resonance curves.
+These can be seen in \autoref{fig:analysis_exp_b_1} and \autoref{fig:analysis_exp_b_2}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{curve0.png}
+    \includegraphics[width=0.7\textwidth]{curve1.png}
+    \includegraphics[width=0.7\textwidth]{curve2.png}
+    \includegraphics[width=0.7\textwidth]{curve3.png}
+    \includegraphics[width=0.7\textwidth]{curve4.png}
+    \caption{Resonance Curves at Various Temperatures}
+    \label{fig:analysis_exp_b_1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{curve5.png}
+    \includegraphics[width=0.7\textwidth]{curve6.png}
+    \includegraphics[width=0.7\textwidth]{curve7.png}
+    \includegraphics[width=0.7\textwidth]{curve8.png}
+    \includegraphics[width=0.7\textwidth]{curve9.png}
+    \caption{Resonance Curves at Various Temperatures}
+    \label{fig:analysis_exp_b_2}
+\end{figure}
+
+From the fit parameters for each of the curves we use \autoref{eq:analysis_b_peak} to calculate the position of the resonance peak.
+The error propagation is also given.
+The resulting $f_R$ are shown in \autoref{tab:analysis_exp_b_peak_pos}
+
+\begin{gather}
+    \omega_R = \sqrt{\omega_0^2 - \frac{\gamma^2}{2}} \\
+    f_R = \frac{1}{2 \pi} \sqrt{\omega_0^2 - \frac{\gamma^2}{2}}
+    \label{eq:analysis_b_peak} \\
+    \Delta f_R = \frac{1}{f_R} \sqrt{(\omega_0 \cdot \Delta \omega_0)^2 + (\gamma \cdot \Delta \gamma)^2 / 4}
+\end{gather}
+
+\begin{table}
+    \centering
+    \caption{Resonance Peak Positions at Various Temperatures}
+    \label{tab:analysis_exp_b_peak_pos}
+    \begin{tabular}{
+            S[table-format=1.3]
+            l
+            l
+        }
+        \toprule
+        {Target Voltage} & {Temperature} & {Peak Position} \\
+        \midrule
+        1.000 & 69.980430186 \pm 0.00211013261159623 & 124.95156755998492 \pm 0.0006722940940180838 \\
+        0.889 & 72.00790907400004 \pm 0.0008845575174610274 & 124.87168562804878 \pm 0.0007419391154181948 \\
+        0.778 & 73.80723177 \pm 0.0 & 124.92133498357933 \pm 0.00046046386052510136 \\
+        0.667 & 73.80723177 \pm 0.0 & 124.94441801746099 \pm 0.0006146848712504102 \\
+        0.556 & 69.91302040200001 \pm 0.0005159376016774748 & 125.04942417870389 \pm 0.0005291396066343728 \\
+        0.444 & 62.783139402000046 \pm 0.0030562895062528073 & 124.94044860179059 \pm 0.0006065035329008249 \\
+        0.333 & 55.775114550000055 \pm 0.002777320083574138 & 124.89952040066942 \pm 0.0005364465356643733 \\
+        0.222 & 49.18451182200002 \pm 0.000773906402516233 & 125.0427020281186 \pm 0.0006622522070971209 \\
+        0.111 & 42.695023770000034 \pm 7.105427357601002e-17 & 124.99006370371073 \pm 0.0005405069237857238 \\
+        0.000 & 38.82933192599999 \pm 0.0013268362761916135 & 124.99062074210859 \pm 0.0006114526290540911 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The position of the peak should be dependent on the temperature.
+This is tested by graphing the two quantities in \autoref{fig:analysis_exp_b_temp_graph}.
+Here we use a linear fit function (\autoref{eq:analysis_b_linear_fit}).
+The slope is called the temperature coefficient.
+For completeness, we list the vertical offset along with this coefficient in the summary.
+
+\begin{gather}
+    f_R(T) = m \cdot T + c
+    \label{eq:analysis_b_linear_fit}
+\end{gather}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{temp_graph.png}
+    \caption{Dependence of First Resonance Peak Position On Temperature}
+    \label{fig:analysis_exp_b_temp_graph}
+\end{figure}
+
+\begin{gather}
+    \boxed{
+        \begin{aligned}
+            &m &&= -0.001441 ± 0.000014 \\
+            &b &&= 125.0490 ± 0.0009
+        \end{aligned}
+    }
+\end{gather}
+
