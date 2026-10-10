@@ -1,0 +1,119 @@
+\subsection{Experiment A}
+
+The resonance curve of the vibrating reed was measured around the first three harmonic frequencies.
+\num{20} independent measurements of the amplitude/phase shift/\(X\)/\(Y\) were taken at each frequency, then immediately averaged, with standard deviation taken to be the error.
+These datasets were saved to text files for analysis.
+In our analysis code we read in the data again.
+The measurements are plotted against frequency and displayed in \autoref{fig:analysis_exp_a}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{./Assets/exp_a/curve0.png}
+    \includegraphics[width=0.85\textwidth]{./Assets/exp_a/curve1.png}
+    \includegraphics[width=0.85\textwidth]{./Assets/exp_a/curve2.png}
+    \caption{Resonance Curves at First Three Harmonics}
+    \label{fig:analysis_exp_a}
+\end{figure}
+
+In the graphs we also plot the \quotedef{target frequency} around which the peak is expected to be.
+Lastly, we use regression (least squares/parametric \(\chi^2\) fit) to fit a Lorentz curve (see \autoref{eq:analysis_lorentz}) to the resonance peak for each dataset.
+The resulting parameters are given in \autoref{tab:analysis_params_a}.
+
+\begin{gather}
+    \omega = 2 \pi f \\
+    A(\omega) = \frac{f_0}{\sqrt{(\omega_0^2 - \omega^2)^2 + \gamma^2 \omega^2}}
+    \label{eq:analysis_lorentz}
+\end{gather}
+
+\begin{table}[htpb]
+    \centering
+    \caption{Fit Parameters of Lorentz Curves Around First Three Harmonics}
+    \label{tab:analysis_params_a}
+    \begin{tabular}{
+            S[table-format=4]
+            S[table-format=2.4(6)]
+            S[table-format=+4.3(4)]
+            S[table-format=+2.3(4)]
+        }
+        \toprule
+        {\(f_\mathrm{target}\)} & {\(f_0\)}         & {\(\omega_0\)}           & {\(\gamma\)}          \\
+        \midrule
+        125                     & 0.2692 \pm 0.0004 & 785.738 \pm 0.004        & -5.049 \pm 0.009      \\
+        825                     & 0.0996 \pm 0.0009 & -5183.764 \pm 0.07       & 8.67 \pm 0.13         \\
+        2406                    & {\(40  \pm  60\)} & {\(32    \pm 15000000\)} & {\(25 \pm 20000000\)} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+These parameters are found by minimizing the \( \chi^2 \) value, which represents the size of the residuals of the data points (how far the model is from the data).
+It is useful to visualize the residuals as well, so these are shown in \autoref{fig:analysis_exp_a_residuals}.
+Minimizing the \( \chi^2 \) value is equivalent to maximizing the likelihood that the data comes from the created model.
+Another way to understand how well the model fits the data is by calculating the \(p\)-value.
+This is the probability that results with residuals at least this large are obtained in the experiment, assuming the data comes from this model.
+In other words, it represents the probability that we get results at least this \quoteapprox{extreme}.
+The fit statistics are given in \autoref{tab:analysis_stats_a}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{./Assets/exp_a/residuals0.png}
+    \includegraphics[width=0.75\textwidth]{./Assets/exp_a/residuals1.png}
+    \includegraphics[width=0.75\textwidth]{./Assets/exp_a/residuals2.png}
+    \caption{Resonance Curves at First Three Harmonics}
+    \label{fig:analysis_exp_a_residuals}
+\end{figure}
+
+\begin{table}[htpb]
+    \centering
+    \caption{Fit Statistics of Lorentz Curves Around First Three Harmonics}
+    \label{tab:analysis_stats_a}
+    \begin{tabular}{
+            S[table-format=4]
+            S[table-format=3]
+            S[table-format=5]
+            S[table-format=3.3]
+            c
+        }
+        \toprule
+        {\(f_\mathrm{target}\)} & {\text{d.o.f.}} & {\(\chi^2\)} & {\(\chi^2_\mathrm{red}\)} & {\(p\)}                 \\
+        \midrule
+        125                     & 196             & 28667        & 146.3                     & \(0\)                   \\
+        825                     & 196             & 1887         & 9.627                     & \(0\)                   \\
+        2406                    & 196             & 354          & 1.804                     & {\(3 \times 10^{-11}\)} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Finally, we examine the quality of the resonator (the \(Q\)-factor).
+This can be calculated through \autoref{eq:analysis_a_q_factor_theo} or by measuring the full-width-half-maximum (\(\FWHM\)) of the experimentally measured curve (see \autoref{eq:analysis_a_q_factor_exp}).
+Both of these are calculated/measured and reported in \autoref{tab:analysis_Q_a}.
+In this table we also include the \(\sigma\)-deviation between the two values.
+
+\begin{gather}
+    Q = \frac{\omega_0}{\gamma}
+    \label{eq:analysis_a_q_factor_theo} \\
+    Q \approx \frac{\omega_R}{\FWHM}
+    \label{eq:analysis_a_q_factor_exp} \\
+\end{gather}
+
+\begin{table}[htpb]
+    \centering
+    \caption{Q-Factor of Resonance at First Three Harmonics}
+    \label{tab:analysis_Q_a}
+    \begin{tabular}{
+            S[table-format=4]
+            % S[table-format=4]
+            % S[table-format=4]
+            c
+            c
+            S[table-format=1.7]
+        }
+        \toprule
+        {\(f_\mathrm{target}\)} & {\(Q_\mathrm{fit}\)}                        & {\(Q_\mathrm{exp}\)}                              & {\(\sigma\)\text{-deviation}} \\
+        \midrule
+        125                     & -155.61708181207405 \pm -31022380.727943283 & 6.015998482051183e-05 \pm 1.0491233894606239e-07  & 0.000005                      \\
+        825                     & -597.8302328353765 \pm -46408722.52438324   & 1.940211956258157e-06 \pm 4.996702912074086e-08   & 0.000013                      \\
+        2406                    & 1.2849990738780965 \pm 1038509.5531567676   & 2.7860007138015418e-08 \pm 2.5774849465292796e-09 & 0.0000010                     \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
