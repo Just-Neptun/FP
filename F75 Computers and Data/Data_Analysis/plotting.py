@@ -1,11 +1,13 @@
 import numpy as np
 import pandas as pd
 
+
 def vertical_line(ax, position: float, height=10.0, label="", color="tab:grey"):
-    '''Plots a vertical line at `position` on axes `ax`.'''
+    """Plots a vertical line at `position` on axes `ax`."""
     axes = ax.axis()
     ax.vlines(position, -height, height, label=label, colors=color, linestyles="--")
     ax.axis(axes)
+
 
 def pd_freq_spectrum(fig, axs, data: pd.DataFrame):
     X = data["A"] * np.cos(data["phi"])
@@ -16,7 +18,7 @@ def pd_freq_spectrum(fig, axs, data: pd.DataFrame):
     ax1.set_xlabel(r"$\nu$ / Hz")
     ax1.set_ylabel(r"$A$ / Vpp")
     ax1.set_title("Resonance Curve (Amplitude)")
-    
+
     ax2.errorbar(data["freq"], data["phi"], yerr=data["phi_err"])
     ax2.set_xlabel(r"$\nu$ / Hz")
     ax2.set_ylabel(r"$\phi$")
