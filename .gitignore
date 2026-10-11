@@ -4,3 +4,4 @@
 **/out_dir/
 __pycache__/
 indent.log
+.DS_Store
