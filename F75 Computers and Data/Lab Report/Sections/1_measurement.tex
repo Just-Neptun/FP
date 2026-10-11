@@ -1,7 +1,8 @@
 \section{Measurement}
 The subject of this experiment is the so-called \quotedef{vibrating reed,} pictured in \autoref{fig:setup}.
-It consists of a metal plate, clamped down on one end, which is compelled to vibrate by the electrostatic force exerted on it by an electrode.
-The resulting vibration is measured by another electrode.
+It consists of a metal plate, clamped down on one end, which is compelled to vibrate.
+In the first part of the experiment, we want to measure its first three resonance frequencies \( ν_0 \), \( ν_1 \), and \( ν_2 \).
+In the second part, we investigate the dependence of \( ν_0 \) on the temperature of the reed.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.6\linewidth]{./Assets/setup.png}
@@ -9,21 +10,76 @@ The resulting vibration is measured by another electrode.
     \label{fig:setup}
 \end{figure}
 
-% A
-% Nehmen Sie die Resonanzkurven für die drei Frequenzen ν0, ν1 und ν2 auf.
+\subsection{Experimental Setup and Hardware Architecture}
+A brass reed with approximate dimensions of length \( l \approx \qty{20}{\milli\meter} \), width \( b \approx \qty{5}{\milli\meter} \), and thickness \( d \approx \qty{200}{\micro\meter} \) is rigidly clamped at its lower end between two copper blocks.
+The free upper end is positioned between two electrostatic circular electrodes of diameter \( D = \qty{3}{\milli\meter} \) positioned at a distance of \( g \approx \qty{100}{\micro\meter} \) on opposite sides of the sample.
 
-% B
-% Temperaturabhangigkeit der Resonanzfrequenz
+The excitation electrode is driven by a synthesized function generator (Stanford Research Systems DS345) supplying an AC voltage \( U(t) = U_0 \cos(ω t) \) with an amplitude of \( U_0 = \qty{10.0}{\volt} \).
+Because the electrostatic force exerted on the reed scales quadratically with the applied voltage (\( F \propto U^2 \)), driving the electrode at a frequency \( ν / 2 \) induces mechanical oscillations in the reed at the harmonic frequency \( ν \).
 
-% I
-% Sie nehmen eine komplette Resonanzkurve fur jede eingestellte Temperatur.
+The resulting deflection is detected electrostatically using the opposite electrode, which is biased with a static DC voltage \( U_B = \qty{108}{\volt} \) supplied by a low-noise battery power supply.
+Motion of the reed alters the capacitance between the reed and the detection electrode, inducing an AC current that is converted into a voltage signal.
+To extract the weak signal from background noise, the signal is routed to a dual-phase Lock-In amplifier (Stanford Research Systems SR530) operating in \( 2f \) harmonic mode.
+Operating in \( 2f \) mode ensures that crosstalk from the excitation signal at frequency \( ν/2 \) is effectively filtered out.
 
-% II
-% Mit dieser Methode kann man die Temperaturabhängigkeit viel schneller messen und ohne Nachtmessung auskommen. Man benutzt dabei das A cos ϕ-Signal des Lock-In-Verstärkers. Zunächst stellt man die Spannung im Peltier-Element entsprechend der Temper
+The Lock-In amplifier yields two output components:
+\begin{equation}
+    X = A \cos φ, \qquad
+    Y = A \sin φ, \label{eq:lockin}
+\end{equation}
+from which the signal amplitude \( A \) and relative phase shift \( φ \) are calculated via:
+\begin{equation}
+    A = \sqrt{X^2 + Y^2},  \qquad
+    φ = \arctan(Y / X).
+    \label{eq:calc_amp_and_phase}
+\end{equation}
 
+Temperature control and readout are integrated directly into the sample holder.
+A Peltier element mounted on the copper clamping base allows controlled heating of the sample, driven by an analog control voltage supplied via the auxiliary output (\texttt{X6}/\texttt{out}) of the Lock-In amplifier.
+Sample temperature is monitored using a Pt1000 resistance sensor connected to the auxiliary analog input (\texttt{X2}/\texttt{in}) of the Lock-In amplifier.
+The measured sensor voltage \( V_T \) is converted to temperature \( T \) in Celsius using the linear calibration curve:
+\begin{equation}
+    T = (V_T - 1.000325) \times 259.2684
+    \label{eq:temp_conversion}
+\end{equation}
 
-% (
-% • Was wollen wir im Abschnitt A und B messen?
-% • Versuchsplanung: Wie wollen Sie die Resonanzfrequenzen im Abschnitt A finden?
-% • Was sind Vor- und Nachteile der beiden Methoden für die Messung im Abschnitt B?
-% )
+\subsection{Software Architecture and Device Automation}
+The data acquisition and instrument control pipeline in this experiment was implemented in Python using the \texttt{PyVISA} library operating over a Prologix GPIB-USB interface.
+This modular architecture provides full automation, structured data logging, and robust error handling.
+
+The software architecture is structured into four primary functional layers.
+At the hardware interface level, \texttt{device\_managers.py} defines a \texttt{GPIB} base class for string escaping and address routing, while derived classes (\texttt{SynFunGen} and \texttt{LockInAmp}) encapsulate device-specific SCPI commands.
+These are wrapped by a \texttt{Devices} facade class that provides unified access methods to abstract low-level communication from the experiment logic.
+Execution parameters such as sample counts, frequency resolution, voltage ranges, and thermalization delays are encapsulated within configuration classes in \texttt{experiment\_configs.py}.
+During execution, the high-level measurement loops for frequency sweeps and temperature stabilization are handled by dedicated managers (\texttt{experimentA\_manager.py} and \texttt{experimentB\_manager.py}).
+Finally, data persistence is managed by a \texttt{DataWriter} class, which records measured values along with comprehensive execution metadata directly into CSV formats.
+
+\subsection{Measurement Protocols}
+
+\subsubsection{Experiment A: Resonance Spectrum Characterization}
+The aim of experiment A is to map the resonance spectra \( A(ν) \) and \( φ(ν) \) across the first three theoretical resonance frequencies (\( ν_0 \approx \qty{125}{\Hz} \), \( ν_1 \approx \qty{825}{\Hz} \), and \( ν_2 \approx \qty{2406.2}{\Hz} \)) at room temperature.
+
+For each frequency, a spectrum consisting of 200 logarithmically spaced points is swept.
+At each frequency step, the function generator is updated, followed by a settling delay of \( \Delta t = \qty{0.9}{\second} \) to accommodate the Lock-In integration time constant.
+Subsequently, \( N = 20 \) repeated measurements of the quadrature components \( X \) and \( Y \) are sampled.
+Individual amplitude and phase values are computed via \autoref{eq:calc_amp_and_phase}.
+
+The sample mean \( \bar{x} \) and the standard error of the mean \( s_{\bar{x}} \) are calculated according to the central limit theorem:
+\begin{equation}
+    \bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i, \quad s_{\bar{x}} = \frac{\sigma}{\sqrt{N}} = \sqrt{\frac{1}{N(N-1)} \sum_{i=1}^{N} (x_i - \bar{x})^2}.
+    \label{eq:sem}
+\end{equation}
+The resulting mean values (\( A \), \( φ \)) and their statistical uncertainties (\( A_{\text{std}} \), \( φ_{\text{std}} \)) are stored alongside the frequency value.
+
+\subsubsection{Experiment B: Temperature-Dependent Resonance Shift}
+
+Experiment B investigates the variation of the fundamental resonance frequency \( ν_0 \) as a function of temperature \( T \).
+Heating is induced by stepping the Peltier drive voltage across 10 levels from \qty{0.0}{\volt} to \qty{1.0}{\volt}.
+
+Because thermal gradient drifts induce significant frequency shifts, an automated thermalization sequence is executed prior to each frequency sweep.
+The protocol begins by setting the target Peltier control voltage on the auxiliary channel \texttt{out}.
+To allow the system to respond, an initial thermal wait time of \( t_{\text{wait}} = \qty{300}{\second} \) is enforced.
+The manager then performs \( M = 100 \) sequential temperature readings at \qty{1.0}{\second} intervals to assess stabilization.
+Thermal equilibrium is confirmed only if both the standard uncertainty \( s_{\bar{T}} = \sigma_T/\sqrt{M} \) and the temperature drift gradient \( \Delta T = |T_{\text{first}} - T_{\text{last}}| \) fall below a \qty{0.5}{\degreeCelsius} threshold.
+Should either criterion be violated, the system waits an additional \qty{300}{\second} before re-evaluating.
+Once stability is achieved, a frequency sweep of 220 logarithmically spaced points is executed around the fundamental resonance mode and logged.
