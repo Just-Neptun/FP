@@ -105,18 +105,17 @@ In this table we also include the \(\sigma\)-deviation between the two values.
     \label{tab:analysis_Q_a}
     \begin{tabular}{
             S[table-format=4]
-            % S[table-format=4]
-            % S[table-format=4]
             c
-            c
+            S[table-format=1.3(4)e-1]
             S[table-format=1.7]
         }
         \toprule
-        {\(f_\mathrm{target}\)} & {\(Q_\mathrm{fit}\)}                        & {\(Q_\mathrm{exp}\)}                              & {\(\sigma\)\text{-deviation}} \\
+        {\(f_\mathrm{target}\)} & {\(Q_\mathrm{fit}\)} & {\(Q_\mathrm{exp}\)}  & {\(\sigma\)\text{-deviation}} \\
         \midrule
-        125                     & -155.61708181207405 \pm -31022380.727943283 & 6.015998482051183e-05 \pm 1.0491233894606239e-07  & 0.000005                      \\
-        825                     & -597.8302328353765 \pm -46408722.52438324   & 1.940211956258157e-06 \pm 4.996702912074086e-08   & 0.000013                      \\
-        2406                    & 1.2849990738780965 \pm 1038509.5531567676   & 2.7860007138015418e-08 \pm 2.5774849465292796e-09 & 0.0000010                     \\
+        % in siunitx, the powers of ten apply correctly to value and unc, this works
+        125  & \( -155.6 \pm 31022380.7 \) & 6.016 \pm 0.010 e-05 & 0.000005  \\
+        825  & \( -597.8 \pm 46408722.5 \) & 1.94  \pm 0.05  e-06 & 0.000013  \\
+        2406 & \(    1.3 \pm  1038509.6 \) & 2.79  \pm 0.26  e-08 & 0.0000010 \\
         \bottomrule
     \end{tabular}
 \end{table}
