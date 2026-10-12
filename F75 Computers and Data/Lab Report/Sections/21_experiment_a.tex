@@ -16,7 +16,7 @@ The measurements are plotted against frequency and displayed in \autoref{fig:ana
 \end{figure}
 
 In the graphs we also plot the \quotedef{target frequency} around which the peak is expected to be.
-Lastly, we use regression (least squares/parametric \(\chi^2\) fit) to fit a Lorentz curve (see \autoref{eq:analysis_lorentz}) to the resonance peak for each dataset.
+Lastly, we use regression (least squares/parametric \(\chi^2\) fit method) to fit a Lorentz curve (see \autoref{eq:analysis_lorentz}) to the resonance peak for each dataset.
 The resulting parameters are given in \autoref{tab:analysis_params_a}.
 
 \begin{gather}
@@ -45,7 +45,7 @@ The resulting parameters are given in \autoref{tab:analysis_params_a}.
     \end{tabular}
 \end{table}
 
-These parameters are found by minimizing the \( \chi^2 \) value, which represents the size of the residuals of the data points (how far the model is from the data).
+These parameters are found by minimizing the \( \chi^2 \) value, which quantitatively represents the size of the residuals of the data points (how far the model is from the data).
 
 It is useful to visualize the residuals as well, so these are shown in \autoref{fig:analysis_exp_a_residuals}.
 In the ideal case, there would be no pattern to the residuals, each one should be independently distributed around \num{0} (if the model is correct).
