@@ -1,19 +1,23 @@
-\section{Discussion}
+\section{Critical Discussion}
 
 % Kritische Diskussion
 
 % -----
 
-% • Wozu macht man Fits gemessener Daten?
-% • Wie lautet der zentrale Grenzwertsatz? Am besten in einem Statistik-Lehrbuch nachschlagen!
-% • Bei einer Reihe von N Messungen in einem Messpunkt mit Standardabweichung σ, wie groß
+% Wozu macht man Fits gemessener Daten?
+% Wie lautet der zentrale Grenzwertsatz? Am besten in einem Statistik-Lehrbuch nachschlagen!
+% Bei einer Reihe von N Messungen in einem Messpunkt mit Standardabweichung σ, wie groß
 % ist der statistische Fehler δ des Mittelwerts?
-% • Bei mehreren Reihen mit je N Messungen im selben Messpunkt, wie ist die Verteilung der
+% Bei mehreren Reihen mit je N Messungen im selben Messpunkt, wie ist die Verteilung der
 % Mittelwerte?
-% • Was zeichnet die ”
-% Least Squares“-Methode aus? Wie ist χ
-% 2 definiert?
-% • Wie schätzt man quantitativ die Qualität eines Fits ab? Was für Schlüsse lassen sich aus der Abschatzung ziehen?
+% Was zeichnet die ”Least Squares“-Methode aus? Wie ist χ2 definiert?
+% Wie schätzt man quantitativ die Qualität eines Fits ab? Was für Schlüsse lassen sich aus der Abschatzung ziehen?
+
+
+% NOT sources of error:
+% Luftdämpfung
+% Dämpfung durch Wärmeleitung der Probe
+% Elektromechanische Wandlerverluste
 
 \subsection{Experiment A}
 
@@ -40,6 +44,30 @@ Because the fit parameters are most likely not well determined, we do not expect
 As we see in \autoref{tab:analysis_Q_a}, the factors determined from the fit parameters are illogical and do not fit with the experimentally determined ones.
 The large errors in $Q_\mathrm{fit}$ mean the $\sigma$-deviations are very low, but viewing both the relative and absolute deviation together it is easy to conclude that the calculations were not successful.
 
+\subsubsection{Sources of Error}
+
+Clearly some of the measurements in this section were affected by errors in the measurement process.
+
+We can especially clearly see through the plotted fit curve and through the residuals that the Lorentz curve model itself does not work with the data very well. Either it overestimates the tails to reach the peak, or it matches in the tails but underestimates the peak.
+This is the cause of the high $\chi^2$ values, as the residuals in the over-/underestimation areas contribute large amounts to the statistic (also leading to very low $p$-values).
+There must be other effects on the vibrating reed during its oscillation which change the resonance curve, making it different from the expected Lorentz shape.
+For example, if the reed is vibrating with a large amplitude and getting too close to the capacitor plate the electromagnetic force between reed and electrodes will no longer be approximately linear.
+This would lead to a greater increase in force when the reed and electrode get closer, meaning as the amplitude increases, proportionally more force is also applied to the reed, causing it to oscillate even further.
+This is one of the effects which could change the shape of the resonance peak.
+
+Another factor which could affect this experiment is the changing temperature of the reed.
+We do expect temperature to affect the resonance position in some way, as will be seen in experiment B.
+Therefore, if the temperature of the reed changes during the trials, it could affect the measurement at some points in the frequency space.
+The uneven and unexpected shifting of measured amplitude would affect the shape of the resonance curve.
+
+A simple but important example of the changing temperature is the room temperature.
+In this experiment we did not control the temperature of the reed directly, so (ignoring other unexpected temperature effects) it should be at room temperature.
+If this changes throughout the day, this would cause the temperature of the reed to also change, affecting the data as explained above.
+This is exacerbated by the fact that the measurement of the resonance curve takes a relatively long time, meaning the room temperature would be free to change during that time.
+
+The room in which the experiment was carried out was also not temperature controlled, so in addition to the air temperature changing, a wind gust from outside blowing into the window or people moving and circulating air could also intermittently cool the experimental setup.
+
+
 \subsection{Experiment B}
 
 In part B we analyzed ten resonance curves which were measured at different temperatures. For each of these we performed fits using Lorentz curves, like in experiment A.
@@ -58,4 +86,28 @@ A linear fit was performed on this data to obtain the fit parameters:
 For this relationship, the slope is called the temperature coefficient.
 It describes how an increase in temperature affects the frequency of the resonance maximum.
 We found this to have a negative sign, meaning an increase in temperature decreases the frequency at which the resonance reaches its peak.
+
+\subsubsection{Sources of Error}
+
+As in part A, it is important to examine possible systematic errors in this experiment.
+
+To an even greater extent than in experiment A, the difficulty in controlling the temperature of the reed played a role in the errors in this experiment.
+This time, a constant voltage was applied to control the temperature and to use it as the independent variable.
+As we see in \autoref{tab:analysis_exp_b_peak_pos}, the voltage was incremented in even steps from \qty{1.000}{\volt} to \qty{0.000}{\volt}.
+Before recording the spectrum at each of these voltages, we programmed in a waiting and checking period where the software measures the temperature repeatedly until it has stabilized.
+Specifically, it waits a minimum amount of time, then measures the temperature a number of times.
+If the error in temperature (standard deviation of the measurements) is too high, it waits another period and then measures and checks again.
+
+This should have kept the temperature on an even decline, ending at room temperature at \qty{0.000}{\volt}.
+Viewing the table shows that this was not the case.
+The temperature even increased after decreasing voltage through the heating element, which runs counter to our expectations.
+
+Factors such as room temperature again play an important factor, as the speed at which the reed reaches equilibrium temperature will be affected by the temperature of the surrounding air.
+We note that this experiment ran overnight for an extended period of time, so temperature fluctuations throughout the day definitely took place in the room.
+
+It is possible that the equilibrium temperature of the reed (and time to reach it) as well as the acceptable standard deviation in temperature was not estimated well in this experiment.
+
+To improve the method in the future, it would be wise to understand/check experimentally how long the reed takes to heat up and how much fluctuation in the temperature should be allowed.
+In addition, an even more robust experiment program could be written to check for temperature fluctuations/equilibria.
+More logging by the program during the experiment would also allow later inspection into what happened to the temperature over the entire experiment, rather than having one temperature data point for the entire spectrum.
 
