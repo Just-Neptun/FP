@@ -2,10 +2,8 @@
 
 % Kritische Diskussion
 
+% -----
 
-% ------
-
-% 4.9 Fragen zur Auswertung
 % • Wozu macht man Fits gemessener Daten?
 % • Wie lautet der zentrale Grenzwertsatz? Am besten in einem Statistik-Lehrbuch nachschlagen!
 % • Bei einer Reihe von N Messungen in einem Messpunkt mit Standardabweichung σ, wie groß
@@ -15,5 +13,49 @@
 % • Was zeichnet die ”
 % Least Squares“-Methode aus? Wie ist χ
 % 2 definiert?
-% • Wie schatzt man quantitativ die Qualit ¨ at eines Fits ab? Was f ¨ ur Schl ¨ usse lassen sich aus der ¨
-% Abschatzung ziehen?
+% • Wie schätzt man quantitativ die Qualität eines Fits ab? Was für Schlüsse lassen sich aus der Abschatzung ziehen?
+
+\subsection{Experiment A}
+
+In the first experiment part, we were able to find plausible Lorentz curves for the first two harmonics.
+The curves along with the data can be seen in \autoref{fig:analysis_exp_a}.
+As can be seen in the graph of the data, it was not possible to properly measure the third resonance peak.
+The measured signal contains too much noise to see the peak.
+This also leads to a failed fit, and we simply see a flat \quoteapprox{Lorentz curve}.
+
+While the curves for the first two resonances look alright visually, goodness of fit analysis produces very high $\chi^2_\mathrm{red}$ values.
+This statistic measures how far away the measurements are from their expected positions.
+Derived from this is the $p$-value of the fit, which represents the probability of measuring data at least this extreme (far away from the expectation), given that the model we found is correct.
+
+To the numerical precision of the calculation software, these values are zero, or end up very small (see \autoref{tab:analysis_stats_a}).
+Using the $p$-values and any reasonable significance level (such as \num{0.05}), we must conclude that the model is not correct, and that in all three cases the measurements did not come from the distributions described by the parameters we calculated in \autoref{tab:analysis_params_a}.
+
+As was noted in the analysis, visually inspecting the residuals of the fit also gives an idea about any systematic over- or underestimates of the data in certain regions.
+In our case, the fit functions for the first two harmonics do produce patterns in their residuals.
+Inspecting \autoref{fig:analysis_exp_a_residuals}, we see that the model of the first harmonic overestimates the size of the tails and underestimates towards the center/peak of the curve.
+The opposite happens with the second fit function around \qty{825}{\hertz}, where the model underestimates the tails and center but overestimates in-between.
+
+To conclude this experiment, we attempted to calculate the quality of the resonator ($Q$-factor) for each peak (even though the fit parameters are likely not accurate).
+Because the fit parameters are most likely not well determined, we do not expect the theoretical $Q$-factors to be correct.
+As we see in \autoref{tab:analysis_Q_a}, the factors determined from the fit parameters are illogical and do not fit with the experimentally determined ones.
+The large errors in $Q_\mathrm{fit}$ mean the $\sigma$-deviations are very low, but viewing both the relative and absolute deviation together it is easy to conclude that the calculations were not successful.
+
+\subsection{Experiment B}
+
+In part B we analyzed ten resonance curves which were measured at different temperatures. For each of these we performed fits using Lorentz curves, like in experiment A.
+These fits were used to determine the exact positions of the peaks, which could be graphed against the temperature of the read during each of the spectrum measurements.
+The resulting graph is shown in \autoref{fig:analysis_exp_b_temp_graph}.
+A linear fit was performed on this data to obtain the fit parameters:
+\begin{gather}
+    \boxed{
+        \begin{aligned}
+             & m &  & = -0.001441 ± 0.000014 \\
+             & b &  & = 125.0490 ± 0.0009
+        \end{aligned}
+    }
+\end{gather}
+
+For this relationship, the slope is called the temperature coefficient.
+It describes how an increase in temperature affects the frequency of the resonance maximum.
+We found this to have a negative sign, meaning an increase in temperature decreases the frequency at which the resonance reaches its peak.
+
